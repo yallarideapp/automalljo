@@ -1,0 +1,95 @@
+name: Publish AutoMall to GitHub Pages
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  build:
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+    runs-on: ubuntu-latest
+    outputs:
+      page_url: ${{ steps.pages.outputs.base_url }}
+    defaults:
+      run:
+        working-directory: app
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Import prepared AutoMall source
+        if: ${{ hashFiles('app/package.json') == '' }}
+        working-directory: .
+        env:
+          SOURCE_ARCHIVE: https://d2ol7oe51mr4n9.cloudfront.net/user_3J9f94ynwnliU0R5KuHprnWAvUm/74715d94-2f3e-49c3-9d4b-b143bf7a4848.zip
+          SOURCE_SHA256: 2bfecf94793129eb8700e85dae04056643732fe9e076130fafcec2bc69781b12
+        run: |
+          curl --fail --location --silent --show-error "$SOURCE_ARCHIVE" --output /tmp/automall-source.zip
+          echo "$SOURCE_SHA256  /tmp/automall-source.zip" | sha256sum --check
+          python3 - <<'PY'
+          from pathlib import PurePosixPath
+          from zipfile import ZipFile
+          import stat
+          allowed={'app','refs','README.md','.gitignore'}
+          with ZipFile('/tmp/automall-source.zip') as archive:
+              for entry in archive.infolist():
+                  path=PurePosixPath(entry.filename)
+                  if path.is_absolute() or '..' in path.parts or not path.parts or path.parts[0] not in allowed:
+                      raise ValueError('Unexpected archive path')
+                  if any(part in {'.git','.github','node_modules'} for part in path.parts) or stat.S_ISLNK(entry.external_attr >> 16):
+                      raise ValueError('Unexpected archive entry')
+                  archive.extract(entry,'.')
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add app refs README.md .gitignore
+          git commit -m "Upload complete AutoMall website source and assets"
+          git push origin HEAD:main
+      - name: Configure Pages
+        id: pages
+        uses: actions/configure-pages@v5
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: Install locked dependencies
+        run: bun install --frozen-lockfile
+      - name: Prepare localized static files
+        env:
+          VITE_SITE_URL: ${{ steps.pages.outputs.base_url }}
+          VITE_BASE_PATH: ${{ steps.pages.outputs.base_path }}
+        run: node scripts/prepare-pages.mjs
+      - name: Type check
+        run: bun run typecheck
+      - name: Build static website
+        env:
+          VITE_SITE_URL: ${{ steps.pages.outputs.base_url }}
+          VITE_BASE_PATH: ${{ steps.pages.outputs.base_path }}
+        run: bun run build
+      - name: Verify static output
+        env:
+          VITE_SITE_URL: ${{ steps.pages.outputs.base_url }}
+          VITE_BASE_PATH: ${{ steps.pages.outputs.base_path }}
+        run: node scripts/verify-pages.mjs
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: app/dist/client
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
