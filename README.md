@@ -1,6 +1,6 @@
 # AutoMall Jo
 
-A bilingual car-dealership website with AutoMall's original Instagram vehicle photos, searchable featured collection, vehicle details, trade-in enquiries, WhatsApp links, showroom directions and an interactive cinematic hero.
+A bilingual car-dealership website with AutoMall's original Instagram vehicle photos, searchable featured collection, vehicle details, trade-in enquiries, WhatsApp links, showroom directions and an interactive studio hero.
 
 ## Project
 
@@ -22,7 +22,9 @@ The deployment creates separate HTML pages for English and Arabic:
 
 These paths are relative to the configured Pages project subpath. Arabic content is prerendered in RTL, so direct visits work without language hydration mismatches. The static 404 recovery page deliberately does not hydrate and remains usable at arbitrary missing URLs.
 
-Generated images, original vehicle photos, fonts, encoded desktop/mobile films, exact posters and social previews are served from this site. The existing scroll-scrub engine is preserved unchanged. Reduced-motion visitors use static posters without video requests.
+Generated images, original vehicle photos, fonts and social previews are served from this site. The current hero uses a native-resolution transparent car cutout with CSS lighting, bounded pointer depth and scroll movement. The image stays fully visible on mobile. Reduced-motion visitors receive the same complete composition without movement. The original video engine remains inert source and no hero video is downloaded.
+
+Hero artwork and the built-in generation prompt are documented in `refs/hero-v2-notes.md`.
 
 ## Build with an existing toolchain
 

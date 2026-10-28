@@ -1,7 +1,6 @@
 import {createFileRoute} from "@tanstack/react-router";
 import {useDeferredValue,useEffect,useMemo,useRef,useState} from "react";
-import {ScrollScrub} from "@/components/scroll-scrub/scroll-scrub";
-import {scrollScrubScenes,scrollScrubScenesArabic,scrollScrubTheme} from "@/scroll-scrub-scenes";
+import {AutoMallHero} from "@/components/automall-hero";
 import {SiteHeader,SiteFooter} from "@/components/automall-site";
 import {copy,vehicles,modelMessage,whatsapp,PHONE,INSTAGRAM,MAPS,SITE_URL,type Lang,type Vehicle} from "@/site-data";
 import {assetPath,sitePath,localizedLinks} from "@/site-paths";
@@ -23,7 +22,7 @@ export function AutoMallPage({lang}:{lang:Lang}){
  return <div ref={page} className="automall-page" lang={lang} dir={lang==="ar"?"rtl":"ltr"}>
  <SiteHeader lang={lang} home/>
  <main id="main-content">
- <div className="hero-world"><ScrollScrub scenes={lang==="ar"?scrollScrubScenesArabic:scrollScrubScenes} theme={scrollScrubTheme} className="automall-journey"/><div className="hero-footnote"><span>{t.tagline}</span><small>{t.heroCaption}</small><a href="#collection" aria-label={t.browse}>↓</a></div></div>
+ <AutoMallHero lang={lang}/>
  <section className="collection-section section-wrap" id="collection" aria-labelledby="collection-heading">
  <div className="collection-intro"><p className="section-kicker">{t.collectionLabel}</p><h2 id="collection-heading">{t.collectionTitle}</h2><p>{t.collectionBody}</p></div>
  <div className="collection-tools"><div className="collection-filters" role="group" aria-label={lang==="ar"?"تصفية السيارات":"Filter vehicles"}>{filters.map(f=><button key={f.id} type="button" className={filter===f.id?"filter-tab is-selected":"filter-tab"} aria-pressed={filter===f.id} onClick={()=>setFilter(f.id)}><img src={assetPath("/assets/icon-"+f.icon+".png")} alt="" role="presentation" width="22" height="22"/>{f.label}</button>)}</div><div className="collection-search"><label htmlFor="car-search">{t.search}</label><div><input id="car-search" type="search" placeholder={t.searchPlaceholder} value={query} maxLength={100} onChange={e=>setQuery(e.target.value)}/><span aria-hidden="true">⌕</span></div></div></div>

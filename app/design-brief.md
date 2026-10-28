@@ -45,3 +45,6 @@ Generation capability: GPT Image required a paid plan. Soul Cinema still images 
 Motion stack: Bun, dependencies, Lenis and GSAP were unavailable in the editing environment. No dependencies were installed. CSS and requestAnimationFrame drive surrounding motion; the shipped scrub engine owns video time.
 Semantic story: the one shot reveals arrival, presence and possibility as camera moments under one permanent hero heading; collection, trade-in and showroom are the following semantic chapters.
 Prior build: no previous website in this chat; identity-axis repetition does not apply.
+
+## Hero revision, 2026-10-29
+The user explicitly asked to replace the blurry animation with something better. Replace the active video journey with an interactive studio hero: native 1672×940 alpha PNG, bounded image sizing, vector-sharp CSS lighting rails, finite light reveal and gentle input-responsive depth. Keep the legacy controller untouched and unused. Mobile shows the complete car in its own stage above the text. No cover cropping, upscaled MP4 or runtime video fetch. Both language routes share the same component. Reduced motion freezes all decorative movement while preserving content and controls. The image is illustrative brand artwork, separate from real source-backed vehicle listings.
