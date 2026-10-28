@@ -1,0 +1,195 @@
+@import "./automall-fonts.css";
+:root{--am-bg:#111315;--am-panel:#191c1e;--am-ink:#e7e9e9;--am-muted:#a7adaf;--am-accent:#ed8738;--am-line:#34383b;--am-gutter:clamp(22px,5vw,88px)}
+html{scroll-behavior:smooth;scroll-padding-top:100px;background:var(--am-bg)}
+body{margin:0;background:var(--am-bg);color:var(--am-ink);font-family:Outfit,"Noto Sans Arabic",sans-serif;font-size:16px;line-height:1.6}
+*{box-sizing:border-box}
+button,input,a{-webkit-tap-highlight-color:transparent}
+button,input{font:inherit}
+button,a{touch-action:manipulation}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer}
+a,button,input,summary{outline-offset:6px}
+:focus-visible{outline:2px solid var(--am-accent)}
+::selection{color:var(--am-bg);background:var(--am-accent)}
+.automall-page{overflow:clip;background:var(--am-bg)}
+.automall-page[lang=ar]{font-family:"Noto Sans Arabic",Outfit,sans-serif}
+.automall-page h1,.automall-page h2,.automall-page h3,.error-page h1{font-family:Outfit,"Noto Sans Arabic",sans-serif;font-weight:500}
+.automall-page[lang=ar] h1,.automall-page[lang=ar] h2,.automall-page[lang=ar] h3{font-family:"Noto Sans Arabic",Outfit,sans-serif;letter-spacing:-.035em;line-height:1.35}
+.automall-page p{line-height:1.65}
+.skip-link{position:fixed;top:10px;left:20px;z-index:1000;transform:translateY(-180%);padding:12px 20px;background:var(--am-accent);color:var(--am-bg)}
+.skip-link:focus{transform:translateY(0)}
+.section-wrap{padding-inline:var(--am-gutter);max-width:1680px;margin-inline:auto}
+.site-header{position:fixed;z-index:50;inset:0 0 auto;height:80px;padding-inline:var(--am-gutter);display:flex;align-items:center;justify-content:space-between;gap:35px;border-bottom:1px solid color-mix(in srgb,var(--am-ink) 13%,transparent);background:linear-gradient(var(--am-bg),transparent);transition:background .25s}
+.automall-page[data-scrolled=true] .site-header,.legal-page .site-header{background:color-mix(in srgb,var(--am-bg) 96%,transparent);backdrop-filter:blur(16px)}
+.brand{display:flex;align-items:center;gap:11px;flex-shrink:0}
+.brand>img{width:44px;height:44px;object-fit:cover}
+.brand>span{font-family:Outfit,sans-serif;font-size:22px;font-weight:700;letter-spacing:.035em;line-height:1.15}
+.brand small{display:block;font-family:"Noto Sans Arabic",sans-serif;font-weight:400;font-size:10px;text-align:center;letter-spacing:0;line-height:1.7}
+.main-nav{display:flex;gap:32px;align-items:center}
+.main-nav>a{position:relative;font-size:14px;color:var(--am-ink);padding-block:8px}
+.main-nav>a:after{content:"";position:absolute;bottom:1px;inset-inline-start:0;width:12px;height:2px;background:var(--am-accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.main-nav>a:hover:after{transform:scaleX(1)}
+.header-utilities{display:flex;align-items:center;gap:24px}
+.language-control{font-size:13px}
+.nav-whatsapp{display:flex;align-items:center;gap:22px;font-size:13px;border-inline-start:1px solid var(--am-line);padding-inline-start:22px}
+.nav-whatsapp>span{font-size:21px;color:var(--am-accent);transition:transform .25s}
+.nav-whatsapp:hover>span{transform:translate(3px,-3px)}
+.menu-control{display:none;width:42px;height:42px;border:1px solid var(--am-line);background:var(--am-bg);color:var(--am-ink);font-size:24px}
+.hero-world{position:relative}
+.automall-journey .scroll-scrub__route{display:none}
+.automall-journey .scroll-scrub__progress{top:auto;bottom:0;height:2px;z-index:8}
+.automall-journey .scroll-scrub__chapter-pin{align-items:flex-end;padding:155px var(--am-gutter) 145px}
+.automall-journey .scroll-scrub__copy{width:min(790px,64vw)}
+.automall-journey .scroll-scrub__copy:before{inset:-70px -90px -110px;background:radial-gradient(ellipse at left bottom,color-mix(in srgb,var(--am-bg) 94%,transparent),color-mix(in srgb,var(--am-bg) 67%,transparent) 50%,transparent 76%)}
+.automall-journey .scroll-scrub__media:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,color-mix(in srgb,var(--am-bg) 15%,transparent),transparent 70%);pointer-events:none}
+.automall-journey .scroll-scrub__title{font-size:clamp(50px,6.1vw,96px);font-weight:500;max-width:none;line-height:1.04;letter-spacing:-.055em;white-space:pre-line;animation:headline-settle 1s cubic-bezier(.22,1,.36,1) both}
+.automall-journey .scroll-scrub__body{max-width:380px;font-size:16px;color:var(--am-ink);margin-top:22px;line-height:1.65}
+.automall-journey .scroll-scrub__actions{margin-top:30px}
+.hero-action-row{display:flex;gap:24px;align-items:center}
+.hero-browse{background:var(--am-accent);color:var(--am-bg);min-height:54px;display:flex;align-items:center;gap:36px;padding:14px 22px;clip-path:polygon(0 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%);font-weight:600;font-size:14px;transition:transform .25s}
+.hero-browse>span{font-size:22px;line-height:1;transition:transform .25s}
+.hero-browse:hover>span{transform:translate(3px,-3px)}
+.hero-browse:active{transform:translateY(2px)}
+.hero-enquire{font-size:14px;display:flex;gap:18px;align-items:center;padding:13px 0;border-bottom:1px solid var(--am-ink);transition:color .25s}
+.hero-enquire:hover{color:var(--am-accent)}
+.hero-enquire>span{font-size:20px}
+.hero-footnote{position:absolute;bottom:24px;inset-inline:var(--am-gutter);display:flex;justify-content:space-between;align-items:center;gap:24px;z-index:6;font-size:12px}
+.hero-footnote>span{font-size:14px}
+.hero-footnote small{font-size:11px;color:var(--am-muted)}
+.hero-footnote>a{height:40px;width:40px;display:grid;place-items:center;border:1px solid var(--am-line);font-size:22px}
+.collection-section{padding-block:115px 100px}
+.section-kicker{font-family:"IBM Plex Mono","Noto Sans Arabic",monospace;color:var(--am-accent);font-size:11px;letter-spacing:.12em;font-weight:400;margin:0 0 22px}
+.collection-intro h2,.showroom-intro h2,.faq-section h2{font-size:clamp(36px,4.2vw,64px);letter-spacing:-.045em;line-height:1.1;margin:0}
+.collection-intro>p:last-child,.showroom-intro>p:last-child{max-width:540px;color:var(--am-muted);font-size:16px;margin:23px 0 0}
+.collection-tools{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;margin-top:48px;border-bottom:1px solid var(--am-line)}
+.collection-filters{display:flex;align-items:center;gap:26px}
+.filter-tab{position:relative;background:none;border:0;color:var(--am-muted);display:flex;align-items:center;gap:8px;min-height:56px;padding:8px 0;font-size:14px;white-space:nowrap}
+.filter-tab img{width:20px;height:20px;object-fit:contain;opacity:.6}
+.filter-tab:after{position:absolute;bottom:-1px;inset-inline:0;height:2px;background:var(--am-accent);content:"";transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.filter-tab.is-selected{color:var(--am-ink)}
+.filter-tab.is-selected img{opacity:1}
+.filter-tab.is-selected:after{transform:scaleX(1)}
+.collection-search{width:250px;max-width:100%;padding-bottom:12px}
+.collection-search>label{font-size:11px;color:var(--am-muted);display:block;margin-bottom:3px}
+.collection-search>div{display:flex;align-items:center;gap:10px}
+.collection-search input{background:transparent;color:var(--am-ink);border:0;border-bottom:1px solid transparent;font-size:14px;width:100%;min-width:0;padding:3px 0;border-radius:0}
+.collection-search input::placeholder{color:var(--am-muted)}
+.collection-search span{font-size:24px;line-height:1;color:var(--am-muted)}
+.collection-count{display:flex;justify-content:space-between;gap:20px;font-family:"IBM Plex Mono","Noto Sans Arabic",monospace;font-size:11px;color:var(--am-muted);padding-block:20px}
+.vehicle-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:42px;row-gap:50px;align-items:start}
+.vehicle-card:nth-child(even){transform:translateY(45px)}
+.vehicle-open{display:block;text-align:start;padding:0;border:0;width:100%;color:var(--am-ink);background:transparent}
+.vehicle-image{position:relative;overflow:hidden;aspect-ratio:1;background:var(--am-panel)}
+.vehicle-image>img{display:block;width:100%;height:100%;object-fit:contain;transition:transform .7s cubic-bezier(.22,1,.36,1)}
+.vehicle-open:hover .vehicle-image>img{transform:scale(1.035)}
+.image-corner{position:absolute;bottom:14px;inset-inline-end:14px;width:42px;height:42px;display:grid;place-items:center;font-size:24px;color:var(--am-bg);background:var(--am-accent);transform:translateY(65px);transition:transform .3s}
+.vehicle-open:hover .image-corner,.vehicle-open:focus-visible .image-corner{transform:translateY(0)}
+.vehicle-info{display:flex;justify-content:space-between;align-items:center;gap:15px;border-bottom:1px solid var(--am-line);padding:24px 0 23px}
+.vehicle-year{font-family:"IBM Plex Mono","Noto Sans Arabic",monospace;font-size:11px;color:var(--am-muted);line-height:1.6}
+.vehicle-info h3{font-size:clamp(24px,2.15vw,34px);line-height:1.15;letter-spacing:-.035em;margin:8px 0}
+.vehicle-info h3>span{font-weight:400}
+.vehicle-info p{font-size:13px;color:var(--am-muted);margin:0}
+.vehicle-detail-link{font-size:12px;white-space:nowrap;align-self:flex-end;padding-bottom:3px}
+.vehicle-detail-link>span{display:inline-block;margin-inline-start:8px;color:var(--am-accent);transition:transform .25s}
+.vehicle-open:hover .vehicle-detail-link>span{transform:translate(3px,-3px)}
+.collection-after{display:flex;align-items:center;justify-content:space-between;gap:40px;margin-top:85px}
+.collection-after p{font-size:12px;color:var(--am-muted);max-width:450px;margin:0}
+.collection-after a{display:flex;align-items:center;gap:35px;padding-block:14px;border-bottom:1px solid var(--am-line);font-size:14px;white-space:nowrap}
+.collection-after a>span{color:var(--am-accent);font-size:22px}
+.collection-empty{min-height:340px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:1px solid var(--am-line);padding:30px}
+.collection-empty>span{font-size:40px;color:var(--am-accent)}
+.collection-empty h3{font-size:28px;letter-spacing:-.03em;margin:10px 0}
+.collection-empty p{font-size:16px;color:var(--am-muted);max-width:440px;margin:5px 0 25px}
+.collection-empty button{color:var(--am-bg);background:var(--am-accent);border:0;padding:12px 22px}
+.trade-section{position:relative;min-height:620px;display:flex;align-items:center;isolation:isolate;overflow:hidden;border-block:1px solid var(--am-line)}
+.trade-media{position:absolute;inset:-35px 0;z-index:-2;background:var(--am-panel);transform:translateY(var(--pan,0px))}
+.trade-media>img{height:100%;width:100%;object-fit:cover;object-position:65% 50%;display:block}
+.trade-section:after{position:absolute;z-index:-1;inset:0;content:"";background:linear-gradient(90deg,color-mix(in srgb,var(--am-bg) 96%,transparent),color-mix(in srgb,var(--am-bg) 78%,transparent) 35%,color-mix(in srgb,var(--am-bg) 10%,transparent))}
+.trade-content{padding:100px var(--am-gutter);width:100%}
+.trade-content h2{font-size:clamp(38px,4.3vw,68px);line-height:1.07;letter-spacing:-.045em;white-space:pre-line;margin:0}
+.trade-content>p{max-width:370px;color:var(--am-muted);margin-block:24px 32px;font-size:16px}
+.trade-link{display:inline-flex;gap:14px;align-items:center;font-size:15px;padding:12px 0}
+.trade-link>img{width:28px;height:28px;object-fit:contain}
+.trade-link>span{margin-inline-start:30px;color:var(--am-accent);font-size:26px;transition:transform .25s}
+.trade-link:hover>span{transform:rotate(45deg)}
+.showroom-section{padding-block:110px 100px}
+.showroom-grid{display:grid;grid-template-columns:1fr 1fr;margin-top:55px;border:1px solid var(--am-line);min-height:430px}
+.showroom-address{padding:45px;position:relative}
+.showroom-pin{object-fit:contain;margin-bottom:25px}
+.showroom-address address{font-style:normal}
+.showroom-address h3{font-size:30px;letter-spacing:-.035em;line-height:1.2;margin:0 0 10px}
+.showroom-address address p{color:var(--am-muted);margin:0}
+.directions-link{display:inline-flex;align-items:center;justify-content:space-between;gap:45px;margin-top:24px;font-size:14px;padding:9px 0;position:relative}
+.directions-link:before,.directions-link:after{content:"";position:absolute;width:6px;height:6px;border-color:var(--am-accent);border-style:solid;transition:transform .25s}
+.directions-link:before{inset-inline-start:-9px;top:5px;border-width:1px 0 0 1px}
+.directions-link:after{inset-inline-end:-9px;bottom:3px;border-width:0 1px 1px 0}
+.directions-link:hover:before{transform:translate(3px,3px)}
+.directions-link:hover:after{transform:translate(-3px,-3px)}
+.directions-link>span{font-size:20px;color:var(--am-accent)}
+.showroom-phone{padding-top:28px;border-top:1px solid var(--am-line);margin-top:32px}
+.showroom-phone>span{display:block;font-size:12px;color:var(--am-muted);margin-bottom:8px}
+.showroom-phone>a{font-family:Outfit,sans-serif;font-size:clamp(26px,2.6vw,40px);letter-spacing:-.03em;line-height:1.2;display:flex;align-items:center;gap:20px;width:max-content;max-width:100%}
+.showroom-phone img{object-fit:contain}
+.visit-note{font-size:12px;color:var(--am-muted);max-width:360px;margin:18px 0 0}
+.showroom-art{position:relative;overflow:hidden;background:var(--am-panel)}
+.showroom-art>img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.75)}
+.showroom-art>div{position:absolute;inset:0;display:flex;justify-content:center;align-items:center;flex-direction:column;background:color-mix(in srgb,var(--am-bg) 20%,transparent)}
+.showroom-art span{font-family:Outfit,sans-serif;font-size:clamp(28px,3.4vw,54px);font-weight:600;letter-spacing:.04em}
+.showroom-art p{font-family:"Noto Sans Arabic",sans-serif;font-size:18px;margin:5px 0}
+.faq-section{padding-block:5px 100px;display:grid;grid-template-columns:1fr 1.6fr;gap:65px}
+.faq-list{border-top:1px solid var(--am-line)}
+.faq-list details{border-bottom:1px solid var(--am-line)}
+.faq-list summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:20px;padding-block:24px;font-size:17px;line-height:1.5}
+.faq-list summary::-webkit-details-marker{display:none}
+.faq-list summary>span{font-family:Outfit,sans-serif;color:var(--am-accent);font-size:25px;transition:transform .25s}
+.faq-list details[open] summary>span{transform:rotate(45deg)}
+.faq-list details>p{font-size:16px;color:var(--am-muted);margin:0 38px 26px 0}
+.site-footer{padding:58px var(--am-gutter) 28px;background:var(--am-panel);border-top:1px solid var(--am-line)}
+.footer-top{display:grid;grid-template-columns:1.1fr 1fr auto;gap:60px;align-items:center;padding-bottom:55px}
+.footer-wordmark{font-family:Outfit,sans-serif;font-size:clamp(24px,3.3vw,47px);letter-spacing:-.035em;font-weight:600;line-height:1}
+.footer-wordmark>span{font-size:10px;border:1px solid var(--am-accent);color:var(--am-accent);margin-inline-start:8px;padding:2px 4px;vertical-align:top;letter-spacing:.1em}
+.footer-top p{color:var(--am-muted);font-size:14px;max-width:290px;margin:0}
+.instagram-link{display:flex;align-items:center;gap:30px;font-size:14px}
+.instagram-link>span{color:var(--am-accent);font-size:24px}
+.footer-bottom{border-top:1px solid var(--am-line);padding-top:24px;display:flex;justify-content:space-between;gap:25px;font-size:11px;color:var(--am-muted)}
+.footer-bottom nav{display:flex;gap:25px;flex-wrap:wrap}
+.footer-bottom a:hover{color:var(--am-ink)}
+.trademark-notice{font-size:10px;color:var(--am-muted);max-width:900px;margin-top:24px!important;margin-bottom:0!important}
+.vehicle-dialog{background:var(--am-panel);color:var(--am-ink);border:1px solid var(--am-line);padding:0;max-width:min(1100px,calc(100vw - 48px));width:1100px;max-height:calc(100dvh - 60px);overflow:auto;overscroll-behavior:contain}
+.vehicle-dialog::backdrop{background:color-mix(in srgb,var(--am-bg) 88%,transparent);backdrop-filter:blur(8px)}
+.dialog-layout{position:relative;display:grid;grid-template-columns:1fr 1fr}
+.dialog-close{position:absolute;z-index:2;top:12px;inset-inline-end:12px;display:grid;place-items:center;width:40px;height:40px;border:1px solid var(--am-line);background:var(--am-bg);color:var(--am-ink);font-size:29px;line-height:1}
+.dialog-image{width:100%;height:100%;object-fit:contain;background:var(--am-bg)}
+.dialog-copy{padding:52px 34px 34px}
+.dialog-copy h2{font-size:36px;line-height:1.15;letter-spacing:-.04em;margin:12px 0 22px}
+.dialog-copy>p{color:var(--am-muted);font-size:15px}
+.vehicle-facts{border-top:1px solid var(--am-line);margin-top:26px}
+.vehicle-facts>div{display:flex;justify-content:space-between;gap:20px;border-bottom:1px solid var(--am-line);padding:12px 0;font-size:12px}
+.vehicle-facts dt{color:var(--am-muted)}
+.vehicle-facts dd{margin:0;text-align:end}
+.dialog-copy .detail-note{font-size:11px;margin-top:20px}
+.dialog-enquire{margin-top:24px;display:flex;justify-content:space-between;gap:20px;background:var(--am-accent);color:var(--am-bg);padding:15px 18px;font-size:14px;font-weight:600}
+.dialog-enquire>span{transition:transform .25s}
+.dialog-enquire:hover>span{transform:translate(3px,-3px)}
+.dialog-source{display:block;font-size:12px;color:var(--am-muted);margin-top:18px;text-align:center}
+.legal-content{max-width:870px;padding:150px 25px 95px;margin-inline:auto}
+.legal-back{display:inline-block;color:var(--am-accent);font-size:14px;margin-bottom:40px}
+.legal-content h1{font-size:clamp(36px,5vw,60px);letter-spacing:-.04em;line-height:1.2;margin:0}
+.legal-date{font-size:13px;color:var(--am-muted);border-bottom:1px solid var(--am-line);padding-bottom:35px;margin-top:20px}
+.legal-content section{padding-top:24px}
+.legal-content h2{font-size:23px;line-height:1.35;letter-spacing:-.02em;margin:0 0 16px}
+.legal-content section p{font-size:16px;color:var(--am-muted)}
+.legal-content section a{color:var(--am-accent);font-size:14px}
+.error-page{min-height:100dvh;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:30px;color:var(--am-ink);background:var(--am-bg);font-family:Outfit,sans-serif}
+.error-page h1{font-size:48px;letter-spacing:-.04em;margin:20px 0}
+.error-page a,.error-page button{color:var(--am-bg);background:var(--am-accent);border:0;padding:13px 22px;margin-top:22px}
+[dir=rtl] .automall-journey .scroll-scrub__copy:before{background:radial-gradient(ellipse at right bottom,color-mix(in srgb,var(--am-bg) 94%,transparent),color-mix(in srgb,var(--am-bg) 67%,transparent) 50%,transparent 76%)}
+[dir=rtl] .trade-section:after{background:linear-gradient(270deg,color-mix(in srgb,var(--am-bg) 96%,transparent),color-mix(in srgb,var(--am-bg) 78%,transparent) 35%,color-mix(in srgb,var(--am-bg) 10%,transparent))}
+[dir=rtl] .trade-content h2{line-height:1.4}
+[dir=rtl] .faq-list details>p{margin:0 0 26px 38px}
+@keyframes headline-settle{from{transform:translateY(30px)}to{transform:translateY(0)}}
+@media(min-width:1600px){.collection-section,.showroom-section,.faq-section{padding-inline:70px}}
+@media(max-width:1100px){.site-header{height:78px;gap:20px}.main-nav{gap:20px}.header-utilities{gap:16px}.brand>span{font-size:18px}.nav-whatsapp{padding-inline-start:16px;gap:12px}.collection-filters{gap:18px}.filter-tab{font-size:13px}.collection-search{width:210px}.vehicle-grid{gap:30px}.vehicle-info{align-items:start}.vehicle-detail-link{font-size:11px}.showroom-address{padding:32px}.footer-top{gap:35px}.faq-section{gap:35px}}
+@media(max-width:860px){.main-nav{position:absolute;top:77px;inset-inline:0;display:none;padding:24px var(--am-gutter);background:var(--am-panel);border-bottom:1px solid var(--am-line)}.main-nav.is-open{display:flex}.menu-control{display:grid;place-items:center}.nav-whatsapp{display:none}.site-header{gap:14px}.header-utilities{gap:18px}.automall-journey .scroll-scrub__chapter-pin{padding:130px var(--am-gutter) 145px;align-items:flex-end}.automall-journey .scroll-scrub__copy{width:min(100%,670px)}.automall-journey .scroll-scrub__title{font-size:clamp(46px,8vw,70px);line-height:1.07}.automall-journey .scroll-scrub__copy:before{inset:-45px -30px -145px;background:linear-gradient(0deg,var(--am-bg),color-mix(in srgb,var(--am-bg) 82%,transparent) 58%,transparent)}.collection-section{padding-block:80px}.collection-tools{align-items:stretch;flex-direction:column;gap:20px}.collection-filters{gap:28px}.collection-search{width:100%;padding-bottom:16px}.collection-search>div{border:1px solid var(--am-line);padding:8px 12px}.collection-search>label{margin-bottom:8px}.collection-count{font-size:10px}.vehicle-info{flex-direction:column;gap:12px}.vehicle-detail-link{align-self:initial}.collection-after{margin-top:80px;gap:20px;align-items:flex-start}.collection-after p{max-width:350px}.trade-section{min-height:560px}.showroom-section{padding-block:80px}.showroom-grid{margin-top:40px}.showroom-address{padding:30px}.showroom-address h3{font-size:25px}.showroom-phone>a{font-size:27px}.showroom-art span{font-size:30px}.showroom-art p{font-size:15px}.faq-section{grid-template-columns:1fr;gap:35px;padding-bottom:75px}.footer-top{grid-template-columns:1fr 1fr;gap:25px}.instagram-link{grid-column:1/-1;width:max-content}.dialog-layout{grid-template-columns:1fr}.dialog-image{height:auto;max-height:50dvh;object-fit:contain}.dialog-copy{padding:30px}.vehicle-dialog{width:650px;max-width:calc(100vw - 34px)}}
+@media(max-width:580px){:root{--am-gutter:22px}.site-header{height:74px}.brand>img{height:37px;width:37px}.brand>span{font-size:17px}.brand small{font-size:9px}.main-nav{top:73px;flex-direction:column;align-items:stretch;gap:10px}.main-nav>a{font-size:17px;padding-block:10px}.header-utilities{gap:15px}.language-control{font-size:12px}.menu-control{width:36px;height:36px;font-size:21px}.automall-journey .scroll-scrub__chapter-pin{padding:100px var(--am-gutter) 135px}.automall-journey .scroll-scrub__title{font-size:clamp(38px,10.6vw,61px);line-height:1.08}.automall-journey .scroll-scrub__body{font-size:14px;max-width:330px;margin-top:20px}.automall-journey .scroll-scrub__actions{margin-top:23px}.hero-action-row{gap:23px}.hero-browse{min-height:49px;gap:23px;font-size:13px;padding:12px 17px}.hero-enquire{font-size:13px;gap:12px}.hero-footnote{bottom:19px;gap:12px;align-items:center}.hero-footnote>span{font-size:11px;max-width:130px}.hero-footnote small{font-size:9px;max-width:140px;text-align:center}.hero-footnote>a{width:32px;height:35px;flex-shrink:0}.collection-section{padding-block:65px}.section-kicker{font-size:10px;margin-bottom:18px}.collection-intro h2,.showroom-intro h2,.faq-section h2{font-size:36px}.collection-intro>p:last-child,.showroom-intro>p:last-child{margin-top:20px;font-size:15px}.collection-tools{margin-top:30px}.collection-filters{gap:0;justify-content:space-between}.filter-tab{font-size:12px;gap:5px;min-height:48px}.filter-tab img{width:15px;height:15px}.collection-count{padding-block:17px;gap:10px;font-size:9px}.vehicle-grid{grid-template-columns:1fr;row-gap:30px}.vehicle-card:nth-child(even){transform:none}.vehicle-info{flex-direction:row;align-items:center;padding:20px 0}.vehicle-info h3{font-size:27px}.vehicle-year{font-size:10px}.vehicle-info p{font-size:12px}.vehicle-detail-link{align-self:flex-end;white-space:nowrap;font-size:10px}.image-corner{display:none}.collection-after{margin-top:32px;flex-direction:column;gap:12px}.collection-after a{font-size:13px}.trade-section{min-height:545px;align-items:flex-end}.trade-media>img{object-position:62% 50%}.trade-section:after{background:linear-gradient(0deg,var(--am-bg),color-mix(in srgb,var(--am-bg) 82%,transparent) 55%,color-mix(in srgb,var(--am-bg) 12%,transparent))}.trade-content{padding:65px var(--am-gutter)}.trade-content h2{font-size:40px}.trade-content>p{font-size:15px}.trade-link{font-size:14px}.showroom-section{padding-block:65px}.showroom-grid{grid-template-columns:1fr;margin-top:35px}.showroom-address{padding:28px}.showroom-art{min-height:260px}.showroom-art>img{position:absolute;inset:0}.showroom-art span{font-size:38px}.showroom-phone>a{font-size:33px}.faq-section{padding-block:0 65px;gap:30px}.faq-list summary{font-size:15px;padding-block:22px}.faq-list details>p{font-size:14px}.site-footer{padding-block:40px 24px}.footer-top{grid-template-columns:1fr;gap:25px;padding-bottom:32px}.footer-wordmark{font-size:35px}.footer-top p{font-size:13px;max-width:270px}.footer-bottom{flex-direction:column;gap:18px}.footer-bottom nav{gap:20px;font-size:10px}.trademark-notice{font-size:9px}.vehicle-dialog{max-width:calc(100vw - 20px);max-height:calc(100dvh - 24px)}.dialog-copy{padding:25px}.dialog-copy h2{font-size:30px}.dialog-image{max-height:43dvh}.dialog-copy>p{font-size:14px}.dialog-close{width:35px;height:35px}.legal-content{padding:115px 22px 65px}.legal-back{margin-bottom:30px}.legal-content h1{font-size:38px}.legal-content h2{font-size:22px}.legal-content section p{font-size:15px}[dir=rtl] .trade-section:after{background:linear-gradient(0deg,var(--am-bg),color-mix(in srgb,var(--am-bg) 82%,transparent) 55%,color-mix(in srgb,var(--am-bg) 12%,transparent))}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}.trade-media{transform:none}.vehicle-card:nth-child(even){transform:none}.vehicle-open:hover .vehicle-image>img{transform:none}.image-corner{transform:none}.automall-journey .scroll-scrub__chapter{min-height:100dvh!important}}

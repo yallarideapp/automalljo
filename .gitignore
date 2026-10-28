@@ -1,0 +1,8 @@
+node_modules/
+app/dist/
+app/.output/
+app/.tanstack/
+.env
+.env.*
+*.zip
+.DS_Store

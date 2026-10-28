@@ -1,0 +1,5 @@
+import {SiteHeader,SiteFooter} from "./automall-site";
+import {legal,LAST_UPDATED} from "@/legal-data";
+import {sitePath} from "@/site-paths";
+import {copy,type Lang} from "@/site-data";
+export function LegalPage({kind,lang}:{kind:"privacy"|"terms";lang:Lang}){const l=legal[lang];return <div className="automall-page legal-page" dir={lang==="ar"?"rtl":"ltr"} lang={lang}><SiteHeader lang={lang} page={kind}/><main id="main-content" className="legal-content"><a className="legal-back" href={sitePath("",lang)}>← {copy[lang].back}</a><h1>{kind==="privacy"?l.privacyTitle:l.termsTitle}</h1><p className="legal-date">{l.updatedLabel}: {LAST_UPDATED}</p>{l[kind].map((section,i)=><section key={i}><h2>{section.title}</h2><p>{section.text}</p>{section.link&&<a href={section.link} target="_blank" rel="noopener noreferrer">{section.linkLabel} ↗</a>}</section>)}</main><SiteFooter lang={lang}/></div>;}
