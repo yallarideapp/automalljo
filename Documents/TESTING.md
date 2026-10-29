@@ -34,10 +34,14 @@
 
 ### Live delivery verification
 
-- Pending deployment and final smoke checks of the published routes.
+- GitHub Actions run `40931611346` completed successfully: category tests, typecheck, production build, all 156 static-output checks, artifact upload and Pages deployment. Deployed website commit: `f9d258bbac22bbe0d860563a44160f005a516a95`.
+- All 12 published page-type/language combinations loaded successfully, hydrated without console warnings/errors, retained the charcoal background and showed no horizontal overflow.
+- On production, electric + sedan returned five listings after refresh and language switching. Opening Zeekr 7X showed all 29 photographs and its 615 km advertised range; next photo advanced to 2/29. Returning to the electric + SUV catalogue retained both filters and returned 15 listings.
+- Eleven generated category WebPs are deployed; original dealer galleries and Version 1 remain available.
 
 The production output verifier now checks all 156 localized HTML documents, canonical URLs and indexing rules, complete car galleries and electric ranges, category image assets, independent catalogue filter groups, and Version 1's four-photo hero.
 
 ### Content to confirm with the showroom
 
 The catalogue remains the public-listing snapshot checked on 29 October 2026. Current availability, unadvertised prices, exact trim details, warranty terms and opening hours require showroom confirmation. Category artwork is illustrative; individual listing galleries use the original dealer photographs.
+
