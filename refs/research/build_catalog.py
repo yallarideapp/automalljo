@@ -1,6 +1,6 @@
 """Build the public catalogue from the captured live dealer ads and audited captions."""
 import concurrent.futures, hashlib, io, json, pathlib, time, urllib.request
-from PIL import Image
+from PIL import Image, ImageOps
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 RESEARCH = ROOT / 'refs/research'
@@ -11,6 +11,8 @@ for path in sorted(RESEARCH.glob('model-audit-*.json')):
     audit.update(json.loads(path.read_text()))
 details = {p.stem: json.loads(p.read_text()) for p in RESEARCH.glob('details-*/*.json')}
 assert len(audit) == len(details) == len(source['listings']) == 70
+galleries = json.loads((RESEARCH / 'gallery-audit.json').read_text())
+ranges = json.loads((RESEARCH / 'electric-range-audit.json').read_text())
 
 def pair(en, ar=None): return {'en': str(en), 'ar': str(ar if ar is not None else en)}
 AR = {
@@ -47,12 +49,37 @@ def tech_ar(s):
     return s
 
 manifest=[]
-def photo(v):
-    ident=v['id']; url=details[ident]['photoURLs'][0]
+photo_jobs=[]
+photo_paths={}
+CONVERSION={'maxEdge':1600,'quality':88,'method':4}
+CACHE=RESEARCH/'gallery-photo-cache'
+CACHE.mkdir(exist_ok=True)
+previous_manifest=APP/'catalog-images.json'
+previous_images={p['path']:p for p in json.loads(previous_manifest.read_text()).get('images',[])} if previous_manifest.exists() else {}
+for vehicle in source['listings']:
+    ident=vehicle['id']; gallery=galleries[ident]['photos']
+    assert gallery and len(gallery)==galleries[ident]['count'], ident
+    paths=[]
+    for index, item in enumerate(gallery,1):
+        url=item['url']; extension=pathlib.PurePosixPath(url).suffix.lower()
+        assert extension in {'.jpg','.jpeg','.png','.webp'},(ident,url)
+        rel=f'public/assets/catalog/gallery-{ident}-{index}.webp'
+        photo_jobs.append((ident,index,url,rel))
+        paths.append('/'+rel.removeprefix('public/'))
+    photo_paths[ident]=paths
+
+def photo(job):
+    ident,index,url,rel=job
     assert url.startswith('https://opensooq-imagesv2.os-cdn.com/')
-    rel=f'public/assets/catalog/os-{ident}-1.webp'; dest=APP/rel
+    dest=APP/rel
     dest.parent.mkdir(parents=True,exist_ok=True)
-    data=dest.read_bytes() if dest.exists() else None
+    cache=CACHE/f'{ident}-{index}.json'
+    if dest.exists() and (cache.exists() or rel in previous_images):
+        saved=json.loads(cache.read_text()) if cache.exists() else previous_images[rel]
+        if saved.get('url')==url and saved.get('conversion')==CONVERSION and saved['sha256']==hashlib.sha256(dest.read_bytes()).hexdigest():
+            return saved
+    old_original=dest.with_name(f'original-{ident}-{index}{pathlib.PurePosixPath(url).suffix.lower()}')
+    data=old_original.read_bytes() if old_original.exists() else None
     if data is None:
         for attempt in range(4):
             try:
@@ -61,13 +88,22 @@ def photo(v):
             except Exception:
                 if attempt==3: raise
                 time.sleep(1+attempt)
-        dest.write_bytes(data)
     image=Image.open(io.BytesIO(data)); image.verify()
-    image=Image.open(io.BytesIO(data)); w,h=image.size
-    assert data[:4]==b'RIFF' and data[8:12]==b'WEBP' and w>=700 and h>=400,(ident,w,h)
-    return {'id':ident,'path':rel,'url':url,'sha256':hashlib.sha256(data).hexdigest(),'width':w,'height':h,'bytes':len(data)}
-with concurrent.futures.ThreadPoolExecutor(max_workers=5) as pool:
-    manifest=list(pool.map(photo,source['listings']))
+    image=Image.open(io.BytesIO(data)); source_w,source_h=image.size
+    assert image.format in {'JPEG','PNG','WEBP'} and max(source_w,source_h)>=300,(ident,source_w,source_h)
+    image=ImageOps.exif_transpose(image)
+    image=image.convert('RGBA' if 'A' in image.getbands() else 'RGB')
+    image.thumbnail((1600,1600),Image.Resampling.LANCZOS)
+    output=io.BytesIO(); image.save(output,format='WEBP',quality=88,method=4)
+    optimized=output.getvalue(); dest.write_bytes(optimized)
+    w,h=image.size
+    result={'id':ident,'index':index,'path':rel,'url':url,'sourceUrl':url,
+        'sourceSha256':hashlib.sha256(data).hexdigest(),'sourceBytes':len(data),'sourceWidth':source_w,'sourceHeight':source_h,
+        'conversion':CONVERSION,'sha256':hashlib.sha256(optimized).hexdigest(),'width':w,'height':h,'bytes':len(optimized)}
+    cache.write_text(json.dumps(result,ensure_ascii=False))
+    return result
+with concurrent.futures.ThreadPoolExecutor(max_workers=6) as pool:
+    manifest=list(pool.map(photo,photo_jobs))
 
 vehicles=[]
 premium={'Maserati','Mercedes-Benz','Porsche','BMW','Audi','Land Rover','Zeekr','AVATR','Hongqi'}
@@ -95,7 +131,11 @@ for raw in source['listings']:
     add('Interior colour','لون المقصورة',a.get('interiorColor'))
     for key,label,ar in [('engine','Engine / hybrid system','المحرك / النظام الهجين'),('drive','Drive','نظام الدفع'),('battery','Battery (seller stated)','البطارية (بحسب الإعلان)')]:
         add(label,ar,overrides.get(key),tech_ar(overrides[key]) if key in overrides else None)
-    # Omit disputed acceleration, output and range data rather than mixing test cycles or trims.
+    # Use each exact EV listing's caption; never substitute another trim's range.
+    range_entry=ranges.get(ident)
+    if fuel=='Electric':
+        assert range_entry and range_entry['sourceURL']==a['sourceURL'],ident
+        add('Advertised driving range','مدى القيادة المعلن',range_entry['displayEnglish'],range_entry['displayArabic'])
     region=(sf.get('specs') or [None])[0]
     add('Market specification','فئة المواصفات',region)
     add('Dealer listing ID','رقم إعلان المعرض',ident)
@@ -110,14 +150,15 @@ for raw in source['listings']:
     if ident=='288440874': ar+=' السعر المعلن لا يشمل لوحة التسجيل.'
     if ident=='287890904': ar+=' السعر المعلن يشمل وحدة التبريد.'
     v={'id':ident,'brand':brand,'name':name,'year':a['year'],
-       'image':f'/assets/catalog/os-{ident}-1.webp','categories':categories,
+       'image':photo_paths[ident][0],'gallery':photo_paths[ident],'categories':categories,
        'color':pair(f'{color} exterior',f'لون خارجي {tr(color)}'),
        'type':pair(f'{body} · {fuel}',f'{tr(body)} · {tr(fuel)}'),
        'description':pair(en,ar),
        'facts':{'en':[fuel,condition,mileage,a.get('trim') or body],
                 'ar':[tr(fuel),tr(condition),mileage.replace('km','كم'),a.get('trim') or tr(body)]},
        'specs':specs,'post':a['sourceURL'],
-       'sourceLabel':pair('View dealer listing on OpenSooq','عرض إعلان المعرض على السوق المفتوح')}
+       'sourceLabel':pair('Original dealer listing','إعلان المعرض الأصلي')}
+    if range_entry:v['range']=pair(range_entry['displayEnglish'],range_entry['displayArabic'])
     price=d['vehicleSchema'].get('offers',{}).get('price')
     if price and float(price)>0 and ident!='288700698': v['price']={'amount':int(float(price)),'currency':'JOD'}
     vehicles.append(v)

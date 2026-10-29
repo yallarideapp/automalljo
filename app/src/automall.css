@@ -235,3 +235,15 @@ a,button,input,summary{outline-offset:6px}
 @media(max-width:860px){.collection-refinements{width:100%;grid-template-columns:minmax(140px,1fr) minmax(200px,1.7fr);gap:20px}.collection-tools .collection-filters{gap:24px}.dialog-media{position:relative}.dialog-media .dialog-image{max-height:50dvh;aspect-ratio:4/3}}
 @media(max-width:580px){.collection-refinements{grid-template-columns:minmax(0,1fr);gap:15px}.collection-tools{gap:20px}.collection-tools .collection-filters{gap:22px}.collection-tools .filter-tab{min-height:49px}.collection-brand>select,.collection-refinements .collection-search input{font-size:16px}.collection-count{gap:9px;font-size:10px}.vehicle-info{gap:14px}.vehicle-info .vehicle-price{margin-top:12px}.vehicle-price>strong{font-size:22px}.collection-pagination{padding-top:36px}.collection-more{width:100%;gap:25px;font-size:13px}.dialog-media .dialog-image{max-height:42dvh}.dialog-thumbnails{padding:10px;gap:8px}.dialog-thumbnails>button{width:66px;height:54px;flex-basis:66px}.dialog-price>strong{font-size:27px}.vehicle-facts>div{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);font-size:12px}}
 @media(prefers-reduced-motion:reduce){.collection-more{transition:none}}
+.vehicle-photo-count{position:absolute;bottom:14px;inset-inline-start:14px;padding:5px 9px;background:var(--am-bg);color:var(--am-ink);border:1px solid var(--am-line);font-size:10px;line-height:1.4}
+.vehicle-info .vehicle-range{display:flex;flex-direction:column;gap:4px;margin-top:13px;padding-inline-start:10px;border-inline-start:2px solid var(--am-accent);color:var(--am-ink)}
+.vehicle-range>small{font-size:10px;color:var(--am-muted);line-height:1.5}
+.vehicle-range>strong{font-size:13px;font-weight:500;line-height:1.5;max-width:260px}
+.dialog-photo-controls{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:4px 12px;border-top:1px solid var(--am-line)}
+.dialog-photo-controls>button{display:grid;place-items:center;width:44px;height:44px;border:1px solid transparent;background:var(--am-bg);color:var(--am-ink);font-size:25px;line-height:1}
+.dialog-photo-controls>button:hover{border-color:var(--am-accent);color:var(--am-accent)}
+.dialog-photo-controls>span{font-size:12px;color:var(--am-muted);font-variant-numeric:tabular-nums}
+.dialog-range{display:flex;flex-direction:column;gap:6px;margin-block:20px;padding:12px 15px;border-inline-start:2px solid var(--am-accent);background:var(--am-panel)}
+.dialog-range>span{font-size:11px;color:var(--am-muted)}
+.dialog-range>strong{font-size:17px;font-weight:500;line-height:1.5}
+@media(max-width:580px){.vehicle-range>strong{font-size:12px}.vehicle-photo-count{bottom:10px;inset-inline-start:10px}.dialog-range>strong{font-size:16px}}

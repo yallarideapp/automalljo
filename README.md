@@ -30,15 +30,16 @@ Hero artwork and the built-in generation prompt are documented in `refs/hero-v2-
 
 The catalogue covers all 70 live ads on AutoMall’s public OpenSooq dealer page across three pages, checked 29 October 2026. It excludes 225 sold ads. Separate active listing IDs are preserved even when the same model appears in multiple colours. This is a dated public-listing snapshot, not a guarantee of all physical showroom stock or an automatic feed.
 
-`app/src/catalog-data.json` contains audited bilingual specifications and source links. `refs/research/` preserves the source snapshot and caption audits. Performance figures with conflicting trims or test cycles are omitted. Only 19 explicit current full-vehicle prices are displayed in JOD; the Yangwang U8 down payment is not presented as a purchase price.
+`app/src/catalog-data.json` contains audited bilingual specifications and source links. `refs/research/` preserves the source snapshot and caption audits. Conflicting performance figures are omitted. EV range is explicitly seller advertised and does not promise a real-world result. All 27 pure-electric listings include the advertised range from their own seller captions, with stated test cycles and qualifiers preserved. Only 19 explicit current full-vehicle prices are displayed in JOD; the Yangwang U8 down payment is not presented as a purchase price.
 
-All 70 source photographs are self-hosted WebP files, verified against `app/catalog-images.json`. The CI sync script downloads only missing photos from the source CDN, verifies their exact bytes and commits the originals before building. No generated substitute vehicle photos are used. The catalogue opens with 12 listings, with brand/fuel filters, bilingual search and load-more.
+All 1,537 original dealer photographs across the 70 listings are self-hosted as optimized WebP files, verified against `app/catalog-images.json`. The CI sync script downloads only missing photos from the source CDN, verifies their source bytes, creates the pinned 1600-pixel WebP derivatives and commits the verified gallery assets before building. Original source files have no added marketplace overlay; no generated substitute vehicle photos are used. The image conversion changes only resolution/encoding for website delivery. The catalogue opens with 12 listings, with brand/fuel filters, bilingual search and load-more.
 
 ## Build with an existing toolchain
 
 From `app/`, provide `VITE_SITE_URL` as the full final URL (including the repository path for a project site) and `VITE_BASE_PATH` as that deployment pathname. Then run:
 
 ```sh
+python3 -m pip install Pillow==12.3.0
 python3 scripts/sync-catalog-images.py
 node scripts/verify-catalog.mjs
 node scripts/prepare-pages.mjs

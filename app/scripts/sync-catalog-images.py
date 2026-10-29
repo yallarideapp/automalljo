@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import concurrent.futures
 import hashlib
+import io
 import json
 import os
 from pathlib import Path, PurePosixPath
@@ -18,12 +19,15 @@ import urllib.parse
 import urllib.request
 from dataclasses import dataclass
 
+from PIL import Image, ImageOps
+
 
 APP_ROOT = Path(__file__).resolve().parents[1]
 ASSET_ROOT = APP_ROOT / "public" / "assets" / "catalog"
 MANIFEST_PATH = APP_ROOT / "catalog-images.json"
 ALLOWED_HOST = "opensooq-imagesv2.os-cdn.com"
 MAX_IMAGE_BYTES = 20 * 1024 * 1024
+MAX_SOURCE_BYTES = 64 * 1024 * 1024
 MAX_MANIFEST_BYTES = 4 * 1024 * 1024
 WORKERS = 4
 ATTEMPTS = 3
@@ -43,6 +47,11 @@ class CatalogImage:
     width: int
     height: int
     byte_count: int
+    source_sha256: str | None = None
+    source_width: int | None = None
+    source_height: int | None = None
+    source_byte_count: int | None = None
+    conversion: dict[str, int] | None = None
 
 
 def validate_url(url: object) -> str:
@@ -87,9 +96,9 @@ def validate_target(value: object) -> tuple[str, Path]:
         or ".." in path.parts
         or len(path.parts) != 4
         or path.parts[:3] != ("public", "assets", "catalog")
-        or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._-]*\.webp", path.name)
+        or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._-]*\.(?:webp|jpg|jpeg|png)", path.name)
     ):
-        raise CatalogSyncError("Photo path must be a WebP file under public/assets/catalog")
+        raise CatalogSyncError("Photo path must be a WebP, JPEG or PNG file under public/assets/catalog")
     target = APP_ROOT.joinpath(*path.parts)
     if not target.resolve().is_relative_to(ASSET_ROOT.resolve()):
         raise CatalogSyncError("Catalogue photo path leaves the asset directory")
@@ -126,15 +135,42 @@ def read_manifest() -> list[CatalogImage]:
         digest = entry.get("sha256")
         if not isinstance(digest, str) or not re.fullmatch(r"[0-9a-fA-F]{64}", digest):
             raise CatalogSyncError(f"Invalid photo SHA-256: {path}")
+        conversion = entry.get("conversion")
+        source_digest = None
+        source_width = source_height = source_byte_count = None
+        if conversion is not None:
+            if (
+                not isinstance(conversion, dict)
+                or set(conversion) != {"maxEdge", "quality", "method"}
+                or any(type(value) is not int for value in conversion.values())
+                or conversion != {"maxEdge": 1600, "quality": 88, "method": 4}
+                or PurePosixPath(path).suffix != ".webp"
+            ):
+                raise CatalogSyncError(f"Unsupported catalogue photo conversion: {path}")
+            source_digest = entry.get("sourceSha256")
+            if not isinstance(source_digest, str) or not re.fullmatch(r"[0-9a-fA-F]{64}", source_digest):
+                raise CatalogSyncError(f"Invalid source photo SHA-256: {path}")
+            source_digest = source_digest.lower()
+            source_width = positive_integer(entry.get("sourceWidth"), "source photo width", 20000)
+            source_height = positive_integer(entry.get("sourceHeight"), "source photo height", 20000)
+            source_byte_count = positive_integer(entry.get("sourceBytes"), "source photo byte count", MAX_SOURCE_BYTES)
+            source_url = validate_url(entry.get("sourceUrl"))
+        else:
+            source_url = validate_url(entry.get("url"))
         result.append(CatalogImage(
             image_id=str(image_id),
             path=path,
             target=target,
-            url=validate_url(entry.get("url")),
+            url=source_url,
             sha256=digest.lower(),
             width=positive_integer(entry.get("width"), "photo width", 20000),
             height=positive_integer(entry.get("height"), "photo height", 20000),
             byte_count=positive_integer(entry.get("bytes"), "photo byte count", MAX_IMAGE_BYTES),
+            source_sha256=source_digest,
+            source_width=source_width,
+            source_height=source_height,
+            source_byte_count=source_byte_count,
+            conversion=conversion,
         ))
     return result
 
@@ -163,13 +199,115 @@ def webp_dimensions(data: bytes) -> tuple[int, int]:
     raise CatalogSyncError("Downloaded WebP has no supported image header")
 
 
+def jpeg_dimensions(data: bytes) -> tuple[int, int]:
+    if len(data) < 4 or data[:2] != b"\xff\xd8" or data[-2:] != b"\xff\xd9":
+        raise CatalogSyncError("Downloaded photo is not a complete JPEG file")
+    offset = 2
+    frame_markers = {0xC0, 0xC1, 0xC2, 0xC3, 0xC5, 0xC6, 0xC7, 0xC9, 0xCA, 0xCB, 0xCD, 0xCE, 0xCF}
+    while offset < len(data):
+        if data[offset] != 0xFF:
+            raise CatalogSyncError("Downloaded JPEG has an invalid marker")
+        while offset < len(data) and data[offset] == 0xFF:
+            offset += 1
+        if offset >= len(data):
+            break
+        marker = data[offset]
+        offset += 1
+        if marker in (0x00, 0xDA, 0xD9):
+            break
+        if marker == 0x01 or 0xD0 <= marker <= 0xD8:
+            continue
+        if offset + 2 > len(data):
+            break
+        size = struct.unpack_from(">H", data, offset)[0]
+        if size < 2 or offset + size > len(data):
+            raise CatalogSyncError("Downloaded JPEG contains an incomplete segment")
+        if marker in frame_markers:
+            if size < 8:
+                raise CatalogSyncError("Downloaded JPEG has an invalid frame header")
+            height, width = struct.unpack_from(">HH", data, offset + 3)
+            return width, height
+        offset += size
+    raise CatalogSyncError("Downloaded JPEG has no supported image header")
+
+
+def png_dimensions(data: bytes) -> tuple[int, int]:
+    if (
+        len(data) < 45
+        or data[:8] != b"\x89PNG\r\n\x1a\n"
+        or data[8:16] != b"\x00\x00\x00\x0dIHDR"
+        or data[-12:] != b"\x00\x00\x00\x00IEND\xaeB`\x82"
+    ):
+        raise CatalogSyncError("Downloaded photo is not a complete PNG file")
+    return struct.unpack_from(">II", data, 16)
+
+
+def image_dimensions(data: bytes, path: str) -> tuple[int, int]:
+    extension = PurePosixPath(path).suffix
+    if extension in (".jpg", ".jpeg"):
+        return jpeg_dimensions(data)
+    if extension == ".png":
+        return png_dimensions(data)
+    if extension == ".webp":
+        return webp_dimensions(data)
+    raise CatalogSyncError("Unsupported catalogue photo format")
+
+
 def verify_bytes(image: CatalogImage, data: bytes) -> None:
     if len(data) != image.byte_count:
         raise CatalogSyncError("Photo byte count differs from the manifest")
     if hashlib.sha256(data).hexdigest() != image.sha256:
         raise CatalogSyncError("Photo SHA-256 differs from the manifest")
-    if webp_dimensions(data) != (image.width, image.height):
+    if image_dimensions(data, image.path) != (image.width, image.height):
         raise CatalogSyncError("Photo dimensions differ from the manifest")
+
+
+def optimize_source(image: CatalogImage, data: bytes) -> bytes:
+    """Verify original bytes, then reproduce the manifest's exact WebP recipe.
+
+    Source containers are decoded in memory and are never written to disk.
+    Source dimensions describe the stored pixels before EXIF orientation.
+    """
+    if image.conversion is None:
+        return data
+    if len(data) != image.source_byte_count:
+        raise CatalogSyncError("Source photo byte count differs from the manifest")
+    if hashlib.sha256(data).hexdigest() != image.source_sha256:
+        raise CatalogSyncError("Source photo SHA-256 differs from the manifest")
+    extension = PurePosixPath(urllib.parse.urlsplit(image.url).path).suffix.lower()
+    expected_formats = {".jpg": "JPEG", ".jpeg": "JPEG", ".png": "PNG", ".webp": "WEBP"}
+    expected_format = expected_formats.get(extension)
+    signatures = {
+        "JPEG": data.startswith(b"\xff\xd8\xff"),
+        "PNG": data.startswith(b"\x89PNG\r\n\x1a\n"),
+        "WEBP": len(data) >= 12 and data[:4] == b"RIFF" and data[8:12] == b"WEBP",
+    }
+    if expected_format is None or not signatures[expected_format]:
+        raise CatalogSyncError("Source photo type does not match its original URL")
+    with Image.open(io.BytesIO(data)) as source:
+        if source.format != expected_format:
+            raise CatalogSyncError("Source photo decoder type differs from its URL")
+        if source.size != (image.source_width, image.source_height):
+            raise CatalogSyncError("Source photo dimensions differ from the manifest")
+        oriented = ImageOps.exif_transpose(source)
+        converted = oriented.convert("RGBA" if "A" in oriented.getbands() else "RGB")
+        try:
+            converted.thumbnail(
+                (image.conversion["maxEdge"], image.conversion["maxEdge"]),
+                Image.Resampling.LANCZOS,
+            )
+            output = io.BytesIO()
+            converted.save(
+                output,
+                format="WEBP",
+                quality=image.conversion["quality"],
+                method=image.conversion["method"],
+            )
+            return output.getvalue()
+        finally:
+            converted.close()
+            if oriented is not source:
+                oriented.close()
 
 
 def existing_matches(image: CatalogImage) -> bool:
@@ -186,13 +324,17 @@ def fetch_image(image: CatalogImage) -> bool:
     if existing_matches(image):
         return False
     opener = urllib.request.build_opener(SameHostRedirectHandler())
-    request = urllib.request.Request(image.url, headers={"User-Agent": "Mozilla/5.0", "Accept": "image/webp"})
+    request = urllib.request.Request(image.url, headers={"User-Agent": "Mozilla/5.0", "Accept": "image/jpeg,image/png,image/webp"})
     error: Exception | None = None
     for attempt in range(ATTEMPTS):
         try:
             with opener.open(request, timeout=30) as response:
                 validate_url(response.geturl())
-                data = response.read(image.byte_count + 1)
+                expected_bytes = image.source_byte_count if image.conversion is not None else image.byte_count
+                if expected_bytes is None:
+                    raise CatalogSyncError("Missing source byte limit")
+                data = response.read(expected_bytes + 1)
+            data = optimize_source(image, data)
             verify_bytes(image, data)
             image.target.parent.mkdir(parents=True, exist_ok=True)
             temporary: str | None = None
@@ -206,7 +348,7 @@ def fetch_image(image: CatalogImage) -> bool:
                 if temporary is not None:
                     Path(temporary).unlink(missing_ok=True)
             return True
-        except (OSError, ValueError, CatalogSyncError, urllib.error.URLError) as caught:
+        except (OSError, ValueError, CatalogSyncError, urllib.error.URLError, Image.DecompressionBombError) as caught:
             error = caught
             if attempt < ATTEMPTS - 1:
                 time.sleep(2 ** attempt)

@@ -4,7 +4,29 @@
     "brand": "EXEED",
     "name": "Exlantix ES",
     "year": 2026,
-    "image": "/assets/catalog/os-288638424-1.webp",
+    "image": "/assets/catalog/gallery-288638424-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-288638424-1.webp",
+      "/assets/catalog/gallery-288638424-2.webp",
+      "/assets/catalog/gallery-288638424-3.webp",
+      "/assets/catalog/gallery-288638424-4.webp",
+      "/assets/catalog/gallery-288638424-5.webp",
+      "/assets/catalog/gallery-288638424-6.webp",
+      "/assets/catalog/gallery-288638424-7.webp",
+      "/assets/catalog/gallery-288638424-8.webp",
+      "/assets/catalog/gallery-288638424-9.webp",
+      "/assets/catalog/gallery-288638424-10.webp",
+      "/assets/catalog/gallery-288638424-11.webp",
+      "/assets/catalog/gallery-288638424-12.webp",
+      "/assets/catalog/gallery-288638424-13.webp",
+      "/assets/catalog/gallery-288638424-14.webp",
+      "/assets/catalog/gallery-288638424-15.webp",
+      "/assets/catalog/gallery-288638424-16.webp",
+      "/assets/catalog/gallery-288638424-17.webp",
+      "/assets/catalog/gallery-288638424-18.webp",
+      "/assets/catalog/gallery-288638424-19.webp",
+      "/assets/catalog/gallery-288638424-20.webp"
+    ],
     "categories": [
       "hybrid"
     ],
@@ -178,8 +200,8 @@
     ],
     "post": "https://jo.opensooq.com/en/search/288638424",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
     }
   },
   {
@@ -187,7 +209,32 @@
     "brand": "Maserati",
     "name": "Quattroporte",
     "year": 2009,
-    "image": "/assets/catalog/os-288700596-1.webp",
+    "image": "/assets/catalog/gallery-288700596-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-288700596-1.webp",
+      "/assets/catalog/gallery-288700596-2.webp",
+      "/assets/catalog/gallery-288700596-3.webp",
+      "/assets/catalog/gallery-288700596-4.webp",
+      "/assets/catalog/gallery-288700596-5.webp",
+      "/assets/catalog/gallery-288700596-6.webp",
+      "/assets/catalog/gallery-288700596-7.webp",
+      "/assets/catalog/gallery-288700596-8.webp",
+      "/assets/catalog/gallery-288700596-9.webp",
+      "/assets/catalog/gallery-288700596-10.webp",
+      "/assets/catalog/gallery-288700596-11.webp",
+      "/assets/catalog/gallery-288700596-12.webp",
+      "/assets/catalog/gallery-288700596-13.webp",
+      "/assets/catalog/gallery-288700596-14.webp",
+      "/assets/catalog/gallery-288700596-15.webp",
+      "/assets/catalog/gallery-288700596-16.webp",
+      "/assets/catalog/gallery-288700596-17.webp",
+      "/assets/catalog/gallery-288700596-18.webp",
+      "/assets/catalog/gallery-288700596-19.webp",
+      "/assets/catalog/gallery-288700596-20.webp",
+      "/assets/catalog/gallery-288700596-21.webp",
+      "/assets/catalog/gallery-288700596-22.webp",
+      "/assets/catalog/gallery-288700596-23.webp"
+    ],
     "categories": [
       "gasoline",
       "premium"
@@ -342,8 +389,8 @@
     ],
     "post": "https://jo.opensooq.com/en/search/288700596",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
     },
     "price": {
       "amount": 29000,
@@ -355,7 +402,38 @@
     "brand": "Zeekr",
     "name": "7X",
     "year": 2026,
-    "image": "/assets/catalog/os-288700472-1.webp",
+    "image": "/assets/catalog/gallery-288700472-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-288700472-1.webp",
+      "/assets/catalog/gallery-288700472-2.webp",
+      "/assets/catalog/gallery-288700472-3.webp",
+      "/assets/catalog/gallery-288700472-4.webp",
+      "/assets/catalog/gallery-288700472-5.webp",
+      "/assets/catalog/gallery-288700472-6.webp",
+      "/assets/catalog/gallery-288700472-7.webp",
+      "/assets/catalog/gallery-288700472-8.webp",
+      "/assets/catalog/gallery-288700472-9.webp",
+      "/assets/catalog/gallery-288700472-10.webp",
+      "/assets/catalog/gallery-288700472-11.webp",
+      "/assets/catalog/gallery-288700472-12.webp",
+      "/assets/catalog/gallery-288700472-13.webp",
+      "/assets/catalog/gallery-288700472-14.webp",
+      "/assets/catalog/gallery-288700472-15.webp",
+      "/assets/catalog/gallery-288700472-16.webp",
+      "/assets/catalog/gallery-288700472-17.webp",
+      "/assets/catalog/gallery-288700472-18.webp",
+      "/assets/catalog/gallery-288700472-19.webp",
+      "/assets/catalog/gallery-288700472-20.webp",
+      "/assets/catalog/gallery-288700472-21.webp",
+      "/assets/catalog/gallery-288700472-22.webp",
+      "/assets/catalog/gallery-288700472-23.webp",
+      "/assets/catalog/gallery-288700472-24.webp",
+      "/assets/catalog/gallery-288700472-25.webp",
+      "/assets/catalog/gallery-288700472-26.webp",
+      "/assets/catalog/gallery-288700472-27.webp",
+      "/assets/catalog/gallery-288700472-28.webp",
+      "/assets/catalog/gallery-288700472-29.webp"
+    ],
     "categories": [
       "electric",
       "suv",
@@ -510,6 +588,16 @@
       },
       {
         "label": {
+          "en": "Advertised driving range",
+          "ar": "مدى القيادة المعلن"
+        },
+        "value": {
+          "en": "615 km (cycle unspecified)",
+          "ar": "615 كم (دورة القياس غير مذكورة)"
+        }
+      },
+      {
+        "label": {
           "en": "Market specification",
           "ar": "فئة المواصفات"
         },
@@ -531,8 +619,12 @@
     ],
     "post": "https://jo.opensooq.com/en/search/288700472",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
+    },
+    "range": {
+      "en": "615 km (cycle unspecified)",
+      "ar": "615 كم (دورة القياس غير مذكورة)"
     }
   },
   {
@@ -540,7 +632,29 @@
     "brand": "EXEED",
     "name": "Exlantix ET",
     "year": 2026,
-    "image": "/assets/catalog/os-288657536-1.webp",
+    "image": "/assets/catalog/gallery-288657536-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-288657536-1.webp",
+      "/assets/catalog/gallery-288657536-2.webp",
+      "/assets/catalog/gallery-288657536-3.webp",
+      "/assets/catalog/gallery-288657536-4.webp",
+      "/assets/catalog/gallery-288657536-5.webp",
+      "/assets/catalog/gallery-288657536-6.webp",
+      "/assets/catalog/gallery-288657536-7.webp",
+      "/assets/catalog/gallery-288657536-8.webp",
+      "/assets/catalog/gallery-288657536-9.webp",
+      "/assets/catalog/gallery-288657536-10.webp",
+      "/assets/catalog/gallery-288657536-11.webp",
+      "/assets/catalog/gallery-288657536-12.webp",
+      "/assets/catalog/gallery-288657536-13.webp",
+      "/assets/catalog/gallery-288657536-14.webp",
+      "/assets/catalog/gallery-288657536-15.webp",
+      "/assets/catalog/gallery-288657536-16.webp",
+      "/assets/catalog/gallery-288657536-17.webp",
+      "/assets/catalog/gallery-288657536-18.webp",
+      "/assets/catalog/gallery-288657536-19.webp",
+      "/assets/catalog/gallery-288657536-20.webp"
+    ],
     "categories": [
       "hybrid",
       "suv"
@@ -725,8 +839,8 @@
     ],
     "post": "https://jo.opensooq.com/en/search/288657536",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
     }
   },
   {
@@ -734,7 +848,27 @@
     "brand": "Geely Farizon",
     "name": "SV",
     "year": 2025,
-    "image": "/assets/catalog/os-288657488-1.webp",
+    "image": "/assets/catalog/gallery-288657488-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-288657488-1.webp",
+      "/assets/catalog/gallery-288657488-2.webp",
+      "/assets/catalog/gallery-288657488-3.webp",
+      "/assets/catalog/gallery-288657488-4.webp",
+      "/assets/catalog/gallery-288657488-5.webp",
+      "/assets/catalog/gallery-288657488-6.webp",
+      "/assets/catalog/gallery-288657488-7.webp",
+      "/assets/catalog/gallery-288657488-8.webp",
+      "/assets/catalog/gallery-288657488-9.webp",
+      "/assets/catalog/gallery-288657488-10.webp",
+      "/assets/catalog/gallery-288657488-11.webp",
+      "/assets/catalog/gallery-288657488-12.webp",
+      "/assets/catalog/gallery-288657488-13.webp",
+      "/assets/catalog/gallery-288657488-14.webp",
+      "/assets/catalog/gallery-288657488-15.webp",
+      "/assets/catalog/gallery-288657488-16.webp",
+      "/assets/catalog/gallery-288657488-17.webp",
+      "/assets/catalog/gallery-288657488-18.webp"
+    ],
     "categories": [
       "electric"
     ],
@@ -877,6 +1011,16 @@
       },
       {
         "label": {
+          "en": "Advertised driving range",
+          "ar": "مدى القيادة المعلن"
+        },
+        "value": {
+          "en": "Up to 560 km (cycle unspecified)",
+          "ar": "حتى 560 كم (دورة القياس غير مذكورة)"
+        }
+      },
+      {
+        "label": {
           "en": "Market specification",
           "ar": "فئة المواصفات"
         },
@@ -898,8 +1042,12 @@
     ],
     "post": "https://jo.opensooq.com/en/search/288657488",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
+    },
+    "range": {
+      "en": "Up to 560 km (cycle unspecified)",
+      "ar": "حتى 560 كم (دورة القياس غير مذكورة)"
     }
   },
   {
@@ -907,7 +1055,30 @@
     "brand": "EXEED",
     "name": "VX",
     "year": 2026,
-    "image": "/assets/catalog/os-288657370-1.webp",
+    "image": "/assets/catalog/gallery-288657370-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-288657370-1.webp",
+      "/assets/catalog/gallery-288657370-2.webp",
+      "/assets/catalog/gallery-288657370-3.webp",
+      "/assets/catalog/gallery-288657370-4.webp",
+      "/assets/catalog/gallery-288657370-5.webp",
+      "/assets/catalog/gallery-288657370-6.webp",
+      "/assets/catalog/gallery-288657370-7.webp",
+      "/assets/catalog/gallery-288657370-8.webp",
+      "/assets/catalog/gallery-288657370-9.webp",
+      "/assets/catalog/gallery-288657370-10.webp",
+      "/assets/catalog/gallery-288657370-11.webp",
+      "/assets/catalog/gallery-288657370-12.webp",
+      "/assets/catalog/gallery-288657370-13.webp",
+      "/assets/catalog/gallery-288657370-14.webp",
+      "/assets/catalog/gallery-288657370-15.webp",
+      "/assets/catalog/gallery-288657370-16.webp",
+      "/assets/catalog/gallery-288657370-17.webp",
+      "/assets/catalog/gallery-288657370-18.webp",
+      "/assets/catalog/gallery-288657370-19.webp",
+      "/assets/catalog/gallery-288657370-20.webp",
+      "/assets/catalog/gallery-288657370-21.webp"
+    ],
     "categories": [
       "hybrid",
       "suv"
@@ -1082,8 +1253,8 @@
     ],
     "post": "https://jo.opensooq.com/en/search/288657370",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
     }
   },
   {
@@ -1091,7 +1262,36 @@
     "brand": "Mercedes-Benz",
     "name": "G580",
     "year": 2025,
-    "image": "/assets/catalog/os-287516454-1.webp",
+    "image": "/assets/catalog/gallery-287516454-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-287516454-1.webp",
+      "/assets/catalog/gallery-287516454-2.webp",
+      "/assets/catalog/gallery-287516454-3.webp",
+      "/assets/catalog/gallery-287516454-4.webp",
+      "/assets/catalog/gallery-287516454-5.webp",
+      "/assets/catalog/gallery-287516454-6.webp",
+      "/assets/catalog/gallery-287516454-7.webp",
+      "/assets/catalog/gallery-287516454-8.webp",
+      "/assets/catalog/gallery-287516454-9.webp",
+      "/assets/catalog/gallery-287516454-10.webp",
+      "/assets/catalog/gallery-287516454-11.webp",
+      "/assets/catalog/gallery-287516454-12.webp",
+      "/assets/catalog/gallery-287516454-13.webp",
+      "/assets/catalog/gallery-287516454-14.webp",
+      "/assets/catalog/gallery-287516454-15.webp",
+      "/assets/catalog/gallery-287516454-16.webp",
+      "/assets/catalog/gallery-287516454-17.webp",
+      "/assets/catalog/gallery-287516454-18.webp",
+      "/assets/catalog/gallery-287516454-19.webp",
+      "/assets/catalog/gallery-287516454-20.webp",
+      "/assets/catalog/gallery-287516454-21.webp",
+      "/assets/catalog/gallery-287516454-22.webp",
+      "/assets/catalog/gallery-287516454-23.webp",
+      "/assets/catalog/gallery-287516454-24.webp",
+      "/assets/catalog/gallery-287516454-25.webp",
+      "/assets/catalog/gallery-287516454-26.webp",
+      "/assets/catalog/gallery-287516454-27.webp"
+    ],
     "categories": [
       "electric",
       "suv",
@@ -1246,6 +1446,16 @@
       },
       {
         "label": {
+          "en": "Advertised driving range",
+          "ar": "مدى القيادة المعلن"
+        },
+        "value": {
+          "en": "Up to 473 km (WLTP)",
+          "ar": "حتى 473 كم (WLTP)"
+        }
+      },
+      {
+        "label": {
           "en": "Market specification",
           "ar": "فئة المواصفات"
         },
@@ -1267,8 +1477,12 @@
     ],
     "post": "https://jo.opensooq.com/en/search/287516454",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
+    },
+    "range": {
+      "en": "Up to 473 km (WLTP)",
+      "ar": "حتى 473 كم (WLTP)"
     }
   },
   {
@@ -1276,7 +1490,32 @@
     "brand": "Chery iCAR",
     "name": "V27",
     "year": 2026,
-    "image": "/assets/catalog/os-287175144-1.webp",
+    "image": "/assets/catalog/gallery-287175144-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-287175144-1.webp",
+      "/assets/catalog/gallery-287175144-2.webp",
+      "/assets/catalog/gallery-287175144-3.webp",
+      "/assets/catalog/gallery-287175144-4.webp",
+      "/assets/catalog/gallery-287175144-5.webp",
+      "/assets/catalog/gallery-287175144-6.webp",
+      "/assets/catalog/gallery-287175144-7.webp",
+      "/assets/catalog/gallery-287175144-8.webp",
+      "/assets/catalog/gallery-287175144-9.webp",
+      "/assets/catalog/gallery-287175144-10.webp",
+      "/assets/catalog/gallery-287175144-11.webp",
+      "/assets/catalog/gallery-287175144-12.webp",
+      "/assets/catalog/gallery-287175144-13.webp",
+      "/assets/catalog/gallery-287175144-14.webp",
+      "/assets/catalog/gallery-287175144-15.webp",
+      "/assets/catalog/gallery-287175144-16.webp",
+      "/assets/catalog/gallery-287175144-17.webp",
+      "/assets/catalog/gallery-287175144-18.webp",
+      "/assets/catalog/gallery-287175144-19.webp",
+      "/assets/catalog/gallery-287175144-20.webp",
+      "/assets/catalog/gallery-287175144-21.webp",
+      "/assets/catalog/gallery-287175144-22.webp",
+      "/assets/catalog/gallery-287175144-23.webp"
+    ],
     "categories": [
       "hybrid",
       "suv"
@@ -1461,8 +1700,8 @@
     ],
     "post": "https://jo.opensooq.com/en/search/287175144",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
     }
   },
   {
@@ -1470,7 +1709,30 @@
     "brand": "Rising",
     "name": "R7",
     "year": 2023,
-    "image": "/assets/catalog/os-287614790-1.webp",
+    "image": "/assets/catalog/gallery-287614790-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-287614790-1.webp",
+      "/assets/catalog/gallery-287614790-2.webp",
+      "/assets/catalog/gallery-287614790-3.webp",
+      "/assets/catalog/gallery-287614790-4.webp",
+      "/assets/catalog/gallery-287614790-5.webp",
+      "/assets/catalog/gallery-287614790-6.webp",
+      "/assets/catalog/gallery-287614790-7.webp",
+      "/assets/catalog/gallery-287614790-8.webp",
+      "/assets/catalog/gallery-287614790-9.webp",
+      "/assets/catalog/gallery-287614790-10.webp",
+      "/assets/catalog/gallery-287614790-11.webp",
+      "/assets/catalog/gallery-287614790-12.webp",
+      "/assets/catalog/gallery-287614790-13.webp",
+      "/assets/catalog/gallery-287614790-14.webp",
+      "/assets/catalog/gallery-287614790-15.webp",
+      "/assets/catalog/gallery-287614790-16.webp",
+      "/assets/catalog/gallery-287614790-17.webp",
+      "/assets/catalog/gallery-287614790-18.webp",
+      "/assets/catalog/gallery-287614790-19.webp",
+      "/assets/catalog/gallery-287614790-20.webp",
+      "/assets/catalog/gallery-287614790-21.webp"
+    ],
     "categories": [
       "electric",
       "suv"
@@ -1624,6 +1886,16 @@
       },
       {
         "label": {
+          "en": "Advertised driving range",
+          "ar": "مدى القيادة المعلن"
+        },
+        "value": {
+          "en": "Up to 551 km (CLTC)",
+          "ar": "حتى 551 كم (CLTC)"
+        }
+      },
+      {
+        "label": {
           "en": "Market specification",
           "ar": "فئة المواصفات"
         },
@@ -1645,8 +1917,12 @@
     ],
     "post": "https://jo.opensooq.com/en/search/287614790",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
+    },
+    "range": {
+      "en": "Up to 551 km (CLTC)",
+      "ar": "حتى 551 كم (CLTC)"
     }
   },
   {
@@ -1654,7 +1930,29 @@
     "brand": "EXEED",
     "name": "Exlantix ET",
     "year": 2026,
-    "image": "/assets/catalog/os-289157148-1.webp",
+    "image": "/assets/catalog/gallery-289157148-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-289157148-1.webp",
+      "/assets/catalog/gallery-289157148-2.webp",
+      "/assets/catalog/gallery-289157148-3.webp",
+      "/assets/catalog/gallery-289157148-4.webp",
+      "/assets/catalog/gallery-289157148-5.webp",
+      "/assets/catalog/gallery-289157148-6.webp",
+      "/assets/catalog/gallery-289157148-7.webp",
+      "/assets/catalog/gallery-289157148-8.webp",
+      "/assets/catalog/gallery-289157148-9.webp",
+      "/assets/catalog/gallery-289157148-10.webp",
+      "/assets/catalog/gallery-289157148-11.webp",
+      "/assets/catalog/gallery-289157148-12.webp",
+      "/assets/catalog/gallery-289157148-13.webp",
+      "/assets/catalog/gallery-289157148-14.webp",
+      "/assets/catalog/gallery-289157148-15.webp",
+      "/assets/catalog/gallery-289157148-16.webp",
+      "/assets/catalog/gallery-289157148-17.webp",
+      "/assets/catalog/gallery-289157148-18.webp",
+      "/assets/catalog/gallery-289157148-19.webp",
+      "/assets/catalog/gallery-289157148-20.webp"
+    ],
     "categories": [
       "hybrid",
       "suv"
@@ -1839,8 +2137,8 @@
     ],
     "post": "https://jo.opensooq.com/en/search/289157148",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
     }
   },
   {
@@ -1848,7 +2146,30 @@
     "brand": "EXEED",
     "name": "Exlantix ET",
     "year": 2026,
-    "image": "/assets/catalog/os-289156972-1.webp",
+    "image": "/assets/catalog/gallery-289156972-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-289156972-1.webp",
+      "/assets/catalog/gallery-289156972-2.webp",
+      "/assets/catalog/gallery-289156972-3.webp",
+      "/assets/catalog/gallery-289156972-4.webp",
+      "/assets/catalog/gallery-289156972-5.webp",
+      "/assets/catalog/gallery-289156972-6.webp",
+      "/assets/catalog/gallery-289156972-7.webp",
+      "/assets/catalog/gallery-289156972-8.webp",
+      "/assets/catalog/gallery-289156972-9.webp",
+      "/assets/catalog/gallery-289156972-10.webp",
+      "/assets/catalog/gallery-289156972-11.webp",
+      "/assets/catalog/gallery-289156972-12.webp",
+      "/assets/catalog/gallery-289156972-13.webp",
+      "/assets/catalog/gallery-289156972-14.webp",
+      "/assets/catalog/gallery-289156972-15.webp",
+      "/assets/catalog/gallery-289156972-16.webp",
+      "/assets/catalog/gallery-289156972-17.webp",
+      "/assets/catalog/gallery-289156972-18.webp",
+      "/assets/catalog/gallery-289156972-19.webp",
+      "/assets/catalog/gallery-289156972-20.webp",
+      "/assets/catalog/gallery-289156972-21.webp"
+    ],
     "categories": [
       "hybrid",
       "suv"
@@ -2033,8 +2354,8 @@
     ],
     "post": "https://jo.opensooq.com/en/search/289156972",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
     }
   },
   {
@@ -2042,7 +2363,32 @@
     "brand": "AVATR",
     "name": "12",
     "year": 2024,
-    "image": "/assets/catalog/os-289156540-1.webp",
+    "image": "/assets/catalog/gallery-289156540-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-289156540-1.webp",
+      "/assets/catalog/gallery-289156540-2.webp",
+      "/assets/catalog/gallery-289156540-3.webp",
+      "/assets/catalog/gallery-289156540-4.webp",
+      "/assets/catalog/gallery-289156540-5.webp",
+      "/assets/catalog/gallery-289156540-6.webp",
+      "/assets/catalog/gallery-289156540-7.webp",
+      "/assets/catalog/gallery-289156540-8.webp",
+      "/assets/catalog/gallery-289156540-9.webp",
+      "/assets/catalog/gallery-289156540-10.webp",
+      "/assets/catalog/gallery-289156540-11.webp",
+      "/assets/catalog/gallery-289156540-12.webp",
+      "/assets/catalog/gallery-289156540-13.webp",
+      "/assets/catalog/gallery-289156540-14.webp",
+      "/assets/catalog/gallery-289156540-15.webp",
+      "/assets/catalog/gallery-289156540-16.webp",
+      "/assets/catalog/gallery-289156540-17.webp",
+      "/assets/catalog/gallery-289156540-18.webp",
+      "/assets/catalog/gallery-289156540-19.webp",
+      "/assets/catalog/gallery-289156540-20.webp",
+      "/assets/catalog/gallery-289156540-21.webp",
+      "/assets/catalog/gallery-289156540-22.webp",
+      "/assets/catalog/gallery-289156540-23.webp"
+    ],
     "categories": [
       "electric",
       "premium"
@@ -2196,6 +2542,16 @@
       },
       {
         "label": {
+          "en": "Advertised driving range",
+          "ar": "مدى القيادة المعلن"
+        },
+        "value": {
+          "en": "Up to 700 km (CLTC)",
+          "ar": "حتى 700 كم (CLTC)"
+        }
+      },
+      {
+        "label": {
           "en": "Market specification",
           "ar": "فئة المواصفات"
         },
@@ -2217,8 +2573,12 @@
     ],
     "post": "https://jo.opensooq.com/en/search/289156540",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
+    },
+    "range": {
+      "en": "Up to 700 km (CLTC)",
+      "ar": "حتى 700 كم (CLTC)"
     }
   },
   {
@@ -2226,7 +2586,37 @@
     "brand": "Lynk & Co",
     "name": "900",
     "year": 2026,
-    "image": "/assets/catalog/os-289156416-1.webp",
+    "image": "/assets/catalog/gallery-289156416-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-289156416-1.webp",
+      "/assets/catalog/gallery-289156416-2.webp",
+      "/assets/catalog/gallery-289156416-3.webp",
+      "/assets/catalog/gallery-289156416-4.webp",
+      "/assets/catalog/gallery-289156416-5.webp",
+      "/assets/catalog/gallery-289156416-6.webp",
+      "/assets/catalog/gallery-289156416-7.webp",
+      "/assets/catalog/gallery-289156416-8.webp",
+      "/assets/catalog/gallery-289156416-9.webp",
+      "/assets/catalog/gallery-289156416-10.webp",
+      "/assets/catalog/gallery-289156416-11.webp",
+      "/assets/catalog/gallery-289156416-12.webp",
+      "/assets/catalog/gallery-289156416-13.webp",
+      "/assets/catalog/gallery-289156416-14.webp",
+      "/assets/catalog/gallery-289156416-15.webp",
+      "/assets/catalog/gallery-289156416-16.webp",
+      "/assets/catalog/gallery-289156416-17.webp",
+      "/assets/catalog/gallery-289156416-18.webp",
+      "/assets/catalog/gallery-289156416-19.webp",
+      "/assets/catalog/gallery-289156416-20.webp",
+      "/assets/catalog/gallery-289156416-21.webp",
+      "/assets/catalog/gallery-289156416-22.webp",
+      "/assets/catalog/gallery-289156416-23.webp",
+      "/assets/catalog/gallery-289156416-24.webp",
+      "/assets/catalog/gallery-289156416-25.webp",
+      "/assets/catalog/gallery-289156416-26.webp",
+      "/assets/catalog/gallery-289156416-27.webp",
+      "/assets/catalog/gallery-289156416-28.webp"
+    ],
     "categories": [
       "hybrid",
       "suv"
@@ -2411,8 +2801,8 @@
     ],
     "post": "https://jo.opensooq.com/en/search/289156416",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
     }
   },
   {
@@ -2420,7 +2810,29 @@
     "brand": "EXEED",
     "name": "Exlantix ES",
     "year": 2026,
-    "image": "/assets/catalog/os-289156312-1.webp",
+    "image": "/assets/catalog/gallery-289156312-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-289156312-1.webp",
+      "/assets/catalog/gallery-289156312-2.webp",
+      "/assets/catalog/gallery-289156312-3.webp",
+      "/assets/catalog/gallery-289156312-4.webp",
+      "/assets/catalog/gallery-289156312-5.webp",
+      "/assets/catalog/gallery-289156312-6.webp",
+      "/assets/catalog/gallery-289156312-7.webp",
+      "/assets/catalog/gallery-289156312-8.webp",
+      "/assets/catalog/gallery-289156312-9.webp",
+      "/assets/catalog/gallery-289156312-10.webp",
+      "/assets/catalog/gallery-289156312-11.webp",
+      "/assets/catalog/gallery-289156312-12.webp",
+      "/assets/catalog/gallery-289156312-13.webp",
+      "/assets/catalog/gallery-289156312-14.webp",
+      "/assets/catalog/gallery-289156312-15.webp",
+      "/assets/catalog/gallery-289156312-16.webp",
+      "/assets/catalog/gallery-289156312-17.webp",
+      "/assets/catalog/gallery-289156312-18.webp",
+      "/assets/catalog/gallery-289156312-19.webp",
+      "/assets/catalog/gallery-289156312-20.webp"
+    ],
     "categories": [
       "hybrid"
     ],
@@ -2594,8 +3006,8 @@
     ],
     "post": "https://jo.opensooq.com/en/search/289156312",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
     }
   },
   {
@@ -2603,7 +3015,28 @@
     "brand": "SERES",
     "name": "5",
     "year": 2024,
-    "image": "/assets/catalog/os-289156230-1.webp",
+    "image": "/assets/catalog/gallery-289156230-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-289156230-1.webp",
+      "/assets/catalog/gallery-289156230-2.webp",
+      "/assets/catalog/gallery-289156230-3.webp",
+      "/assets/catalog/gallery-289156230-4.webp",
+      "/assets/catalog/gallery-289156230-5.webp",
+      "/assets/catalog/gallery-289156230-6.webp",
+      "/assets/catalog/gallery-289156230-7.webp",
+      "/assets/catalog/gallery-289156230-8.webp",
+      "/assets/catalog/gallery-289156230-9.webp",
+      "/assets/catalog/gallery-289156230-10.webp",
+      "/assets/catalog/gallery-289156230-11.webp",
+      "/assets/catalog/gallery-289156230-12.webp",
+      "/assets/catalog/gallery-289156230-13.webp",
+      "/assets/catalog/gallery-289156230-14.webp",
+      "/assets/catalog/gallery-289156230-15.webp",
+      "/assets/catalog/gallery-289156230-16.webp",
+      "/assets/catalog/gallery-289156230-17.webp",
+      "/assets/catalog/gallery-289156230-18.webp",
+      "/assets/catalog/gallery-289156230-19.webp"
+    ],
     "categories": [
       "hybrid",
       "suv"
@@ -2778,8 +3211,8 @@
     ],
     "post": "https://jo.opensooq.com/en/search/289156230",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
     }
   },
   {
@@ -2787,7 +3220,24 @@
     "brand": "BYD",
     "name": "Song Plus",
     "year": 2026,
-    "image": "/assets/catalog/os-289156088-1.webp",
+    "image": "/assets/catalog/gallery-289156088-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-289156088-1.webp",
+      "/assets/catalog/gallery-289156088-2.webp",
+      "/assets/catalog/gallery-289156088-3.webp",
+      "/assets/catalog/gallery-289156088-4.webp",
+      "/assets/catalog/gallery-289156088-5.webp",
+      "/assets/catalog/gallery-289156088-6.webp",
+      "/assets/catalog/gallery-289156088-7.webp",
+      "/assets/catalog/gallery-289156088-8.webp",
+      "/assets/catalog/gallery-289156088-9.webp",
+      "/assets/catalog/gallery-289156088-10.webp",
+      "/assets/catalog/gallery-289156088-11.webp",
+      "/assets/catalog/gallery-289156088-12.webp",
+      "/assets/catalog/gallery-289156088-13.webp",
+      "/assets/catalog/gallery-289156088-14.webp",
+      "/assets/catalog/gallery-289156088-15.webp"
+    ],
     "categories": [
       "hybrid",
       "suv"
@@ -2972,8 +3422,8 @@
     ],
     "post": "https://jo.opensooq.com/en/search/289156088",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
     }
   },
   {
@@ -2981,7 +3431,36 @@
     "brand": "Mercedes-Benz",
     "name": "V-Class / Vito",
     "year": 2025,
-    "image": "/assets/catalog/os-289156002-1.webp",
+    "image": "/assets/catalog/gallery-289156002-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-289156002-1.webp",
+      "/assets/catalog/gallery-289156002-2.webp",
+      "/assets/catalog/gallery-289156002-3.webp",
+      "/assets/catalog/gallery-289156002-4.webp",
+      "/assets/catalog/gallery-289156002-5.webp",
+      "/assets/catalog/gallery-289156002-6.webp",
+      "/assets/catalog/gallery-289156002-7.webp",
+      "/assets/catalog/gallery-289156002-8.webp",
+      "/assets/catalog/gallery-289156002-9.webp",
+      "/assets/catalog/gallery-289156002-10.webp",
+      "/assets/catalog/gallery-289156002-11.webp",
+      "/assets/catalog/gallery-289156002-12.webp",
+      "/assets/catalog/gallery-289156002-13.webp",
+      "/assets/catalog/gallery-289156002-14.webp",
+      "/assets/catalog/gallery-289156002-15.webp",
+      "/assets/catalog/gallery-289156002-16.webp",
+      "/assets/catalog/gallery-289156002-17.webp",
+      "/assets/catalog/gallery-289156002-18.webp",
+      "/assets/catalog/gallery-289156002-19.webp",
+      "/assets/catalog/gallery-289156002-20.webp",
+      "/assets/catalog/gallery-289156002-21.webp",
+      "/assets/catalog/gallery-289156002-22.webp",
+      "/assets/catalog/gallery-289156002-23.webp",
+      "/assets/catalog/gallery-289156002-24.webp",
+      "/assets/catalog/gallery-289156002-25.webp",
+      "/assets/catalog/gallery-289156002-26.webp",
+      "/assets/catalog/gallery-289156002-27.webp"
+    ],
     "categories": [
       "hybrid",
       "premium"
@@ -3146,8 +3625,8 @@
     ],
     "post": "https://jo.opensooq.com/en/search/289156002",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
     }
   },
   {
@@ -3155,7 +3634,24 @@
     "brand": "GAC Aion",
     "name": "ES",
     "year": 2026,
-    "image": "/assets/catalog/os-289155916-1.webp",
+    "image": "/assets/catalog/gallery-289155916-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-289155916-1.webp",
+      "/assets/catalog/gallery-289155916-2.webp",
+      "/assets/catalog/gallery-289155916-3.webp",
+      "/assets/catalog/gallery-289155916-4.webp",
+      "/assets/catalog/gallery-289155916-5.webp",
+      "/assets/catalog/gallery-289155916-6.webp",
+      "/assets/catalog/gallery-289155916-7.webp",
+      "/assets/catalog/gallery-289155916-8.webp",
+      "/assets/catalog/gallery-289155916-9.webp",
+      "/assets/catalog/gallery-289155916-10.webp",
+      "/assets/catalog/gallery-289155916-11.webp",
+      "/assets/catalog/gallery-289155916-12.webp",
+      "/assets/catalog/gallery-289155916-13.webp",
+      "/assets/catalog/gallery-289155916-14.webp",
+      "/assets/catalog/gallery-289155916-15.webp"
+    ],
     "categories": [
       "electric"
     ],
@@ -3308,6 +3804,16 @@
       },
       {
         "label": {
+          "en": "Advertised driving range",
+          "ar": "مدى القيادة المعلن"
+        },
+        "value": {
+          "en": "440–450 km (cycle unspecified)",
+          "ar": "440–450 كم (دورة القياس غير مذكورة)"
+        }
+      },
+      {
+        "label": {
           "en": "Market specification",
           "ar": "فئة المواصفات"
         },
@@ -3329,8 +3835,12 @@
     ],
     "post": "https://jo.opensooq.com/en/search/289155916",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
+    },
+    "range": {
+      "en": "440–450 km (cycle unspecified)",
+      "ar": "440–450 كم (دورة القياس غير مذكورة)"
     }
   },
   {
@@ -3338,7 +3848,23 @@
     "brand": "BYD",
     "name": "Song L",
     "year": 2024,
-    "image": "/assets/catalog/os-289155874-1.webp",
+    "image": "/assets/catalog/gallery-289155874-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-289155874-1.webp",
+      "/assets/catalog/gallery-289155874-2.webp",
+      "/assets/catalog/gallery-289155874-3.webp",
+      "/assets/catalog/gallery-289155874-4.webp",
+      "/assets/catalog/gallery-289155874-5.webp",
+      "/assets/catalog/gallery-289155874-6.webp",
+      "/assets/catalog/gallery-289155874-7.webp",
+      "/assets/catalog/gallery-289155874-8.webp",
+      "/assets/catalog/gallery-289155874-9.webp",
+      "/assets/catalog/gallery-289155874-10.webp",
+      "/assets/catalog/gallery-289155874-11.webp",
+      "/assets/catalog/gallery-289155874-12.webp",
+      "/assets/catalog/gallery-289155874-13.webp",
+      "/assets/catalog/gallery-289155874-14.webp"
+    ],
     "categories": [
       "electric",
       "suv"
@@ -3482,6 +4008,16 @@
       },
       {
         "label": {
+          "en": "Advertised driving range",
+          "ar": "مدى القيادة المعلن"
+        },
+        "value": {
+          "en": "Approximately 662 km (cycle unspecified)",
+          "ar": "نحو 662 كم (دورة القياس غير مذكورة)"
+        }
+      },
+      {
+        "label": {
           "en": "Market specification",
           "ar": "فئة المواصفات"
         },
@@ -3503,8 +4039,12 @@
     ],
     "post": "https://jo.opensooq.com/en/search/289155874",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
+    },
+    "range": {
+      "en": "Approximately 662 km (cycle unspecified)",
+      "ar": "نحو 662 كم (دورة القياس غير مذكورة)"
     }
   },
   {
@@ -3512,7 +4052,33 @@
     "brand": "EXEED",
     "name": "RX",
     "year": 2026,
-    "image": "/assets/catalog/os-289155808-1.webp",
+    "image": "/assets/catalog/gallery-289155808-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-289155808-1.webp",
+      "/assets/catalog/gallery-289155808-2.webp",
+      "/assets/catalog/gallery-289155808-3.webp",
+      "/assets/catalog/gallery-289155808-4.webp",
+      "/assets/catalog/gallery-289155808-5.webp",
+      "/assets/catalog/gallery-289155808-6.webp",
+      "/assets/catalog/gallery-289155808-7.webp",
+      "/assets/catalog/gallery-289155808-8.webp",
+      "/assets/catalog/gallery-289155808-9.webp",
+      "/assets/catalog/gallery-289155808-10.webp",
+      "/assets/catalog/gallery-289155808-11.webp",
+      "/assets/catalog/gallery-289155808-12.webp",
+      "/assets/catalog/gallery-289155808-13.webp",
+      "/assets/catalog/gallery-289155808-14.webp",
+      "/assets/catalog/gallery-289155808-15.webp",
+      "/assets/catalog/gallery-289155808-16.webp",
+      "/assets/catalog/gallery-289155808-17.webp",
+      "/assets/catalog/gallery-289155808-18.webp",
+      "/assets/catalog/gallery-289155808-19.webp",
+      "/assets/catalog/gallery-289155808-20.webp",
+      "/assets/catalog/gallery-289155808-21.webp",
+      "/assets/catalog/gallery-289155808-22.webp",
+      "/assets/catalog/gallery-289155808-23.webp",
+      "/assets/catalog/gallery-289155808-24.webp"
+    ],
     "categories": [
       "hybrid",
       "suv"
@@ -3697,8 +4263,8 @@
     ],
     "post": "https://jo.opensooq.com/en/search/289155808",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
     }
   },
   {
@@ -3706,7 +4272,30 @@
     "brand": "BAIC",
     "name": "BJ30e",
     "year": 2025,
-    "image": "/assets/catalog/os-289155248-1.webp",
+    "image": "/assets/catalog/gallery-289155248-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-289155248-1.webp",
+      "/assets/catalog/gallery-289155248-2.webp",
+      "/assets/catalog/gallery-289155248-3.webp",
+      "/assets/catalog/gallery-289155248-4.webp",
+      "/assets/catalog/gallery-289155248-5.webp",
+      "/assets/catalog/gallery-289155248-6.webp",
+      "/assets/catalog/gallery-289155248-7.webp",
+      "/assets/catalog/gallery-289155248-8.webp",
+      "/assets/catalog/gallery-289155248-9.webp",
+      "/assets/catalog/gallery-289155248-10.webp",
+      "/assets/catalog/gallery-289155248-11.webp",
+      "/assets/catalog/gallery-289155248-12.webp",
+      "/assets/catalog/gallery-289155248-13.webp",
+      "/assets/catalog/gallery-289155248-14.webp",
+      "/assets/catalog/gallery-289155248-15.webp",
+      "/assets/catalog/gallery-289155248-16.webp",
+      "/assets/catalog/gallery-289155248-17.webp",
+      "/assets/catalog/gallery-289155248-18.webp",
+      "/assets/catalog/gallery-289155248-19.webp",
+      "/assets/catalog/gallery-289155248-20.webp",
+      "/assets/catalog/gallery-289155248-21.webp"
+    ],
     "categories": [
       "hybrid",
       "suv"
@@ -3881,8 +4470,8 @@
     ],
     "post": "https://jo.opensooq.com/en/search/289155248",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
     },
     "price": {
       "amount": 23900,
@@ -3894,7 +4483,31 @@
     "brand": "GAC",
     "name": "EMKOO",
     "year": 2025,
-    "image": "/assets/catalog/os-288939920-1.webp",
+    "image": "/assets/catalog/gallery-288939920-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-288939920-1.webp",
+      "/assets/catalog/gallery-288939920-2.webp",
+      "/assets/catalog/gallery-288939920-3.webp",
+      "/assets/catalog/gallery-288939920-4.webp",
+      "/assets/catalog/gallery-288939920-5.webp",
+      "/assets/catalog/gallery-288939920-6.webp",
+      "/assets/catalog/gallery-288939920-7.webp",
+      "/assets/catalog/gallery-288939920-8.webp",
+      "/assets/catalog/gallery-288939920-9.webp",
+      "/assets/catalog/gallery-288939920-10.webp",
+      "/assets/catalog/gallery-288939920-11.webp",
+      "/assets/catalog/gallery-288939920-12.webp",
+      "/assets/catalog/gallery-288939920-13.webp",
+      "/assets/catalog/gallery-288939920-14.webp",
+      "/assets/catalog/gallery-288939920-15.webp",
+      "/assets/catalog/gallery-288939920-16.webp",
+      "/assets/catalog/gallery-288939920-17.webp",
+      "/assets/catalog/gallery-288939920-18.webp",
+      "/assets/catalog/gallery-288939920-19.webp",
+      "/assets/catalog/gallery-288939920-20.webp",
+      "/assets/catalog/gallery-288939920-21.webp",
+      "/assets/catalog/gallery-288939920-22.webp"
+    ],
     "categories": [
       "gasoline",
       "suv"
@@ -4059,8 +4672,8 @@
     ],
     "post": "https://jo.opensooq.com/en/search/288939920",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
     },
     "price": {
       "amount": 16500,
@@ -4072,7 +4685,33 @@
     "brand": "Toyota",
     "name": "Land Cruiser 300",
     "year": 2026,
-    "image": "/assets/catalog/os-288939240-1.webp",
+    "image": "/assets/catalog/gallery-288939240-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-288939240-1.webp",
+      "/assets/catalog/gallery-288939240-2.webp",
+      "/assets/catalog/gallery-288939240-3.webp",
+      "/assets/catalog/gallery-288939240-4.webp",
+      "/assets/catalog/gallery-288939240-5.webp",
+      "/assets/catalog/gallery-288939240-6.webp",
+      "/assets/catalog/gallery-288939240-7.webp",
+      "/assets/catalog/gallery-288939240-8.webp",
+      "/assets/catalog/gallery-288939240-9.webp",
+      "/assets/catalog/gallery-288939240-10.webp",
+      "/assets/catalog/gallery-288939240-11.webp",
+      "/assets/catalog/gallery-288939240-12.webp",
+      "/assets/catalog/gallery-288939240-13.webp",
+      "/assets/catalog/gallery-288939240-14.webp",
+      "/assets/catalog/gallery-288939240-15.webp",
+      "/assets/catalog/gallery-288939240-16.webp",
+      "/assets/catalog/gallery-288939240-17.webp",
+      "/assets/catalog/gallery-288939240-18.webp",
+      "/assets/catalog/gallery-288939240-19.webp",
+      "/assets/catalog/gallery-288939240-20.webp",
+      "/assets/catalog/gallery-288939240-21.webp",
+      "/assets/catalog/gallery-288939240-22.webp",
+      "/assets/catalog/gallery-288939240-23.webp",
+      "/assets/catalog/gallery-288939240-24.webp"
+    ],
     "categories": [
       "hybrid",
       "suv"
@@ -4247,8 +4886,8 @@
     ],
     "post": "https://jo.opensooq.com/en/search/288939240",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
     },
     "price": {
       "amount": 94000,
@@ -4260,7 +4899,28 @@
     "brand": "Porsche",
     "name": "911 Carrera",
     "year": 2020,
-    "image": "/assets/catalog/os-288938770-1.webp",
+    "image": "/assets/catalog/gallery-288938770-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-288938770-1.webp",
+      "/assets/catalog/gallery-288938770-2.webp",
+      "/assets/catalog/gallery-288938770-3.webp",
+      "/assets/catalog/gallery-288938770-4.webp",
+      "/assets/catalog/gallery-288938770-5.webp",
+      "/assets/catalog/gallery-288938770-6.webp",
+      "/assets/catalog/gallery-288938770-7.webp",
+      "/assets/catalog/gallery-288938770-8.webp",
+      "/assets/catalog/gallery-288938770-9.webp",
+      "/assets/catalog/gallery-288938770-10.webp",
+      "/assets/catalog/gallery-288938770-11.webp",
+      "/assets/catalog/gallery-288938770-12.webp",
+      "/assets/catalog/gallery-288938770-13.webp",
+      "/assets/catalog/gallery-288938770-14.webp",
+      "/assets/catalog/gallery-288938770-15.webp",
+      "/assets/catalog/gallery-288938770-16.webp",
+      "/assets/catalog/gallery-288938770-17.webp",
+      "/assets/catalog/gallery-288938770-18.webp",
+      "/assets/catalog/gallery-288938770-19.webp"
+    ],
     "categories": [
       "gasoline",
       "premium"
@@ -4435,8 +5095,8 @@
     ],
     "post": "https://jo.opensooq.com/en/search/288938770",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
     },
     "price": {
       "amount": 113000,
@@ -4448,7 +5108,37 @@
     "brand": "Audi",
     "name": "Q5 e-tron",
     "year": 2022,
-    "image": "/assets/catalog/os-287890738-1.webp",
+    "image": "/assets/catalog/gallery-287890738-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-287890738-1.webp",
+      "/assets/catalog/gallery-287890738-2.webp",
+      "/assets/catalog/gallery-287890738-3.webp",
+      "/assets/catalog/gallery-287890738-4.webp",
+      "/assets/catalog/gallery-287890738-5.webp",
+      "/assets/catalog/gallery-287890738-6.webp",
+      "/assets/catalog/gallery-287890738-7.webp",
+      "/assets/catalog/gallery-287890738-8.webp",
+      "/assets/catalog/gallery-287890738-9.webp",
+      "/assets/catalog/gallery-287890738-10.webp",
+      "/assets/catalog/gallery-287890738-11.webp",
+      "/assets/catalog/gallery-287890738-12.webp",
+      "/assets/catalog/gallery-287890738-13.webp",
+      "/assets/catalog/gallery-287890738-14.webp",
+      "/assets/catalog/gallery-287890738-15.webp",
+      "/assets/catalog/gallery-287890738-16.webp",
+      "/assets/catalog/gallery-287890738-17.webp",
+      "/assets/catalog/gallery-287890738-18.webp",
+      "/assets/catalog/gallery-287890738-19.webp",
+      "/assets/catalog/gallery-287890738-20.webp",
+      "/assets/catalog/gallery-287890738-21.webp",
+      "/assets/catalog/gallery-287890738-22.webp",
+      "/assets/catalog/gallery-287890738-23.webp",
+      "/assets/catalog/gallery-287890738-24.webp",
+      "/assets/catalog/gallery-287890738-25.webp",
+      "/assets/catalog/gallery-287890738-26.webp",
+      "/assets/catalog/gallery-287890738-27.webp",
+      "/assets/catalog/gallery-287890738-28.webp"
+    ],
     "categories": [
       "electric",
       "suv",
@@ -4603,6 +5293,16 @@
       },
       {
         "label": {
+          "en": "Advertised driving range",
+          "ar": "مدى القيادة المعلن"
+        },
+        "value": {
+          "en": "Up to 560 km (CLTC)",
+          "ar": "حتى 560 كم (CLTC)"
+        }
+      },
+      {
+        "label": {
           "en": "Market specification",
           "ar": "فئة المواصفات"
         },
@@ -4624,8 +5324,12 @@
     ],
     "post": "https://jo.opensooq.com/en/search/287890738",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
+    },
+    "range": {
+      "en": "Up to 560 km (CLTC)",
+      "ar": "حتى 560 كم (CLTC)"
     },
     "price": {
       "amount": 32900,
@@ -4637,7 +5341,29 @@
     "brand": "SERES",
     "name": "5",
     "year": 2024,
-    "image": "/assets/catalog/os-288442864-1.webp",
+    "image": "/assets/catalog/gallery-288442864-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-288442864-1.webp",
+      "/assets/catalog/gallery-288442864-2.webp",
+      "/assets/catalog/gallery-288442864-3.webp",
+      "/assets/catalog/gallery-288442864-4.webp",
+      "/assets/catalog/gallery-288442864-5.webp",
+      "/assets/catalog/gallery-288442864-6.webp",
+      "/assets/catalog/gallery-288442864-7.webp",
+      "/assets/catalog/gallery-288442864-8.webp",
+      "/assets/catalog/gallery-288442864-9.webp",
+      "/assets/catalog/gallery-288442864-10.webp",
+      "/assets/catalog/gallery-288442864-11.webp",
+      "/assets/catalog/gallery-288442864-12.webp",
+      "/assets/catalog/gallery-288442864-13.webp",
+      "/assets/catalog/gallery-288442864-14.webp",
+      "/assets/catalog/gallery-288442864-15.webp",
+      "/assets/catalog/gallery-288442864-16.webp",
+      "/assets/catalog/gallery-288442864-17.webp",
+      "/assets/catalog/gallery-288442864-18.webp",
+      "/assets/catalog/gallery-288442864-19.webp",
+      "/assets/catalog/gallery-288442864-20.webp"
+    ],
     "categories": [
       "electric",
       "suv"
@@ -4791,6 +5517,16 @@
       },
       {
         "label": {
+          "en": "Advertised driving range",
+          "ar": "مدى القيادة المعلن"
+        },
+        "value": {
+          "en": "485–500 km (WLTP)",
+          "ar": "485–500 كم (WLTP)"
+        }
+      },
+      {
+        "label": {
           "en": "Market specification",
           "ar": "فئة المواصفات"
         },
@@ -4812,8 +5548,12 @@
     ],
     "post": "https://jo.opensooq.com/en/search/288442864",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
+    },
+    "range": {
+      "en": "485–500 km (WLTP)",
+      "ar": "485–500 كم (WLTP)"
     }
   },
   {
@@ -4821,7 +5561,29 @@
     "brand": "BYD",
     "name": "Ti7",
     "year": 2027,
-    "image": "/assets/catalog/os-288700802-1.webp",
+    "image": "/assets/catalog/gallery-288700802-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-288700802-1.webp",
+      "/assets/catalog/gallery-288700802-2.webp",
+      "/assets/catalog/gallery-288700802-3.webp",
+      "/assets/catalog/gallery-288700802-4.webp",
+      "/assets/catalog/gallery-288700802-5.webp",
+      "/assets/catalog/gallery-288700802-6.webp",
+      "/assets/catalog/gallery-288700802-7.webp",
+      "/assets/catalog/gallery-288700802-8.webp",
+      "/assets/catalog/gallery-288700802-9.webp",
+      "/assets/catalog/gallery-288700802-10.webp",
+      "/assets/catalog/gallery-288700802-11.webp",
+      "/assets/catalog/gallery-288700802-12.webp",
+      "/assets/catalog/gallery-288700802-13.webp",
+      "/assets/catalog/gallery-288700802-14.webp",
+      "/assets/catalog/gallery-288700802-15.webp",
+      "/assets/catalog/gallery-288700802-16.webp",
+      "/assets/catalog/gallery-288700802-17.webp",
+      "/assets/catalog/gallery-288700802-18.webp",
+      "/assets/catalog/gallery-288700802-19.webp",
+      "/assets/catalog/gallery-288700802-20.webp"
+    ],
     "categories": [
       "hybrid",
       "suv"
@@ -5006,8 +5768,8 @@
     ],
     "post": "https://jo.opensooq.com/en/search/288700802",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
     }
   },
   {
@@ -5015,7 +5777,31 @@
     "brand": "EXEED",
     "name": "VX",
     "year": 2026,
-    "image": "/assets/catalog/os-288717710-1.webp",
+    "image": "/assets/catalog/gallery-288717710-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-288717710-1.webp",
+      "/assets/catalog/gallery-288717710-2.webp",
+      "/assets/catalog/gallery-288717710-3.webp",
+      "/assets/catalog/gallery-288717710-4.webp",
+      "/assets/catalog/gallery-288717710-5.webp",
+      "/assets/catalog/gallery-288717710-6.webp",
+      "/assets/catalog/gallery-288717710-7.webp",
+      "/assets/catalog/gallery-288717710-8.webp",
+      "/assets/catalog/gallery-288717710-9.webp",
+      "/assets/catalog/gallery-288717710-10.webp",
+      "/assets/catalog/gallery-288717710-11.webp",
+      "/assets/catalog/gallery-288717710-12.webp",
+      "/assets/catalog/gallery-288717710-13.webp",
+      "/assets/catalog/gallery-288717710-14.webp",
+      "/assets/catalog/gallery-288717710-15.webp",
+      "/assets/catalog/gallery-288717710-16.webp",
+      "/assets/catalog/gallery-288717710-17.webp",
+      "/assets/catalog/gallery-288717710-18.webp",
+      "/assets/catalog/gallery-288717710-19.webp",
+      "/assets/catalog/gallery-288717710-20.webp",
+      "/assets/catalog/gallery-288717710-21.webp",
+      "/assets/catalog/gallery-288717710-22.webp"
+    ],
     "categories": [
       "hybrid",
       "suv"
@@ -5200,8 +5986,8 @@
     ],
     "post": "https://jo.opensooq.com/en/search/288717710",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
     }
   },
   {
@@ -5209,7 +5995,31 @@
     "brand": "BAIC",
     "name": "BJ30e",
     "year": 2025,
-    "image": "/assets/catalog/os-288717686-1.webp",
+    "image": "/assets/catalog/gallery-288717686-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-288717686-1.webp",
+      "/assets/catalog/gallery-288717686-2.webp",
+      "/assets/catalog/gallery-288717686-3.webp",
+      "/assets/catalog/gallery-288717686-4.webp",
+      "/assets/catalog/gallery-288717686-5.webp",
+      "/assets/catalog/gallery-288717686-6.webp",
+      "/assets/catalog/gallery-288717686-7.webp",
+      "/assets/catalog/gallery-288717686-8.webp",
+      "/assets/catalog/gallery-288717686-9.webp",
+      "/assets/catalog/gallery-288717686-10.webp",
+      "/assets/catalog/gallery-288717686-11.webp",
+      "/assets/catalog/gallery-288717686-12.webp",
+      "/assets/catalog/gallery-288717686-13.webp",
+      "/assets/catalog/gallery-288717686-14.webp",
+      "/assets/catalog/gallery-288717686-15.webp",
+      "/assets/catalog/gallery-288717686-16.webp",
+      "/assets/catalog/gallery-288717686-17.webp",
+      "/assets/catalog/gallery-288717686-18.webp",
+      "/assets/catalog/gallery-288717686-19.webp",
+      "/assets/catalog/gallery-288717686-20.webp",
+      "/assets/catalog/gallery-288717686-21.webp",
+      "/assets/catalog/gallery-288717686-22.webp"
+    ],
     "categories": [
       "hybrid",
       "suv"
@@ -5384,8 +6194,8 @@
     ],
     "post": "https://jo.opensooq.com/en/search/288717686",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
     },
     "price": {
       "amount": 23900,
@@ -5397,7 +6207,28 @@
     "brand": "BYD",
     "name": "Ti7",
     "year": 2027,
-    "image": "/assets/catalog/os-288717658-1.webp",
+    "image": "/assets/catalog/gallery-288717658-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-288717658-1.webp",
+      "/assets/catalog/gallery-288717658-2.webp",
+      "/assets/catalog/gallery-288717658-3.webp",
+      "/assets/catalog/gallery-288717658-4.webp",
+      "/assets/catalog/gallery-288717658-5.webp",
+      "/assets/catalog/gallery-288717658-6.webp",
+      "/assets/catalog/gallery-288717658-7.webp",
+      "/assets/catalog/gallery-288717658-8.webp",
+      "/assets/catalog/gallery-288717658-9.webp",
+      "/assets/catalog/gallery-288717658-10.webp",
+      "/assets/catalog/gallery-288717658-11.webp",
+      "/assets/catalog/gallery-288717658-12.webp",
+      "/assets/catalog/gallery-288717658-13.webp",
+      "/assets/catalog/gallery-288717658-14.webp",
+      "/assets/catalog/gallery-288717658-15.webp",
+      "/assets/catalog/gallery-288717658-16.webp",
+      "/assets/catalog/gallery-288717658-17.webp",
+      "/assets/catalog/gallery-288717658-18.webp",
+      "/assets/catalog/gallery-288717658-19.webp"
+    ],
     "categories": [
       "hybrid",
       "suv"
@@ -5582,8 +6413,8 @@
     ],
     "post": "https://jo.opensooq.com/en/search/288717658",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
     }
   },
   {
@@ -5591,7 +6422,34 @@
     "brand": "EXEED",
     "name": "RX",
     "year": 2026,
-    "image": "/assets/catalog/os-288717622-1.webp",
+    "image": "/assets/catalog/gallery-288717622-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-288717622-1.webp",
+      "/assets/catalog/gallery-288717622-2.webp",
+      "/assets/catalog/gallery-288717622-3.webp",
+      "/assets/catalog/gallery-288717622-4.webp",
+      "/assets/catalog/gallery-288717622-5.webp",
+      "/assets/catalog/gallery-288717622-6.webp",
+      "/assets/catalog/gallery-288717622-7.webp",
+      "/assets/catalog/gallery-288717622-8.webp",
+      "/assets/catalog/gallery-288717622-9.webp",
+      "/assets/catalog/gallery-288717622-10.webp",
+      "/assets/catalog/gallery-288717622-11.webp",
+      "/assets/catalog/gallery-288717622-12.webp",
+      "/assets/catalog/gallery-288717622-13.webp",
+      "/assets/catalog/gallery-288717622-14.webp",
+      "/assets/catalog/gallery-288717622-15.webp",
+      "/assets/catalog/gallery-288717622-16.webp",
+      "/assets/catalog/gallery-288717622-17.webp",
+      "/assets/catalog/gallery-288717622-18.webp",
+      "/assets/catalog/gallery-288717622-19.webp",
+      "/assets/catalog/gallery-288717622-20.webp",
+      "/assets/catalog/gallery-288717622-21.webp",
+      "/assets/catalog/gallery-288717622-22.webp",
+      "/assets/catalog/gallery-288717622-23.webp",
+      "/assets/catalog/gallery-288717622-24.webp",
+      "/assets/catalog/gallery-288717622-25.webp"
+    ],
     "categories": [
       "hybrid",
       "suv"
@@ -5776,8 +6634,8 @@
     ],
     "post": "https://jo.opensooq.com/en/search/288717622",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
     }
   },
   {
@@ -5785,7 +6643,33 @@
     "brand": "ARCFOX",
     "name": "T1",
     "year": 2026,
-    "image": "/assets/catalog/os-288717604-1.webp",
+    "image": "/assets/catalog/gallery-288717604-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-288717604-1.webp",
+      "/assets/catalog/gallery-288717604-2.webp",
+      "/assets/catalog/gallery-288717604-3.webp",
+      "/assets/catalog/gallery-288717604-4.webp",
+      "/assets/catalog/gallery-288717604-5.webp",
+      "/assets/catalog/gallery-288717604-6.webp",
+      "/assets/catalog/gallery-288717604-7.webp",
+      "/assets/catalog/gallery-288717604-8.webp",
+      "/assets/catalog/gallery-288717604-9.webp",
+      "/assets/catalog/gallery-288717604-10.webp",
+      "/assets/catalog/gallery-288717604-11.webp",
+      "/assets/catalog/gallery-288717604-12.webp",
+      "/assets/catalog/gallery-288717604-13.webp",
+      "/assets/catalog/gallery-288717604-14.webp",
+      "/assets/catalog/gallery-288717604-15.webp",
+      "/assets/catalog/gallery-288717604-16.webp",
+      "/assets/catalog/gallery-288717604-17.webp",
+      "/assets/catalog/gallery-288717604-18.webp",
+      "/assets/catalog/gallery-288717604-19.webp",
+      "/assets/catalog/gallery-288717604-20.webp",
+      "/assets/catalog/gallery-288717604-21.webp",
+      "/assets/catalog/gallery-288717604-22.webp",
+      "/assets/catalog/gallery-288717604-23.webp",
+      "/assets/catalog/gallery-288717604-24.webp"
+    ],
     "categories": [
       "electric",
       "suv"
@@ -5929,6 +6813,16 @@
       },
       {
         "label": {
+          "en": "Advertised driving range",
+          "ar": "مدى القيادة المعلن"
+        },
+        "value": {
+          "en": "400 km (CLTC)",
+          "ar": "400 كم (CLTC)"
+        }
+      },
+      {
+        "label": {
           "en": "Market specification",
           "ar": "فئة المواصفات"
         },
@@ -5950,8 +6844,12 @@
     ],
     "post": "https://jo.opensooq.com/en/search/288717604",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
+    },
+    "range": {
+      "en": "400 km (CLTC)",
+      "ar": "400 كم (CLTC)"
     }
   },
   {
@@ -5959,7 +6857,27 @@
     "brand": "BAW",
     "name": "212 T01",
     "year": 2026,
-    "image": "/assets/catalog/os-288714972-1.webp",
+    "image": "/assets/catalog/gallery-288714972-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-288714972-1.webp",
+      "/assets/catalog/gallery-288714972-2.webp",
+      "/assets/catalog/gallery-288714972-3.webp",
+      "/assets/catalog/gallery-288714972-4.webp",
+      "/assets/catalog/gallery-288714972-5.webp",
+      "/assets/catalog/gallery-288714972-6.webp",
+      "/assets/catalog/gallery-288714972-7.webp",
+      "/assets/catalog/gallery-288714972-8.webp",
+      "/assets/catalog/gallery-288714972-9.webp",
+      "/assets/catalog/gallery-288714972-10.webp",
+      "/assets/catalog/gallery-288714972-11.webp",
+      "/assets/catalog/gallery-288714972-12.webp",
+      "/assets/catalog/gallery-288714972-13.webp",
+      "/assets/catalog/gallery-288714972-14.webp",
+      "/assets/catalog/gallery-288714972-15.webp",
+      "/assets/catalog/gallery-288714972-16.webp",
+      "/assets/catalog/gallery-288714972-17.webp",
+      "/assets/catalog/gallery-288714972-18.webp"
+    ],
     "categories": [
       "gasoline",
       "suv"
@@ -6124,8 +7042,8 @@
     ],
     "post": "https://jo.opensooq.com/en/search/288714972",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
     }
   },
   {
@@ -6133,7 +7051,35 @@
     "brand": "Riddara",
     "name": "RD6",
     "year": 2025,
-    "image": "/assets/catalog/os-288714918-1.webp",
+    "image": "/assets/catalog/gallery-288714918-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-288714918-1.webp",
+      "/assets/catalog/gallery-288714918-2.webp",
+      "/assets/catalog/gallery-288714918-3.webp",
+      "/assets/catalog/gallery-288714918-4.webp",
+      "/assets/catalog/gallery-288714918-5.webp",
+      "/assets/catalog/gallery-288714918-6.webp",
+      "/assets/catalog/gallery-288714918-7.webp",
+      "/assets/catalog/gallery-288714918-8.webp",
+      "/assets/catalog/gallery-288714918-9.webp",
+      "/assets/catalog/gallery-288714918-10.webp",
+      "/assets/catalog/gallery-288714918-11.webp",
+      "/assets/catalog/gallery-288714918-12.webp",
+      "/assets/catalog/gallery-288714918-13.webp",
+      "/assets/catalog/gallery-288714918-14.webp",
+      "/assets/catalog/gallery-288714918-15.webp",
+      "/assets/catalog/gallery-288714918-16.webp",
+      "/assets/catalog/gallery-288714918-17.webp",
+      "/assets/catalog/gallery-288714918-18.webp",
+      "/assets/catalog/gallery-288714918-19.webp",
+      "/assets/catalog/gallery-288714918-20.webp",
+      "/assets/catalog/gallery-288714918-21.webp",
+      "/assets/catalog/gallery-288714918-22.webp",
+      "/assets/catalog/gallery-288714918-23.webp",
+      "/assets/catalog/gallery-288714918-24.webp",
+      "/assets/catalog/gallery-288714918-25.webp",
+      "/assets/catalog/gallery-288714918-26.webp"
+    ],
     "categories": [
       "electric"
     ],
@@ -6286,6 +7232,16 @@
       },
       {
         "label": {
+          "en": "Advertised driving range",
+          "ar": "مدى القيادة المعلن"
+        },
+        "value": {
+          "en": "Approximately 450 km (cycle unspecified)",
+          "ar": "نحو 450 كم (دورة القياس غير مذكورة)"
+        }
+      },
+      {
+        "label": {
           "en": "Market specification",
           "ar": "فئة المواصفات"
         },
@@ -6307,8 +7263,12 @@
     ],
     "post": "https://jo.opensooq.com/en/search/288714918",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
+    },
+    "range": {
+      "en": "Approximately 450 km (cycle unspecified)",
+      "ar": "نحو 450 كم (دورة القياس غير مذكورة)"
     },
     "price": {
       "amount": 27900,
@@ -6320,7 +7280,30 @@
     "brand": "EXEED",
     "name": "Exlantix ET",
     "year": 2026,
-    "image": "/assets/catalog/os-288714784-1.webp",
+    "image": "/assets/catalog/gallery-288714784-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-288714784-1.webp",
+      "/assets/catalog/gallery-288714784-2.webp",
+      "/assets/catalog/gallery-288714784-3.webp",
+      "/assets/catalog/gallery-288714784-4.webp",
+      "/assets/catalog/gallery-288714784-5.webp",
+      "/assets/catalog/gallery-288714784-6.webp",
+      "/assets/catalog/gallery-288714784-7.webp",
+      "/assets/catalog/gallery-288714784-8.webp",
+      "/assets/catalog/gallery-288714784-9.webp",
+      "/assets/catalog/gallery-288714784-10.webp",
+      "/assets/catalog/gallery-288714784-11.webp",
+      "/assets/catalog/gallery-288714784-12.webp",
+      "/assets/catalog/gallery-288714784-13.webp",
+      "/assets/catalog/gallery-288714784-14.webp",
+      "/assets/catalog/gallery-288714784-15.webp",
+      "/assets/catalog/gallery-288714784-16.webp",
+      "/assets/catalog/gallery-288714784-17.webp",
+      "/assets/catalog/gallery-288714784-18.webp",
+      "/assets/catalog/gallery-288714784-19.webp",
+      "/assets/catalog/gallery-288714784-20.webp",
+      "/assets/catalog/gallery-288714784-21.webp"
+    ],
     "categories": [
       "hybrid",
       "suv"
@@ -6505,8 +7488,8 @@
     ],
     "post": "https://jo.opensooq.com/en/search/288714784",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
     }
   },
   {
@@ -6514,7 +7497,33 @@
     "brand": "Hongqi",
     "name": "H9",
     "year": 2023,
-    "image": "/assets/catalog/os-288700874-1.webp",
+    "image": "/assets/catalog/gallery-288700874-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-288700874-1.webp",
+      "/assets/catalog/gallery-288700874-2.webp",
+      "/assets/catalog/gallery-288700874-3.webp",
+      "/assets/catalog/gallery-288700874-4.webp",
+      "/assets/catalog/gallery-288700874-5.webp",
+      "/assets/catalog/gallery-288700874-6.webp",
+      "/assets/catalog/gallery-288700874-7.webp",
+      "/assets/catalog/gallery-288700874-8.webp",
+      "/assets/catalog/gallery-288700874-9.webp",
+      "/assets/catalog/gallery-288700874-10.webp",
+      "/assets/catalog/gallery-288700874-11.webp",
+      "/assets/catalog/gallery-288700874-12.webp",
+      "/assets/catalog/gallery-288700874-13.webp",
+      "/assets/catalog/gallery-288700874-14.webp",
+      "/assets/catalog/gallery-288700874-15.webp",
+      "/assets/catalog/gallery-288700874-16.webp",
+      "/assets/catalog/gallery-288700874-17.webp",
+      "/assets/catalog/gallery-288700874-18.webp",
+      "/assets/catalog/gallery-288700874-19.webp",
+      "/assets/catalog/gallery-288700874-20.webp",
+      "/assets/catalog/gallery-288700874-21.webp",
+      "/assets/catalog/gallery-288700874-22.webp",
+      "/assets/catalog/gallery-288700874-23.webp",
+      "/assets/catalog/gallery-288700874-24.webp"
+    ],
     "categories": [
       "hybrid",
       "premium"
@@ -6679,8 +7688,8 @@
     ],
     "post": "https://jo.opensooq.com/en/search/288700874",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
     }
   },
   {
@@ -6688,7 +7697,37 @@
     "brand": "Riddara",
     "name": "RD6",
     "year": 2025,
-    "image": "/assets/catalog/os-288700838-1.webp",
+    "image": "/assets/catalog/gallery-288700838-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-288700838-1.webp",
+      "/assets/catalog/gallery-288700838-2.webp",
+      "/assets/catalog/gallery-288700838-3.webp",
+      "/assets/catalog/gallery-288700838-4.webp",
+      "/assets/catalog/gallery-288700838-5.webp",
+      "/assets/catalog/gallery-288700838-6.webp",
+      "/assets/catalog/gallery-288700838-7.webp",
+      "/assets/catalog/gallery-288700838-8.webp",
+      "/assets/catalog/gallery-288700838-9.webp",
+      "/assets/catalog/gallery-288700838-10.webp",
+      "/assets/catalog/gallery-288700838-11.webp",
+      "/assets/catalog/gallery-288700838-12.webp",
+      "/assets/catalog/gallery-288700838-13.webp",
+      "/assets/catalog/gallery-288700838-14.webp",
+      "/assets/catalog/gallery-288700838-15.webp",
+      "/assets/catalog/gallery-288700838-16.webp",
+      "/assets/catalog/gallery-288700838-17.webp",
+      "/assets/catalog/gallery-288700838-18.webp",
+      "/assets/catalog/gallery-288700838-19.webp",
+      "/assets/catalog/gallery-288700838-20.webp",
+      "/assets/catalog/gallery-288700838-21.webp",
+      "/assets/catalog/gallery-288700838-22.webp",
+      "/assets/catalog/gallery-288700838-23.webp",
+      "/assets/catalog/gallery-288700838-24.webp",
+      "/assets/catalog/gallery-288700838-25.webp",
+      "/assets/catalog/gallery-288700838-26.webp",
+      "/assets/catalog/gallery-288700838-27.webp",
+      "/assets/catalog/gallery-288700838-28.webp"
+    ],
     "categories": [
       "electric"
     ],
@@ -6841,6 +7880,16 @@
       },
       {
         "label": {
+          "en": "Advertised driving range",
+          "ar": "مدى القيادة المعلن"
+        },
+        "value": {
+          "en": "Approximately 450 km (cycle unspecified)",
+          "ar": "نحو 450 كم (دورة القياس غير مذكورة)"
+        }
+      },
+      {
+        "label": {
           "en": "Market specification",
           "ar": "فئة المواصفات"
         },
@@ -6862,8 +7911,12 @@
     ],
     "post": "https://jo.opensooq.com/en/search/288700838",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
+    },
+    "range": {
+      "en": "Approximately 450 km (cycle unspecified)",
+      "ar": "نحو 450 كم (دورة القياس غير مذكورة)"
     },
     "price": {
       "amount": 27900,
@@ -6875,7 +7928,26 @@
     "brand": "Geely Farizon",
     "name": "SV",
     "year": 2025,
-    "image": "/assets/catalog/os-288700734-1.webp",
+    "image": "/assets/catalog/gallery-288700734-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-288700734-1.webp",
+      "/assets/catalog/gallery-288700734-2.webp",
+      "/assets/catalog/gallery-288700734-3.webp",
+      "/assets/catalog/gallery-288700734-4.webp",
+      "/assets/catalog/gallery-288700734-5.webp",
+      "/assets/catalog/gallery-288700734-6.webp",
+      "/assets/catalog/gallery-288700734-7.webp",
+      "/assets/catalog/gallery-288700734-8.webp",
+      "/assets/catalog/gallery-288700734-9.webp",
+      "/assets/catalog/gallery-288700734-10.webp",
+      "/assets/catalog/gallery-288700734-11.webp",
+      "/assets/catalog/gallery-288700734-12.webp",
+      "/assets/catalog/gallery-288700734-13.webp",
+      "/assets/catalog/gallery-288700734-14.webp",
+      "/assets/catalog/gallery-288700734-15.webp",
+      "/assets/catalog/gallery-288700734-16.webp",
+      "/assets/catalog/gallery-288700734-17.webp"
+    ],
     "categories": [
       "electric"
     ],
@@ -7008,6 +8080,16 @@
       },
       {
         "label": {
+          "en": "Advertised driving range",
+          "ar": "مدى القيادة المعلن"
+        },
+        "value": {
+          "en": "Up to 450 km (cycle unspecified)",
+          "ar": "حتى 450 كم (دورة القياس غير مذكورة)"
+        }
+      },
+      {
+        "label": {
           "en": "Market specification",
           "ar": "فئة المواصفات"
         },
@@ -7029,8 +8111,12 @@
     ],
     "post": "https://jo.opensooq.com/en/search/288700734",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
+    },
+    "range": {
+      "en": "Up to 450 km (cycle unspecified)",
+      "ar": "حتى 450 كم (دورة القياس غير مذكورة)"
     }
   },
   {
@@ -7038,7 +8124,33 @@
     "brand": "BYD Yangwang",
     "name": "U8",
     "year": 2026,
-    "image": "/assets/catalog/os-288700698-1.webp",
+    "image": "/assets/catalog/gallery-288700698-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-288700698-1.webp",
+      "/assets/catalog/gallery-288700698-2.webp",
+      "/assets/catalog/gallery-288700698-3.webp",
+      "/assets/catalog/gallery-288700698-4.webp",
+      "/assets/catalog/gallery-288700698-5.webp",
+      "/assets/catalog/gallery-288700698-6.webp",
+      "/assets/catalog/gallery-288700698-7.webp",
+      "/assets/catalog/gallery-288700698-8.webp",
+      "/assets/catalog/gallery-288700698-9.webp",
+      "/assets/catalog/gallery-288700698-10.webp",
+      "/assets/catalog/gallery-288700698-11.webp",
+      "/assets/catalog/gallery-288700698-12.webp",
+      "/assets/catalog/gallery-288700698-13.webp",
+      "/assets/catalog/gallery-288700698-14.webp",
+      "/assets/catalog/gallery-288700698-15.webp",
+      "/assets/catalog/gallery-288700698-16.webp",
+      "/assets/catalog/gallery-288700698-17.webp",
+      "/assets/catalog/gallery-288700698-18.webp",
+      "/assets/catalog/gallery-288700698-19.webp",
+      "/assets/catalog/gallery-288700698-20.webp",
+      "/assets/catalog/gallery-288700698-21.webp",
+      "/assets/catalog/gallery-288700698-22.webp",
+      "/assets/catalog/gallery-288700698-23.webp",
+      "/assets/catalog/gallery-288700698-24.webp"
+    ],
     "categories": [
       "hybrid",
       "suv"
@@ -7213,8 +8325,8 @@
     ],
     "post": "https://jo.opensooq.com/en/search/288700698",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
     }
   },
   {
@@ -7222,7 +8334,30 @@
     "brand": "Zeekr",
     "name": "001",
     "year": 2026,
-    "image": "/assets/catalog/os-288700670-1.webp",
+    "image": "/assets/catalog/gallery-288700670-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-288700670-1.webp",
+      "/assets/catalog/gallery-288700670-2.webp",
+      "/assets/catalog/gallery-288700670-3.webp",
+      "/assets/catalog/gallery-288700670-4.webp",
+      "/assets/catalog/gallery-288700670-5.webp",
+      "/assets/catalog/gallery-288700670-6.webp",
+      "/assets/catalog/gallery-288700670-7.webp",
+      "/assets/catalog/gallery-288700670-8.webp",
+      "/assets/catalog/gallery-288700670-9.webp",
+      "/assets/catalog/gallery-288700670-10.webp",
+      "/assets/catalog/gallery-288700670-11.webp",
+      "/assets/catalog/gallery-288700670-12.webp",
+      "/assets/catalog/gallery-288700670-13.webp",
+      "/assets/catalog/gallery-288700670-14.webp",
+      "/assets/catalog/gallery-288700670-15.webp",
+      "/assets/catalog/gallery-288700670-16.webp",
+      "/assets/catalog/gallery-288700670-17.webp",
+      "/assets/catalog/gallery-288700670-18.webp",
+      "/assets/catalog/gallery-288700670-19.webp",
+      "/assets/catalog/gallery-288700670-20.webp",
+      "/assets/catalog/gallery-288700670-21.webp"
+    ],
     "categories": [
       "electric",
       "premium"
@@ -7376,6 +8511,16 @@
       },
       {
         "label": {
+          "en": "Advertised driving range",
+          "ar": "مدى القيادة المعلن"
+        },
+        "value": {
+          "en": "Up to 580 km (WLTP)",
+          "ar": "حتى 580 كم (WLTP)"
+        }
+      },
+      {
+        "label": {
           "en": "Market specification",
           "ar": "فئة المواصفات"
         },
@@ -7397,8 +8542,12 @@
     ],
     "post": "https://jo.opensooq.com/en/search/288700670",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
+    },
+    "range": {
+      "en": "Up to 580 km (WLTP)",
+      "ar": "حتى 580 كم (WLTP)"
     }
   },
   {
@@ -7406,7 +8555,21 @@
     "brand": "Porsche",
     "name": "911",
     "year": 2008,
-    "image": "/assets/catalog/os-288700570-1.webp",
+    "image": "/assets/catalog/gallery-288700570-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-288700570-1.webp",
+      "/assets/catalog/gallery-288700570-2.webp",
+      "/assets/catalog/gallery-288700570-3.webp",
+      "/assets/catalog/gallery-288700570-4.webp",
+      "/assets/catalog/gallery-288700570-5.webp",
+      "/assets/catalog/gallery-288700570-6.webp",
+      "/assets/catalog/gallery-288700570-7.webp",
+      "/assets/catalog/gallery-288700570-8.webp",
+      "/assets/catalog/gallery-288700570-9.webp",
+      "/assets/catalog/gallery-288700570-10.webp",
+      "/assets/catalog/gallery-288700570-11.webp",
+      "/assets/catalog/gallery-288700570-12.webp"
+    ],
     "categories": [
       "gasoline",
       "premium"
@@ -7561,8 +8724,8 @@
     ],
     "post": "https://jo.opensooq.com/en/search/288700570",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
     }
   },
   {
@@ -7570,7 +8733,33 @@
     "brand": "BMW",
     "name": "i5 M60 xDrive",
     "year": 2024,
-    "image": "/assets/catalog/os-288630286-1.webp",
+    "image": "/assets/catalog/gallery-288630286-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-288630286-1.webp",
+      "/assets/catalog/gallery-288630286-2.webp",
+      "/assets/catalog/gallery-288630286-3.webp",
+      "/assets/catalog/gallery-288630286-4.webp",
+      "/assets/catalog/gallery-288630286-5.webp",
+      "/assets/catalog/gallery-288630286-6.webp",
+      "/assets/catalog/gallery-288630286-7.webp",
+      "/assets/catalog/gallery-288630286-8.webp",
+      "/assets/catalog/gallery-288630286-9.webp",
+      "/assets/catalog/gallery-288630286-10.webp",
+      "/assets/catalog/gallery-288630286-11.webp",
+      "/assets/catalog/gallery-288630286-12.webp",
+      "/assets/catalog/gallery-288630286-13.webp",
+      "/assets/catalog/gallery-288630286-14.webp",
+      "/assets/catalog/gallery-288630286-15.webp",
+      "/assets/catalog/gallery-288630286-16.webp",
+      "/assets/catalog/gallery-288630286-17.webp",
+      "/assets/catalog/gallery-288630286-18.webp",
+      "/assets/catalog/gallery-288630286-19.webp",
+      "/assets/catalog/gallery-288630286-20.webp",
+      "/assets/catalog/gallery-288630286-21.webp",
+      "/assets/catalog/gallery-288630286-22.webp",
+      "/assets/catalog/gallery-288630286-23.webp",
+      "/assets/catalog/gallery-288630286-24.webp"
+    ],
     "categories": [
       "electric",
       "premium"
@@ -7724,6 +8913,16 @@
       },
       {
         "label": {
+          "en": "Advertised driving range",
+          "ar": "مدى القيادة المعلن"
+        },
+        "value": {
+          "en": "Up to 516 km (WLTP)",
+          "ar": "حتى 516 كم (WLTP)"
+        }
+      },
+      {
+        "label": {
           "en": "Market specification",
           "ar": "فئة المواصفات"
         },
@@ -7745,8 +8944,12 @@
     ],
     "post": "https://jo.opensooq.com/en/search/288630286",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
+    },
+    "range": {
+      "en": "Up to 516 km (WLTP)",
+      "ar": "حتى 516 كم (WLTP)"
     }
   },
   {
@@ -7754,7 +8957,27 @@
     "brand": "Land Rover",
     "name": "Range Rover",
     "year": 2019,
-    "image": "/assets/catalog/os-288440874-1.webp",
+    "image": "/assets/catalog/gallery-288440874-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-288440874-1.webp",
+      "/assets/catalog/gallery-288440874-2.webp",
+      "/assets/catalog/gallery-288440874-3.webp",
+      "/assets/catalog/gallery-288440874-4.webp",
+      "/assets/catalog/gallery-288440874-5.webp",
+      "/assets/catalog/gallery-288440874-6.webp",
+      "/assets/catalog/gallery-288440874-7.webp",
+      "/assets/catalog/gallery-288440874-8.webp",
+      "/assets/catalog/gallery-288440874-9.webp",
+      "/assets/catalog/gallery-288440874-10.webp",
+      "/assets/catalog/gallery-288440874-11.webp",
+      "/assets/catalog/gallery-288440874-12.webp",
+      "/assets/catalog/gallery-288440874-13.webp",
+      "/assets/catalog/gallery-288440874-14.webp",
+      "/assets/catalog/gallery-288440874-15.webp",
+      "/assets/catalog/gallery-288440874-16.webp",
+      "/assets/catalog/gallery-288440874-17.webp",
+      "/assets/catalog/gallery-288440874-18.webp"
+    ],
     "categories": [
       "gasoline",
       "suv",
@@ -7920,8 +9143,8 @@
     ],
     "post": "https://jo.opensooq.com/en/search/288440874",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
     },
     "price": {
       "amount": 49500,
@@ -7933,7 +9156,36 @@
     "brand": "Jetour",
     "name": "G700",
     "year": 2026,
-    "image": "/assets/catalog/os-288440948-1.webp",
+    "image": "/assets/catalog/gallery-288440948-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-288440948-1.webp",
+      "/assets/catalog/gallery-288440948-2.webp",
+      "/assets/catalog/gallery-288440948-3.webp",
+      "/assets/catalog/gallery-288440948-4.webp",
+      "/assets/catalog/gallery-288440948-5.webp",
+      "/assets/catalog/gallery-288440948-6.webp",
+      "/assets/catalog/gallery-288440948-7.webp",
+      "/assets/catalog/gallery-288440948-8.webp",
+      "/assets/catalog/gallery-288440948-9.webp",
+      "/assets/catalog/gallery-288440948-10.webp",
+      "/assets/catalog/gallery-288440948-11.webp",
+      "/assets/catalog/gallery-288440948-12.webp",
+      "/assets/catalog/gallery-288440948-13.webp",
+      "/assets/catalog/gallery-288440948-14.webp",
+      "/assets/catalog/gallery-288440948-15.webp",
+      "/assets/catalog/gallery-288440948-16.webp",
+      "/assets/catalog/gallery-288440948-17.webp",
+      "/assets/catalog/gallery-288440948-18.webp",
+      "/assets/catalog/gallery-288440948-19.webp",
+      "/assets/catalog/gallery-288440948-20.webp",
+      "/assets/catalog/gallery-288440948-21.webp",
+      "/assets/catalog/gallery-288440948-22.webp",
+      "/assets/catalog/gallery-288440948-23.webp",
+      "/assets/catalog/gallery-288440948-24.webp",
+      "/assets/catalog/gallery-288440948-25.webp",
+      "/assets/catalog/gallery-288440948-26.webp",
+      "/assets/catalog/gallery-288440948-27.webp"
+    ],
     "categories": [
       "hybrid",
       "suv"
@@ -8118,8 +9370,8 @@
     ],
     "post": "https://jo.opensooq.com/en/search/288440948",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
     }
   },
   {
@@ -8127,7 +9379,34 @@
     "brand": "ARCFOX",
     "name": "T1",
     "year": 2027,
-    "image": "/assets/catalog/os-288438518-1.webp",
+    "image": "/assets/catalog/gallery-288438518-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-288438518-1.webp",
+      "/assets/catalog/gallery-288438518-2.webp",
+      "/assets/catalog/gallery-288438518-3.webp",
+      "/assets/catalog/gallery-288438518-4.webp",
+      "/assets/catalog/gallery-288438518-5.webp",
+      "/assets/catalog/gallery-288438518-6.webp",
+      "/assets/catalog/gallery-288438518-7.webp",
+      "/assets/catalog/gallery-288438518-8.webp",
+      "/assets/catalog/gallery-288438518-9.webp",
+      "/assets/catalog/gallery-288438518-10.webp",
+      "/assets/catalog/gallery-288438518-11.webp",
+      "/assets/catalog/gallery-288438518-12.webp",
+      "/assets/catalog/gallery-288438518-13.webp",
+      "/assets/catalog/gallery-288438518-14.webp",
+      "/assets/catalog/gallery-288438518-15.webp",
+      "/assets/catalog/gallery-288438518-16.webp",
+      "/assets/catalog/gallery-288438518-17.webp",
+      "/assets/catalog/gallery-288438518-18.webp",
+      "/assets/catalog/gallery-288438518-19.webp",
+      "/assets/catalog/gallery-288438518-20.webp",
+      "/assets/catalog/gallery-288438518-21.webp",
+      "/assets/catalog/gallery-288438518-22.webp",
+      "/assets/catalog/gallery-288438518-23.webp",
+      "/assets/catalog/gallery-288438518-24.webp",
+      "/assets/catalog/gallery-288438518-25.webp"
+    ],
     "categories": [
       "electric",
       "suv"
@@ -8271,6 +9550,16 @@
       },
       {
         "label": {
+          "en": "Advertised driving range",
+          "ar": "مدى القيادة المعلن"
+        },
+        "value": {
+          "en": "Up to 400 km (cycle unspecified)",
+          "ar": "حتى 400 كم (دورة القياس غير مذكورة)"
+        }
+      },
+      {
+        "label": {
           "en": "Market specification",
           "ar": "فئة المواصفات"
         },
@@ -8292,8 +9581,12 @@
     ],
     "post": "https://jo.opensooq.com/en/search/288438518",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
+    },
+    "range": {
+      "en": "Up to 400 km (cycle unspecified)",
+      "ar": "حتى 400 كم (دورة القياس غير مذكورة)"
     }
   },
   {
@@ -8301,7 +9594,37 @@
     "brand": "Mercedes-Benz",
     "name": "EQC",
     "year": 2021,
-    "image": "/assets/catalog/os-288440772-1.webp",
+    "image": "/assets/catalog/gallery-288440772-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-288440772-1.webp",
+      "/assets/catalog/gallery-288440772-2.webp",
+      "/assets/catalog/gallery-288440772-3.webp",
+      "/assets/catalog/gallery-288440772-4.webp",
+      "/assets/catalog/gallery-288440772-5.webp",
+      "/assets/catalog/gallery-288440772-6.webp",
+      "/assets/catalog/gallery-288440772-7.webp",
+      "/assets/catalog/gallery-288440772-8.webp",
+      "/assets/catalog/gallery-288440772-9.webp",
+      "/assets/catalog/gallery-288440772-10.webp",
+      "/assets/catalog/gallery-288440772-11.webp",
+      "/assets/catalog/gallery-288440772-12.webp",
+      "/assets/catalog/gallery-288440772-13.webp",
+      "/assets/catalog/gallery-288440772-14.webp",
+      "/assets/catalog/gallery-288440772-15.webp",
+      "/assets/catalog/gallery-288440772-16.webp",
+      "/assets/catalog/gallery-288440772-17.webp",
+      "/assets/catalog/gallery-288440772-18.webp",
+      "/assets/catalog/gallery-288440772-19.webp",
+      "/assets/catalog/gallery-288440772-20.webp",
+      "/assets/catalog/gallery-288440772-21.webp",
+      "/assets/catalog/gallery-288440772-22.webp",
+      "/assets/catalog/gallery-288440772-23.webp",
+      "/assets/catalog/gallery-288440772-24.webp",
+      "/assets/catalog/gallery-288440772-25.webp",
+      "/assets/catalog/gallery-288440772-26.webp",
+      "/assets/catalog/gallery-288440772-27.webp",
+      "/assets/catalog/gallery-288440772-28.webp"
+    ],
     "categories": [
       "electric",
       "suv",
@@ -8446,6 +9769,16 @@
       },
       {
         "label": {
+          "en": "Advertised driving range",
+          "ar": "مدى القيادة المعلن"
+        },
+        "value": {
+          "en": "More than 450 km (cycle unspecified)",
+          "ar": "أكثر من 450 كم (دورة القياس غير مذكورة)"
+        }
+      },
+      {
+        "label": {
           "en": "Market specification",
           "ar": "فئة المواصفات"
         },
@@ -8467,8 +9800,12 @@
     ],
     "post": "https://jo.opensooq.com/en/search/288440772",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
+    },
+    "range": {
+      "en": "More than 450 km (cycle unspecified)",
+      "ar": "أكثر من 450 كم (دورة القياس غير مذكورة)"
     },
     "price": {
       "amount": 37500,
@@ -8480,7 +9817,34 @@
     "brand": "Chery iCAR",
     "name": "V27",
     "year": 2026,
-    "image": "/assets/catalog/os-288440598-1.webp",
+    "image": "/assets/catalog/gallery-288440598-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-288440598-1.webp",
+      "/assets/catalog/gallery-288440598-2.webp",
+      "/assets/catalog/gallery-288440598-3.webp",
+      "/assets/catalog/gallery-288440598-4.webp",
+      "/assets/catalog/gallery-288440598-5.webp",
+      "/assets/catalog/gallery-288440598-6.webp",
+      "/assets/catalog/gallery-288440598-7.webp",
+      "/assets/catalog/gallery-288440598-8.webp",
+      "/assets/catalog/gallery-288440598-9.webp",
+      "/assets/catalog/gallery-288440598-10.webp",
+      "/assets/catalog/gallery-288440598-11.webp",
+      "/assets/catalog/gallery-288440598-12.webp",
+      "/assets/catalog/gallery-288440598-13.webp",
+      "/assets/catalog/gallery-288440598-14.webp",
+      "/assets/catalog/gallery-288440598-15.webp",
+      "/assets/catalog/gallery-288440598-16.webp",
+      "/assets/catalog/gallery-288440598-17.webp",
+      "/assets/catalog/gallery-288440598-18.webp",
+      "/assets/catalog/gallery-288440598-19.webp",
+      "/assets/catalog/gallery-288440598-20.webp",
+      "/assets/catalog/gallery-288440598-21.webp",
+      "/assets/catalog/gallery-288440598-22.webp",
+      "/assets/catalog/gallery-288440598-23.webp",
+      "/assets/catalog/gallery-288440598-24.webp",
+      "/assets/catalog/gallery-288440598-25.webp"
+    ],
     "categories": [
       "hybrid",
       "suv"
@@ -8655,8 +10019,8 @@
     ],
     "post": "https://jo.opensooq.com/en/search/288440598",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
     }
   },
   {
@@ -8664,7 +10028,31 @@
     "brand": "Chery iCAR",
     "name": "V27",
     "year": 2026,
-    "image": "/assets/catalog/os-288442830-1.webp",
+    "image": "/assets/catalog/gallery-288442830-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-288442830-1.webp",
+      "/assets/catalog/gallery-288442830-2.webp",
+      "/assets/catalog/gallery-288442830-3.webp",
+      "/assets/catalog/gallery-288442830-4.webp",
+      "/assets/catalog/gallery-288442830-5.webp",
+      "/assets/catalog/gallery-288442830-6.webp",
+      "/assets/catalog/gallery-288442830-7.webp",
+      "/assets/catalog/gallery-288442830-8.webp",
+      "/assets/catalog/gallery-288442830-9.webp",
+      "/assets/catalog/gallery-288442830-10.webp",
+      "/assets/catalog/gallery-288442830-11.webp",
+      "/assets/catalog/gallery-288442830-12.webp",
+      "/assets/catalog/gallery-288442830-13.webp",
+      "/assets/catalog/gallery-288442830-14.webp",
+      "/assets/catalog/gallery-288442830-15.webp",
+      "/assets/catalog/gallery-288442830-16.webp",
+      "/assets/catalog/gallery-288442830-17.webp",
+      "/assets/catalog/gallery-288442830-18.webp",
+      "/assets/catalog/gallery-288442830-19.webp",
+      "/assets/catalog/gallery-288442830-20.webp",
+      "/assets/catalog/gallery-288442830-21.webp",
+      "/assets/catalog/gallery-288442830-22.webp"
+    ],
     "categories": [
       "hybrid",
       "suv"
@@ -8839,8 +10227,8 @@
     ],
     "post": "https://jo.opensooq.com/en/search/288442830",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
     }
   },
   {
@@ -8848,7 +10236,35 @@
     "brand": "Riddara",
     "name": "RD6",
     "year": 2025,
-    "image": "/assets/catalog/os-288441286-1.webp",
+    "image": "/assets/catalog/gallery-288441286-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-288441286-1.webp",
+      "/assets/catalog/gallery-288441286-2.webp",
+      "/assets/catalog/gallery-288441286-3.webp",
+      "/assets/catalog/gallery-288441286-4.webp",
+      "/assets/catalog/gallery-288441286-5.webp",
+      "/assets/catalog/gallery-288441286-6.webp",
+      "/assets/catalog/gallery-288441286-7.webp",
+      "/assets/catalog/gallery-288441286-8.webp",
+      "/assets/catalog/gallery-288441286-9.webp",
+      "/assets/catalog/gallery-288441286-10.webp",
+      "/assets/catalog/gallery-288441286-11.webp",
+      "/assets/catalog/gallery-288441286-12.webp",
+      "/assets/catalog/gallery-288441286-13.webp",
+      "/assets/catalog/gallery-288441286-14.webp",
+      "/assets/catalog/gallery-288441286-15.webp",
+      "/assets/catalog/gallery-288441286-16.webp",
+      "/assets/catalog/gallery-288441286-17.webp",
+      "/assets/catalog/gallery-288441286-18.webp",
+      "/assets/catalog/gallery-288441286-19.webp",
+      "/assets/catalog/gallery-288441286-20.webp",
+      "/assets/catalog/gallery-288441286-21.webp",
+      "/assets/catalog/gallery-288441286-22.webp",
+      "/assets/catalog/gallery-288441286-23.webp",
+      "/assets/catalog/gallery-288441286-24.webp",
+      "/assets/catalog/gallery-288441286-25.webp",
+      "/assets/catalog/gallery-288441286-26.webp"
+    ],
     "categories": [
       "electric"
     ],
@@ -8991,6 +10407,16 @@
       },
       {
         "label": {
+          "en": "Advertised driving range",
+          "ar": "مدى القيادة المعلن"
+        },
+        "value": {
+          "en": "Approximately 450 km (cycle unspecified)",
+          "ar": "نحو 450 كم (دورة القياس غير مذكورة)"
+        }
+      },
+      {
+        "label": {
           "en": "Market specification",
           "ar": "فئة المواصفات"
         },
@@ -9012,8 +10438,12 @@
     ],
     "post": "https://jo.opensooq.com/en/search/288441286",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
+    },
+    "range": {
+      "en": "Approximately 450 km (cycle unspecified)",
+      "ar": "نحو 450 كم (دورة القياس غير مذكورة)"
     },
     "price": {
       "amount": 27900,
@@ -9025,7 +10455,27 @@
     "brand": "BYD",
     "name": "Sealion 5",
     "year": 2026,
-    "image": "/assets/catalog/os-288441140-1.webp",
+    "image": "/assets/catalog/gallery-288441140-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-288441140-1.webp",
+      "/assets/catalog/gallery-288441140-2.webp",
+      "/assets/catalog/gallery-288441140-3.webp",
+      "/assets/catalog/gallery-288441140-4.webp",
+      "/assets/catalog/gallery-288441140-5.webp",
+      "/assets/catalog/gallery-288441140-6.webp",
+      "/assets/catalog/gallery-288441140-7.webp",
+      "/assets/catalog/gallery-288441140-8.webp",
+      "/assets/catalog/gallery-288441140-9.webp",
+      "/assets/catalog/gallery-288441140-10.webp",
+      "/assets/catalog/gallery-288441140-11.webp",
+      "/assets/catalog/gallery-288441140-12.webp",
+      "/assets/catalog/gallery-288441140-13.webp",
+      "/assets/catalog/gallery-288441140-14.webp",
+      "/assets/catalog/gallery-288441140-15.webp",
+      "/assets/catalog/gallery-288441140-16.webp",
+      "/assets/catalog/gallery-288441140-17.webp",
+      "/assets/catalog/gallery-288441140-18.webp"
+    ],
     "categories": [
       "hybrid",
       "suv"
@@ -9210,8 +10660,8 @@
     ],
     "post": "https://jo.opensooq.com/en/search/288441140",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
     }
   },
   {
@@ -9219,7 +10669,29 @@
     "brand": "Mercedes-Benz",
     "name": "G-Class",
     "year": 2023,
-    "image": "/assets/catalog/os-288441022-1.webp",
+    "image": "/assets/catalog/gallery-288441022-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-288441022-1.webp",
+      "/assets/catalog/gallery-288441022-2.webp",
+      "/assets/catalog/gallery-288441022-3.webp",
+      "/assets/catalog/gallery-288441022-4.webp",
+      "/assets/catalog/gallery-288441022-5.webp",
+      "/assets/catalog/gallery-288441022-6.webp",
+      "/assets/catalog/gallery-288441022-7.webp",
+      "/assets/catalog/gallery-288441022-8.webp",
+      "/assets/catalog/gallery-288441022-9.webp",
+      "/assets/catalog/gallery-288441022-10.webp",
+      "/assets/catalog/gallery-288441022-11.webp",
+      "/assets/catalog/gallery-288441022-12.webp",
+      "/assets/catalog/gallery-288441022-13.webp",
+      "/assets/catalog/gallery-288441022-14.webp",
+      "/assets/catalog/gallery-288441022-15.webp",
+      "/assets/catalog/gallery-288441022-16.webp",
+      "/assets/catalog/gallery-288441022-17.webp",
+      "/assets/catalog/gallery-288441022-18.webp",
+      "/assets/catalog/gallery-288441022-19.webp",
+      "/assets/catalog/gallery-288441022-20.webp"
+    ],
     "categories": [
       "gasoline",
       "suv",
@@ -9385,8 +10857,8 @@
     ],
     "post": "https://jo.opensooq.com/en/search/288441022",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
     }
   },
   {
@@ -9394,7 +10866,30 @@
     "brand": "Lynk & Co",
     "name": "08",
     "year": 2027,
-    "image": "/assets/catalog/os-288440988-1.webp",
+    "image": "/assets/catalog/gallery-288440988-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-288440988-1.webp",
+      "/assets/catalog/gallery-288440988-2.webp",
+      "/assets/catalog/gallery-288440988-3.webp",
+      "/assets/catalog/gallery-288440988-4.webp",
+      "/assets/catalog/gallery-288440988-5.webp",
+      "/assets/catalog/gallery-288440988-6.webp",
+      "/assets/catalog/gallery-288440988-7.webp",
+      "/assets/catalog/gallery-288440988-8.webp",
+      "/assets/catalog/gallery-288440988-9.webp",
+      "/assets/catalog/gallery-288440988-10.webp",
+      "/assets/catalog/gallery-288440988-11.webp",
+      "/assets/catalog/gallery-288440988-12.webp",
+      "/assets/catalog/gallery-288440988-13.webp",
+      "/assets/catalog/gallery-288440988-14.webp",
+      "/assets/catalog/gallery-288440988-15.webp",
+      "/assets/catalog/gallery-288440988-16.webp",
+      "/assets/catalog/gallery-288440988-17.webp",
+      "/assets/catalog/gallery-288440988-18.webp",
+      "/assets/catalog/gallery-288440988-19.webp",
+      "/assets/catalog/gallery-288440988-20.webp",
+      "/assets/catalog/gallery-288440988-21.webp"
+    ],
     "categories": [
       "hybrid",
       "suv"
@@ -9569,8 +11064,8 @@
     ],
     "post": "https://jo.opensooq.com/en/search/288440988",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
     }
   },
   {
@@ -9578,7 +11073,35 @@
     "brand": "ARCFOX",
     "name": "T1",
     "year": 2027,
-    "image": "/assets/catalog/os-288440412-1.webp",
+    "image": "/assets/catalog/gallery-288440412-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-288440412-1.webp",
+      "/assets/catalog/gallery-288440412-2.webp",
+      "/assets/catalog/gallery-288440412-3.webp",
+      "/assets/catalog/gallery-288440412-4.webp",
+      "/assets/catalog/gallery-288440412-5.webp",
+      "/assets/catalog/gallery-288440412-6.webp",
+      "/assets/catalog/gallery-288440412-7.webp",
+      "/assets/catalog/gallery-288440412-8.webp",
+      "/assets/catalog/gallery-288440412-9.webp",
+      "/assets/catalog/gallery-288440412-10.webp",
+      "/assets/catalog/gallery-288440412-11.webp",
+      "/assets/catalog/gallery-288440412-12.webp",
+      "/assets/catalog/gallery-288440412-13.webp",
+      "/assets/catalog/gallery-288440412-14.webp",
+      "/assets/catalog/gallery-288440412-15.webp",
+      "/assets/catalog/gallery-288440412-16.webp",
+      "/assets/catalog/gallery-288440412-17.webp",
+      "/assets/catalog/gallery-288440412-18.webp",
+      "/assets/catalog/gallery-288440412-19.webp",
+      "/assets/catalog/gallery-288440412-20.webp",
+      "/assets/catalog/gallery-288440412-21.webp",
+      "/assets/catalog/gallery-288440412-22.webp",
+      "/assets/catalog/gallery-288440412-23.webp",
+      "/assets/catalog/gallery-288440412-24.webp",
+      "/assets/catalog/gallery-288440412-25.webp",
+      "/assets/catalog/gallery-288440412-26.webp"
+    ],
     "categories": [
       "electric",
       "suv"
@@ -9722,6 +11245,16 @@
       },
       {
         "label": {
+          "en": "Advertised driving range",
+          "ar": "مدى القيادة المعلن"
+        },
+        "value": {
+          "en": "Up to 400 km (cycle unspecified)",
+          "ar": "حتى 400 كم (دورة القياس غير مذكورة)"
+        }
+      },
+      {
+        "label": {
           "en": "Market specification",
           "ar": "فئة المواصفات"
         },
@@ -9743,8 +11276,12 @@
     ],
     "post": "https://jo.opensooq.com/en/search/288440412",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
+    },
+    "range": {
+      "en": "Up to 400 km (cycle unspecified)",
+      "ar": "حتى 400 كم (دورة القياس غير مذكورة)"
     }
   },
   {
@@ -9752,7 +11289,34 @@
     "brand": "ARCFOX",
     "name": "T1",
     "year": 2027,
-    "image": "/assets/catalog/os-288438754-1.webp",
+    "image": "/assets/catalog/gallery-288438754-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-288438754-1.webp",
+      "/assets/catalog/gallery-288438754-2.webp",
+      "/assets/catalog/gallery-288438754-3.webp",
+      "/assets/catalog/gallery-288438754-4.webp",
+      "/assets/catalog/gallery-288438754-5.webp",
+      "/assets/catalog/gallery-288438754-6.webp",
+      "/assets/catalog/gallery-288438754-7.webp",
+      "/assets/catalog/gallery-288438754-8.webp",
+      "/assets/catalog/gallery-288438754-9.webp",
+      "/assets/catalog/gallery-288438754-10.webp",
+      "/assets/catalog/gallery-288438754-11.webp",
+      "/assets/catalog/gallery-288438754-12.webp",
+      "/assets/catalog/gallery-288438754-13.webp",
+      "/assets/catalog/gallery-288438754-14.webp",
+      "/assets/catalog/gallery-288438754-15.webp",
+      "/assets/catalog/gallery-288438754-16.webp",
+      "/assets/catalog/gallery-288438754-17.webp",
+      "/assets/catalog/gallery-288438754-18.webp",
+      "/assets/catalog/gallery-288438754-19.webp",
+      "/assets/catalog/gallery-288438754-20.webp",
+      "/assets/catalog/gallery-288438754-21.webp",
+      "/assets/catalog/gallery-288438754-22.webp",
+      "/assets/catalog/gallery-288438754-23.webp",
+      "/assets/catalog/gallery-288438754-24.webp",
+      "/assets/catalog/gallery-288438754-25.webp"
+    ],
     "categories": [
       "electric",
       "suv"
@@ -9896,6 +11460,16 @@
       },
       {
         "label": {
+          "en": "Advertised driving range",
+          "ar": "مدى القيادة المعلن"
+        },
+        "value": {
+          "en": "Up to 400 km (cycle unspecified)",
+          "ar": "حتى 400 كم (دورة القياس غير مذكورة)"
+        }
+      },
+      {
+        "label": {
           "en": "Market specification",
           "ar": "فئة المواصفات"
         },
@@ -9917,8 +11491,12 @@
     ],
     "post": "https://jo.opensooq.com/en/search/288438754",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
+    },
+    "range": {
+      "en": "Up to 400 km (cycle unspecified)",
+      "ar": "حتى 400 كم (دورة القياس غير مذكورة)"
     }
   },
   {
@@ -9926,7 +11504,35 @@
     "brand": "ARCFOX",
     "name": "T1",
     "year": 2027,
-    "image": "/assets/catalog/os-288438620-1.webp",
+    "image": "/assets/catalog/gallery-288438620-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-288438620-1.webp",
+      "/assets/catalog/gallery-288438620-2.webp",
+      "/assets/catalog/gallery-288438620-3.webp",
+      "/assets/catalog/gallery-288438620-4.webp",
+      "/assets/catalog/gallery-288438620-5.webp",
+      "/assets/catalog/gallery-288438620-6.webp",
+      "/assets/catalog/gallery-288438620-7.webp",
+      "/assets/catalog/gallery-288438620-8.webp",
+      "/assets/catalog/gallery-288438620-9.webp",
+      "/assets/catalog/gallery-288438620-10.webp",
+      "/assets/catalog/gallery-288438620-11.webp",
+      "/assets/catalog/gallery-288438620-12.webp",
+      "/assets/catalog/gallery-288438620-13.webp",
+      "/assets/catalog/gallery-288438620-14.webp",
+      "/assets/catalog/gallery-288438620-15.webp",
+      "/assets/catalog/gallery-288438620-16.webp",
+      "/assets/catalog/gallery-288438620-17.webp",
+      "/assets/catalog/gallery-288438620-18.webp",
+      "/assets/catalog/gallery-288438620-19.webp",
+      "/assets/catalog/gallery-288438620-20.webp",
+      "/assets/catalog/gallery-288438620-21.webp",
+      "/assets/catalog/gallery-288438620-22.webp",
+      "/assets/catalog/gallery-288438620-23.webp",
+      "/assets/catalog/gallery-288438620-24.webp",
+      "/assets/catalog/gallery-288438620-25.webp",
+      "/assets/catalog/gallery-288438620-26.webp"
+    ],
     "categories": [
       "electric",
       "suv"
@@ -10070,6 +11676,16 @@
       },
       {
         "label": {
+          "en": "Advertised driving range",
+          "ar": "مدى القيادة المعلن"
+        },
+        "value": {
+          "en": "Up to 400 km (cycle unspecified)",
+          "ar": "حتى 400 كم (دورة القياس غير مذكورة)"
+        }
+      },
+      {
+        "label": {
           "en": "Market specification",
           "ar": "فئة المواصفات"
         },
@@ -10091,8 +11707,12 @@
     ],
     "post": "https://jo.opensooq.com/en/search/288438620",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
+    },
+    "range": {
+      "en": "Up to 400 km (cycle unspecified)",
+      "ar": "حتى 400 كم (دورة القياس غير مذكورة)"
     }
   },
   {
@@ -10100,7 +11720,34 @@
     "brand": "ARCFOX",
     "name": "T1",
     "year": 2027,
-    "image": "/assets/catalog/os-288438470-1.webp",
+    "image": "/assets/catalog/gallery-288438470-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-288438470-1.webp",
+      "/assets/catalog/gallery-288438470-2.webp",
+      "/assets/catalog/gallery-288438470-3.webp",
+      "/assets/catalog/gallery-288438470-4.webp",
+      "/assets/catalog/gallery-288438470-5.webp",
+      "/assets/catalog/gallery-288438470-6.webp",
+      "/assets/catalog/gallery-288438470-7.webp",
+      "/assets/catalog/gallery-288438470-8.webp",
+      "/assets/catalog/gallery-288438470-9.webp",
+      "/assets/catalog/gallery-288438470-10.webp",
+      "/assets/catalog/gallery-288438470-11.webp",
+      "/assets/catalog/gallery-288438470-12.webp",
+      "/assets/catalog/gallery-288438470-13.webp",
+      "/assets/catalog/gallery-288438470-14.webp",
+      "/assets/catalog/gallery-288438470-15.webp",
+      "/assets/catalog/gallery-288438470-16.webp",
+      "/assets/catalog/gallery-288438470-17.webp",
+      "/assets/catalog/gallery-288438470-18.webp",
+      "/assets/catalog/gallery-288438470-19.webp",
+      "/assets/catalog/gallery-288438470-20.webp",
+      "/assets/catalog/gallery-288438470-21.webp",
+      "/assets/catalog/gallery-288438470-22.webp",
+      "/assets/catalog/gallery-288438470-23.webp",
+      "/assets/catalog/gallery-288438470-24.webp",
+      "/assets/catalog/gallery-288438470-25.webp"
+    ],
     "categories": [
       "electric",
       "suv"
@@ -10244,6 +11891,16 @@
       },
       {
         "label": {
+          "en": "Advertised driving range",
+          "ar": "مدى القيادة المعلن"
+        },
+        "value": {
+          "en": "400 km (cycle unspecified)",
+          "ar": "400 كم (دورة القياس غير مذكورة)"
+        }
+      },
+      {
+        "label": {
           "en": "Market specification",
           "ar": "فئة المواصفات"
         },
@@ -10265,8 +11922,12 @@
     ],
     "post": "https://jo.opensooq.com/en/search/288438470",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
+    },
+    "range": {
+      "en": "400 km (cycle unspecified)",
+      "ar": "400 كم (دورة القياس غير مذكورة)"
     }
   },
   {
@@ -10274,7 +11935,23 @@
     "brand": "Toyota",
     "name": "Camry",
     "year": 2021,
-    "image": "/assets/catalog/os-288432146-1.webp",
+    "image": "/assets/catalog/gallery-288432146-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-288432146-1.webp",
+      "/assets/catalog/gallery-288432146-2.webp",
+      "/assets/catalog/gallery-288432146-3.webp",
+      "/assets/catalog/gallery-288432146-4.webp",
+      "/assets/catalog/gallery-288432146-5.webp",
+      "/assets/catalog/gallery-288432146-6.webp",
+      "/assets/catalog/gallery-288432146-7.webp",
+      "/assets/catalog/gallery-288432146-8.webp",
+      "/assets/catalog/gallery-288432146-9.webp",
+      "/assets/catalog/gallery-288432146-10.webp",
+      "/assets/catalog/gallery-288432146-11.webp",
+      "/assets/catalog/gallery-288432146-12.webp",
+      "/assets/catalog/gallery-288432146-13.webp",
+      "/assets/catalog/gallery-288432146-14.webp"
+    ],
     "categories": [
       "hybrid"
     ],
@@ -10438,8 +12115,8 @@
     ],
     "post": "https://jo.opensooq.com/en/search/288432146",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
     },
     "price": {
       "amount": 20900,
@@ -10451,7 +12128,26 @@
     "brand": "MG",
     "name": "MG5",
     "year": 2023,
-    "image": "/assets/catalog/os-288295034-1.webp",
+    "image": "/assets/catalog/gallery-288295034-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-288295034-1.webp",
+      "/assets/catalog/gallery-288295034-2.webp",
+      "/assets/catalog/gallery-288295034-3.webp",
+      "/assets/catalog/gallery-288295034-4.webp",
+      "/assets/catalog/gallery-288295034-5.webp",
+      "/assets/catalog/gallery-288295034-6.webp",
+      "/assets/catalog/gallery-288295034-7.webp",
+      "/assets/catalog/gallery-288295034-8.webp",
+      "/assets/catalog/gallery-288295034-9.webp",
+      "/assets/catalog/gallery-288295034-10.webp",
+      "/assets/catalog/gallery-288295034-11.webp",
+      "/assets/catalog/gallery-288295034-12.webp",
+      "/assets/catalog/gallery-288295034-13.webp",
+      "/assets/catalog/gallery-288295034-14.webp",
+      "/assets/catalog/gallery-288295034-15.webp",
+      "/assets/catalog/gallery-288295034-16.webp",
+      "/assets/catalog/gallery-288295034-17.webp"
+    ],
     "categories": [
       "gasoline"
     ],
@@ -10615,8 +12311,8 @@
     ],
     "post": "https://jo.opensooq.com/en/search/288295034",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
     },
     "price": {
       "amount": 10700,
@@ -10628,7 +12324,30 @@
     "brand": "ARCFOX",
     "name": "T1",
     "year": 2027,
-    "image": "/assets/catalog/os-286428842-1.webp",
+    "image": "/assets/catalog/gallery-286428842-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-286428842-1.webp",
+      "/assets/catalog/gallery-286428842-2.webp",
+      "/assets/catalog/gallery-286428842-3.webp",
+      "/assets/catalog/gallery-286428842-4.webp",
+      "/assets/catalog/gallery-286428842-5.webp",
+      "/assets/catalog/gallery-286428842-6.webp",
+      "/assets/catalog/gallery-286428842-7.webp",
+      "/assets/catalog/gallery-286428842-8.webp",
+      "/assets/catalog/gallery-286428842-9.webp",
+      "/assets/catalog/gallery-286428842-10.webp",
+      "/assets/catalog/gallery-286428842-11.webp",
+      "/assets/catalog/gallery-286428842-12.webp",
+      "/assets/catalog/gallery-286428842-13.webp",
+      "/assets/catalog/gallery-286428842-14.webp",
+      "/assets/catalog/gallery-286428842-15.webp",
+      "/assets/catalog/gallery-286428842-16.webp",
+      "/assets/catalog/gallery-286428842-17.webp",
+      "/assets/catalog/gallery-286428842-18.webp",
+      "/assets/catalog/gallery-286428842-19.webp",
+      "/assets/catalog/gallery-286428842-20.webp",
+      "/assets/catalog/gallery-286428842-21.webp"
+    ],
     "categories": [
       "electric",
       "suv"
@@ -10772,6 +12491,16 @@
       },
       {
         "label": {
+          "en": "Advertised driving range",
+          "ar": "مدى القيادة المعلن"
+        },
+        "value": {
+          "en": "Up to 400 km (cycle unspecified)",
+          "ar": "حتى 400 كم (دورة القياس غير مذكورة)"
+        }
+      },
+      {
+        "label": {
           "en": "Market specification",
           "ar": "فئة المواصفات"
         },
@@ -10793,8 +12522,12 @@
     ],
     "post": "https://jo.opensooq.com/en/search/286428842",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
+    },
+    "range": {
+      "en": "Up to 400 km (cycle unspecified)",
+      "ar": "حتى 400 كم (دورة القياس غير مذكورة)"
     }
   },
   {
@@ -10802,7 +12535,30 @@
     "brand": "Mercedes-Benz",
     "name": "EQE SUV",
     "year": 2024,
-    "image": "/assets/catalog/os-287914576-1.webp",
+    "image": "/assets/catalog/gallery-287914576-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-287914576-1.webp",
+      "/assets/catalog/gallery-287914576-2.webp",
+      "/assets/catalog/gallery-287914576-3.webp",
+      "/assets/catalog/gallery-287914576-4.webp",
+      "/assets/catalog/gallery-287914576-5.webp",
+      "/assets/catalog/gallery-287914576-6.webp",
+      "/assets/catalog/gallery-287914576-7.webp",
+      "/assets/catalog/gallery-287914576-8.webp",
+      "/assets/catalog/gallery-287914576-9.webp",
+      "/assets/catalog/gallery-287914576-10.webp",
+      "/assets/catalog/gallery-287914576-11.webp",
+      "/assets/catalog/gallery-287914576-12.webp",
+      "/assets/catalog/gallery-287914576-13.webp",
+      "/assets/catalog/gallery-287914576-14.webp",
+      "/assets/catalog/gallery-287914576-15.webp",
+      "/assets/catalog/gallery-287914576-16.webp",
+      "/assets/catalog/gallery-287914576-17.webp",
+      "/assets/catalog/gallery-287914576-18.webp",
+      "/assets/catalog/gallery-287914576-19.webp",
+      "/assets/catalog/gallery-287914576-20.webp",
+      "/assets/catalog/gallery-287914576-21.webp"
+    ],
     "categories": [
       "electric",
       "suv",
@@ -10957,6 +12713,16 @@
       },
       {
         "label": {
+          "en": "Advertised driving range",
+          "ar": "مدى القيادة المعلن"
+        },
+        "value": {
+          "en": "Up to 600 km (cycle unspecified)",
+          "ar": "حتى 600 كم (دورة القياس غير مذكورة)"
+        }
+      },
+      {
+        "label": {
           "en": "Market specification",
           "ar": "فئة المواصفات"
         },
@@ -10978,8 +12744,12 @@
     ],
     "post": "https://jo.opensooq.com/en/search/287914576",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
+    },
+    "range": {
+      "en": "Up to 600 km (cycle unspecified)",
+      "ar": "حتى 600 كم (دورة القياس غير مذكورة)"
     },
     "price": {
       "amount": 57000,
@@ -10991,7 +12761,28 @@
     "brand": "Land Rover",
     "name": "Defender 110",
     "year": 2025,
-    "image": "/assets/catalog/os-287914072-1.webp",
+    "image": "/assets/catalog/gallery-287914072-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-287914072-1.webp",
+      "/assets/catalog/gallery-287914072-2.webp",
+      "/assets/catalog/gallery-287914072-3.webp",
+      "/assets/catalog/gallery-287914072-4.webp",
+      "/assets/catalog/gallery-287914072-5.webp",
+      "/assets/catalog/gallery-287914072-6.webp",
+      "/assets/catalog/gallery-287914072-7.webp",
+      "/assets/catalog/gallery-287914072-8.webp",
+      "/assets/catalog/gallery-287914072-9.webp",
+      "/assets/catalog/gallery-287914072-10.webp",
+      "/assets/catalog/gallery-287914072-11.webp",
+      "/assets/catalog/gallery-287914072-12.webp",
+      "/assets/catalog/gallery-287914072-13.webp",
+      "/assets/catalog/gallery-287914072-14.webp",
+      "/assets/catalog/gallery-287914072-15.webp",
+      "/assets/catalog/gallery-287914072-16.webp",
+      "/assets/catalog/gallery-287914072-17.webp",
+      "/assets/catalog/gallery-287914072-18.webp",
+      "/assets/catalog/gallery-287914072-19.webp"
+    ],
     "categories": [
       "hybrid",
       "suv",
@@ -11177,8 +12968,8 @@
     ],
     "post": "https://jo.opensooq.com/en/search/287914072",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
     },
     "price": {
       "amount": 79500,
@@ -11190,7 +12981,30 @@
     "brand": "BAIC",
     "name": "BJ30e",
     "year": 2025,
-    "image": "/assets/catalog/os-287913510-1.webp",
+    "image": "/assets/catalog/gallery-287913510-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-287913510-1.webp",
+      "/assets/catalog/gallery-287913510-2.webp",
+      "/assets/catalog/gallery-287913510-3.webp",
+      "/assets/catalog/gallery-287913510-4.webp",
+      "/assets/catalog/gallery-287913510-5.webp",
+      "/assets/catalog/gallery-287913510-6.webp",
+      "/assets/catalog/gallery-287913510-7.webp",
+      "/assets/catalog/gallery-287913510-8.webp",
+      "/assets/catalog/gallery-287913510-9.webp",
+      "/assets/catalog/gallery-287913510-10.webp",
+      "/assets/catalog/gallery-287913510-11.webp",
+      "/assets/catalog/gallery-287913510-12.webp",
+      "/assets/catalog/gallery-287913510-13.webp",
+      "/assets/catalog/gallery-287913510-14.webp",
+      "/assets/catalog/gallery-287913510-15.webp",
+      "/assets/catalog/gallery-287913510-16.webp",
+      "/assets/catalog/gallery-287913510-17.webp",
+      "/assets/catalog/gallery-287913510-18.webp",
+      "/assets/catalog/gallery-287913510-19.webp",
+      "/assets/catalog/gallery-287913510-20.webp",
+      "/assets/catalog/gallery-287913510-21.webp"
+    ],
     "categories": [
       "hybrid",
       "suv"
@@ -11375,8 +13189,8 @@
     ],
     "post": "https://jo.opensooq.com/en/search/287913510",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
     },
     "price": {
       "amount": 23900,
@@ -11388,7 +13202,30 @@
     "brand": "BAIC",
     "name": "BJ30e",
     "year": 2025,
-    "image": "/assets/catalog/os-287912580-1.webp",
+    "image": "/assets/catalog/gallery-287912580-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-287912580-1.webp",
+      "/assets/catalog/gallery-287912580-2.webp",
+      "/assets/catalog/gallery-287912580-3.webp",
+      "/assets/catalog/gallery-287912580-4.webp",
+      "/assets/catalog/gallery-287912580-5.webp",
+      "/assets/catalog/gallery-287912580-6.webp",
+      "/assets/catalog/gallery-287912580-7.webp",
+      "/assets/catalog/gallery-287912580-8.webp",
+      "/assets/catalog/gallery-287912580-9.webp",
+      "/assets/catalog/gallery-287912580-10.webp",
+      "/assets/catalog/gallery-287912580-11.webp",
+      "/assets/catalog/gallery-287912580-12.webp",
+      "/assets/catalog/gallery-287912580-13.webp",
+      "/assets/catalog/gallery-287912580-14.webp",
+      "/assets/catalog/gallery-287912580-15.webp",
+      "/assets/catalog/gallery-287912580-16.webp",
+      "/assets/catalog/gallery-287912580-17.webp",
+      "/assets/catalog/gallery-287912580-18.webp",
+      "/assets/catalog/gallery-287912580-19.webp",
+      "/assets/catalog/gallery-287912580-20.webp",
+      "/assets/catalog/gallery-287912580-21.webp"
+    ],
     "categories": [
       "hybrid",
       "suv"
@@ -11573,8 +13410,8 @@
     ],
     "post": "https://jo.opensooq.com/en/search/287912580",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
     },
     "price": {
       "amount": 23900,
@@ -11586,7 +13423,30 @@
     "brand": "AVATR",
     "name": "12",
     "year": 2024,
-    "image": "/assets/catalog/os-287890976-1.webp",
+    "image": "/assets/catalog/gallery-287890976-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-287890976-1.webp",
+      "/assets/catalog/gallery-287890976-2.webp",
+      "/assets/catalog/gallery-287890976-3.webp",
+      "/assets/catalog/gallery-287890976-4.webp",
+      "/assets/catalog/gallery-287890976-5.webp",
+      "/assets/catalog/gallery-287890976-6.webp",
+      "/assets/catalog/gallery-287890976-7.webp",
+      "/assets/catalog/gallery-287890976-8.webp",
+      "/assets/catalog/gallery-287890976-9.webp",
+      "/assets/catalog/gallery-287890976-10.webp",
+      "/assets/catalog/gallery-287890976-11.webp",
+      "/assets/catalog/gallery-287890976-12.webp",
+      "/assets/catalog/gallery-287890976-13.webp",
+      "/assets/catalog/gallery-287890976-14.webp",
+      "/assets/catalog/gallery-287890976-15.webp",
+      "/assets/catalog/gallery-287890976-16.webp",
+      "/assets/catalog/gallery-287890976-17.webp",
+      "/assets/catalog/gallery-287890976-18.webp",
+      "/assets/catalog/gallery-287890976-19.webp",
+      "/assets/catalog/gallery-287890976-20.webp",
+      "/assets/catalog/gallery-287890976-21.webp"
+    ],
     "categories": [
       "electric",
       "premium"
@@ -11740,6 +13600,16 @@
       },
       {
         "label": {
+          "en": "Advertised driving range",
+          "ar": "مدى القيادة المعلن"
+        },
+        "value": {
+          "en": "Up to 700 km (CLTC)",
+          "ar": "حتى 700 كم (CLTC)"
+        }
+      },
+      {
+        "label": {
           "en": "Market specification",
           "ar": "فئة المواصفات"
         },
@@ -11761,8 +13631,12 @@
     ],
     "post": "https://jo.opensooq.com/en/search/287890976",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
+    },
+    "range": {
+      "en": "Up to 700 km (CLTC)",
+      "ar": "حتى 700 كم (CLTC)"
     }
   },
   {
@@ -11770,7 +13644,31 @@
     "brand": "Geely Farizon",
     "name": "H8E",
     "year": 2024,
-    "image": "/assets/catalog/os-287890904-1.webp",
+    "image": "/assets/catalog/gallery-287890904-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-287890904-1.webp",
+      "/assets/catalog/gallery-287890904-2.webp",
+      "/assets/catalog/gallery-287890904-3.webp",
+      "/assets/catalog/gallery-287890904-4.webp",
+      "/assets/catalog/gallery-287890904-5.webp",
+      "/assets/catalog/gallery-287890904-6.webp",
+      "/assets/catalog/gallery-287890904-7.webp",
+      "/assets/catalog/gallery-287890904-8.webp",
+      "/assets/catalog/gallery-287890904-9.webp",
+      "/assets/catalog/gallery-287890904-10.webp",
+      "/assets/catalog/gallery-287890904-11.webp",
+      "/assets/catalog/gallery-287890904-12.webp",
+      "/assets/catalog/gallery-287890904-13.webp",
+      "/assets/catalog/gallery-287890904-14.webp",
+      "/assets/catalog/gallery-287890904-15.webp",
+      "/assets/catalog/gallery-287890904-16.webp",
+      "/assets/catalog/gallery-287890904-17.webp",
+      "/assets/catalog/gallery-287890904-18.webp",
+      "/assets/catalog/gallery-287890904-19.webp",
+      "/assets/catalog/gallery-287890904-20.webp",
+      "/assets/catalog/gallery-287890904-21.webp",
+      "/assets/catalog/gallery-287890904-22.webp"
+    ],
     "categories": [
       "electric"
     ],
@@ -11903,6 +13801,16 @@
       },
       {
         "label": {
+          "en": "Advertised driving range",
+          "ar": "مدى القيادة المعلن"
+        },
+        "value": {
+          "en": "Up to 350 km (cycle unspecified)",
+          "ar": "حتى 350 كم (دورة القياس غير مذكورة)"
+        }
+      },
+      {
+        "label": {
           "en": "Market specification",
           "ar": "فئة المواصفات"
         },
@@ -11924,8 +13832,12 @@
     ],
     "post": "https://jo.opensooq.com/en/search/287890904",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
+    },
+    "range": {
+      "en": "Up to 350 km (cycle unspecified)",
+      "ar": "حتى 350 كم (دورة القياس غير مذكورة)"
     },
     "price": {
       "amount": 36000,
@@ -11937,7 +13849,35 @@
     "brand": "Jetour",
     "name": "G700",
     "year": 2026,
-    "image": "/assets/catalog/os-287890886-1.webp",
+    "image": "/assets/catalog/gallery-287890886-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-287890886-1.webp",
+      "/assets/catalog/gallery-287890886-2.webp",
+      "/assets/catalog/gallery-287890886-3.webp",
+      "/assets/catalog/gallery-287890886-4.webp",
+      "/assets/catalog/gallery-287890886-5.webp",
+      "/assets/catalog/gallery-287890886-6.webp",
+      "/assets/catalog/gallery-287890886-7.webp",
+      "/assets/catalog/gallery-287890886-8.webp",
+      "/assets/catalog/gallery-287890886-9.webp",
+      "/assets/catalog/gallery-287890886-10.webp",
+      "/assets/catalog/gallery-287890886-11.webp",
+      "/assets/catalog/gallery-287890886-12.webp",
+      "/assets/catalog/gallery-287890886-13.webp",
+      "/assets/catalog/gallery-287890886-14.webp",
+      "/assets/catalog/gallery-287890886-15.webp",
+      "/assets/catalog/gallery-287890886-16.webp",
+      "/assets/catalog/gallery-287890886-17.webp",
+      "/assets/catalog/gallery-287890886-18.webp",
+      "/assets/catalog/gallery-287890886-19.webp",
+      "/assets/catalog/gallery-287890886-20.webp",
+      "/assets/catalog/gallery-287890886-21.webp",
+      "/assets/catalog/gallery-287890886-22.webp",
+      "/assets/catalog/gallery-287890886-23.webp",
+      "/assets/catalog/gallery-287890886-24.webp",
+      "/assets/catalog/gallery-287890886-25.webp",
+      "/assets/catalog/gallery-287890886-26.webp"
+    ],
     "categories": [
       "hybrid",
       "suv"
@@ -12112,8 +14052,8 @@
     ],
     "post": "https://jo.opensooq.com/en/search/287890886",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
     }
   },
   {
@@ -12121,7 +14061,34 @@
     "brand": "Toyota",
     "name": "Land Cruiser",
     "year": 2026,
-    "image": "/assets/catalog/os-287890852-1.webp",
+    "image": "/assets/catalog/gallery-287890852-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-287890852-1.webp",
+      "/assets/catalog/gallery-287890852-2.webp",
+      "/assets/catalog/gallery-287890852-3.webp",
+      "/assets/catalog/gallery-287890852-4.webp",
+      "/assets/catalog/gallery-287890852-5.webp",
+      "/assets/catalog/gallery-287890852-6.webp",
+      "/assets/catalog/gallery-287890852-7.webp",
+      "/assets/catalog/gallery-287890852-8.webp",
+      "/assets/catalog/gallery-287890852-9.webp",
+      "/assets/catalog/gallery-287890852-10.webp",
+      "/assets/catalog/gallery-287890852-11.webp",
+      "/assets/catalog/gallery-287890852-12.webp",
+      "/assets/catalog/gallery-287890852-13.webp",
+      "/assets/catalog/gallery-287890852-14.webp",
+      "/assets/catalog/gallery-287890852-15.webp",
+      "/assets/catalog/gallery-287890852-16.webp",
+      "/assets/catalog/gallery-287890852-17.webp",
+      "/assets/catalog/gallery-287890852-18.webp",
+      "/assets/catalog/gallery-287890852-19.webp",
+      "/assets/catalog/gallery-287890852-20.webp",
+      "/assets/catalog/gallery-287890852-21.webp",
+      "/assets/catalog/gallery-287890852-22.webp",
+      "/assets/catalog/gallery-287890852-23.webp",
+      "/assets/catalog/gallery-287890852-24.webp",
+      "/assets/catalog/gallery-287890852-25.webp"
+    ],
     "categories": [
       "gasoline",
       "suv"
@@ -12296,8 +14263,8 @@
     ],
     "post": "https://jo.opensooq.com/en/search/287890852",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
     }
   },
   {
@@ -12305,7 +14272,37 @@
     "brand": "BMW",
     "name": "i5 eDrive35L M Sport Package",
     "year": 2024,
-    "image": "/assets/catalog/os-287890822-1.webp",
+    "image": "/assets/catalog/gallery-287890822-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-287890822-1.webp",
+      "/assets/catalog/gallery-287890822-2.webp",
+      "/assets/catalog/gallery-287890822-3.webp",
+      "/assets/catalog/gallery-287890822-4.webp",
+      "/assets/catalog/gallery-287890822-5.webp",
+      "/assets/catalog/gallery-287890822-6.webp",
+      "/assets/catalog/gallery-287890822-7.webp",
+      "/assets/catalog/gallery-287890822-8.webp",
+      "/assets/catalog/gallery-287890822-9.webp",
+      "/assets/catalog/gallery-287890822-10.webp",
+      "/assets/catalog/gallery-287890822-11.webp",
+      "/assets/catalog/gallery-287890822-12.webp",
+      "/assets/catalog/gallery-287890822-13.webp",
+      "/assets/catalog/gallery-287890822-14.webp",
+      "/assets/catalog/gallery-287890822-15.webp",
+      "/assets/catalog/gallery-287890822-16.webp",
+      "/assets/catalog/gallery-287890822-17.webp",
+      "/assets/catalog/gallery-287890822-18.webp",
+      "/assets/catalog/gallery-287890822-19.webp",
+      "/assets/catalog/gallery-287890822-20.webp",
+      "/assets/catalog/gallery-287890822-21.webp",
+      "/assets/catalog/gallery-287890822-22.webp",
+      "/assets/catalog/gallery-287890822-23.webp",
+      "/assets/catalog/gallery-287890822-24.webp",
+      "/assets/catalog/gallery-287890822-25.webp",
+      "/assets/catalog/gallery-287890822-26.webp",
+      "/assets/catalog/gallery-287890822-27.webp",
+      "/assets/catalog/gallery-287890822-28.webp"
+    ],
     "categories": [
       "electric",
       "premium"
@@ -12459,6 +14456,16 @@
       },
       {
         "label": {
+          "en": "Advertised driving range",
+          "ar": "مدى القيادة المعلن"
+        },
+        "value": {
+          "en": "498–582 km (WLTP)",
+          "ar": "498–582 كم (WLTP)"
+        }
+      },
+      {
+        "label": {
           "en": "Market specification",
           "ar": "فئة المواصفات"
         },
@@ -12480,8 +14487,12 @@
     ],
     "post": "https://jo.opensooq.com/en/search/287890822",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
+    },
+    "range": {
+      "en": "498–582 km (WLTP)",
+      "ar": "498–582 كم (WLTP)"
     }
   },
   {
@@ -12489,7 +14500,30 @@
     "brand": "Jetour",
     "name": "G700",
     "year": 2026,
-    "image": "/assets/catalog/os-287890782-1.webp",
+    "image": "/assets/catalog/gallery-287890782-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-287890782-1.webp",
+      "/assets/catalog/gallery-287890782-2.webp",
+      "/assets/catalog/gallery-287890782-3.webp",
+      "/assets/catalog/gallery-287890782-4.webp",
+      "/assets/catalog/gallery-287890782-5.webp",
+      "/assets/catalog/gallery-287890782-6.webp",
+      "/assets/catalog/gallery-287890782-7.webp",
+      "/assets/catalog/gallery-287890782-8.webp",
+      "/assets/catalog/gallery-287890782-9.webp",
+      "/assets/catalog/gallery-287890782-10.webp",
+      "/assets/catalog/gallery-287890782-11.webp",
+      "/assets/catalog/gallery-287890782-12.webp",
+      "/assets/catalog/gallery-287890782-13.webp",
+      "/assets/catalog/gallery-287890782-14.webp",
+      "/assets/catalog/gallery-287890782-15.webp",
+      "/assets/catalog/gallery-287890782-16.webp",
+      "/assets/catalog/gallery-287890782-17.webp",
+      "/assets/catalog/gallery-287890782-18.webp",
+      "/assets/catalog/gallery-287890782-19.webp",
+      "/assets/catalog/gallery-287890782-20.webp",
+      "/assets/catalog/gallery-287890782-21.webp"
+    ],
     "categories": [
       "hybrid",
       "suv"
@@ -12674,8 +14708,8 @@
     ],
     "post": "https://jo.opensooq.com/en/search/287890782",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
     }
   },
   {
@@ -12683,7 +14717,28 @@
     "brand": "Lynk & Co",
     "name": "08",
     "year": 2027,
-    "image": "/assets/catalog/os-287890622-1.webp",
+    "image": "/assets/catalog/gallery-287890622-1.webp",
+    "gallery": [
+      "/assets/catalog/gallery-287890622-1.webp",
+      "/assets/catalog/gallery-287890622-2.webp",
+      "/assets/catalog/gallery-287890622-3.webp",
+      "/assets/catalog/gallery-287890622-4.webp",
+      "/assets/catalog/gallery-287890622-5.webp",
+      "/assets/catalog/gallery-287890622-6.webp",
+      "/assets/catalog/gallery-287890622-7.webp",
+      "/assets/catalog/gallery-287890622-8.webp",
+      "/assets/catalog/gallery-287890622-9.webp",
+      "/assets/catalog/gallery-287890622-10.webp",
+      "/assets/catalog/gallery-287890622-11.webp",
+      "/assets/catalog/gallery-287890622-12.webp",
+      "/assets/catalog/gallery-287890622-13.webp",
+      "/assets/catalog/gallery-287890622-14.webp",
+      "/assets/catalog/gallery-287890622-15.webp",
+      "/assets/catalog/gallery-287890622-16.webp",
+      "/assets/catalog/gallery-287890622-17.webp",
+      "/assets/catalog/gallery-287890622-18.webp",
+      "/assets/catalog/gallery-287890622-19.webp"
+    ],
     "categories": [
       "hybrid",
       "suv"
@@ -12858,8 +14913,8 @@
     ],
     "post": "https://jo.opensooq.com/en/search/287890622",
     "sourceLabel": {
-      "en": "View dealer listing on OpenSooq",
-      "ar": "عرض إعلان المعرض على السوق المفتوح"
+      "en": "Original dealer listing",
+      "ar": "إعلان المعرض الأصلي"
     }
   }
 ]
