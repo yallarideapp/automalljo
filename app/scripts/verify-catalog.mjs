@@ -66,3 +66,20 @@ for(const vehicle of catalog){
 assert.equal(referencedPhotos.size,photosByPath.size,"Manifest includes photographs absent from the catalogue galleries");
 assert.equal(catalog.find(v=>v.id==="288700698").price,undefined,"A down payment is not the full vehicle price");
 console.log(`Verified ${catalog.length} active dealer listings, source links, specifications and ${referencedPhotos.size} original gallery photos.`);
+const equipment=JSON.parse(await readFile("src/v2-feature-data.json","utf8"));
+assert.deepEqual(new Set(Object.keys(equipment.vehicles)),expected,"V2 equipment must map every captured listing");
+const iconNames=new Set(["range","battery","charge","hybrid","awd","panorama","camera360","heatedSeats","ventilatedSeats","leather","cruise","hud","keyless","powerTailgate","carplay","parkingSensors","safety","seats","gearbox","engine","mileage"]);
+let featureCount=0;
+for(const [id,record] of Object.entries(equipment.vehicles)){
+ const seen=new Set();
+ for(const feature of record.features){
+  assert.ok(iconNames.has(feature.id),`Missing feature icon: ${id}: ${feature.id}`);
+  assert.ok(!seen.has(feature.id),`Duplicate equipment claim: ${id}: ${feature.id}`);seen.add(feature.id);
+  for(const lang of ["en","ar"])assert.ok(feature.label[lang]?.trim(),`Missing equipment translation: ${id}`);
+  if(feature.sourceType==="dealer-listing")assert.equal(feature.sourceURL,`https://jo.opensooq.com/en/search/${id}`,`Equipment came from another listing: ${id}`);
+  else{assert.equal(feature.sourceType,"facebook");assert.ok(equipment.facebookPosts.some(post=>post.url===feature.sourceURL&&post.vehicleIds.includes(id)),`Facebook equipment has no matched post: ${id}`);}
+  featureCount++;
+ }
+}
+for(const post of equipment.facebookPosts){assert.ok(post.url.startsWith("https://www.facebook.com/automall.jo/"));assert.equal(post.captionAccess,"public-full-caption");assert.ok(post.vehicleIds.every(id=>expected.has(id)));}
+console.log(`Verified ${featureCount} V2 equipment claims, matching icon names and ${equipment.facebookPosts.length} public Facebook sources.`);

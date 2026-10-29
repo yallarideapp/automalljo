@@ -5,7 +5,7 @@ import svgr from "vite-plugin-svgr";
 import {defineConfig} from "vite";
 import {fileURLToPath} from "node:url";
 const iconsShim=fileURLToPath(new URL("./src/lib/quanta-icons.ts",import.meta.url));
-const pages=["/","/ar/","/privacy/","/ar/privacy/","/terms/","/ar/terms/"];
+const pages=["/","/ar/","/v2/","/ar/v2/","/privacy/","/ar/privacy/","/terms/","/ar/terms/"];
 export default defineConfig(({command})=>{
  const rawBase=process.env.VITE_BASE_PATH||"/";
  const base="/"+rawBase.replace(/^\/+|\/+$/g,"")+(rawBase.replace(/^\/+|\/+$/g,"")?"/":"");

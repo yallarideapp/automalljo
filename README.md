@@ -14,9 +14,10 @@ The repository includes no customer database, account system, online payment or 
 
 Choose **GitHub Actions** under the repository's **Settings > Pages**. The workflow derives the full public URL and project subpath from `actions/configure-pages`; it does not hardcode an account or repository owner. It uses Bun's frozen lockfile installation, runs type checks, builds and verifies the static output, then uploads only `app/dist/client`.
 
-The deployment creates separate HTML pages for English and Arabic:
+The deployment creates separate HTML pages for English and Arabic, including both design versions:
 
 - `/` and `/ar/`
+- `/v2/` and `/ar/v2/`
 - `/privacy/` and `/ar/privacy/`
 - `/terms/` and `/ar/terms/`
 
@@ -50,10 +51,17 @@ node scripts/verify-pages.mjs
 
 The final static site is in `app/dist/client`. Package manifests and lockfiles are unchanged from the supplied project. Cloudflare-related scaffold modules remain inert source; GitHub Pages does not deploy a Worker, server functions or secrets. The Pages Vite configuration prerenders the active brochure routes under Node and disables the original runtime inspector.
 
-Search indexing remains disabled through `noindex` metadata and `robots.txt` until the owner explicitly launches indexing. The sitemap lists the six real localized routes.
+Search indexing remains disabled through `noindex` metadata and `robots.txt` until the owner explicitly launches indexing. The sitemap lists the eight real localized routes.
 
 ## Review before a commercial launch
 
 Review the displayed phone/address, featured vehicles, privacy policy and commercial terms. Confirm the dealership's legal entity name, message retention, hosting log retention, warranty, returns and delivery terms. No commercial terms have been invented. This is not legal advice; the author is not a lawyer.
 
 The GitHub Actions workflow performs the required type check, production build and static output verification before deploying. Local catalogue and UI checks use the bundled Node runtime.
+
+
+## Version 02
+
+The original site remains at `/` and `/ar/`. The new BBT/Motorflow-inspired design is served separately at `/v2/` and `/ar/v2/`. It combines a graphite editorial hero with a bright vehicle collection, equipment filters, 21 original SVG automotive icons, full galleries and direct WhatsApp enquiries. Eight public AutoMall Facebook posts supply showroom updates; 25 equipment claims are corroborated by those captions and the remaining 474 come from the exact linked dealer listings. All 499 claims map to the 70 captured listing IDs; no equipment is assumed across different trims.
+
+Design observations are in `refs/research/v2-design-reference.md`, and feature provenance is in `refs/research/facebook-feature-audit.json`. Runtime content uses `app/src/v2-feature-data.json`. Prices and technical figures retain the existing catalogue sources where Facebook values are ambiguous. New browsing controls retain their state only in React memory; no customer forms, storage, accounts, checkout or tracking were added. The shared legal pages include Facebook among external services and remain linked from both versions.

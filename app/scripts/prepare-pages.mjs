@@ -4,10 +4,10 @@ if(!source)throw new Error("VITE_SITE_URL is required; use the base_url output f
 const url=new URL(source);
 if(!["http:","https:"].includes(url.protocol)||url.username||url.password||url.search||url.hash)throw new Error("VITE_SITE_URL must be a plain public HTTP(S) site URL.");
 const base=url.href.replace(/\/+$/,"");
-const paths=["/","/ar/","/privacy/","/ar/privacy/","/terms/","/ar/terms/"];
+const paths=["/","/ar/","/v2/","/ar/v2/","/privacy/","/ar/privacy/","/terms/","/ar/terms/"];
 const xml=value=>value.replace(/[<>&"']/g,char=>({"<":"&lt;",">":"&gt;","&":"&amp;",'"':"&quot;","'":"&apos;"})[char]);
 await mkdir("public",{recursive:true});
 await writeFile("public/robots.txt","User-agent: *\nDisallow: /\n\nSitemap: "+base+"/sitemap.xml\n");
 await writeFile("public/sitemap.xml",'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+paths.map(path=>"  <url><loc>"+xml(base+path)+"</loc><lastmod>2026-10-29</lastmod></url>").join("\n")+"\n</urlset>\n");
 await writeFile("public/.nojekyll","");
-console.log("Prepared robots.txt and sitemap.xml for six localized public pages.");
+console.log("Prepared robots.txt and sitemap.xml for eight localized public pages.");
