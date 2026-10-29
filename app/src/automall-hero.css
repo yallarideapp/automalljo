@@ -1,4 +1,4 @@
-.am-photo-story{position:relative;background:var(--am-bg);view-timeline-name:--automall-story;view-timeline-axis:block}
+.am-photo-story{position:relative;background:var(--am-bg);view-timeline-name:--automall-story;view-timeline-axis:block;view-timeline-inset:0}
 .am-photo-story[data-enhanced=true]{height:400svh}
 .am-photo-story__stage{position:relative;height:100svh;min-height:600px;isolation:isolate;overflow:clip;border-bottom:1px solid var(--am-line)}
 .am-photo-story[data-enhanced=true] .am-photo-story__stage{position:sticky;top:0}
