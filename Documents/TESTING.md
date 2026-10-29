@@ -55,3 +55,14 @@ The catalogue remains the public-listing snapshot checked on 29 October 2026. Cu
 - Browser review covered home and catalogue in both languages at 320, 390, 900 and 1280 px: 16 cases, no horizontal overflow. Every homepage had exactly one category group, no body tiles and no repeated hero category tabs.
 - Electric + sedan returned five cars; adding BMW returned two. Clearing the last advanced value kept the panel open. Removing a hidden advanced filter returned focus to its summary. Removing the body filter retained the electric selection (27 cars). Hybrid + pickup correctly remained empty; clear-all restored the catalogue and ascending price placed MG MG5 first.
 - Production smoke checks are performed after the Pages deployment.
+
+## 29 October 2026 — Body icons and vehicle-brand logos
+
+- Added eight original side-profile body icons plus a generic all-types icon to the body-style selector and its selected value/chip.
+- Added genuine, self-hosted logos for all 26 catalogue brands to the brand selector, selected value, filter chip, vehicle cards and detail pages. Preserved source colors with light/dark contrast badges. Sources and file hashes are recorded in `refs/brand-logo-sources.md`. Total optimized logo assets: 295,781 bytes.
+- Used the existing Base UI Select primitives for ARIA listbox/combobox behavior, keyboard arrows/Home/End, text typeahead, Enter, Escape/focus restoration and outside dismissal. No dependencies changed.
+- Typecheck, production build, nine catalogue tests (192 assertions) and static verification of all 156 pages passed.
+- Browser review: home, catalogue and car detail in both languages at 320, 390, 900 and 1280 px (24 layouts), plus both selector popups at each size/language (16 menus). No horizontal overflow, popup outside the viewport, broken logo image or console warning/error was found.
+- Body menu contains nine options with recognizable icons; brand menu contains 27 options with all 26 brand logos. Electric + sedan returned five cars and BMW narrowed to two; selected values showed the sedan icon/BMW logo. End reached refrigerated truck, Escape returned focus to the body trigger, Z typeahead found Zeekr, Enter selected it, and clicking outside dismissed the menu.
+- All logo SVGs parsed successfully and were checked for scripts, event handlers and external references. GitHub blob hashes matched the selected local assets.
+- Production deployment and final smoke checks follow publication.
