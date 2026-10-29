@@ -1,6 +1,6 @@
 # AutoMall Jo
 
-A bilingual car-dealership website with 70 live public dealer listings, original vehicle photos, searchable catalogue, vehicle details, trade-in enquiries, WhatsApp links, showroom directions and an interactive studio hero.
+A bilingual car-dealership website with 70 live public dealer listings, original vehicle photos, searchable catalogue, vehicle details, trade-in enquiries, WhatsApp links, showroom directions and a scroll-controlled photo journey.
 
 ## Project
 
@@ -8,7 +8,7 @@ A bilingual car-dealership website with 70 live public dealer listings, original
 - `refs/`: design reference boards.
 - `.github/workflows/pages.yml`: candidate GitHub Pages workflow.
 
-The repository includes no customer database, account system, online payment or submitted personal-data forms. Prices and availability are confirmed directly with the dealership. Manufacturer names identify featured vehicles. The hero is an illustrative brand visual.
+The repository includes no customer database, account system, online payment or submitted personal-data forms. Prices and availability are confirmed directly with the dealership. Manufacturer names identify featured vehicles. The hero uses real photos from featured dealer listings.
 
 ## GitHub Pages
 
@@ -22,9 +22,9 @@ The deployment creates separate HTML pages for English and Arabic:
 
 These paths are relative to the configured Pages project subpath. Arabic content is prerendered in RTL, so direct visits work without language hydration mismatches. The static 404 recovery page deliberately does not hydrate and remains usable at arbitrary missing URLs.
 
-Generated images, original vehicle photos, fonts and social previews are served from this site. The current hero uses a native-resolution transparent car cutout with CSS lighting, bounded pointer depth and scroll movement. The image stays fully visible on mobile. Reduced-motion visitors receive the same complete composition without movement. The original video engine remains inert source and no hero video is downloaded.
+Generated images, original vehicle photos, fonts and social previews are served from this site. The current hero is a four-chapter scroll journey through actual BMW i5, Jetour G700, BMW cabin and Mercedes G580 photographs. Scrolling drives crossfades, image depth, text movement and a progress line; chapter buttons also jump to each view. Native CSS view timelines animate compositor properties when supported, with a measured requestAnimationFrame fallback. React updates only when the active chapter changes. Mobile uses contained landscape images so the complete car stays visible. Reduced-motion visitors get all four photos and text in normal document flow. Only four hero photos are mounted. The original video engine remains inert source and no hero video is downloaded.
 
-Hero artwork and the built-in generation prompt are documented in `refs/hero-v2-notes.md`.
+Hero photo selection and source listing IDs are documented in `refs/research/scroll-photo-selection.json`; the previous generated artwork remains archived in `refs/hero-v2-notes.md`.
 
 ## Catalogue snapshot
 

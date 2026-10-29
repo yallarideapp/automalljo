@@ -1,118 +1,119 @@
 import {useEffect,useRef,useState,type CSSProperties} from "react";
-import {assetPath} from "@/site-paths";
-import {copy,genericMessage,whatsapp,type Lang} from "@/site-data";
+import {copy,modelMessage,whatsapp,type Lang} from "@/site-data";
+import {scrollPhotoScenes} from "@/scroll-photo-scenes";
 
-const clamp=(value:number,min=-1,max=1)=>Math.min(max,Math.max(min,value));
+const clamp=(value:number)=>Math.max(0,Math.min(1,value));
+const count=scrollPhotoScenes.length;
 
-/** Native-resolution artwork and compositor motion keep the showroom sharp. */
 export function AutoMallHero({lang}:{lang:Lang}){
-  const t=copy[lang];
-  const [night,setNight]=useState(false);
-  const hero=useRef<HTMLElement>(null);
-  const stage=useRef<HTMLDivElement>(null);
-  const car=useRef<HTMLDivElement>(null);
-  const text=useRef<HTMLDivElement>(null);
-  const carSource=assetPath("assets/hero-car-v2.png");
-  const maskStyle:CSSProperties={maskImage:`url("${carSource}")`,WebkitMaskImage:`url("${carSource}")`};
+ const t=copy[lang];
+ const root=useRef<HTMLElement>(null);
+ const stage=useRef<HTMLDivElement>(null);
+ const progress=useRef<HTMLSpanElement>(null);
+ const [active,setActive]=useState(0);
+ const [animated,setAnimated]=useState(false);
 
-  useEffect(()=>{
-    const root=hero.current,scene=stage.current,vehicle=car.current,copyLayer=text.current;
-    if(!root||!scene||!vehicle||!copyLayer)return;
-    const reduced=window.matchMedia("(prefers-reduced-motion: reduce)");
-    const fine=window.matchMedia("(hover: hover) and (pointer: fine)");
-    let frame=0,visible=true,pointerX=0,pointerY=0;
-    let metrics={left:0,top:0,width:1,height:1,heroTop:0,heroHeight:1};
-    const measure=()=>{
-      const sceneRect=scene.getBoundingClientRect(),rootRect=root.getBoundingClientRect();
-      metrics={left:sceneRect.left,top:sceneRect.top+window.scrollY,width:Math.max(sceneRect.width,1),height:Math.max(sceneRect.height,1),heroTop:rootRect.top+window.scrollY,heroHeight:Math.max(rootRect.height,1)};
-    };
-    const clear=()=>{
-      vehicle.style.removeProperty("transform");
-      copyLayer.style.removeProperty("transform");
-    };
-    const paint=()=>{
-      frame=0;
-      if(reduced.matches||!fine.matches){clear();return;}
-      if(!visible)return;
-      const progress=clamp((window.scrollY-metrics.heroTop)/metrics.heroHeight,0,1);
-      vehicle.style.transform=`translate3d(${(pointerX*10).toFixed(2)}px,${(pointerY*6-progress*22).toFixed(2)}px,0)`;
-      copyLayer.style.transform=`translate3d(0,${(-progress*8).toFixed(2)}px,0)`;
-    };
-    const requestPaint=()=>{
-      if(!frame&&visible)frame=window.requestAnimationFrame(paint);
-    };
-    const onPointer=(event:PointerEvent)=>{
-      if(reduced.matches||!fine.matches||event.pointerType!=="mouse")return;
-      pointerX=clamp((event.clientX-metrics.left)/metrics.width*2-1);
-      pointerY=clamp((event.clientY+window.scrollY-metrics.top)/metrics.height*2-1);
-      requestPaint();
-    };
-    const onLeave=()=>{pointerX=0;pointerY=0;requestPaint();};
-    const onResize=()=>{measure();requestPaint();};
-    const onPreference=()=>{pointerX=0;pointerY=0;clear();requestPaint();};
-    measure();
-    const observer=typeof IntersectionObserver!=="undefined"?new IntersectionObserver(entries=>{
-      visible=entries[0]?.isIntersecting??true;
-      if(visible){measure();requestPaint();}
-      else if(frame){window.cancelAnimationFrame(frame);frame=0;}
-    },{rootMargin:"80px"}):null;
-    observer?.observe(root);
-    const resize=typeof ResizeObserver!=="undefined"?new ResizeObserver(onResize):null;
-    resize?.observe(root);
-    scene.addEventListener("pointerenter",onResize);
-    scene.addEventListener("pointermove",onPointer,{passive:true});
-    scene.addEventListener("pointerleave",onLeave);
-    window.addEventListener("scroll",requestPaint,{passive:true});
-    window.addEventListener("resize",onResize,{passive:true});
-    reduced.addEventListener("change",onPreference);
-    fine.addEventListener("change",onPreference);
-    return()=>{
-      window.cancelAnimationFrame(frame);
-      observer?.disconnect();resize?.disconnect();
-      scene.removeEventListener("pointerenter",onResize);
-      scene.removeEventListener("pointermove",onPointer);
-      scene.removeEventListener("pointerleave",onLeave);
-      window.removeEventListener("scroll",requestPaint);
-      window.removeEventListener("resize",onResize);
-      reduced.removeEventListener("change",onPreference);
-      fine.removeEventListener("change",onPreference);
-      clear();
-    };
-  },[]);
+ useEffect(()=>{
+  const section=root.current,pin=stage.current,bar=progress.current;
+  if(!section||!pin||!bar)return;
+  const panels=Array.from(section.querySelectorAll<HTMLElement>(".am-photo-story__scene"));
+  const pictures=Array.from(section.querySelectorAll<HTMLImageElement>(".am-photo-story__image"));
+  const copies=Array.from(section.querySelectorAll<HTMLElement>(".am-photo-story__copy"));
+  const reduced=window.matchMedia("(prefers-reduced-motion: reduce)");
+  const native=CSS.supports("animation-timeline: view()")&&CSS.supports("animation-range: contain 0% contain 100%");
+  let frame=0,visible=true,start=0,distance=1,current=0;
+  const measure=()=>{
+   start=section.getBoundingClientRect().top+window.scrollY;
+   distance=Math.max(1,section.offsetHeight-pin.offsetHeight);
+  };
+  const clear=()=>{
+   for(let i=0;i<count;i++){
+    panels[i].style.removeProperty("opacity");
+    pictures[i].style.removeProperty("transform");
+    copies[i].style.removeProperty("transform");
+   }
+   bar.style.removeProperty("transform");
+  };
+  const paint=()=>{
+   frame=0;
+   if(reduced.matches||!visible)return;
+   const value=clamp((window.scrollY-start)/distance),phase=value*count;
+   const next=Math.min(count-1,Math.max(0,Math.floor(phase+.1)));
+   if(next!==current){current=next;setActive(next);}
+   if(native)return;
+   for(let i=0;i<count;i++){
+    const enter=i===0?1:clamp((phase-(i-.2))/.2);
+    const exit=i===count-1?0:clamp((phase-(i+.8))/.2);
+    panels[i].style.opacity=String(enter*(1-exit));
+    pictures[i].style.transform=`translate3d(0,${(-value*24).toFixed(2)}px,0) scale(${(1.04+value*.08).toFixed(4)})`;
+    copies[i].style.transform=`translate3d(0,${((1-enter)*24-exit*20).toFixed(2)}px,0)`;
+   }
+   bar.style.transform=`scaleX(${value.toFixed(4)})`;
+  };
+  const request=()=>{if(!frame&&visible&&!reduced.matches)frame=window.requestAnimationFrame(paint);};
+  const resize=()=>{measure();request();};
+  const preference=()=>{
+   clear();
+   section.dataset.enhanced=String(!reduced.matches);
+   section.dataset.timeline=native?"native":"js";
+   setAnimated(!reduced.matches);
+   if(reduced.matches){current=0;setActive(0);}
+   measure();request();
+  };
+  preference();
+  const intersection=new IntersectionObserver(entries=>{
+   visible=entries[0]?.isIntersecting??true;
+   if(visible){measure();request();}
+   else if(frame){window.cancelAnimationFrame(frame);frame=0;}
+  },{rootMargin:"100px"});
+  intersection.observe(section);
+  const observer=new ResizeObserver(resize);
+  observer.observe(section);observer.observe(pin);
+  window.addEventListener("scroll",request,{passive:true});
+  window.addEventListener("resize",resize,{passive:true});
+  reduced.addEventListener("change",preference);
+  return()=>{
+   window.cancelAnimationFrame(frame);intersection.disconnect();observer.disconnect();
+   window.removeEventListener("scroll",request);window.removeEventListener("resize",resize);
+   reduced.removeEventListener("change",preference);clear();
+   delete section.dataset.enhanced;delete section.dataset.timeline;
+  };
+ },[]);
 
-  return <section ref={hero} className="am-hero" data-lighting={night?"night":"studio"} dir={lang==="ar"?"rtl":"ltr"} aria-labelledby="automall-hero-title">
-    <div className="am-hero__ambient am-hero__ambient--studio" aria-hidden="true"/>
-    <div className="am-hero__ambient am-hero__ambient--night" aria-hidden="true"/>
-    <div className="am-hero__layout">
-      <div ref={text} className="am-hero__copy">
-        <h1 className="am-hero__title" id="automall-hero-title">{t.heroTitle}</h1>
-        <p className="am-hero__description">{t.heroBody}</p>
-        <div className="hero-action-row am-hero__actions">
-          <a href="#collection" className="hero-browse">{t.browse}<span aria-hidden="true">↗</span></a>
-          <a href={whatsapp(genericMessage(lang))} className="hero-enquire" target="_blank" rel="noopener noreferrer">{t.chat}<span aria-hidden="true">↗</span></a>
-        </div>
+ const goTo=(index:number)=>{
+  const section=root.current,pin=stage.current;
+  if(!section||!pin)return;
+  if(!animated){section.querySelectorAll<HTMLElement>(".am-photo-story__scene")[index]?.scrollIntoView({block:"start"});return;}
+  const top=section.getBoundingClientRect().top+window.scrollY;
+  const travel=Math.max(1,section.offsetHeight-pin.offsetHeight);
+  window.scrollTo({top:top+travel*((index+.35)/count),behavior:"smooth"});
+ };
+
+ return <section ref={root} id="drive-story" className="am-photo-story" data-active={active} dir={lang==="ar"?"rtl":"ltr"} aria-label={lang==="ar"?"رحلة أوتومول بالصور":"AutoMall photo journey"}>
+  <div ref={stage} className="am-photo-story__stage">
+   <div className="am-photo-story__scenes">
+    {scrollPhotoScenes.map((scene,index)=>{
+     const hidden=animated&&active!==index;
+     const Heading=index===0?"h1":"h2";
+     const headingId=index===0?"automall-hero-title":"drive-title-"+scene.id;
+     return <article className="am-photo-story__scene" id={"drive-"+scene.id} key={scene.id} aria-labelledby={headingId} aria-hidden={hidden||undefined} inert={hidden} style={{"--story-position":scene.position} as CSSProperties}>
+      <img className="am-photo-story__image" src={scene.photo} width="1600" height="1068" alt={lang==="ar"?"صورة أصلية من أوتومول: "+scene.vehicle.brand+" "+scene.vehicle.name:"Original AutoMall photograph: "+scene.vehicle.brand+" "+scene.vehicle.name} loading={index===0?"eager":"lazy"} fetchPriority={index===0?"high":"low"} decoding="async"/>
+      <div className="am-photo-story__shade" aria-hidden="true"/>
+      <div className="am-photo-story__copy">
+       <p className="am-photo-story__eyebrow"><span dir="ltr">0{index+1} / AUTOMALL</span><span>{scene.label[lang]}</span></p>
+       <Heading id={headingId} className="am-photo-story__title">{scene.title[lang]}</Heading>
+       <p className="am-photo-story__description">{scene.body[lang]}</p>
+       <div className="am-photo-story__featured"><span>{scene.vehicle.brand} {scene.vehicle.name} <small>{scene.vehicle.year}</small></span>{scene.vehicle.range&&<p><strong>{scene.vehicle.range[lang]}</strong><small>{lang==="ar"?"مدى كهربائي معلن":"Advertised electric range"}</small></p>}</div>
+       <div className="am-photo-story__actions"><a className="hero-browse" href="#collection">{t.browse}<span aria-hidden="true">↗</span></a><a className="hero-enquire" href={whatsapp(modelMessage(scene.vehicle,lang))} target="_blank" rel="noopener noreferrer">{t.chat}<span aria-hidden="true">↗</span></a></div>
       </div>
-      <div className="am-hero__visual">
-        <div ref={stage} className="am-hero__stage">
-          <div className="am-hero__architecture" aria-hidden="true"><span/><span/><span/></div>
-          <div className="am-hero__floor" aria-hidden="true"><span/><span/></div>
-          <div ref={car} className="am-hero__motion">
-            <div className="am-hero__car-entry">
-              <img className="am-hero__car-image" src={carSource} width="1672" height="940" fetchPriority="high" decoding="async" alt={lang==="ar"?"سيارة سيدان فضية في مشهد تعريفي لأوتومول":"Silver performance sedan, an illustrative AutoMall brand visual"}/>
-              <div className="am-hero__paint-sweep" style={maskStyle} aria-hidden="true"><span/></div>
-            </div>
-          </div>
-          <span className="am-hero__floor-edge" aria-hidden="true"/>
-        </div>
-      </div>
-    </div>
-    <div className="am-hero__footer">
-      <div className="am-hero__signature"><span>{t.tagline}</span><small>{t.heroCaption}</small></div>
-      <div className="am-hero__lighting" role="group" aria-label={lang==="ar"?"إضاءة المشهد":"Showroom lighting"}>
-        <span className="am-hero__lighting-label">{lang==="ar"?"الإضاءة":"Lighting"}</span>
-        <button type="button" aria-pressed={!night} onClick={()=>setNight(false)}>{lang==="ar"?"استوديو":"Studio"}</button>
-        <button type="button" aria-pressed={night} onClick={()=>setNight(true)}>{lang==="ar"?"ليلية":"Night"}</button>
-      </div>
-    </div>
-  </section>;
+     </article>;
+    })}
+   </div>
+   <div className="am-photo-story__footer">
+    <div className="am-photo-story__signature"><span>{lang==="ar"?"صور أصلية. سيارات حقيقية.":"Original photos. Real cars."}</span><span className="am-photo-story__scroll">{lang==="ar"?"مرر لاستكشاف السيارات":"Scroll to explore"}<span aria-hidden="true">↓</span></span></div>
+    <nav className="am-photo-story__chapters" aria-label={lang==="ar"?"مشاهد الرحلة":"Photo journey chapters"}>{scrollPhotoScenes.map((scene,index)=><button key={scene.id} type="button" onClick={()=>goTo(index)} aria-current={active===index?"step":undefined} aria-controls={"drive-"+scene.id}><span dir="ltr">0{index+1}</span><span>{scene.label[lang]}</span></button>)}</nav>
+   </div>
+   <div className="am-photo-story__progress" aria-hidden="true"><span ref={progress}/></div>
+  </div>
+ </section>;
 }

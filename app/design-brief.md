@@ -48,3 +48,8 @@ Prior build: no previous website in this chat; identity-axis repetition does not
 
 ## Hero revision, 2026-10-29
 The user explicitly asked to replace the blurry animation with something better. Replace the active video journey with an interactive studio hero: native 1672×940 alpha PNG, bounded image sizing, vector-sharp CSS lighting rails, finite light reveal and gentle input-responsive depth. Keep the legacy controller untouched and unused. Mobile shows the complete car in its own stage above the text. No cover cropping, upscaled MP4 or runtime video fetch. Both language routes share the same component. Reduced motion freezes all decorative movement while preserving content and controls. The image is illustrative brand artwork, separate from real source-backed vehicle listings.
+
+
+## Active hero: dealer photo journey (29 October 2026)
+
+The user requested a scrollable animation using photos from the dealer page and invoked the Motion skill. The active hero now uses four real, existing dealer-gallery photographs: BMW i5 eDrive35L exterior, Jetour G700 exterior, BMW i5 M60 cabin and Mercedes G580 exterior. Vertical scrolling advances a sticky four-chapter visual story, with reversible crossfades, subtle image depth and chapter navigation. The first BMW photo is visible during SSR. Native CSS view timelines animate opacity and transforms; the fallback caches measurements and writes compositor properties in one scheduled frame. No per-frame React state and no animation dependency changes. Mobile contains the entire wide image above the text. Reduced motion shows the four scenes as a static sequence. All 70 catalogue listings, 1,537 galleries and advertised EV ranges remain available below.
