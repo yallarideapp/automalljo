@@ -67,3 +67,13 @@ The catalogue remains the public-listing snapshot checked on 29 October 2026. Cu
 - All logo SVGs parsed successfully and were checked for scripts, event handlers and external references. GitHub blob hashes matched the selected local assets.
 - Production verified on 30 October 2026. GitHub Actions run `40947203857` passed all checks and deployed website commit `874508179f75d642ad47c7d3a5521038b7af05b9`.
 - Live body menu showed nine illustrated options; live brand menu showed all 26 logos plus the all-brands option, with no broken images. Electric + sedan + BMW returned two cars; the sedan icon and BMW badge remained after refresh and switching to English. BMW M60 detail showed its brand logo and retained its advertised 516 km WLTP range. No console errors or warnings occurred.
+
+## 30 October 2026 — Conventional dealership homepage and direct filters
+
+- Replaced the oversized editorial homepage with a contained real-photo hero, one car finder, six selected vehicle cards, concise information blocks and showroom/contact details. No repeated category galleries or featured-car carousel remain on the homepage.
+- Removed the More filters accordion and equipment selector. Brand and body selectors remain directly visible, with their genuine logos and body icons. Fuel uses compact tabs; search, sort, per-filter chips and reset remain available.
+- Simplified shared header navigation, typography, card facts and footer; aligned sections to 1200 px. News cards now show the matching dealer vehicle photograph, model/year heading and existing Facebook summary/link. All 70 listings, 1,537 gallery photographs and 27 advertised EV ranges remain in the catalogue.
+- Home finder uses ordinary GET navigation. Electric + BMW + sedan produced two results. Hybrid + Toyota + sedan survived an English-to-Arabic switch and produced the single Toyota Camry listing.
+- Existing nine catalogue tests (192 assertions), full typecheck, production build and static verification of all 156 localized pages passed.
+- Browser review covered all six page types in both languages at 320, 390, 900 and 1280 px: 48 cases, no horizontal overflow, missing heading, additional-filter control or console warning/error. Each homepage had exactly one finder and six selected vehicles. A 1440 px desktop check confirmed shared 1200 px alignment.
+- Reviewed actual screenshots of Arabic/English home, catalogue, news and contact layouts, including mobile. Home brand popup remained inside the phone viewport. Publication and live checks follow the local checks.
