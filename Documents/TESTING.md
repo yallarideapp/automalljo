@@ -45,3 +45,13 @@ The production output verifier now checks all 156 localized HTML documents, cano
 
 The catalogue remains the public-listing snapshot checked on 29 October 2026. Current availability, unadvertised prices, exact trim details, warranty terms and opening hours require showroom confirmation. Category artwork is illustrative; individual listing galleries use the original dealer photographs.
 
+
+## 29 October 2026 — Simpler homepage and catalogue filters
+
+- Homepage now has one three-card powertrain section. The second body-style section and repeated hero category buttons were removed; neutral previous/next arrows remain for the featured cars.
+- Body style is a labelled catalogue dropdown. Search and sort stay visible, with brand and equipment under an expandable More filters panel. Active filters can be removed individually or cleared together.
+- Advanced filters restored from a URL open their panel; clearing them does not collapse the focused control. Existing independent combinations, URL serialization and catalogue data remain unchanged.
+- Local typecheck, production build, nine existing catalogue tests (192 assertions) and static verification of all 156 pages passed.
+- Browser review covered home and catalogue in both languages at 320, 390, 900 and 1280 px: 16 cases, no horizontal overflow. Every homepage had exactly one category group, no body tiles and no repeated hero category tabs.
+- Electric + sedan returned five cars; adding BMW returned two. Clearing the last advanced value kept the panel open. Removing a hidden advanced filter returned focus to its summary. Removing the body filter retained the electric selection (27 cars). Hybrid + pickup correctly remained empty; clear-all restored the catalogue and ascending price placed MG MG5 first.
+- Production smoke checks are performed after the Pages deployment.
