@@ -1,0 +1,1166 @@
+{
+  "288717622": {
+    "id": "288717622",
+    "brand": "EXEED",
+    "model": "RX",
+    "trim": "C-DM · Nardo Grey",
+    "cleanEnglishName": "EXEED RX C-DM · Nardo Grey",
+    "year": 2026,
+    "fuelDisplay": "Plug-in hybrid",
+    "bodyType": "SUV",
+    "omitUnverifiedFields": [
+      "horsepower",
+      "acceleration",
+      "chargingSpeed",
+      "fuelConsumption",
+      "range"
+    ],
+    "notes": "Caption gives19.27kWh but160–200km electric range and56.8km/L; omit range/consumption pending exact trim confirmation.",
+    "sourceURL": "https://jo.opensooq.com/en/search/288717622",
+    "evidence": "Audited against full seller caption and structured visible listing fields in refs/research/details-31-70/288717622.json. Numeric extra specs remain seller declared, not independently verified OEM specifications.",
+    "seats": 5,
+    "transmission": "DHT automatic",
+    "exteriorColor": "Nardo Grey",
+    "interiorColor": "Red",
+    "specificationOverrides": {
+      "engine": "1.5L turbo plug-in hybrid",
+      "drive": "FWD",
+      "battery": "19.27 kWh",
+      "transmission": "DHT automatic"
+    },
+    "currentStructuredPriceJOD": null,
+    "priceEvidence": "Current headline is AskForPrice and Vehicle.offers.price is0; unknown full price, not free."
+  },
+  "288717604": {
+    "id": "288717604",
+    "brand": "ARCFOX",
+    "model": "T1",
+    "trim": null,
+    "cleanEnglishName": "ARCFOX T1",
+    "year": 2026,
+    "fuelDisplay": "Electric",
+    "bodyType": "SUV",
+    "omitUnverifiedFields": [
+      "horsepower",
+      "acceleration",
+      "chargingSpeed",
+      "fuelConsumption"
+    ],
+    "notes": "",
+    "sourceURL": "https://jo.opensooq.com/en/search/288717604",
+    "evidence": "Audited against full seller caption and structured visible listing fields in refs/research/details-31-70/288717604.json. Numeric extra specs remain seller declared, not independently verified OEM specifications.",
+    "seats": 5,
+    "transmission": "Automatic",
+    "exteriorColor": "Baby Blue",
+    "interiorColor": "Brown",
+    "specificationOverrides": {
+      "drive": "FWD",
+      "battery": "42.4 kWh"
+    },
+    "currentStructuredPriceJOD": null,
+    "priceEvidence": "Current headline is AskForPrice and Vehicle.offers.price is0; unknown full price, not free."
+  },
+  "288714972": {
+    "id": "288714972",
+    "brand": "BAW",
+    "model": "212 T01",
+    "trim": "High Class Edition",
+    "cleanEnglishName": "BAW 212 T01 High Class Edition",
+    "year": 2026,
+    "fuelDisplay": "Petrol",
+    "bodyType": "SUV",
+    "omitUnverifiedFields": [
+      "horsepower",
+      "acceleration",
+      "chargingSpeed",
+      "fuelConsumption"
+    ],
+    "notes": "",
+    "sourceURL": "https://jo.opensooq.com/en/search/288714972",
+    "evidence": "Audited against full seller caption and structured visible listing fields in refs/research/details-31-70/288714972.json. Numeric extra specs remain seller declared, not independently verified OEM specifications.",
+    "seats": 5,
+    "transmission": "Automatic",
+    "exteriorColor": "Green",
+    "interiorColor": "Black",
+    "specificationOverrides": {
+      "engine": "2.0L turbo petrol"
+    },
+    "currentStructuredPriceJOD": null,
+    "priceEvidence": "Current headline is AskForPrice and Vehicle.offers.price is0; unknown full price, not free."
+  },
+  "288714918": {
+    "id": "288714918",
+    "brand": "Riddara",
+    "model": "RD6",
+    "trim": "4x4 · Grey",
+    "cleanEnglishName": "Riddara RD6 4x4 · Grey",
+    "year": 2025,
+    "fuelDisplay": "Electric",
+    "bodyType": "Pickup",
+    "omitUnverifiedFields": [
+      "horsepower",
+      "acceleration",
+      "chargingSpeed",
+      "fuelConsumption"
+    ],
+    "notes": "",
+    "sourceURL": "https://jo.opensooq.com/en/search/288714918",
+    "evidence": "Audited against full seller caption and structured visible listing fields in refs/research/details-31-70/288714918.json. Numeric extra specs remain seller declared, not independently verified OEM specifications.",
+    "seats": 5,
+    "transmission": "Automatic",
+    "exteriorColor": "Grey",
+    "interiorColor": "Brown",
+    "specificationOverrides": {
+      "drive": "4WD / AWD",
+      "battery": "85 kWh"
+    },
+    "currentStructuredPriceJOD": 27900,
+    "priceEvidence": "Positive price matches card, current detail headline and Vehicle.offers.price."
+  },
+  "288714784": {
+    "id": "288714784",
+    "brand": "EXEED",
+    "model": "Exlantix ET",
+    "trim": "1.5L Turbo REEV AWD · Nardo Grey",
+    "cleanEnglishName": "EXEED Exlantix ET 1.5L Turbo REEV AWD · Nardo Grey",
+    "year": 2026,
+    "fuelDisplay": "Hybrid (range extender / REEV)",
+    "bodyType": "SUV",
+    "omitUnverifiedFields": [
+      "horsepower",
+      "acceleration",
+      "chargingSpeed",
+      "fuelConsumption"
+    ],
+    "notes": "Critical: card brand BYD is incorrect. Full seller title and caption identify EXEED Exlantix ET1.5L REEVAWD.",
+    "sourceURL": "https://jo.opensooq.com/en/search/288714784",
+    "evidence": "Audited against full seller caption and structured visible listing fields in refs/research/details-31-70/288714784.json. Numeric extra specs remain seller declared, not independently verified OEM specifications.",
+    "seats": 5,
+    "transmission": "Automatic",
+    "exteriorColor": "Nardo Grey",
+    "interiorColor": "Beige",
+    "specificationOverrides": {
+      "engine": "1.5L turbo petrol range extender",
+      "drive": "AWD",
+      "battery": "40 kWh"
+    },
+    "currentStructuredPriceJOD": null,
+    "priceEvidence": "Current headline is AskForPrice and Vehicle.offers.price is0; unknown full price, not free."
+  },
+  "288700874": {
+    "id": "288700874",
+    "brand": "Hongqi",
+    "model": "H9",
+    "trim": "Luxury 45TD",
+    "cleanEnglishName": "Hongqi H9 Luxury 45TD",
+    "year": 2023,
+    "fuelDisplay": "Mild hybrid",
+    "bodyType": "Sedan",
+    "omitUnverifiedFields": [
+      "horsepower",
+      "acceleration",
+      "chargingSpeed",
+      "fuelConsumption"
+    ],
+    "notes": "",
+    "sourceURL": "https://jo.opensooq.com/en/search/288700874",
+    "evidence": "Audited against full seller caption and structured visible listing fields in refs/research/details-31-70/288700874.json. Numeric extra specs remain seller declared, not independently verified OEM specifications.",
+    "seats": 5,
+    "transmission": "Automatic",
+    "exteriorColor": "Black",
+    "interiorColor": "Beige",
+    "specificationOverrides": {
+      "engine": "2.0L turbo four-cylinder mild hybrid"
+    },
+    "currentStructuredPriceJOD": null,
+    "priceEvidence": "Current headline is AskForPrice and Vehicle.offers.price is0; unknown full price, not free."
+  },
+  "288700838": {
+    "id": "288700838",
+    "brand": "Riddara",
+    "model": "RD6",
+    "trim": "4x4 · Olive Green",
+    "cleanEnglishName": "Riddara RD6 4x4 · Olive Green",
+    "year": 2025,
+    "fuelDisplay": "Electric",
+    "bodyType": "Pickup",
+    "omitUnverifiedFields": [
+      "horsepower",
+      "acceleration",
+      "chargingSpeed",
+      "fuelConsumption"
+    ],
+    "notes": "",
+    "sourceURL": "https://jo.opensooq.com/en/search/288700838",
+    "evidence": "Audited against full seller caption and structured visible listing fields in refs/research/details-31-70/288700838.json. Numeric extra specs remain seller declared, not independently verified OEM specifications.",
+    "seats": 5,
+    "transmission": "Automatic",
+    "exteriorColor": "Green",
+    "interiorColor": "Grey",
+    "specificationOverrides": {
+      "drive": "4WD / AWD",
+      "battery": "85 kWh"
+    },
+    "currentStructuredPriceJOD": 27900,
+    "priceEvidence": "Positive price matches card, current detail headline and Vehicle.offers.price."
+  },
+  "288700734": {
+    "id": "288700734",
+    "brand": "Geely Farizon",
+    "model": "SV",
+    "trim": "Super Van",
+    "cleanEnglishName": "Geely Farizon SV Super Van",
+    "year": 2025,
+    "fuelDisplay": "Electric",
+    "bodyType": "Van",
+    "omitUnverifiedFields": [
+      "horsepower",
+      "acceleration",
+      "chargingSpeed",
+      "fuelConsumption"
+    ],
+    "notes": "",
+    "sourceURL": "https://jo.opensooq.com/en/search/288700734",
+    "evidence": "Audited against full seller caption and structured visible listing fields in refs/research/details-31-70/288700734.json. Numeric extra specs remain seller declared, not independently verified OEM specifications.",
+    "seats": 2,
+    "transmission": "Automatic",
+    "exteriorColor": "White",
+    "interiorColor": "Grey",
+    "specificationOverrides": {},
+    "currentStructuredPriceJOD": null,
+    "priceEvidence": "Current headline is AskForPrice and Vehicle.offers.price is0; unknown full price, not free."
+  },
+  "288700698": {
+    "id": "288700698",
+    "brand": "BYD Yangwang",
+    "model": "U8",
+    "trim": "Premium Edition",
+    "cleanEnglishName": "BYD Yangwang U8 Premium Edition",
+    "year": 2026,
+    "fuelDisplay": "Hybrid (range extender / REEV)",
+    "bodyType": "SUV",
+    "omitUnverifiedFields": [
+      "horsepower",
+      "acceleration",
+      "chargingSpeed",
+      "fuelConsumption"
+    ],
+    "notes": "40,000JOD in title is explicitly a down payment, not full vehicle price. Keep full price unknown unless separately advertised. Seller explicitly describes2.0L petrol range extender. Caption additionally quotes10,000JOD monthly instalments; neither40,000JOD down payment nor10,000monthly is full vehicleprice.",
+    "sourceURL": "https://jo.opensooq.com/en/search/288700698",
+    "evidence": "Audited against full seller caption and structured visible listing fields in refs/research/details-31-70/288700698.json. Numeric extra specs remain seller declared, not independently verified OEM specifications.",
+    "seats": 5,
+    "transmission": "Automatic",
+    "exteriorColor": "Black",
+    "interiorColor": "Beige",
+    "specificationOverrides": {
+      "engine": "2.0L turbo petrol range extender",
+      "drive": "Four independent electric motors"
+    },
+    "currentStructuredPriceJOD": null,
+    "priceEvidence": "Current headline is AskForPrice and Vehicle.offers.price is0; unknown full price, not free."
+  },
+  "288700670": {
+    "id": "288700670",
+    "brand": "Zeekr",
+    "model": "001",
+    "trim": "Premium AWD",
+    "cleanEnglishName": "Zeekr 001 Premium AWD",
+    "year": 2026,
+    "fuelDisplay": "Electric",
+    "bodyType": "Shooting brake",
+    "omitUnverifiedFields": [
+      "horsepower",
+      "acceleration",
+      "chargingSpeed",
+      "fuelConsumption",
+      "range"
+    ],
+    "notes": "Caption says100kWh; core bucket90–99kWh differs. Use caption amount as dealer supplied. Body categorizedSUV by source, exact body classification not independently verified. ManufacturerGeely explicitly identifies001 as a shooting brake; corrected sourceSUV classification.",
+    "sourceURL": "https://jo.opensooq.com/en/search/288700670",
+    "evidence": "Audited against full seller caption and structured visible listing fields in refs/research/details-31-70/288700670.json. Numeric extra specs remain seller declared, not independently verified OEM specifications.",
+    "seats": 5,
+    "transmission": "Automatic",
+    "exteriorColor": "Grey",
+    "interiorColor": "Black",
+    "specificationOverrides": {
+      "drive": "AWD dual motor",
+      "battery": "100 kWh"
+    },
+    "currentStructuredPriceJOD": null,
+    "priceEvidence": "Current headline is AskForPrice and Vehicle.offers.price is0; unknown full price, not free.",
+    "independentReference": "https://zgh.com/media-center/news/2021-04-15/?lang=en"
+  },
+  "288700570": {
+    "id": "288700570",
+    "brand": "Porsche",
+    "model": "911",
+    "trim": "Targa 4S",
+    "cleanEnglishName": "Porsche 911 Targa 4S",
+    "year": 2008,
+    "fuelDisplay": "Petrol",
+    "bodyType": "Targa",
+    "omitUnverifiedFields": [
+      "horsepower",
+      "acceleration",
+      "chargingSpeed",
+      "fuelConsumption",
+      "seats"
+    ],
+    "notes": "Core source listsSedan and5seats; these conflict with named911Targa model. Use Targa body; omit seat count until confirmed.",
+    "sourceURL": "https://jo.opensooq.com/en/search/288700570",
+    "evidence": "Audited against full seller caption and structured visible listing fields in refs/research/details-31-70/288700570.json. Numeric extra specs remain seller declared, not independently verified OEM specifications.",
+    "seats": null,
+    "transmission": "Automatic",
+    "exteriorColor": "Silver",
+    "interiorColor": "Brown",
+    "specificationOverrides": {
+      "engine": "3.8L petrol"
+    },
+    "currentStructuredPriceJOD": null,
+    "priceEvidence": "Current headline is AskForPrice and Vehicle.offers.price is0; unknown full price, not free."
+  },
+  "288630286": {
+    "id": "288630286",
+    "brand": "BMW",
+    "model": "i5",
+    "trim": "M60 xDrive · Grey",
+    "cleanEnglishName": "BMW i5 M60 xDrive · Grey",
+    "year": 2024,
+    "fuelDisplay": "Electric",
+    "bodyType": "Sedan",
+    "omitUnverifiedFields": [
+      "horsepower",
+      "acceleration",
+      "chargingSpeed",
+      "fuelConsumption"
+    ],
+    "notes": "Critical: core cardyear2023 conflicts with full title and repeated caption2024. Use advertised2024 and flag model-year confirmation to dealer. Caption has63,000JOD but current headline remains AskForPrice and offer0. Keep current price unknown under headline/offer policy; do not silently promote caption price.",
+    "sourceURL": "https://jo.opensooq.com/en/search/288630286",
+    "evidence": "Audited against full seller caption and structured visible listing fields in refs/research/details-31-70/288630286.json. Numeric extra specs remain seller declared, not independently verified OEM specifications.",
+    "seats": 5,
+    "transmission": "Automatic",
+    "exteriorColor": "Grey",
+    "interiorColor": "Burgundy",
+    "specificationOverrides": {
+      "drive": "xDrive AWD",
+      "battery": "81.2 kWh"
+    },
+    "currentStructuredPriceJOD": null,
+    "priceEvidence": "Current headline is AskForPrice and Vehicle.offers.price is0; unknown full price, not free."
+  },
+  "288440874": {
+    "id": "288440874",
+    "brand": "Land Rover",
+    "model": "Range Rover",
+    "trim": "Vogue HSE",
+    "cleanEnglishName": "Land Rover Range Rover Vogue HSE",
+    "year": 2019,
+    "fuelDisplay": "Petrol",
+    "bodyType": "SUV",
+    "omitUnverifiedFields": [
+      "horsepower",
+      "acceleration",
+      "chargingSpeed",
+      "fuelConsumption"
+    ],
+    "notes": " Advertised49,500JOD price explicitly excludes the licenseplate number.",
+    "sourceURL": "https://jo.opensooq.com/en/search/288440874",
+    "evidence": "Audited against full seller caption and structured visible listing fields in refs/research/details-31-70/288440874.json. Numeric extra specs remain seller declared, not independently verified OEM specifications.",
+    "seats": 5,
+    "transmission": "Automatic",
+    "exteriorColor": "Navy Blue",
+    "interiorColor": "Beige",
+    "specificationOverrides": {
+      "engine": "3.0L petrol"
+    },
+    "currentStructuredPriceJOD": 49500,
+    "priceEvidence": "Positive price matches card, current detail headline and Vehicle.offers.price."
+  },
+  "288440948": {
+    "id": "288440948",
+    "brand": "Jetour",
+    "model": "G700",
+    "trim": "Flagship PHEV VIP",
+    "cleanEnglishName": "Jetour G700 Flagship PHEV VIP",
+    "year": 2026,
+    "fuelDisplay": "Plug-in hybrid",
+    "bodyType": "SUV",
+    "omitUnverifiedFields": [
+      "horsepower",
+      "acceleration",
+      "chargingSpeed",
+      "fuelConsumption"
+    ],
+    "notes": "Critical: card fuelGasoline is incorrect. Full seller title and caption explicitly identifyPHEV,2.0LTurboAWD.6seats per structured listing.",
+    "sourceURL": "https://jo.opensooq.com/en/search/288440948",
+    "evidence": "Audited against full seller caption and structured visible listing fields in refs/research/details-31-70/288440948.json. Numeric extra specs remain seller declared, not independently verified OEM specifications.",
+    "seats": 6,
+    "transmission": "Automatic",
+    "exteriorColor": "Black",
+    "interiorColor": "Beige",
+    "specificationOverrides": {
+      "engine": "2.0L turbo plug-in hybrid",
+      "drive": "AWD",
+      "battery": "34.1 kWh"
+    },
+    "currentStructuredPriceJOD": null,
+    "priceEvidence": "Current headline is AskForPrice and Vehicle.offers.price is0; unknown full price, not free."
+  },
+  "288438518": {
+    "id": "288438518",
+    "brand": "ARCFOX",
+    "model": "T1",
+    "trim": "Silver",
+    "cleanEnglishName": "ARCFOX T1 Silver",
+    "year": 2027,
+    "fuelDisplay": "Electric",
+    "bodyType": "SUV",
+    "omitUnverifiedFields": [
+      "horsepower",
+      "acceleration",
+      "chargingSpeed",
+      "fuelConsumption",
+      "range"
+    ],
+    "notes": "",
+    "sourceURL": "https://jo.opensooq.com/en/search/288438518",
+    "evidence": "Audited against full seller caption and structured visible listing fields in refs/research/details-31-70/288438518.json. Numeric extra specs remain seller declared, not independently verified OEM specifications.",
+    "seats": 5,
+    "transmission": "Automatic",
+    "exteriorColor": "Silver",
+    "interiorColor": "Black",
+    "specificationOverrides": {
+      "battery": "42.4 kWh"
+    },
+    "currentStructuredPriceJOD": null,
+    "priceEvidence": "Current headline is AskForPrice and Vehicle.offers.price is0; unknown full price, not free."
+  },
+  "288440772": {
+    "id": "288440772",
+    "brand": "Mercedes-Benz",
+    "model": "EQC",
+    "trim": "400 4MATIC · AMG Kit",
+    "cleanEnglishName": "Mercedes-Benz EQC 400 4MATIC · AMG Kit",
+    "year": 2021,
+    "fuelDisplay": "Electric",
+    "bodyType": "SUV",
+    "omitUnverifiedFields": [
+      "horsepower",
+      "acceleration",
+      "chargingSpeed",
+      "fuelConsumption"
+    ],
+    "notes": "",
+    "sourceURL": "https://jo.opensooq.com/en/search/288440772",
+    "evidence": "Audited against full seller caption and structured visible listing fields in refs/research/details-31-70/288440772.json. Numeric extra specs remain seller declared, not independently verified OEM specifications.",
+    "seats": 5,
+    "transmission": "Automatic",
+    "exteriorColor": "White",
+    "interiorColor": "Black",
+    "specificationOverrides": {
+      "drive": "4MATIC AWD"
+    },
+    "currentStructuredPriceJOD": 37500,
+    "priceEvidence": "Positive price matches card, current detail headline and Vehicle.offers.price."
+  },
+  "288440598": {
+    "id": "288440598",
+    "brand": "Chery iCAR",
+    "model": "V27",
+    "trim": "1.5L REEV AWD · Silver",
+    "cleanEnglishName": "Chery iCAR V27 1.5L REEV AWD · Silver",
+    "year": 2026,
+    "fuelDisplay": "Hybrid (range extender / REEV)",
+    "bodyType": "SUV",
+    "omitUnverifiedFields": [
+      "horsepower",
+      "acceleration",
+      "chargingSpeed",
+      "fuelConsumption"
+    ],
+    "notes": "",
+    "sourceURL": "https://jo.opensooq.com/en/search/288440598",
+    "evidence": "Audited against full seller caption and structured visible listing fields in refs/research/details-31-70/288440598.json. Numeric extra specs remain seller declared, not independently verified OEM specifications.",
+    "seats": 5,
+    "transmission": "Automatic",
+    "exteriorColor": "Silver",
+    "interiorColor": "Brown",
+    "specificationOverrides": {
+      "engine": "1.5L turbo petrol range extender",
+      "drive": "AWD"
+    },
+    "currentStructuredPriceJOD": null,
+    "priceEvidence": "Current headline is AskForPrice and Vehicle.offers.price is0; unknown full price, not free."
+  },
+  "288442830": {
+    "id": "288442830",
+    "brand": "Chery iCAR",
+    "model": "V27",
+    "trim": "1.5L REEV AWD · Olive Green",
+    "cleanEnglishName": "Chery iCAR V27 1.5L REEV AWD · Olive Green",
+    "year": 2026,
+    "fuelDisplay": "Hybrid (range extender / REEV)",
+    "bodyType": "SUV",
+    "omitUnverifiedFields": [
+      "horsepower",
+      "acceleration",
+      "chargingSpeed",
+      "fuelConsumption"
+    ],
+    "notes": "",
+    "sourceURL": "https://jo.opensooq.com/en/search/288442830",
+    "evidence": "Audited against full seller caption and structured visible listing fields in refs/research/details-31-70/288442830.json. Numeric extra specs remain seller declared, not independently verified OEM specifications.",
+    "seats": 5,
+    "transmission": "Automatic",
+    "exteriorColor": "Green",
+    "interiorColor": "Brown",
+    "specificationOverrides": {
+      "engine": "1.5L turbo petrol range extender",
+      "drive": "AWD"
+    },
+    "currentStructuredPriceJOD": null,
+    "priceEvidence": "Current headline is AskForPrice and Vehicle.offers.price is0; unknown full price, not free."
+  },
+  "288441286": {
+    "id": "288441286",
+    "brand": "Riddara",
+    "model": "RD6",
+    "trim": "4x4 · White",
+    "cleanEnglishName": "Riddara RD6 4x4 · White",
+    "year": 2025,
+    "fuelDisplay": "Electric",
+    "bodyType": "Pickup",
+    "omitUnverifiedFields": [
+      "horsepower",
+      "acceleration",
+      "chargingSpeed",
+      "fuelConsumption",
+      "seats"
+    ],
+    "notes": "Core seat count2 conflicts with four-door double-cab RD6 wording and sibling listings5seats. Omit seats pending confirmation.",
+    "sourceURL": "https://jo.opensooq.com/en/search/288441286",
+    "evidence": "Audited against full seller caption and structured visible listing fields in refs/research/details-31-70/288441286.json. Numeric extra specs remain seller declared, not independently verified OEM specifications.",
+    "seats": null,
+    "transmission": "Automatic",
+    "exteriorColor": "White",
+    "interiorColor": "Orange",
+    "specificationOverrides": {
+      "drive": "4WD / AWD",
+      "battery": "85 kWh"
+    },
+    "currentStructuredPriceJOD": 27900,
+    "priceEvidence": "Positive price matches card, current detail headline and Vehicle.offers.price."
+  },
+  "288441140": {
+    "id": "288441140",
+    "brand": "BYD",
+    "model": "Sealion 5",
+    "trim": "DM-i",
+    "cleanEnglishName": "BYD Sealion 5 DM-i",
+    "year": 2026,
+    "fuelDisplay": "Plug-in hybrid",
+    "bodyType": "SUV",
+    "omitUnverifiedFields": [
+      "horsepower",
+      "acceleration",
+      "chargingSpeed",
+      "fuelConsumption"
+    ],
+    "notes": "",
+    "sourceURL": "https://jo.opensooq.com/en/search/288441140",
+    "evidence": "Audited against full seller caption and structured visible listing fields in refs/research/details-31-70/288441140.json. Numeric extra specs remain seller declared, not independently verified OEM specifications.",
+    "seats": 5,
+    "transmission": "Automatic",
+    "exteriorColor": "White",
+    "interiorColor": "Grey",
+    "specificationOverrides": {
+      "engine": "1.5L petrol plug-in hybrid",
+      "drive": "FWD",
+      "battery": "18.3 kWh Blade"
+    },
+    "currentStructuredPriceJOD": null,
+    "priceEvidence": "Current headline is AskForPrice and Vehicle.offers.price is0; unknown full price, not free."
+  },
+  "288441022": {
+    "id": "288441022",
+    "brand": "Mercedes-Benz",
+    "model": "G-Class",
+    "trim": "G500 AMG Line",
+    "cleanEnglishName": "Mercedes-Benz G-Class G500 AMG Line",
+    "year": 2023,
+    "fuelDisplay": "Petrol",
+    "bodyType": "SUV",
+    "omitUnverifiedFields": [
+      "horsepower",
+      "acceleration",
+      "chargingSpeed",
+      "fuelConsumption"
+    ],
+    "notes": "",
+    "sourceURL": "https://jo.opensooq.com/en/search/288441022",
+    "evidence": "Audited against full seller caption and structured visible listing fields in refs/research/details-31-70/288441022.json. Numeric extra specs remain seller declared, not independently verified OEM specifications.",
+    "seats": 5,
+    "transmission": "Automatic",
+    "exteriorColor": "Black",
+    "interiorColor": "Black",
+    "specificationOverrides": {
+      "engine": "4.0L V8 twin-turbo petrol"
+    },
+    "currentStructuredPriceJOD": null,
+    "priceEvidence": "Current headline is AskForPrice and Vehicle.offers.price is0; unknown full price, not free."
+  },
+  "288440988": {
+    "id": "288440988",
+    "brand": "Lynk & Co",
+    "model": "08",
+    "trim": "EM-P 1.5L Turbo",
+    "cleanEnglishName": "Lynk & Co 08 EM-P 1.5L Turbo",
+    "year": 2027,
+    "fuelDisplay": "Plug-in hybrid",
+    "bodyType": "SUV",
+    "omitUnverifiedFields": [
+      "horsepower",
+      "acceleration",
+      "chargingSpeed",
+      "fuelConsumption"
+    ],
+    "notes": "Card saysHybrid; seller caption identifies plug-in hybrid EM-P. UsePlug-in hybrid.",
+    "sourceURL": "https://jo.opensooq.com/en/search/288440988",
+    "evidence": "Audited against full seller caption and structured visible listing fields in refs/research/details-31-70/288440988.json. Numeric extra specs remain seller declared, not independently verified OEM specifications.",
+    "seats": 5,
+    "transmission": "Automatic",
+    "exteriorColor": "Black",
+    "interiorColor": "Beige",
+    "specificationOverrides": {
+      "engine": "1.5L turbo plug-in hybrid",
+      "battery": "39.8 kWh"
+    },
+    "currentStructuredPriceJOD": null,
+    "priceEvidence": "Current headline is AskForPrice and Vehicle.offers.price is0; unknown full price, not free."
+  },
+  "288440412": {
+    "id": "288440412",
+    "brand": "ARCFOX",
+    "model": "T1",
+    "trim": "Purple",
+    "cleanEnglishName": "ARCFOX T1 Purple",
+    "year": 2027,
+    "fuelDisplay": "Electric",
+    "bodyType": "SUV",
+    "omitUnverifiedFields": [
+      "horsepower",
+      "acceleration",
+      "chargingSpeed",
+      "fuelConsumption",
+      "range"
+    ],
+    "notes": "",
+    "sourceURL": "https://jo.opensooq.com/en/search/288440412",
+    "evidence": "Audited against full seller caption and structured visible listing fields in refs/research/details-31-70/288440412.json. Numeric extra specs remain seller declared, not independently verified OEM specifications.",
+    "seats": 5,
+    "transmission": "Automatic",
+    "exteriorColor": "Purple",
+    "interiorColor": "Black",
+    "specificationOverrides": {
+      "battery": "42.4 kWh"
+    },
+    "currentStructuredPriceJOD": null,
+    "priceEvidence": "Current headline is AskForPrice and Vehicle.offers.price is0; unknown full price, not free."
+  },
+  "288438754": {
+    "id": "288438754",
+    "brand": "ARCFOX",
+    "model": "T1",
+    "trim": "Silver",
+    "cleanEnglishName": "ARCFOX T1 Silver",
+    "year": 2027,
+    "fuelDisplay": "Electric",
+    "bodyType": "SUV",
+    "omitUnverifiedFields": [
+      "horsepower",
+      "acceleration",
+      "chargingSpeed",
+      "fuelConsumption",
+      "range"
+    ],
+    "notes": "",
+    "sourceURL": "https://jo.opensooq.com/en/search/288438754",
+    "evidence": "Audited against full seller caption and structured visible listing fields in refs/research/details-31-70/288438754.json. Numeric extra specs remain seller declared, not independently verified OEM specifications.",
+    "seats": 5,
+    "transmission": "Automatic",
+    "exteriorColor": "Silver",
+    "interiorColor": "Black",
+    "specificationOverrides": {
+      "battery": "42.4 kWh"
+    },
+    "currentStructuredPriceJOD": null,
+    "priceEvidence": "Current headline is AskForPrice and Vehicle.offers.price is0; unknown full price, not free."
+  },
+  "288438620": {
+    "id": "288438620",
+    "brand": "ARCFOX",
+    "model": "T1",
+    "trim": "White",
+    "cleanEnglishName": "ARCFOX T1 White",
+    "year": 2027,
+    "fuelDisplay": "Electric",
+    "bodyType": "SUV",
+    "omitUnverifiedFields": [
+      "horsepower",
+      "acceleration",
+      "chargingSpeed",
+      "fuelConsumption",
+      "range"
+    ],
+    "notes": "",
+    "sourceURL": "https://jo.opensooq.com/en/search/288438620",
+    "evidence": "Audited against full seller caption and structured visible listing fields in refs/research/details-31-70/288438620.json. Numeric extra specs remain seller declared, not independently verified OEM specifications.",
+    "seats": 5,
+    "transmission": "Automatic",
+    "exteriorColor": "White",
+    "interiorColor": "Black",
+    "specificationOverrides": {
+      "battery": "42.4 kWh"
+    },
+    "currentStructuredPriceJOD": null,
+    "priceEvidence": "Current headline is AskForPrice and Vehicle.offers.price is0; unknown full price, not free."
+  },
+  "288438470": {
+    "id": "288438470",
+    "brand": "ARCFOX",
+    "model": "T1",
+    "trim": "Light Blue",
+    "cleanEnglishName": "ARCFOX T1 Light Blue",
+    "year": 2027,
+    "fuelDisplay": "Electric",
+    "bodyType": "SUV",
+    "omitUnverifiedFields": [
+      "horsepower",
+      "acceleration",
+      "chargingSpeed",
+      "fuelConsumption",
+      "range"
+    ],
+    "notes": "",
+    "sourceURL": "https://jo.opensooq.com/en/search/288438470",
+    "evidence": "Audited against full seller caption and structured visible listing fields in refs/research/details-31-70/288438470.json. Numeric extra specs remain seller declared, not independently verified OEM specifications.",
+    "seats": 5,
+    "transmission": "Automatic",
+    "exteriorColor": "Baby Blue",
+    "interiorColor": "Black",
+    "specificationOverrides": {
+      "battery": "42.4 kWh"
+    },
+    "currentStructuredPriceJOD": null,
+    "priceEvidence": "Current headline is AskForPrice and Vehicle.offers.price is0; unknown full price, not free."
+  },
+  "288432146": {
+    "id": "288432146",
+    "brand": "Toyota",
+    "model": "Camry",
+    "trim": "LE Hybrid",
+    "cleanEnglishName": "Toyota Camry LE Hybrid",
+    "year": 2021,
+    "fuelDisplay": "Hybrid (HEV)",
+    "bodyType": "Sedan",
+    "omitUnverifiedFields": [
+      "horsepower",
+      "acceleration",
+      "chargingSpeed",
+      "fuelConsumption"
+    ],
+    "notes": "",
+    "sourceURL": "https://jo.opensooq.com/en/search/288432146",
+    "evidence": "Audited against full seller caption and structured visible listing fields in refs/research/details-31-70/288432146.json. Numeric extra specs remain seller declared, not independently verified OEM specifications.",
+    "seats": 5,
+    "transmission": "Automatic",
+    "exteriorColor": "Black",
+    "interiorColor": "Black",
+    "specificationOverrides": {
+      "engine": "2.5L petrol hybrid"
+    },
+    "currentStructuredPriceJOD": 20900,
+    "priceEvidence": "Positive price matches card, current detail headline and Vehicle.offers.price."
+  },
+  "288295034": {
+    "id": "288295034",
+    "brand": "MG",
+    "model": "MG5",
+    "trim": "Luxury / DEL",
+    "cleanEnglishName": "MG MG5 Luxury / DEL",
+    "year": 2023,
+    "fuelDisplay": "Petrol",
+    "bodyType": "Sedan",
+    "omitUnverifiedFields": [
+      "horsepower",
+      "acceleration",
+      "chargingSpeed",
+      "fuelConsumption"
+    ],
+    "notes": "",
+    "sourceURL": "https://jo.opensooq.com/en/search/288295034",
+    "evidence": "Audited against full seller caption and structured visible listing fields in refs/research/details-31-70/288295034.json. Numeric extra specs remain seller declared, not independently verified OEM specifications.",
+    "seats": 5,
+    "transmission": "Automatic",
+    "exteriorColor": "Black",
+    "interiorColor": "Beige",
+    "specificationOverrides": {
+      "engine": "1.5L four-cylinder petrol"
+    },
+    "currentStructuredPriceJOD": 10700,
+    "priceEvidence": "Positive price matches card, current detail headline and Vehicle.offers.price."
+  },
+  "286428842": {
+    "id": "286428842",
+    "brand": "ARCFOX",
+    "model": "T1",
+    "trim": "Grey",
+    "cleanEnglishName": "ARCFOX T1 Grey",
+    "year": 2027,
+    "fuelDisplay": "Electric",
+    "bodyType": "SUV",
+    "omitUnverifiedFields": [
+      "horsepower",
+      "acceleration",
+      "chargingSpeed",
+      "fuelConsumption",
+      "range"
+    ],
+    "notes": "",
+    "sourceURL": "https://jo.opensooq.com/en/search/286428842",
+    "evidence": "Audited against full seller caption and structured visible listing fields in refs/research/details-31-70/286428842.json. Numeric extra specs remain seller declared, not independently verified OEM specifications.",
+    "seats": 5,
+    "transmission": "Automatic",
+    "exteriorColor": "Grey",
+    "interiorColor": "White",
+    "specificationOverrides": {
+      "battery": "42.4 kWh"
+    },
+    "currentStructuredPriceJOD": null,
+    "priceEvidence": "Current headline is AskForPrice and Vehicle.offers.price is0; unknown full price, not free."
+  },
+  "287914576": {
+    "id": "287914576",
+    "brand": "Mercedes-Benz",
+    "model": "EQE SUV",
+    "trim": "500 4MATIC AMG Line",
+    "cleanEnglishName": "Mercedes-Benz EQE SUV 500 4MATIC AMG Line",
+    "year": 2024,
+    "fuelDisplay": "Electric",
+    "bodyType": "SUV",
+    "omitUnverifiedFields": [
+      "horsepower",
+      "acceleration",
+      "chargingSpeed",
+      "fuelConsumption"
+    ],
+    "notes": "Caption350kW and408hp do not convert consistently. Omit horsepower and acceleration; battery96kWh remains dealer supplied.",
+    "sourceURL": "https://jo.opensooq.com/en/search/287914576",
+    "evidence": "Audited against full seller caption and structured visible listing fields in refs/research/details-31-70/287914576.json. Numeric extra specs remain seller declared, not independently verified OEM specifications.",
+    "seats": 5,
+    "transmission": "Automatic",
+    "exteriorColor": "Black",
+    "interiorColor": "Beige",
+    "specificationOverrides": {
+      "drive": "4MATIC AWD dual motor",
+      "battery": "96 kWh"
+    },
+    "currentStructuredPriceJOD": 57000,
+    "priceEvidence": "Positive price matches card, current detail headline and Vehicle.offers.price."
+  },
+  "287914072": {
+    "id": "287914072",
+    "brand": "Land Rover",
+    "model": "Defender 110",
+    "trim": "X-DYNAMIC HSE P400e",
+    "cleanEnglishName": "Land Rover Defender 110 X-DYNAMIC HSE P400e",
+    "year": 2025,
+    "fuelDisplay": "Plug-in hybrid",
+    "bodyType": "SUV",
+    "omitUnverifiedFields": [
+      "horsepower",
+      "acceleration",
+      "chargingSpeed",
+      "fuelConsumption"
+    ],
+    "notes": "Current structured headline79,500JOD supersedes old83,000JOD line inside caption. Mileage4,000km card, exact4,241km caption; retain advertised4,000km unless displaying exact caption mileage. Price audit confirms current card/headline/offer79,500JOD; old83,000JOD line is stale.",
+    "sourceURL": "https://jo.opensooq.com/en/search/287914072",
+    "evidence": "Audited against full seller caption and structured visible listing fields in refs/research/details-31-70/287914072.json. Numeric extra specs remain seller declared, not independently verified OEM specifications.",
+    "seats": 5,
+    "transmission": "8-speed automatic",
+    "exteriorColor": "Silver",
+    "interiorColor": "Black",
+    "specificationOverrides": {
+      "engine": "2.0L turbo plug-in hybrid",
+      "drive": "AWD",
+      "battery": "19.2 kWh",
+      "transmission": "8-speed automatic"
+    },
+    "currentStructuredPriceJOD": 79500,
+    "priceEvidence": "Positive price matches card, current detail headline and Vehicle.offers.price."
+  },
+  "287913510": {
+    "id": "287913510",
+    "brand": "BAIC",
+    "model": "BJ30e",
+    "trim": "Magic HEV 1.5L Turbo AWD · Grey",
+    "cleanEnglishName": "BAIC BJ30e Magic HEV 1.5L Turbo AWD · Grey",
+    "year": 2025,
+    "fuelDisplay": "Hybrid (HEV)",
+    "bodyType": "SUV",
+    "omitUnverifiedFields": [
+      "horsepower",
+      "acceleration",
+      "chargingSpeed",
+      "fuelConsumption"
+    ],
+    "notes": "",
+    "sourceURL": "https://jo.opensooq.com/en/search/287913510",
+    "evidence": "Audited against full seller caption and structured visible listing fields in refs/research/details-31-70/287913510.json. Numeric extra specs remain seller declared, not independently verified OEM specifications.",
+    "seats": 5,
+    "transmission": "Automatic",
+    "exteriorColor": "Grey",
+    "interiorColor": "Black",
+    "specificationOverrides": {
+      "engine": "1.5L turbo self-charging hybrid",
+      "drive": "AWD",
+      "battery": "1.67 kWh hybrid battery"
+    },
+    "currentStructuredPriceJOD": 23900,
+    "priceEvidence": "Positive price matches card, current detail headline and Vehicle.offers.price."
+  },
+  "287912580": {
+    "id": "287912580",
+    "brand": "BAIC",
+    "model": "BJ30e",
+    "trim": "Magic HEV 1.5L Turbo AWD · White",
+    "cleanEnglishName": "BAIC BJ30e Magic HEV 1.5L Turbo AWD · White",
+    "year": 2025,
+    "fuelDisplay": "Hybrid (HEV)",
+    "bodyType": "SUV",
+    "omitUnverifiedFields": [
+      "horsepower",
+      "acceleration",
+      "chargingSpeed",
+      "fuelConsumption"
+    ],
+    "notes": "",
+    "sourceURL": "https://jo.opensooq.com/en/search/287912580",
+    "evidence": "Audited against full seller caption and structured visible listing fields in refs/research/details-31-70/287912580.json. Numeric extra specs remain seller declared, not independently verified OEM specifications.",
+    "seats": 5,
+    "transmission": "Automatic",
+    "exteriorColor": "White",
+    "interiorColor": "Black",
+    "specificationOverrides": {
+      "engine": "1.5L turbo self-charging hybrid",
+      "drive": "AWD",
+      "battery": "1.67 kWh hybrid battery"
+    },
+    "currentStructuredPriceJOD": 23900,
+    "priceEvidence": "Positive price matches card, current detail headline and Vehicle.offers.price."
+  },
+  "287890976": {
+    "id": "287890976",
+    "brand": "AVATR",
+    "model": "12",
+    "trim": "Max EV RWD · Misty Purple",
+    "cleanEnglishName": "AVATR 12 Max EV RWD · Misty Purple",
+    "year": 2024,
+    "fuelDisplay": "Electric",
+    "bodyType": "Sedan",
+    "omitUnverifiedFields": [
+      "horsepower",
+      "acceleration",
+      "chargingSpeed",
+      "fuelConsumption"
+    ],
+    "notes": "",
+    "sourceURL": "https://jo.opensooq.com/en/search/287890976",
+    "evidence": "Audited against full seller caption and structured visible listing fields in refs/research/details-31-70/287890976.json. Numeric extra specs remain seller declared, not independently verified OEM specifications.",
+    "seats": 5,
+    "transmission": "Automatic",
+    "exteriorColor": "Purple",
+    "interiorColor": "Beige",
+    "specificationOverrides": {
+      "drive": "RWD",
+      "battery": "94.5 kWh"
+    },
+    "currentStructuredPriceJOD": null,
+    "priceEvidence": "Current headline is AskForPrice and Vehicle.offers.price is0; unknown full price, not free."
+  },
+  "287890904": {
+    "id": "287890904",
+    "brand": "Geely Farizon",
+    "model": "H8E",
+    "trim": "Refrigerated Truck",
+    "cleanEnglishName": "Geely Farizon H8E Refrigerated Truck",
+    "year": 2024,
+    "fuelDisplay": "Electric",
+    "bodyType": "Refrigerated truck",
+    "omitUnverifiedFields": [
+      "horsepower",
+      "acceleration",
+      "chargingSpeed",
+      "fuelConsumption",
+      "seats"
+    ],
+    "notes": "Title/caption identify refrigerated truck, not generic pickup. Core5seat field unverified and unsuitable for refrigerated light-truck body; omit seats pending confirmation. Current card/headline/offer36,000JOD includes refrigeration. Alternative33,000JOD in caption is without cooler, so do not use for the advertised refrigerated vehicle.",
+    "sourceURL": "https://jo.opensooq.com/en/search/287890904",
+    "evidence": "Audited against full seller caption and structured visible listing fields in refs/research/details-31-70/287890904.json. Numeric extra specs remain seller declared, not independently verified OEM specifications.",
+    "seats": null,
+    "transmission": "Automatic",
+    "exteriorColor": "White",
+    "interiorColor": "Grey",
+    "specificationOverrides": {
+      "battery": "100 kWh"
+    },
+    "currentStructuredPriceJOD": 36000,
+    "priceEvidence": "Positive price matches card, current detail headline and Vehicle.offers.price."
+  },
+  "287890886": {
+    "id": "287890886",
+    "brand": "Jetour",
+    "model": "G700",
+    "trim": "Premium",
+    "cleanEnglishName": "Jetour G700 Premium",
+    "year": 2026,
+    "fuelDisplay": "Plug-in hybrid",
+    "bodyType": "SUV",
+    "omitUnverifiedFields": [
+      "horsepower",
+      "acceleration",
+      "chargingSpeed",
+      "fuelConsumption"
+    ],
+    "notes": "",
+    "sourceURL": "https://jo.opensooq.com/en/search/287890886",
+    "evidence": "Audited against full seller caption and structured visible listing fields in refs/research/details-31-70/287890886.json. Numeric extra specs remain seller declared, not independently verified OEM specifications.",
+    "seats": 7,
+    "transmission": "Automatic",
+    "exteriorColor": "Black",
+    "interiorColor": "Beige",
+    "specificationOverrides": {
+      "engine": "2.0L turbo plug-in hybrid",
+      "drive": "AWD"
+    },
+    "currentStructuredPriceJOD": null,
+    "priceEvidence": "Current headline is AskForPrice and Vehicle.offers.price is0; unknown full price, not free."
+  },
+  "287890852": {
+    "id": "287890852",
+    "brand": "Toyota",
+    "model": "Land Cruiser",
+    "trim": "GXR V6 Twin Turbo 4WD",
+    "cleanEnglishName": "Toyota Land Cruiser GXR V6 Twin Turbo 4WD",
+    "year": 2026,
+    "fuelDisplay": "Petrol",
+    "bodyType": "SUV",
+    "omitUnverifiedFields": [
+      "horsepower",
+      "acceleration",
+      "chargingSpeed",
+      "fuelConsumption"
+    ],
+    "notes": "",
+    "sourceURL": "https://jo.opensooq.com/en/search/287890852",
+    "evidence": "Audited against full seller caption and structured visible listing fields in refs/research/details-31-70/287890852.json. Numeric extra specs remain seller declared, not independently verified OEM specifications.",
+    "seats": 7,
+    "transmission": "Automatic",
+    "exteriorColor": "Black",
+    "interiorColor": "Beige",
+    "specificationOverrides": {
+      "engine": "3.5L V6 twin-turbo petrol",
+      "drive": "4WD"
+    },
+    "currentStructuredPriceJOD": null,
+    "priceEvidence": "Current headline is AskForPrice and Vehicle.offers.price is0; unknown full price, not free."
+  },
+  "287890822": {
+    "id": "287890822",
+    "brand": "BMW",
+    "model": "i5",
+    "trim": "eDrive35L M Sport Package",
+    "cleanEnglishName": "BMW i5 eDrive35L M Sport Package",
+    "year": 2024,
+    "fuelDisplay": "Electric",
+    "bodyType": "Sedan",
+    "omitUnverifiedFields": [
+      "horsepower",
+      "acceleration",
+      "chargingSpeed",
+      "fuelConsumption"
+    ],
+    "notes": "Critical: full title identifies BMWi5eDrive35LMSport, not core card i5eDrive40. Use seller title variant. Battery79.05kWh andRWD explicit in caption.",
+    "sourceURL": "https://jo.opensooq.com/en/search/287890822",
+    "evidence": "Audited against full seller caption and structured visible listing fields in refs/research/details-31-70/287890822.json. Numeric extra specs remain seller declared, not independently verified OEM specifications.",
+    "seats": 5,
+    "transmission": "Automatic",
+    "exteriorColor": "Navy Blue",
+    "interiorColor": "Blue",
+    "specificationOverrides": {
+      "drive": "RWD",
+      "battery": "79.05 kWh"
+    },
+    "currentStructuredPriceJOD": null,
+    "priceEvidence": "Current headline is AskForPrice and Vehicle.offers.price is0; unknown full price, not free."
+  },
+  "287890782": {
+    "id": "287890782",
+    "brand": "Jetour",
+    "model": "G700",
+    "trim": "GAIA 2.0L Turbo PHEV AWD",
+    "cleanEnglishName": "Jetour G700 GAIA 2.0L Turbo PHEV AWD",
+    "year": 2026,
+    "fuelDisplay": "Plug-in hybrid",
+    "bodyType": "SUV",
+    "omitUnverifiedFields": [
+      "horsepower",
+      "acceleration",
+      "chargingSpeed",
+      "fuelConsumption"
+    ],
+    "notes": "Critical: cardMildHybrid is incorrect. Seller title and full caption identify2.0LTurboPHEVAWD.",
+    "sourceURL": "https://jo.opensooq.com/en/search/287890782",
+    "evidence": "Audited against full seller caption and structured visible listing fields in refs/research/details-31-70/287890782.json. Numeric extra specs remain seller declared, not independently verified OEM specifications.",
+    "seats": 5,
+    "transmission": "Automatic",
+    "exteriorColor": "Navy Blue",
+    "interiorColor": "White",
+    "specificationOverrides": {
+      "engine": "2.0L turbo plug-in hybrid",
+      "drive": "AWD",
+      "battery": "34.4 kWh"
+    },
+    "currentStructuredPriceJOD": null,
+    "priceEvidence": "Current headline is AskForPrice and Vehicle.offers.price is0; unknown full price, not free."
+  },
+  "287890622": {
+    "id": "287890622",
+    "brand": "Lynk & Co",
+    "model": "08",
+    "trim": "EM-P 1.5L Turbo",
+    "cleanEnglishName": "Lynk & Co 08 EM-P 1.5L Turbo",
+    "year": 2027,
+    "fuelDisplay": "Plug-in hybrid",
+    "bodyType": "SUV",
+    "omitUnverifiedFields": [
+      "horsepower",
+      "acceleration",
+      "chargingSpeed",
+      "fuelConsumption"
+    ],
+    "notes": "",
+    "sourceURL": "https://jo.opensooq.com/en/search/287890622",
+    "evidence": "Audited against full seller caption and structured visible listing fields in refs/research/details-31-70/287890622.json. Numeric extra specs remain seller declared, not independently verified OEM specifications.",
+    "seats": 5,
+    "transmission": "Automatic",
+    "exteriorColor": "Grey",
+    "interiorColor": "Black",
+    "specificationOverrides": {
+      "engine": "1.5L turbo plug-in hybrid",
+      "battery": "39.8 kWh"
+    },
+    "currentStructuredPriceJOD": null,
+    "priceEvidence": "Current headline is AskForPrice and Vehicle.offers.price is0; unknown full price, not free."
+  }
+}

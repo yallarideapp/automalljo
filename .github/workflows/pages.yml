@@ -53,6 +53,16 @@ jobs:
           git add app refs README.md .gitignore
           git commit -m "Upload complete AutoMall website source and assets"
           git push origin HEAD:main
+      - name: Fetch and persist verified catalogue photographs
+        run: |
+          python3 scripts/sync-catalog-images.py
+          git add -- public/assets/catalog
+          if ! git diff --cached --quiet -- public/assets/catalog; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "Sync verified AutoMall catalogue photographs"
+            git push origin HEAD:main
+          fi
       - name: Configure Pages
         id: pages
         uses: actions/configure-pages@v5
@@ -67,6 +77,8 @@ jobs:
           VITE_SITE_URL: ${{ steps.pages.outputs.base_url }}
           VITE_BASE_PATH: ${{ steps.pages.outputs.base_path }}
         run: node scripts/prepare-pages.mjs
+      - name: Verify catalogue sources and photographs
+        run: node scripts/verify-catalog.mjs
       - name: Type check
         run: bun run typecheck
       - name: Build static website
