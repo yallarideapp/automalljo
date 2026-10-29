@@ -9,11 +9,34 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as AppRouteImport } from './routes/app'
+import { Route as R404RouteImport } from './routes/404'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as V2IndexRouteImport } from './routes/v2.index'
+import { Route as ArIndexRouteImport } from './routes/ar.index'
+import { Route as ArTermsRouteImport } from './routes/ar.terms'
+import { Route as ArPrivacyRouteImport } from './routes/ar.privacy'
+import { Route as V2UpdatesIndexRouteImport } from './routes/v2.updates.index'
+import { Route as V2FeaturesIndexRouteImport } from './routes/v2.features.index'
+import { Route as V2ContactIndexRouteImport } from './routes/v2.contact.index'
+import { Route as V2CarsIndexRouteImport } from './routes/v2.cars.index'
+import { Route as ArV2IndexRouteImport } from './routes/ar.v2.index'
+import { Route as V2CarVehicleIdRouteImport } from './routes/v2.car.$vehicleId'
+import { Route as ArV2UpdatesIndexRouteImport } from './routes/ar.v2.updates.index'
+import { Route as ArV2FeaturesIndexRouteImport } from './routes/ar.v2.features.index'
+import { Route as ArV2ContactIndexRouteImport } from './routes/ar.v2.contact.index'
+import { Route as ArV2CarsIndexRouteImport } from './routes/ar.v2.cars.index'
+import { Route as ArV2CarVehicleIdRouteImport } from './routes/ar.v2.car.$vehicleId'
 
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
@@ -24,9 +47,19 @@ const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
   path: '/robots.txt',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AppRoute = AppRouteImport.update({
   id: '/app',
   path: '/app',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const R404Route = R404RouteImport.update({
+  id: '/404',
+  path: '/404',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -34,43 +67,264 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const V2IndexRoute = V2IndexRouteImport.update({
+  id: '/v2/',
+  path: '/v2/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArIndexRoute = ArIndexRouteImport.update({
+  id: '/ar/',
+  path: '/ar/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArTermsRoute = ArTermsRouteImport.update({
+  id: '/ar/terms',
+  path: '/ar/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArPrivacyRoute = ArPrivacyRouteImport.update({
+  id: '/ar/privacy',
+  path: '/ar/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V2UpdatesIndexRoute = V2UpdatesIndexRouteImport.update({
+  id: '/v2/updates/',
+  path: '/v2/updates/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V2FeaturesIndexRoute = V2FeaturesIndexRouteImport.update({
+  id: '/v2/features/',
+  path: '/v2/features/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V2ContactIndexRoute = V2ContactIndexRouteImport.update({
+  id: '/v2/contact/',
+  path: '/v2/contact/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V2CarsIndexRoute = V2CarsIndexRouteImport.update({
+  id: '/v2/cars/',
+  path: '/v2/cars/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArV2IndexRoute = ArV2IndexRouteImport.update({
+  id: '/ar/v2/',
+  path: '/ar/v2/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V2CarVehicleIdRoute = V2CarVehicleIdRouteImport.update({
+  id: '/v2/car/$vehicleId',
+  path: '/v2/car/$vehicleId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArV2UpdatesIndexRoute = ArV2UpdatesIndexRouteImport.update({
+  id: '/ar/v2/updates/',
+  path: '/ar/v2/updates/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArV2FeaturesIndexRoute = ArV2FeaturesIndexRouteImport.update({
+  id: '/ar/v2/features/',
+  path: '/ar/v2/features/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArV2ContactIndexRoute = ArV2ContactIndexRouteImport.update({
+  id: '/ar/v2/contact/',
+  path: '/ar/v2/contact/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArV2CarsIndexRoute = ArV2CarsIndexRouteImport.update({
+  id: '/ar/v2/cars/',
+  path: '/ar/v2/cars/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArV2CarVehicleIdRoute = ArV2CarVehicleIdRouteImport.update({
+  id: '/ar/v2/car/$vehicleId',
+  path: '/ar/v2/car/$vehicleId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/404': typeof R404Route
   '/app': typeof AppRoute
+  '/privacy': typeof PrivacyRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/terms': typeof TermsRoute
+  '/ar/privacy': typeof ArPrivacyRoute
+  '/ar/terms': typeof ArTermsRoute
+  '/ar/': typeof ArIndexRoute
+  '/v2/': typeof V2IndexRoute
+  '/v2/car/$vehicleId': typeof V2CarVehicleIdRoute
+  '/ar/v2/': typeof ArV2IndexRoute
+  '/v2/cars/': typeof V2CarsIndexRoute
+  '/v2/contact/': typeof V2ContactIndexRoute
+  '/v2/features/': typeof V2FeaturesIndexRoute
+  '/v2/updates/': typeof V2UpdatesIndexRoute
+  '/ar/v2/car/$vehicleId': typeof ArV2CarVehicleIdRoute
+  '/ar/v2/cars/': typeof ArV2CarsIndexRoute
+  '/ar/v2/contact/': typeof ArV2ContactIndexRoute
+  '/ar/v2/features/': typeof ArV2FeaturesIndexRoute
+  '/ar/v2/updates/': typeof ArV2UpdatesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/404': typeof R404Route
   '/app': typeof AppRoute
+  '/privacy': typeof PrivacyRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/terms': typeof TermsRoute
+  '/ar/privacy': typeof ArPrivacyRoute
+  '/ar/terms': typeof ArTermsRoute
+  '/ar': typeof ArIndexRoute
+  '/v2': typeof V2IndexRoute
+  '/v2/car/$vehicleId': typeof V2CarVehicleIdRoute
+  '/ar/v2': typeof ArV2IndexRoute
+  '/v2/cars': typeof V2CarsIndexRoute
+  '/v2/contact': typeof V2ContactIndexRoute
+  '/v2/features': typeof V2FeaturesIndexRoute
+  '/v2/updates': typeof V2UpdatesIndexRoute
+  '/ar/v2/car/$vehicleId': typeof ArV2CarVehicleIdRoute
+  '/ar/v2/cars': typeof ArV2CarsIndexRoute
+  '/ar/v2/contact': typeof ArV2ContactIndexRoute
+  '/ar/v2/features': typeof ArV2FeaturesIndexRoute
+  '/ar/v2/updates': typeof ArV2UpdatesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/404': typeof R404Route
   '/app': typeof AppRoute
+  '/privacy': typeof PrivacyRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/terms': typeof TermsRoute
+  '/ar/privacy': typeof ArPrivacyRoute
+  '/ar/terms': typeof ArTermsRoute
+  '/ar/': typeof ArIndexRoute
+  '/v2/': typeof V2IndexRoute
+  '/v2/car/$vehicleId': typeof V2CarVehicleIdRoute
+  '/ar/v2/': typeof ArV2IndexRoute
+  '/v2/cars/': typeof V2CarsIndexRoute
+  '/v2/contact/': typeof V2ContactIndexRoute
+  '/v2/features/': typeof V2FeaturesIndexRoute
+  '/v2/updates/': typeof V2UpdatesIndexRoute
+  '/ar/v2/car/$vehicleId': typeof ArV2CarVehicleIdRoute
+  '/ar/v2/cars/': typeof ArV2CarsIndexRoute
+  '/ar/v2/contact/': typeof ArV2ContactIndexRoute
+  '/ar/v2/features/': typeof ArV2FeaturesIndexRoute
+  '/ar/v2/updates/': typeof ArV2UpdatesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/app' | '/robots.txt' | '/sitemap.xml'
+  fullPaths:
+    | '/'
+    | '/404'
+    | '/app'
+    | '/privacy'
+    | '/robots.txt'
+    | '/sitemap.xml'
+    | '/terms'
+    | '/ar/privacy'
+    | '/ar/terms'
+    | '/ar/'
+    | '/v2/'
+    | '/v2/car/$vehicleId'
+    | '/ar/v2/'
+    | '/v2/cars/'
+    | '/v2/contact/'
+    | '/v2/features/'
+    | '/v2/updates/'
+    | '/ar/v2/car/$vehicleId'
+    | '/ar/v2/cars/'
+    | '/ar/v2/contact/'
+    | '/ar/v2/features/'
+    | '/ar/v2/updates/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/app' | '/robots.txt' | '/sitemap.xml'
-  id: '__root__' | '/' | '/app' | '/robots.txt' | '/sitemap.xml'
+  to:
+    | '/'
+    | '/404'
+    | '/app'
+    | '/privacy'
+    | '/robots.txt'
+    | '/sitemap.xml'
+    | '/terms'
+    | '/ar/privacy'
+    | '/ar/terms'
+    | '/ar'
+    | '/v2'
+    | '/v2/car/$vehicleId'
+    | '/ar/v2'
+    | '/v2/cars'
+    | '/v2/contact'
+    | '/v2/features'
+    | '/v2/updates'
+    | '/ar/v2/car/$vehicleId'
+    | '/ar/v2/cars'
+    | '/ar/v2/contact'
+    | '/ar/v2/features'
+    | '/ar/v2/updates'
+  id:
+    | '__root__'
+    | '/'
+    | '/404'
+    | '/app'
+    | '/privacy'
+    | '/robots.txt'
+    | '/sitemap.xml'
+    | '/terms'
+    | '/ar/privacy'
+    | '/ar/terms'
+    | '/ar/'
+    | '/v2/'
+    | '/v2/car/$vehicleId'
+    | '/ar/v2/'
+    | '/v2/cars/'
+    | '/v2/contact/'
+    | '/v2/features/'
+    | '/v2/updates/'
+    | '/ar/v2/car/$vehicleId'
+    | '/ar/v2/cars/'
+    | '/ar/v2/contact/'
+    | '/ar/v2/features/'
+    | '/ar/v2/updates/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  R404Route: typeof R404Route
   AppRoute: typeof AppRoute
+  PrivacyRoute: typeof PrivacyRoute
   RobotsDottxtRoute: typeof RobotsDottxtRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  TermsRoute: typeof TermsRoute
+  ArPrivacyRoute: typeof ArPrivacyRoute
+  ArTermsRoute: typeof ArTermsRoute
+  ArIndexRoute: typeof ArIndexRoute
+  V2IndexRoute: typeof V2IndexRoute
+  V2CarVehicleIdRoute: typeof V2CarVehicleIdRoute
+  ArV2IndexRoute: typeof ArV2IndexRoute
+  V2CarsIndexRoute: typeof V2CarsIndexRoute
+  V2ContactIndexRoute: typeof V2ContactIndexRoute
+  V2FeaturesIndexRoute: typeof V2FeaturesIndexRoute
+  V2UpdatesIndexRoute: typeof V2UpdatesIndexRoute
+  ArV2CarVehicleIdRoute: typeof ArV2CarVehicleIdRoute
+  ArV2CarsIndexRoute: typeof ArV2CarsIndexRoute
+  ArV2ContactIndexRoute: typeof ArV2ContactIndexRoute
+  ArV2FeaturesIndexRoute: typeof ArV2FeaturesIndexRoute
+  ArV2UpdatesIndexRoute: typeof ArV2UpdatesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
@@ -85,11 +339,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RobotsDottxtRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/app': {
       id: '/app'
       path: '/app'
       fullPath: '/app'
       preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/404': {
+      id: '/404'
+      path: '/404'
+      fullPath: '/404'
+      preLoaderRoute: typeof R404RouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -99,14 +367,137 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/v2/': {
+      id: '/v2/'
+      path: '/v2'
+      fullPath: '/v2/'
+      preLoaderRoute: typeof V2IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ar/': {
+      id: '/ar/'
+      path: '/ar'
+      fullPath: '/ar/'
+      preLoaderRoute: typeof ArIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ar/terms': {
+      id: '/ar/terms'
+      path: '/ar/terms'
+      fullPath: '/ar/terms'
+      preLoaderRoute: typeof ArTermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ar/privacy': {
+      id: '/ar/privacy'
+      path: '/ar/privacy'
+      fullPath: '/ar/privacy'
+      preLoaderRoute: typeof ArPrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v2/updates/': {
+      id: '/v2/updates/'
+      path: '/v2/updates'
+      fullPath: '/v2/updates/'
+      preLoaderRoute: typeof V2UpdatesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v2/features/': {
+      id: '/v2/features/'
+      path: '/v2/features'
+      fullPath: '/v2/features/'
+      preLoaderRoute: typeof V2FeaturesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v2/contact/': {
+      id: '/v2/contact/'
+      path: '/v2/contact'
+      fullPath: '/v2/contact/'
+      preLoaderRoute: typeof V2ContactIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v2/cars/': {
+      id: '/v2/cars/'
+      path: '/v2/cars'
+      fullPath: '/v2/cars/'
+      preLoaderRoute: typeof V2CarsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ar/v2/': {
+      id: '/ar/v2/'
+      path: '/ar/v2'
+      fullPath: '/ar/v2/'
+      preLoaderRoute: typeof ArV2IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v2/car/$vehicleId': {
+      id: '/v2/car/$vehicleId'
+      path: '/v2/car/$vehicleId'
+      fullPath: '/v2/car/$vehicleId'
+      preLoaderRoute: typeof V2CarVehicleIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ar/v2/updates/': {
+      id: '/ar/v2/updates/'
+      path: '/ar/v2/updates'
+      fullPath: '/ar/v2/updates/'
+      preLoaderRoute: typeof ArV2UpdatesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ar/v2/features/': {
+      id: '/ar/v2/features/'
+      path: '/ar/v2/features'
+      fullPath: '/ar/v2/features/'
+      preLoaderRoute: typeof ArV2FeaturesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ar/v2/contact/': {
+      id: '/ar/v2/contact/'
+      path: '/ar/v2/contact'
+      fullPath: '/ar/v2/contact/'
+      preLoaderRoute: typeof ArV2ContactIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ar/v2/cars/': {
+      id: '/ar/v2/cars/'
+      path: '/ar/v2/cars'
+      fullPath: '/ar/v2/cars/'
+      preLoaderRoute: typeof ArV2CarsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ar/v2/car/$vehicleId': {
+      id: '/ar/v2/car/$vehicleId'
+      path: '/ar/v2/car/$vehicleId'
+      fullPath: '/ar/v2/car/$vehicleId'
+      preLoaderRoute: typeof ArV2CarVehicleIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  R404Route: R404Route,
   AppRoute: AppRoute,
+  PrivacyRoute: PrivacyRoute,
   RobotsDottxtRoute: RobotsDottxtRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  TermsRoute: TermsRoute,
+  ArPrivacyRoute: ArPrivacyRoute,
+  ArTermsRoute: ArTermsRoute,
+  ArIndexRoute: ArIndexRoute,
+  V2IndexRoute: V2IndexRoute,
+  V2CarVehicleIdRoute: V2CarVehicleIdRoute,
+  ArV2IndexRoute: ArV2IndexRoute,
+  V2CarsIndexRoute: V2CarsIndexRoute,
+  V2ContactIndexRoute: V2ContactIndexRoute,
+  V2FeaturesIndexRoute: V2FeaturesIndexRoute,
+  V2UpdatesIndexRoute: V2UpdatesIndexRoute,
+  ArV2CarVehicleIdRoute: ArV2CarVehicleIdRoute,
+  ArV2CarsIndexRoute: ArV2CarsIndexRoute,
+  ArV2ContactIndexRoute: ArV2ContactIndexRoute,
+  ArV2FeaturesIndexRoute: ArV2FeaturesIndexRoute,
+  ArV2UpdatesIndexRoute: ArV2UpdatesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -4,8 +4,8 @@ import react from "@vitejs/plugin-react";
 import svgr from "vite-plugin-svgr";
 import {defineConfig} from "vite";
 import {fileURLToPath} from "node:url";
+import {pagePaths} from "./scripts/page-manifest.mjs";
 const iconsShim=fileURLToPath(new URL("./src/lib/quanta-icons.ts",import.meta.url));
-const pages=["/","/ar/","/v2/","/ar/v2/","/privacy/","/ar/privacy/","/terms/","/ar/terms/"];
 export default defineConfig(({command})=>{
  const rawBase=process.env.VITE_BASE_PATH||"/";
  const base="/"+rawBase.replace(/^\/+|\/+$/g,"")+(rawBase.replace(/^\/+|\/+$/g,"")?"/":"");
@@ -23,7 +23,7 @@ export default defineConfig(({command})=>{
    tanstackStart({
     router:{basepath:base},server:{entry:"server"},
     prerender:{enabled:true,autoSubfolderIndex:true,autoStaticPathsDiscovery:false,crawlLinks:false,failOnError:true,concurrency:4},
-    pages:[...pages.map(path=>({path,prerender:{enabled:true}})),{path:"/404/",prerender:{enabled:true,outputPath:"/404.html"}}],
+    pages:[...pagePaths.map(path=>({path,prerender:{enabled:true}})),{path:"/404/",prerender:{enabled:true,outputPath:"/404.html"}}],
     sitemap:{enabled:false}
    }),
    react(),tailwindcss()

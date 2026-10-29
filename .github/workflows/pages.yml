@@ -85,6 +85,8 @@ jobs:
         run: node scripts/prepare-pages.mjs
       - name: Verify catalogue sources and photographs
         run: node scripts/verify-catalog.mjs
+      - name: Test separate car categories and shareable filters
+        run: bun test tests/v2-catalog.test.ts
       - name: Type check
         run: bun run typecheck
       - name: Build static website

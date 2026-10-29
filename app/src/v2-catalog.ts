@@ -1,0 +1,54 @@
+import {vehicles,type Vehicle} from "./site-data";
+import {equipmentFor,equipmentOptions,type Localized} from "./v2-content";
+
+export const powertrains:{id:string;label:Localized;description:Localized}[]=[
+ {id:"electric",label:{en:"Electric",ar:"كهربائية"},description:{en:"A different kind of energy.",ar:"طاقة جديدة لكل رحلة."}},
+ {id:"hybrid",label:{en:"Hybrid",ar:"هايبرد"},description:{en:"The best of both worlds.",ar:"مرونة تجمع مصدرَي الطاقة."}},
+ {id:"gasoline",label:{en:"Petrol",ar:"بنزين"},description:{en:"The familiar feeling of the open road.",ar:"متعة الطريق بأسلوبك المعتاد."}},
+];
+export const bodyStyles:{id:string;source:string;label:Localized}[]=[
+ {id:"suv",source:"SUV",label:{en:"SUV",ar:"SUV"}},
+ {id:"sedan",source:"Sedan",label:{en:"Sedan",ar:"سيدان"}},
+ {id:"pickup",source:"Pickup",label:{en:"Pickup",ar:"بيك أب"}},
+ {id:"van",source:"Van",label:{en:"Van",ar:"فان"}},
+ {id:"coupe",source:"Coupe",label:{en:"Coupé",ar:"كوبيه"}},
+ {id:"shooting-brake",source:"Shooting brake",label:{en:"Shooting brake",ar:"شوتينغ بريك"}},
+ {id:"targa",source:"Targa",label:{en:"Targa",ar:"تارغا"}},
+ {id:"truck",source:"Refrigerated truck",label:{en:"Refrigerated truck",ar:"شاحنة مبردة"}},
+];
+export const bodyStyleFor=(vehicle:Vehicle)=>bodyStyles.find(body=>body.source===vehicle.type.en.split(" · ")[0])?.id??"other";
+export type CatalogFilters={powertrain:string;body:string;brand:string;equipment:string;query:string;sort:string};
+export const defaultFilters:CatalogFilters={powertrain:"all",body:"all",brand:"all",equipment:"all",query:"",sort:"featured"};
+const normalized=(value:string)=>value.normalize("NFKD").replace(/[\u0300-\u036f\u064b-\u065f]/g,"").toLowerCase();
+export function filtersFromSearch(search:URLSearchParams):CatalogFilters{
+ const valid=(key:string,values:string[],fallback="all")=>{const value=search.get(key)??fallback;return values.includes(value)?value:fallback;};
+ return {
+  powertrain:valid("powertrain",["all",...powertrains.map(item=>item.id)]),
+  body:valid("body",["all",...bodyStyles.map(item=>item.id)]),
+  brand:valid("brand",["all",...new Set(vehicles.map(item=>item.brand))]),
+  equipment:valid("equipment",["all",...equipmentOptions.map(([id])=>id)]),
+  query:(search.get("q")??"").slice(0,100),sort:valid("sort",["featured","newest","price","price-desc","name"],"featured"),
+ };
+}
+export function filtersToSearch(filters:CatalogFilters):string{
+ const search=new URLSearchParams();
+ for(const key of ["powertrain","body","brand","equipment","sort"] as const)if(filters[key]!==defaultFilters[key])search.set(key,filters[key]);
+ if(filters.query.trim())search.set("q",filters.query.trim());
+ return search.toString();
+}
+export function filterVehicles(filters:CatalogFilters,items:readonly Vehicle[]=vehicles):Vehicle[]{
+ const needle=normalized(filters.query.trim());
+ const result=items.filter(vehicle=>(filters.powertrain==="all"||vehicle.categories.includes(filters.powertrain))&&(filters.body==="all"||bodyStyleFor(vehicle)===filters.body)&&(filters.brand==="all"||vehicle.brand===filters.brand)&&(filters.equipment==="all"||equipmentFor(vehicle).some(feature=>feature.id===filters.equipment))&&normalized([vehicle.brand,vehicle.name,vehicle.year,vehicle.type.en,vehicle.type.ar,...equipmentFor(vehicle).flatMap(feature=>[feature.label.en,feature.label.ar])].join(" ")).includes(needle));
+ if(filters.sort==="newest")result.sort((a,b)=>Number(b.year)-Number(a.year));
+ if(filters.sort==="price"||filters.sort==="price-desc")result.sort((a,b)=>{
+  if(!a.price)return b.price?1:0;if(!b.price)return -1;
+  return (a.price.amount-b.price.amount)*(filters.sort==="price-desc"?-1:1);
+ });
+ if(filters.sort==="name")result.sort((a,b)=>(a.brand+" "+a.name).localeCompare(b.brand+" "+b.name));
+ return result;
+}
+
+export const navigationCopy={
+ en:{home:"Home",cars:"Cars",features:"Features",updates:"Showroom",contact:"Visit us",powertrain:"01 / Choose your power",body:"02 / Find your shape",powerTitle:"What drives you?",bodyTitle:"A car for your kind of life.",allPower:"All powertrains",allBody:"All body styles",powerFilter:"Powertrain",bodyFilter:"Body style",illustration:"Category illustrations. Explore individual listings for photographs of the actual cars.",featuredTitle:"A few to get you started.",viewAll:"View all cars",backCars:"Back to cars",related:"More like this.",trade:"Ready for a change?",tradeBody:"Talk to AutoMall about trading in your current car. Any offer follows inspection and a final agreement.",tradeAction:"Discuss a trade-in",highPrice:"Price: high to low",byName:"Name: A–Z",notFound:"This car could not be found.",notFoundBody:"Browse the current collection or ask the showroom for help.",detailKicker:"THE DETAILS / YOUR NEXT DRIVE",showroomTitle:"From the showroom.",contactTitle:"Meet your next drive.",featureTitle:"The details make the drive.",catalogTitle:"Find your next drive.",catalogBody:"Choose a powertrain, then a body style. Refine the results to find what fits.",seeFeatures:"Explore the features"},
+ ar:{home:"الرئيسية",cars:"السيارات",features:"التجهيزات",updates:"أخبار المعرض",contact:"زرنا",powertrain:"01 / اختر مصدر الطاقة",body:"02 / اختر شكل سيارتك",powerTitle:"كيف تحب أن تنطلق؟",bodyTitle:"سيارة تناسب أسلوب حياتك.",allPower:"كل أنظمة الحركة",allBody:"كل أنواع الهيكل",powerFilter:"نظام الحركة",bodyFilter:"نوع الهيكل",illustration:"صور توضيحية للفئات. تجد صور السيارات الفعلية داخل كل إعلان.",featuredTitle:"خيارات تستحق أن تبدأ بها.",viewAll:"عرض كل السيارات",backCars:"العودة إلى السيارات",related:"خيارات قد تعجبك.",trade:"حان وقت التغيير؟",tradeBody:"تحدث مع أوتومول عن استبدال سيارتك الحالية. يخضع أي عرض للفحص والاتفاق النهائي.",tradeAction:"ناقش الاستبدال",highPrice:"السعر: من الأعلى للأقل",byName:"الاسم: أ–ي",notFound:"تعذر العثور على هذه السيارة.",notFoundBody:"تصفح التشكيلة الحالية أو تواصل مع المعرض للمساعدة.",detailKicker:"التفاصيل / سيارتك القادمة",showroomTitle:"من داخل المعرض.",contactTitle:"تعرف على سيارتك القادمة.",featureTitle:"التفاصيل تصنع متعة القيادة.",catalogTitle:"اعثر على سيارتك القادمة.",catalogBody:"اختر نظام الحركة، ثم نوع الهيكل. حدد بقية الخيارات لتصل إلى ما يناسبك.",seeFeatures:"اكتشف التجهيزات"},
+};
