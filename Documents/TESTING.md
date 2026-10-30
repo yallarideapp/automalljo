@@ -94,3 +94,11 @@ The catalogue remains the public-listing snapshot checked on 29 October 2026. Cu
 - Browser review covered both homepage languages at 320, 390, 900 and 1280 px (eight layouts): one banner, one search, one category group, six featured cars and no horizontal overflow. Brand and body menus remained inside the phone viewport; no browser warnings/errors were reported.
 - Native homepage form submission for electric + BMW + sedan opened the catalogue with all three URL parameters and returned two listings.
 - Production verified: GitHub Actions run `40999975787` passed the build and Pages deployment for commit `afefc7d3e58d01d11af0e6316be293076ca8e85c`. The live homepage displays the BMW banner, search, category row and six featured cars. Submitting electric + BMW + sedan returned two listings with all three URL parameters; no browser warnings/errors occurred. Proof screenshot: `automall-banner-search-live.jpg`.
+
+## 30 October 2026 — Phone photo banner and sideways featured cars
+
+- Phone banner now keeps the BMW photograph behind its copy, with a dark gradient, readable calls to action and a top vehicle badge. The crop shows the vehicle clearly at 320–430 px.
+- The six homepage featured cars use native horizontal scrolling and snap alignment on phones, with a next-card peek, a visible scrollbar, 44 px previous/next controls and Arrow/Home/End keyboard support. Buttons disable at the edges; scrolling respects reduced motion. Desktop retains the three-column grid. Search, categories, logos, body icons, galleries and EV ranges remain.
+- Full typecheck, production build and static verification of all 156 localized pages passed. Browser checks covered Arabic and English at 320, 390, 430 and 1280 px: no document overflow, six cards in every layout, scrollable phone rows and the unchanged desktop grid.
+- Native horizontal scrolling advanced the Arabic row; arrows and Home/End reached both ends in both languages, with correct disabled buttons. No browser warnings/errors were reported.
+- Live deployment verification follows publication.
