@@ -889,3 +889,172 @@
 }
 .automall-v2{--v2-width:1200px}
 .v2-brand,.v2-dealer-hero-model,.v2-home-contact-grid>a{min-height:44px}
+
+/* Refined split homepage: keep the original showroom composition compact. */
+.v2-header{position:relative;inset:auto;min-height:90px;padding-block:15px}
+.v2-nav{gap:20px;min-height:48px;padding:4px 20px;border:1px solid var(--v2-line);border-radius:99px;background:var(--v2-night)}
+.v2-nav>a{min-height:40px;padding-block:8px;border-bottom:0;font-size:12px}
+.v2-nav>a[aria-current=page]{border-bottom:0;color:var(--v2-orange)}
+.v2-nav>a[aria-current=page]:after{content:"";width:4px;height:4px;flex-shrink:0;margin-inline-start:6px;border-radius:50%;background:var(--v2-orange)}
+.v2-header-chat{min-height:44px;padding:10px 18px;border-color:var(--v2-orange);border-radius:99px;background:var(--v2-orange);color:var(--v2-night)}
+.v2-header-chat:hover{background:#f49d5d;color:var(--v2-night)}
+.v2-home-refined .v2-hero{grid-template-columns:minmax(0,.9fr) minmax(0,1.2fr);gap:24px 45px;align-items:center;min-height:0;padding-block:45px 24px}
+.v2-home-refined .v2-hero-copy{padding-bottom:0}
+.v2-home-refined .v2-hero .v2-eyebrow{font-size:10px;margin-bottom:18px}
+.v2-home-refined .v2-hero h1{font-size:clamp(58px,5.1vw,72px);line-height:1.06;letter-spacing:-.055em;max-width:540px}
+.automall-v2[dir=rtl] .v2-home-refined .v2-hero h1{font-size:clamp(48px,4.2vw,58px);line-height:1.35;letter-spacing:-.025em}
+.v2-home-refined .v2-hero-description{max-width:370px;font-size:14px;line-height:1.85;margin-top:20px}
+.v2-home-refined .v2-hero-ctas{gap:24px;margin-top:25px}
+.v2-home-refined .v2-button{min-height:48px;padding:12px 22px;border-radius:99px}
+.v2-home-refined .v2-hero-ctas .v2-text-link{display:inline-flex;min-height:44px;font-size:12px;gap:15px}
+.v2-home-refined .v2-hero-visual{padding-top:0}
+.v2-home-refined .v2-hero-photo{aspect-ratio:1.9;max-height:310px;border:1px solid #ed873847;border-radius:12px;background:var(--v2-night)}
+.v2-home-refined .v2-hero-photo>img{object-fit:contain}
+.v2-home-refined .v2-spotlight{flex-direction:row;align-items:center;gap:15px;padding-block:14px 15px}
+.v2-home-refined .v2-mini-label{font-size:9px;margin-bottom:2px}
+.v2-home-refined .v2-spotlight-model{min-height:36px;font-size:24px;gap:12px;line-height:1.3}
+.v2-home-refined .v2-spotlight-year{font-size:10px;margin-top:2px;max-width:none}
+.v2-home-refined .v2-hero-controls{gap:2px;height:auto;margin-top:0;align-self:center}
+.v2-home-refined .v2-hero-controls>button{width:44px;min-width:44px;height:44px;border:1px solid transparent;border-radius:50%;font-size:20px}
+.v2-home-refined .v2-hero-controls>button:hover{border-color:var(--v2-line)}
+.v2-home-refined .v2-hero-controls>span{font-size:10px}
+.v2-home-refined .v2-hero-facts{gap:14px;padding-top:16px}
+.v2-home-refined .v2-hero-facts>div{flex-direction:row;align-items:center;gap:9px}
+.v2-home-refined .v2-hero-facts .vehicle-feature-icon{width:21px;height:21px}
+.v2-home-refined .v2-hero-facts small{font-size:8px;margin-bottom:2px}
+.v2-home-refined .v2-hero-facts strong{font-size:11px;line-height:1.5}
+.v2-home-refined .v2-hero-bottom{grid-template-columns:1fr 1.65fr 44px;gap:24px;margin-top:0;padding-block:20px 0}
+.v2-home-refined .v2-hero-bottom>p{font-size:12px}
+.v2-home-refined .v2-stats{gap:25px}
+.v2-home-refined .v2-stats>div{display:flex;align-items:center;gap:11px}
+.v2-home-refined .v2-stats strong{font-size:29px;line-height:1.2}
+.v2-home-refined .v2-stats>div>span{display:block;max-width:90px;font-size:9px;margin-top:0}
+.v2-home-refined .v2-category-section{padding-block:50px 28px}
+.v2-home-refined .v2-section-heading{gap:28px;margin-bottom:28px;align-items:center}
+.v2-home-refined .v2-section-heading h2{font-size:32px;line-height:1.4;letter-spacing:-.025em}
+.v2-home-refined .v2-section-heading .v2-eyebrow{font-size:9px;margin-bottom:9px}
+.v2-home-refined .v2-category-grid[data-kind=powertrain]{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.v2-home-refined .v2-category-card{border-radius:12px;min-height:44px}
+.v2-home-refined .v2-category-card>img{aspect-ratio:1.8;padding:4px 9px 0}
+.v2-home-refined .v2-category-label{padding:17px 20px 18px;gap:12px}
+.v2-home-refined .v2-category-label h3{font-size:23px;line-height:1.35}
+.v2-home-refined .v2-category-label p{font-size:11px;margin-top:5px}
+.v2-home-refined .v2-category-label small{font-size:11px;line-height:1.7;margin-top:7px;min-height:3.4em;max-width:235px}
+.v2-home-refined .v2-category-note{font-size:9px;margin-top:13px}
+.v2-home-refined .v2-home-featured{padding-block:30px 52px}
+.v2-home-refined .v2-home-featured .v2-car-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.v2-home-refined .v2-home-featured .v2-section-heading>.v2-text-link{margin-top:0}
+.v2-refined-contact{display:flex;align-items:center;justify-content:space-between;gap:30px;padding-block:29px 32px;border-block:1px solid var(--v2-line);margin-bottom:27px}
+.v2-refined-contact>div{min-width:0}
+.v2-refined-contact .v2-eyebrow{font-size:9px;margin-bottom:8px;color:var(--v2-orange)}
+.v2-refined-contact h2{font-size:28px;line-height:1.4;letter-spacing:-.025em}
+.v2-refined-contact p:not(.v2-eyebrow){font-size:12px;line-height:1.8;color:var(--v2-silver);margin-top:9px}
+.v2-refined-contact>.v2-button{flex-shrink:0}
+@media(max-width:1180px){
+ .v2-home-refined .v2-hero{column-gap:30px}
+ .v2-home-refined .v2-hero h1{font-size:60px}
+ .automall-v2[dir=rtl] .v2-home-refined .v2-hero h1{font-size:50px}
+ .v2-home-refined .v2-spotlight-model{font-size:21px}
+ .v2-home-refined .v2-stats>div{gap:9px}
+ .v2-home-refined .v2-category-label{padding-inline:17px}
+ .v2-home-refined .v2-category-label h3{font-size:21px}
+}
+@media(max-width:960px){
+ .v2-header{min-height:82px;padding-block:14px}
+ .v2-nav{display:none}
+ .v2-nav.is-open{display:flex;flex-direction:column;align-items:stretch;gap:0;min-height:0;padding:12px 18px;border-radius:12px}
+ .v2-nav.is-open>a{min-height:48px;padding-block:10px;border-bottom:1px solid var(--v2-line);font-size:14px}
+ .v2-nav.is-open>a[aria-current=page]{border-bottom-color:var(--v2-line)}
+ .v2-home-refined .v2-hero{gap:24px;padding-top:35px}
+ .v2-home-refined .v2-hero h1{font-size:51px}
+ .automall-v2[dir=rtl] .v2-home-refined .v2-hero h1{font-size:43px}
+ .v2-home-refined .v2-hero-description{font-size:13px;margin-top:17px}
+ .v2-home-refined .v2-hero-ctas{gap:13px;margin-top:21px}
+ .v2-home-refined .v2-hero-ctas .v2-button{font-size:11px;padding-inline:17px;gap:15px}
+ .v2-home-refined .v2-hero-ctas .v2-text-link{font-size:11px;gap:9px}
+ .v2-home-refined .v2-hero-photo{aspect-ratio:1.6}
+ .v2-home-refined .v2-spotlight{flex-direction:column;align-items:stretch;gap:8px}
+ .v2-home-refined .v2-hero-controls{align-self:flex-end}
+ .v2-home-refined .v2-hero-facts{gap:10px}
+ .v2-home-refined .v2-hero-facts>div{flex-direction:column;align-items:flex-start;gap:6px}
+ .v2-home-refined .v2-hero-bottom{grid-template-columns:.8fr 1.6fr 44px;gap:18px}
+ .v2-home-refined .v2-stats{gap:14px}
+ .v2-home-refined .v2-stats>div{display:block}
+ .v2-home-refined .v2-stats>div>span{margin-top:5px}
+ .v2-home-refined .v2-stats strong{font-size:27px}
+ .v2-home-refined .v2-category-grid[data-kind=powertrain]{gap:14px}
+ .v2-home-refined .v2-category-label{padding:15px 14px;gap:8px}
+ .v2-home-refined .v2-category-label h3{font-size:19px}
+ .v2-home-refined .v2-category-label>span:last-child{min-width:36px;min-height:36px;font-size:19px}
+ .v2-home-refined .v2-category-label small{font-size:10px;min-height:5.1em}
+ .v2-home-refined .v2-home-featured .v2-car-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+}
+@media(max-width:700px){
+ .v2-header{min-height:74px;padding-block:12px}
+ .v2-home-refined .v2-hero{grid-template-columns:minmax(0,1fr);gap:27px;padding-block:30px 21px}
+ .v2-home-refined .v2-hero .v2-eyebrow{font-size:9px;margin-bottom:13px}
+ .v2-home-refined .v2-hero h1{font-size:clamp(43px,10.5vw,58px);line-height:1.08;letter-spacing:-.045em}
+ .automall-v2[dir=rtl] .v2-home-refined .v2-hero h1{font-size:clamp(36px,9.7vw,43px);line-height:1.38;letter-spacing:-.02em}
+ .v2-home-refined .v2-hero-description{font-size:13px;line-height:1.85;margin-top:14px;max-width:430px}
+ .v2-home-refined .v2-hero-ctas{gap:22px;margin-top:20px}
+ .v2-home-refined .v2-hero-ctas .v2-button{min-height:46px;padding:11px 19px;font-size:12px;gap:20px}
+ .v2-home-refined .v2-hero-ctas .v2-text-link{font-size:11px;gap:12px}
+ .v2-home-refined .v2-hero-photo{aspect-ratio:1.65;max-height:330px;border-radius:11px}
+ .v2-home-refined .v2-spotlight{flex-direction:row;align-items:center;gap:10px;padding-block:12px}
+ .v2-home-refined .v2-spotlight-model,.automall-v2[dir=rtl] .v2-home-refined .v2-spotlight-model{font-size:20px;gap:9px;line-height:1.3;min-height:34px}
+ .v2-home-refined .v2-mini-label{font-size:8px}
+ .v2-home-refined .v2-spotlight-year{font-size:9px;max-width:190px}
+ .v2-home-refined .v2-hero-controls{align-self:center;gap:0}
+ .v2-home-refined .v2-hero-controls>span{font-size:9px}
+ .v2-home-refined .v2-hero-facts{gap:12px;padding-top:14px}
+ .v2-home-refined .v2-hero-facts>div{flex-direction:row;align-items:center;gap:7px}
+ .v2-home-refined .v2-hero-facts .vehicle-feature-icon{width:20px;height:20px}
+ .v2-home-refined .v2-hero-facts small{font-size:8px}
+ .v2-home-refined .v2-hero-facts strong{font-size:10px}
+ .v2-home-refined .v2-hero-bottom{grid-template-columns:minmax(0,1fr);gap:14px;padding-top:18px}
+ .v2-home-refined .v2-hero-bottom>p{font-size:11px}
+ .v2-home-refined .v2-stats{gap:15px}
+ .v2-home-refined .v2-stats>div{display:flex;gap:9px}
+ .v2-home-refined .v2-stats strong{font-size:25px}
+ .v2-home-refined .v2-stats>div>span{font-size:8px;max-width:65px;margin-top:0}
+ .v2-home-refined .v2-category-section{padding-block:32px 22px}
+ .v2-home-refined .v2-section-heading{gap:16px;align-items:center;flex-direction:row;margin-bottom:20px}
+ .v2-home-refined .v2-section-heading h2{font-size:27px;line-height:1.4}
+ .v2-home-refined .v2-section-heading .v2-eyebrow{font-size:8px;margin-bottom:7px}
+ .v2-home-refined .v2-category-grid[data-kind=powertrain]{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+ .v2-home-refined .v2-category-card{border-radius:10px}
+ .v2-home-refined .v2-category-card>img{height:100px;aspect-ratio:auto;padding:0 2px;object-fit:contain}
+ .v2-home-refined .v2-category-label{padding:11px 9px 12px;min-height:66px;gap:0}
+ .v2-home-refined .v2-category-label h3,.automall-v2[dir=rtl] .v2-home-refined .v2-category-label h3{font-size:14px;line-height:1.4;letter-spacing:0}
+ .v2-home-refined .v2-category-label p{font-size:10px;margin-top:4px}
+ .v2-home-refined .v2-category-label small,.v2-home-refined .v2-category-label>span:last-child{display:none}
+ .v2-home-refined .v2-category-note{font-size:8px;margin-top:11px;line-height:1.8}
+ .v2-home-refined .v2-home-featured{padding-block:22px 35px}
+ .v2-home-refined .v2-home-featured .v2-section-heading>.v2-text-link{font-size:10px;gap:10px;margin-top:0;max-width:120px}
+ .v2-home-refined .v2-home-featured .v2-car-grid{grid-template-columns:minmax(0,1fr);gap:20px}
+ .v2-refined-contact{align-items:flex-start;flex-direction:column;gap:18px;padding-block:24px 27px;margin-bottom:12px}
+ .v2-refined-contact h2{font-size:25px}
+ .v2-refined-contact p:not(.v2-eyebrow){font-size:11px;margin-top:8px}
+ .v2-refined-contact>.v2-button{min-height:46px;font-size:12px;padding:11px 20px}
+}
+@media(max-width:360px){
+ .v2-home-refined .v2-hero{padding-top:25px;gap:25px}
+ .v2-home-refined .v2-hero h1{font-size:42px}
+ .automall-v2[dir=rtl] .v2-home-refined .v2-hero h1{font-size:35px}
+ .v2-home-refined .v2-hero-ctas{gap:16px}
+ .v2-home-refined .v2-hero-ctas .v2-button{font-size:11px;padding-inline:16px;gap:15px}
+ .v2-home-refined .v2-hero-ctas .v2-text-link{font-size:10px;gap:8px}
+ .v2-home-refined .v2-spotlight{flex-direction:column;align-items:stretch;gap:4px}
+ .v2-home-refined .v2-hero-controls{align-self:flex-end}
+ .v2-home-refined .v2-hero-facts{gap:10px}
+ .v2-home-refined .v2-hero-facts>div{flex-direction:column;align-items:flex-start;gap:6px}
+ .v2-home-refined .v2-stats{gap:10px}
+ .v2-home-refined .v2-stats>div{display:block}
+ .v2-home-refined .v2-stats strong{font-size:25px}
+ .v2-home-refined .v2-stats>div>span{margin-top:4px;max-width:none}
+ .v2-home-refined .v2-category-grid[data-kind=powertrain]{gap:8px}
+ .v2-home-refined .v2-category-label{padding-inline:7px}
+ .v2-home-refined .v2-category-label h3,.automall-v2[dir=rtl] .v2-home-refined .v2-category-label h3{font-size:13px}
+ .v2-home-refined .v2-section-heading h2{font-size:25px}
+ .v2-refined-contact h2{font-size:23px}
+}
