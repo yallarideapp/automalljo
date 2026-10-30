@@ -86,3 +86,11 @@ The catalogue remains the public-listing snapshot checked on 29 October 2026. Cu
 - Browser review covered home/catalogue in Arabic and English at 320, 390, 900 and 1280 px (16 layouts): no horizontal overflow, missing primary heading or broken loaded image. Each homepage had one category group, six vehicle cards, no finder and no additional-filter control. Actual desktop, phone and tablet screenshots were reviewed.
 - Hero next/previous controls advanced to Jetour G700 and returned to Mercedes-Benz G580. Electric category navigation returned 27 cars; sedan narrowed to five and BMW to two, retaining the body icon, brand logo and URL parameters.
 - Production verified: GitHub Actions run `40983220266` passed build and Pages deployment for commit `9c3c2aabf2a2b70cd028500d48520eff2663b7d1`. Arabic and English homepages show the restored split design; live hero navigation advances to Jetour G700 and the electric category returns 27 cars. Desktop and 390 px phone layouts have no horizontal overflow or additional-filter controls; no browser warnings/errors were reported. Proof screenshot: `automall-refined-home-live.jpg`.
+
+## 30 October 2026 — Restore banner and homepage search
+
+- Restored the earlier BMW i5 photograph banner and homepage GET search. Kept the current illustrated category row, six compact featured vehicles, contact strip, pill navigation, genuine brand logos, body-style icons and all catalogue/detail features.
+- Typecheck, production build and static verification passed for all 156 localized pages, including complete vehicle galleries and advertised EV ranges. The verifier now requires the photo banner and search alongside the existing categories and featured cars.
+- Browser review covered both homepage languages at 320, 390, 900 and 1280 px (eight layouts): one banner, one search, one category group, six featured cars and no horizontal overflow. Brand and body menus remained inside the phone viewport; no browser warnings/errors were reported.
+- Native homepage form submission for electric + BMW + sedan opened the catalogue with all three URL parameters and returned two listings.
+- Live deployment verification is recorded after publication.

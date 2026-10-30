@@ -39,7 +39,7 @@ for(const path of v2Paths)if(!hasClass(htmlByPath.get(path),"automall-v2"))throw
 for(const prefix of ["","/ar"]){
  const home=htmlByPath.get(prefix+"/v2/"),cars=htmlByPath.get(prefix+"/v2/cars/");
  if(home.includes('id="v2-collection"')||home.includes('id="v2-posts-heading"'))throw new Error("V2 homepage still includes a full catalogue or posts page: "+prefix);
- if(!hasClass(home,"v2-home-refined")||!hasClass(home,"v2-hero")||!hasClass(home,"v2-category-grid")||!hasClass(home,"v2-home-featured"))throw new Error("V2 homepage is missing its split hero, category links or featured vehicles: "+prefix);
+ if(!hasClass(home,"v2-home-refined")||!hasClass(home,"v2-dealer-hero")||!hasClass(home,"v2-home-search")||!hasClass(home,"v2-category-grid")||!hasClass(home,"v2-home-featured"))throw new Error("V2 homepage is missing its photo banner, search form, category links or featured vehicles: "+prefix);
  if(!hasClass(cars,"v2-powertrain-tabs")||!hasClass(cars,"v2-body-filters"))throw new Error("V2 catalogue needs separate powertrain and body filters: "+prefix);
  if(hasClass(cars,"v2-hero"))throw new Error("Catalogue still includes the homepage hero: "+prefix);
  if(!/<svg\b[^>]*class="[^\"]*\bvehicle-feature-icon\b[^\"]*"/.test(cars))throw new Error("Missing prerendered vehicle feature icons: "+prefix);
