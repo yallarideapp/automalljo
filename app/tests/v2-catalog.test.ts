@@ -48,7 +48,7 @@ describe("AutoMall V2 catalogue navigation",()=>{
  });
 
  test("serializes filters for reload, links, back navigation and language switching",()=>{
-  const selected={powertrain:"electric",body:"sedan",brand:"BMW",equipment:"hud",query:"BMW i5",sort:"price-desc"};
+  const selected={powertrain:"electric",body:"sedan",brand:"BMW",equipment:"hud",query:"BMW i5",sort:"price-desc",yearFrom:"2024",yearTo:"2026"};
   const serialized=filtersToSearch(selected);
   expect(serialized.startsWith("?")).toBe(false);
   expect(filtersFromSearch(new URLSearchParams(serialized))).toEqual(selected);
@@ -82,5 +82,12 @@ describe("AutoMall V2 catalogue navigation",()=>{
    expect(pagePaths).toContain("/ar/v2/car/"+id+"/");
   }
   for(const prefix of ["","/ar"])for(const page of ["","cars/","features/","updates/","contact/"])expect(pagePaths).toContain(prefix+"/v2/"+page);
+ });
+ test("filters by a from-to model year range",()=>{
+  const ranged=filterVehicles({...defaultFilters,yearFrom:"2020",yearTo:"2025"});
+  expect(ranged.length).toBeGreaterThan(0);
+  expect(ranged.every(vehicle=>Number(vehicle.year)>=2020&&Number(vehicle.year)<=2025)).toBe(true);
+  expect(filterVehicles({...defaultFilters,yearFrom:"2027"}).every(vehicle=>Number(vehicle.year)===2027)).toBe(true);
+  expect(filtersFromSearch(new URLSearchParams("from=1990&to=2026")).yearFrom).toBe("all");
  });
 });
