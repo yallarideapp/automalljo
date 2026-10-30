@@ -102,3 +102,11 @@ The catalogue remains the public-listing snapshot checked on 29 October 2026. Cu
 - Full typecheck, production build and static verification of all 156 localized pages passed. Browser checks covered Arabic and English at 320, 390, 430 and 1280 px: no document overflow, six cards in every layout, scrollable phone rows and the unchanged desktop grid.
 - Native horizontal scrolling advanced the Arabic row; arrows and Home/End reached both ends in both languages, with correct disabled buttons. No browser warnings/errors were reported.
 - Production verified: GitHub Actions run `41001255895` passed build and Pages deployment for commit `89a23d9cf6c8a49d25c2bfa54704847cff904c0e`. At 390 px, the live banner uses the photograph behind the copy and the six featured cars scroll sideways. Native horizontal scrolling and the next button advanced through the row; End reached the final car and disabled next. No page overflow or browser warnings/errors were reported. Proof screenshots: `automall-phone-banner-live.jpg` and `automall-phone-cars-live.jpg`.
+
+## 30 October 2026 — Four cars inside the banner
+
+- Replaced the single BMW banner image with four distinct dealer vehicles inside the banner itself: BMW i5, Mercedes-Benz G580, Jetour G700 and Porsche 911. Native sideways swiping, cycling arrows, four direct-selection dots and a 1–4 counter work on desktop and phones. The active vehicle badge and detail link follow the visible car.
+- Added a static-output regression check requiring banner photographs from four distinct vehicle listings. Search, illustrated categories, the separate featured-car row, all vehicle galleries and EV ranges remain intact.
+- Browser checks covered Arabic and English at 320, 390, 900 and 1280 px. All four banner photographs appeared with matching detail URLs, no broken loaded image and no document overflow. Native horizontal scrolling over the banner copy advanced from BMW to G580. Next wrapped from Porsche to BMW; previous wrapped back, and resizing kept the selected car.
+- The carousel uses native scroll snapping, keyboard navigation and reduced-motion handling; no automatic advancing or new dependency was added.
+- Production verification follows deployment.
