@@ -10,7 +10,7 @@
 .v2-showcase .v2-showcase-bar-actions{display:flex;align-items:center;justify-self:end;justify-content:flex-end;gap:14px;min-width:0}
 .v2-showcase .v2-showcase-language{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;font-size:11px;line-height:1.4;color:var(--v2-silver)}
 .v2-showcase .v2-showcase-language:hover{color:var(--v2-orange)}
-.v2-showcase .v2-showcase-visit{justify-self:end;display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:44px;padding:10px 17px;border-radius:99px;background:var(--v2-orange);color:var(--v2-night);font-size:12px;line-height:1.5;text-align:center}
+.v2-showcase .v2-showcase-visit{justify-self:end;display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:44px;padding:10px 17px;border-radius:99px;background:var(--v2-orange);color:var(--v2-on-accent);font-size:12px;line-height:1.5;text-align:center}
 .v2-showcase .v2-showcase-top{display:grid;grid-template-columns:minmax(0,1fr) minmax(420px,.95fr);align-items:start;gap:38px;padding-top:38px}
 .v2-showcase .v2-showcase-title{display:grid;grid-template-columns:42px minmax(0,1fr);column-gap:12px;min-width:0}
 .v2-showcase .v2-showcase-brand{display:flex;align-items:center;align-self:start;grid-column:1;grid-row:1;gap:0;margin:5px 0 0;font-size:12px;color:var(--v2-silver)}
@@ -163,3 +163,9 @@
 @media(prefers-reduced-motion:reduce){
  .v2-showcase .v2-gallery-controls>button{transition:none}
 }
+
+/* car page: the whole photo is shown, letterboxed instead of cropped */
+.v2-showcase .v2-dialog-image{object-fit:contain;object-position:center;background:var(--v2-photo-bg)}
+.v2-showcase .v2-showcase-gallery img{object-fit:contain;background:var(--v2-photo-bg)}
+.v2-showcase .v2-showcase-theme{width:40px;height:40px;min-width:40px}
+@media(max-width:700px){.v2-showcase .v2-showcase-visit{display:none}.v2-showcase .v2-showcase-bar-actions{max-width:none}}
