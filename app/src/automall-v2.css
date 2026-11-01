@@ -1291,3 +1291,13 @@ html[data-v2-theme=light] .automall-v2 .v2-picker-panel{box-shadow:0 26px 50px -
 @keyframes v2-sheet-up{from{transform:translateY(100%)}}
 @keyframes v2-fade{from{opacity:0}}
 @media(prefers-reduced-motion:reduce){.v2-picker-panel,.v2-picker-scrim{animation:none}}
+
+/* filter boxes: even inner spacing, arrow kept clear of the border, text lined up across boxes */
+.automall-v2 .v2-picker .v2-visual-trigger{gap:12px;padding-block:8px;padding-inline:14px 18px}
+.v2-picker .v2-option-value{gap:12px}
+.v2-picker .v2-visual-trigger .v2-option-visual{display:grid;place-items:center;flex:0 0 34px;width:34px;min-width:34px}
+.v2-picker .v2-visual-trigger .v2-option-visual>*{max-width:100%}
+.v2-picker .v2-picker-chevron{width:14px;height:14px;margin-inline-start:auto;flex-shrink:0}
+@media(max-width:960px){.automall-v2 .v2-picker .v2-visual-trigger{padding-inline:12px 16px;gap:10px}.v2-picker .v2-option-value{gap:10px}}
+@media(max-width:700px){.automall-v2 .v2-picker .v2-visual-trigger{padding-inline:12px 16px;gap:8px}.v2-picker .v2-option-value{gap:8px}.v2-picker .v2-visual-trigger .v2-option-visual{flex-basis:30px;width:30px;min-width:30px}.v2-picker .v2-picker-chevron{width:13px;height:13px}}
+@media(max-width:360px){.automall-v2 .v2-picker .v2-visual-trigger{padding-inline:10px 14px}.v2-picker .v2-visual-trigger .v2-option-visual{flex-basis:26px;width:26px;min-width:26px}}
