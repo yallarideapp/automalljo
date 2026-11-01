@@ -4,7 +4,7 @@ export type VehicleFeatureName=
  |"range"|"battery"|"charge"|"hybrid"|"awd"|"panorama"|"camera360"
  |"heatedSeats"|"ventilatedSeats"|"leather"|"cruise"|"hud"|"keyless"
  |"powerTailgate"|"carplay"|"parkingSensors"|"safety"|"seats"|"gearbox"
- |"engine"|"mileage"|"power"|"torque"|"energy"|"emblem"|"featured"|"newest"|"priceUp"|"priceDown"|"alphabet";
+ |"engine"|"mileage"|"power"|"torque"|"energy"|"emblem"|"featured"|"newest"|"priceUp"|"priceDown"|"alphabet"|"piston";
 
 const seat=<><path d="m8 4 1.2 7.2a2 2 0 0 0 2 1.7H16a2 2 0 0 1 2 2v2H9a3 3 0 0 1-3-2.5L4.7 6a1.8 1.8 0 0 1 1.8-2Z"/><path d="M8 17v3m9-3v3M8 20h10"/></>;
 const icons:Record<VehicleFeatureName,ReactNode>={
@@ -37,6 +37,7 @@ const icons:Record<VehicleFeatureName,ReactNode>={
  newest:<><rect x="3.5" y="5" width="13" height="14" rx="2"/><path d="M3.5 9.5h13M7 3v4m6-4v4"/><path d="M20 20V9m-2.5 2.5L20 9l2.5 2.5"/></>,
  priceUp:<><path d="M3 12.6V4.5A1.5 1.5 0 0 1 4.5 3h8.1l5.2 5.2a1.5 1.5 0 0 1 0 2.1l-5.4 5.4a1.5 1.5 0 0 1-2.1 0Z"/><circle cx="7.6" cy="7.6" r="1.4"/><path d="M19 21v-7.5m-2.4 2.4 2.4-2.4 2.4 2.4"/></>,
  priceDown:<><path d="M3 12.6V4.5A1.5 1.5 0 0 1 4.5 3h8.1l5.2 5.2a1.5 1.5 0 0 1 0 2.1l-5.4 5.4a1.5 1.5 0 0 1-2.1 0Z"/><circle cx="7.6" cy="7.6" r="1.4"/><path d="M19 13.5V21m-2.4-2.4L19 21l2.4-2.4"/></>,
+ piston:<><rect x="6" y="3" width="12" height="8" rx="1.6"/><path d="M6 6h12M6 8.5h12M10 11l-1 5.2m5-5.2 1 5.2"/><circle cx="12" cy="18.2" r="2.8"/></>,
  alphabet:<><path d="m3 18 4-12 4 12M4.4 14h5.2M14 6h6l-6 12h6"/></>
 };
 

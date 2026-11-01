@@ -22,8 +22,24 @@ export function cardFacts(vehicle:Vehicle,lang:Lang){
  return [
   {icon:(isElectric(vehicle)?"range":vehicle.categories.includes("hybrid")?"hybrid":"engine") as VehicleFeatureName,label:lang==="ar"?(isElectric(vehicle)?"المدى المعلن":"نظام الحركة"):(isElectric(vehicle)?"Advertised range":"Powertrain"),value:isElectric(vehicle)&&vehicle.range?vehicle.range[lang]:fuel[lang]},
   {icon:"mileage" as const,label:lang==="ar"?"العداد":"Mileage",value:specValue(vehicle,"Mileage")?.[lang]??"—"},
-  {icon:"power" as const,label:lang==="ar"?"القوة والعزم":"Power · torque",value:[specValue(vehicle,"Power")?.[lang],specValue(vehicle,"Torque")?.[lang]?.replace(/ \((engine|المحرك)\)$/,"")].filter(Boolean).join(" · ")||"—"}
+  {icon:"power" as const,label:lang==="ar"?"القوة والعزم":"Power · torque",value:[specValue(vehicle,"Power")?.[lang],specValue(vehicle,"Torque")?.[lang]?.replace(/ \((engine|المحرك)\)$/,"")].filter(Boolean).join(" · ")||"—"},
+  engineFact(vehicle,lang)
  ];
+}
+/** Engine size for petrol and hybrid cars ("2.0L turbo", "4.0L V8 twin-turbo"); battery size for electric cars. */
+export function engineSize(vehicle:Vehicle,lang:Lang){
+ const engine=specValue(vehicle,"Engine / hybrid system")?.en;
+ const size=engine?.match(/\d+(?:\.\d+)?L/)?.[0];
+ if(!size)return undefined;
+ const cylinders=engine!.match(/\bV\d+\b/)?.[0];
+ const boost=/twin-turbo/.test(engine!)?(lang==="ar"?"توين تيربو":"twin-turbo"):/turbo/.test(engine!)?(lang==="ar"?"تيربو":"turbo"):undefined;
+ return [size,cylinders,boost].filter(Boolean).join(" ");
+}
+function engineFact(vehicle:Vehicle,lang:Lang){
+ const size=engineSize(vehicle,lang);
+ if(size||!isElectric(vehicle))return {icon:"piston" as VehicleFeatureName,label:lang==="ar"?"سعة المحرك":"Engine size",value:size??"—"};
+ const battery=specValue(vehicle,"Battery (seller stated)")?.[lang]?.replace(/\s*(Blade|بليد)$/i,"");
+ return {icon:"battery" as VehicleFeatureName,label:lang==="ar"?(battery?"البطارية":"المحرك"):(battery?"Battery":"Motor"),value:battery??(lang==="ar"?"كهربائي":"Electric")};
 }
 export const heroModels=[{id:"287516454",photo:"/assets/catalog/gallery-287516454-1.webp"},{id:"288630286",photo:"/assets/catalog/gallery-288630286-1.webp"},{id:"288440948",photo:"/assets/catalog/gallery-288440948-1.webp"}].map(item=>({...item,vehicle:vehicles.find(v=>v.id===item.id)!}));
 export const copyV2={
