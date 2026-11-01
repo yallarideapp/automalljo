@@ -1301,3 +1301,18 @@ html[data-v2-theme=light] .automall-v2 .v2-picker-panel{box-shadow:0 26px 50px -
 @media(max-width:960px){.automall-v2 .v2-picker .v2-visual-trigger{padding-inline:12px 16px;gap:10px}.v2-picker .v2-option-value{gap:10px}}
 @media(max-width:700px){.automall-v2 .v2-picker .v2-visual-trigger{padding-inline:12px 16px;gap:8px}.v2-picker .v2-option-value{gap:8px}.v2-picker .v2-visual-trigger .v2-option-visual{flex-basis:30px;width:30px;min-width:30px}.v2-picker .v2-picker-chevron{width:13px;height:13px}}
 @media(max-width:360px){.automall-v2 .v2-picker .v2-visual-trigger{padding-inline:10px 14px}.v2-picker .v2-visual-trigger .v2-option-visual{flex-basis:26px;width:26px;min-width:26px}}
+
+/* long labels (common in Arabic) wrap to a second line instead of being cut mid-word */
+.v2-picker .v2-visual-trigger .v2-option-name{white-space:normal;overflow:hidden;text-overflow:clip;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-height:1.3;overflow-wrap:anywhere}
+.automall-v2[dir=rtl] .v2-picker .v2-visual-trigger{padding-inline:14px 16px;line-height:1.35}
+.automall-v2[dir=rtl] .v2-picker .v2-visual-trigger .v2-option-name{line-height:1.45;padding-block:1px}
+.automall-v2[dir=rtl] .v2-picker .v2-option-count{font-variant-numeric:tabular-nums}
+.automall-v2[dir=rtl] .v2-picker-list .v2-option-name{line-height:1.5}
+.automall-v2[dir=rtl] .v2-year-heading{letter-spacing:0}
+.automall-v2[dir=rtl] .v2-home-search-fields label,.automall-v2[dir=rtl] .v2-catalog-toolbar>div>label{text-align:start;letter-spacing:0}
+@media(max-width:700px){
+ .automall-v2[dir=rtl] .v2-picker .v2-visual-trigger{padding-inline:12px 14px}
+ .v2-picker .v2-visual-trigger .v2-option-visual{flex-basis:28px;width:28px;min-width:28px}
+ .v2-home-search-fields .v2-picker .v2-visual-trigger,.v2-catalog-toolbar .v2-picker .v2-visual-trigger{min-height:58px;height:58px;padding-block:6px}
+ .v2-home-search-fields,.v2-catalog-toolbar{align-items:start}
+}
