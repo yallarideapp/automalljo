@@ -6,8 +6,8 @@ import type {Lang} from "@/site-data";
 
 export type PickerOption={value:string;label:string;visual?:ReactNode;count?:number;keywords?:string;disabled?:boolean};
 const pickerCopy={
- en:{search:"Search",noResults:"No matches. Try another word.",close:"Close",clear:"Clear",done:"Show results",from:"From",to:"To",any:"All",searchYear:"Type a year",anyYear:"All",fromYear:"From {y}",toYear:"Up to {y}"},
- ar:{search:"ابحث",noResults:"لا توجد نتائج. جرّب كلمة أخرى.",close:"إغلاق",clear:"مسح",done:"اعرض النتائج",from:"من",to:"إلى",any:"الكل",searchYear:"اكتب السنة",anyYear:"الكل",fromYear:"من {y}",toYear:"حتى {y}"}
+ en:{search:"Search",noResults:"No matches. Try another word.",close:"Close",clear:"Clear",done:"Show results",from:"From",to:"To",any:"Any",searchYear:"Type a year",anyYear:"Any year",fromYear:"From {y}",toYear:"Up to {y}"},
+ ar:{search:"ابحث",noResults:"لا توجد نتائج. جرّب كلمة أخرى.",close:"إغلاق",clear:"مسح",done:"اعرض النتائج",from:"من",to:"إلى",any:"الكل",searchYear:"اكتب السنة",anyYear:"أي سنة",fromYear:"من {y}",toYear:"حتى {y}"}
 };
 const normalize=(value:string)=>value.normalize("NFKD").replace(/[̀-ًͯ-ٟ]/g,"").replace(/[٠-٩]/g,digit=>String("٠١٢٣٤٥٦٧٨٩".indexOf(digit))).toLowerCase().trim();
 const matches=(option:PickerOption,query:string)=>!query||normalize(option.label+" "+(option.keywords??"")).includes(query);
