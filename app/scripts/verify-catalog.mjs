@@ -26,6 +26,7 @@ for(const vehicle of catalog){
  assert.ok(vehicle.brand&&vehicle.name&&vehicle.year,`Missing identity: ${vehicle.id}`);
  assert.equal(vehicle.post,`https://jo.opensooq.com/en/search/${vehicle.id}`);
  assert.ok(vehicle.specs.length>=8,`Missing specifications: ${vehicle.id}`);
+ assert.ok(/^\d[\d,]* hp$/.test(vehicle.specs.find(spec=>spec.label.en==="Power")?.value.en??""),`Missing horsepower: ${vehicle.id}`);
  for(const spec of vehicle.specs)for(const lang of ["en","ar"])assert.ok(spec.label[lang]&&spec.value[lang],`Missing localized spec: ${vehicle.id}`);
  assert.ok(typeof vehicle.image==="string"&&vehicle.image.startsWith("/assets/catalog/"),`Missing primary photograph: ${vehicle.id}`);
  assert.ok(vehicle.gallery===undefined||Array.isArray(vehicle.gallery),`Invalid gallery: ${vehicle.id}`);

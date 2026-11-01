@@ -10,13 +10,17 @@ import {ThemeToggle} from "./v2-theme";
 export type V2VehicleDetailsProps={vehicle:Vehicle;lang:Lang;catalogHref:string;homeHref:string;languageHref?:string};
 type DetailTile={label:string;value:string|undefined;icon:ReactNode;range?:boolean};
 const detailCopy={
- en:{back:"Back to the collection",highlights:"Highlights",information:"Information",gallery:"Gallery",modelYear:"Model year",mileage:"Mileage",battery:"Battery",powertrain:"Powertrain",transmission:"Transmission",seats:"Seats",body:"Body type",condition:"Condition",enquire:"Enquire on WhatsApp",breadcrumb:"Breadcrumb",photoPicker:"Choose a vehicle photo"},
- ar:{back:"العودة إلى السيارات",highlights:"أبرز المواصفات",information:"المعلومات",gallery:"الصور",modelYear:"سنة الموديل",mileage:"المسافة المقطوعة",battery:"البطارية",powertrain:"نظام الحركة",transmission:"ناقل الحركة",seats:"المقاعد",body:"نوع الهيكل",condition:"الحالة",enquire:"استفسر عبر واتساب",breadcrumb:"مسار الصفحة",photoPicker:"اختر صورة للسيارة"}
+ en:{back:"Back to the collection",highlights:"Highlights",information:"Information",gallery:"Gallery",modelYear:"Model year",power:"Horsepower",torque:"Torque",mileage:"Mileage",battery:"Battery",powertrain:"Powertrain",transmission:"Transmission",seats:"Seats",body:"Body type",condition:"Condition",enquire:"Enquire on WhatsApp",breadcrumb:"Breadcrumb",photoPicker:"Choose a vehicle photo"},
+ ar:{back:"العودة إلى السيارات",highlights:"أبرز المواصفات",information:"المعلومات",gallery:"الصور",modelYear:"سنة الموديل",power:"القوة الحصانية",torque:"عزم الدوران",mileage:"المسافة المقطوعة",battery:"البطارية",powertrain:"نظام الحركة",transmission:"ناقل الحركة",seats:"المقاعد",body:"نوع الهيكل",condition:"الحالة",enquire:"استفسر عبر واتساب",breadcrumb:"مسار الصفحة",photoPicker:"اختر صورة للسيارة"}
 };
 const Arrow=()=> <span aria-hidden="true">↗</span>;
 const FeatureIcon=({name}:{name:VehicleFeatureName})=><VehicleFeatureIcon name={name} size={22} className="vehicle-feature-icon"/>;
-function DetailGlyph({name}:{name:"year"|"condition"}){
- return <svg className="vehicle-feature-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{name==="year"?<><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M4 10h16M8 3v4m8-4v4M8 14h3m3 0h2M8 17h3"/></>:<path d="m12 3 2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.3-4.1 5.9-.9Z"/>}</svg>;
+const glyphs={
+ year:<><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M4 10h16M8 3v4m8-4v4M8 14h3m3 0h2M8 17h3"/></>,
+ condition:<path d="m12 3 2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.3-4.1 5.9-.9Z"/>
+};
+function DetailGlyph({name}:{name:keyof typeof glyphs}){
+ return <svg className="vehicle-feature-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{glyphs[name]}</svg>;
 }
 function DetailTiles({items,className}:{items:DetailTile[];className:string}){
  return <dl className={className}>{items.filter((item):item is DetailTile&{value:string}=>!!item.value).map(item=><div className={item.range?"v2-showcase-stat v2-range-panel":"v2-showcase-stat"} key={item.label}><dt><span>{item.label}</span>{item.icon}</dt><dd>{item.value}</dd></div>)}</dl>;
@@ -38,6 +42,8 @@ export function V2VehicleDetails({vehicle,lang,catalogHref,homeHref,languageHref
   value("Battery (seller stated)")?{label:d.battery,value:value("Battery (seller stated)"),icon:<FeatureIcon name="battery"/>}:{label:d.powertrain,value:value("Fuel / powertrain"),icon:<FeatureIcon name={vehicle.categories.includes("electric")?"battery":vehicle.categories.includes("hybrid")?"hybrid":"engine"}/>}
  ];
  const highlights:DetailTile[]=[
+  {label:d.power,value:value("Power"),icon:<FeatureIcon name="power"/>},
+  {label:d.torque,value:value("Torque"),icon:<FeatureIcon name="torque"/>},
   {label:d.transmission,value:value("Transmission"),icon:<FeatureIcon name="gearbox"/>},
   {label:d.seats,value:value("Seats"),icon:<FeatureIcon name="seats"/>},
   {label:d.body,value:value("Body style")??vehicle.type[lang],icon:<BodyStyleIcon name={bodyStyleFor(vehicle)}/>},

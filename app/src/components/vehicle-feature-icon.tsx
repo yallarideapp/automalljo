@@ -4,7 +4,7 @@ export type VehicleFeatureName=
  |"range"|"battery"|"charge"|"hybrid"|"awd"|"panorama"|"camera360"
  |"heatedSeats"|"ventilatedSeats"|"leather"|"cruise"|"hud"|"keyless"
  |"powerTailgate"|"carplay"|"parkingSensors"|"safety"|"seats"|"gearbox"
- |"engine"|"mileage";
+ |"engine"|"mileage"|"power"|"torque"|"energy"|"emblem"|"featured"|"newest"|"priceUp"|"priceDown"|"alphabet";
 
 const seat=<><path d="m8 4 1.2 7.2a2 2 0 0 0 2 1.7H16a2 2 0 0 1 2 2v2H9a3 3 0 0 1-3-2.5L4.7 6a1.8 1.8 0 0 1 1.8-2Z"/><path d="M8 17v3m9-3v3M8 20h10"/></>;
 const icons:Record<VehicleFeatureName,ReactNode>={
@@ -28,7 +28,16 @@ const icons:Record<VehicleFeatureName,ReactNode>={
  seats:<><rect x="4" y="3" width="5" height="4" rx="1.3"/><rect x="15" y="3" width="5" height="4" rx="1.3"/><path d="M3.5 9h6L11 17H2Zm11 0h6l1.5 8H13ZM4 17v4m4-4v4m8-4v4m4-4v4M2 21h9m2 0h9"/></>,
  gearbox:<><path d="M6 4v15m6-15v15m6-15v7H6"/><circle cx="6" cy="4" r="1.5" fill="currentColor" stroke="none"/><circle cx="12" cy="4" r="1.5" fill="currentColor" stroke="none"/><circle cx="18" cy="4" r="1.5" fill="currentColor" stroke="none"/><circle cx="6" cy="19" r="1.5" fill="currentColor" stroke="none"/><circle cx="12" cy="19" r="1.5" fill="currentColor" stroke="none"/></>,
  engine:<><path d="M5 9h4l2-3h5v3h3l2 3v5h-3l-2 2H8l-3-3ZM3 11v5m-1-2h3M11 3h6m-3 0v3M21 11h1v7"/><path d="m12 10-2 4h3l-1 3 4-5h-3l1-2"/></>,
- mileage:<><path d="m8 3-5 18m13-18 5 18M12 3v3m0 4v4m0 4v3"/><path d="M6 12h3m6 0h3M4.5 18H9m6 0h4.5"/></>
+ mileage:<><path d="m8 3-5 18m13-18 5 18M12 3v3m0 4v4m0 4v3"/><path d="M6 12h3m6 0h3M4.5 18H9m6 0h4.5"/></>,
+ power:<><path d="M4.5 3.5h4.2v7.8a3.3 3.3 0 0 0 6.6 0V3.5h4.2v7.8a7.5 7.5 0 0 1-15 0Z"/><circle cx="6.6" cy="6.6" r=".7" fill="currentColor" stroke="none"/><circle cx="6.6" cy="10.4" r=".7" fill="currentColor" stroke="none"/><circle cx="17.4" cy="6.6" r=".7" fill="currentColor" stroke="none"/><circle cx="17.4" cy="10.4" r=".7" fill="currentColor" stroke="none"/></>,
+ torque:<><path d="M19.2 12a7.2 7.2 0 1 1-2.3-5.3"/><path d="M17.8 3.2v3.9h-3.9"/><circle cx="12" cy="12" r="2.4"/><path d="M12 9.6V7.8m2.4 4.2h1.8M12 14.4v1.8M9.6 12H7.8"/></>,
+ energy:<><path d="M4 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16M3 21h12M4 10h10"/><path d="M14 8h2.2a1.8 1.8 0 0 1 1.8 1.8v6.7a1.5 1.5 0 0 0 3 0V8l-3-3"/><path d="m9.4 12.5-1.9 3h2.2l-1.2 2.7"/></>,
+ emblem:<><path d="M12 2.8 19.5 6v5.6c0 4.6-3.1 8.2-7.5 9.6-4.4-1.4-7.5-5-7.5-9.6V6Z"/><path d="m12 7.6 1.3 2.7 3 .4-2.2 2.1.5 3-2.6-1.4-2.6 1.4.5-3-2.2-2.1 3-.4Z"/></>,
+ featured:<><path d="m12 3.2 2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8-4.2-4.1 5.8-.8Z"/></>,
+ newest:<><rect x="3.5" y="5" width="13" height="14" rx="2"/><path d="M3.5 9.5h13M7 3v4m6-4v4"/><path d="M20 20V9m-2.5 2.5L20 9l2.5 2.5"/></>,
+ priceUp:<><path d="M3 12.6V4.5A1.5 1.5 0 0 1 4.5 3h8.1l5.2 5.2a1.5 1.5 0 0 1 0 2.1l-5.4 5.4a1.5 1.5 0 0 1-2.1 0Z"/><circle cx="7.6" cy="7.6" r="1.4"/><path d="M19 21v-7.5m-2.4 2.4 2.4-2.4 2.4 2.4"/></>,
+ priceDown:<><path d="M3 12.6V4.5A1.5 1.5 0 0 1 4.5 3h8.1l5.2 5.2a1.5 1.5 0 0 1 0 2.1l-5.4 5.4a1.5 1.5 0 0 1-2.1 0Z"/><circle cx="7.6" cy="7.6" r="1.4"/><path d="M19 13.5V21m-2.4-2.4L19 21l2.4-2.4"/></>,
+ alphabet:<><path d="m3 18 4-12 4 12M4.4 14h5.2M14 6h6l-6 12h6"/></>
 };
 
 export function VehicleFeatureIcon({name,size=24,className}:{name:VehicleFeatureName;size?:number|string;className?:string}){

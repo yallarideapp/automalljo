@@ -22,7 +22,7 @@ export function cardFacts(vehicle:Vehicle,lang:Lang){
  return [
   {icon:(isElectric(vehicle)?"range":vehicle.categories.includes("hybrid")?"hybrid":"engine") as VehicleFeatureName,label:lang==="ar"?(isElectric(vehicle)?"المدى المعلن":"نظام الحركة"):(isElectric(vehicle)?"Advertised range":"Powertrain"),value:isElectric(vehicle)&&vehicle.range?vehicle.range[lang]:fuel[lang]},
   {icon:"mileage" as const,label:lang==="ar"?"العداد":"Mileage",value:specValue(vehicle,"Mileage")?.[lang]??"—"},
-  {icon:"gearbox" as const,label:lang==="ar"?"ناقل الحركة":"Transmission",value:specValue(vehicle,"Transmission")?.[lang]??"—"}
+  {icon:"power" as const,label:lang==="ar"?"القوة والعزم":"Power · torque",value:[specValue(vehicle,"Power")?.[lang],specValue(vehicle,"Torque")?.[lang]?.replace(/ \((engine|المحرك)\)$/,"")].filter(Boolean).join(" · ")||"—"}
  ];
 }
 export const heroModels=[{id:"287516454",photo:"/assets/catalog/gallery-287516454-1.webp"},{id:"288630286",photo:"/assets/catalog/gallery-288630286-1.webp"},{id:"288440948",photo:"/assets/catalog/gallery-288440948-1.webp"}].map(item=>({...item,vehicle:vehicles.find(v=>v.id===item.id)!}));

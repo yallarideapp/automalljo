@@ -1,0 +1,356 @@
+{
+ "checked": "2026-11-02",
+ "note": "hp figures are as stated by the dealer or manufacturer (PS and hp are treated alike). Manufacturer figures are used when a dealer figure conflicts.",
+ "vehicles": {
+  "288638424": {
+   "hp": 261,
+   "nm": 324,
+   "source": "Exeed Sterra ES EREV RWD 195 kW / 324 Nm (manufacturer, via Wikipedia)"
+  },
+  "289156312": {
+   "hp": 261,
+   "nm": 324,
+   "source": "Exeed Sterra ES EREV RWD 195 kW / 324 Nm (manufacturer, via Wikipedia)"
+  },
+  "288700596": {
+   "hp": 430,
+   "nm": 490,
+   "source": "Maserati Quattroporte S 4.7 V8: 430 PS / 490 Nm (manufacturer)"
+  },
+  "288700472": {
+   "hp": 421,
+   "nm": 440,
+   "source": "dealer listing"
+  },
+  "288657536": {
+   "hp": 470,
+   "nm": 634,
+   "source": "Exlantix ET 1.5 REEV AWD: 470 ch / 634 Nm (wandaloo.com spec sheet)"
+  },
+  "289157148": {
+   "hp": 470,
+   "nm": 634,
+   "source": "Exlantix ET 1.5 REEV AWD: 470 ch / 634 Nm (wandaloo.com spec sheet)"
+  },
+  "289156972": {
+   "hp": 470,
+   "nm": 634,
+   "source": "Exlantix ET 1.5 REEV AWD: 470 ch / 634 Nm (wandaloo.com spec sheet)"
+  },
+  "288714784": {
+   "hp": 470,
+   "nm": 634,
+   "source": "Exlantix ET 1.5 REEV AWD: 470 ch / 634 Nm (wandaloo.com spec sheet)"
+  },
+  "288657488": {
+   "hp": 228,
+   "nm": 336,
+   "source": "dealer listing"
+  },
+  "288700734": {
+   "hp": 228,
+   "nm": 336,
+   "source": "dealer listing 288700734 (228 hp) + 288657488 (336 Nm), same Farizon SV"
+  },
+  "288657370": {
+   "hp": 610,
+   "nm": 920,
+   "source": "Exeed VX C-DM AWD: 455 kW (610 hp) / 920 Nm (CarNewsChina database)"
+  },
+  "288717710": {
+   "hp": 610,
+   "nm": 920,
+   "source": "Exeed VX C-DM AWD: 455 kW (610 hp) / 920 Nm (CarNewsChina database)"
+  },
+  "287516454": {
+   "hp": 579,
+   "nm": 1164,
+   "source": "dealer listing"
+  },
+  "287175144": {
+   "hp": 248,
+   "nm": 300,
+   "source": "iCAR V27 EREV RWD: 185 kW (248 hp) / 300 Nm (CarNewsChina database)"
+  },
+  "288440598": {
+   "hp": 449,
+   "nm": 505,
+   "source": "iCAR V27 EREV AWD: 335 kW (449 hp) / 505 Nm (CarNewsChina database)"
+  },
+  "288442830": {
+   "hp": 449,
+   "nm": 505,
+   "source": "iCAR V27 EREV AWD: 335 kW (449 hp) / 505 Nm (CarNewsChina database)"
+  },
+  "287614790": {
+   "hp": 340,
+   "nm": 450,
+   "source": "dealer listing"
+  },
+  "289156540": {
+   "hp": 313,
+   "nm": 370,
+   "source": "dealer listing"
+  },
+  "287890976": {
+   "hp": 313,
+   "nm": 370,
+   "source": "dealer listing"
+  },
+  "289156416": {
+   "hp": 734,
+   "nm": 1038,
+   "source": "Lynk & Co 900 2.0T Ultra: 540 kW (734 PS) / 1,038 Nm (CarNewsChina database); dealer torque 1,080 Nm differs"
+  },
+  "289156230": {
+   "hp": 262,
+   "nm": 354,
+   "source": "dealer listing"
+  },
+  "289156088": {
+   "hp": 218,
+   "nm": 260,
+   "source": "Song PLUS DM-i 2025 18.3 kWh: motor 160 kW (218 PS) / 260 Nm (CarNewsChina database)"
+  },
+  "289156002": {
+   "hp": 231,
+   "nm": 370,
+   "source": "Mercedes V-Class China 2.0T 48V: 170 kW (231 PS) / 370 Nm (zhichepai.com spec)"
+  },
+  "289155916": {
+   "hp": 134,
+   "nm": 225,
+   "source": "dealer listing (134 hp); 225 Nm (GAC Aion ES spec, autoblog.com.uy)"
+  },
+  "289155874": {
+   "hp": 310,
+   "nm": 380,
+   "source": "dealer listing (230 kW / 310 hp); 380 Nm BYD Song L EV RWD manufacturer"
+  },
+  "289155808": {
+   "hp": 355,
+   "nm": 530,
+   "source": "Exeed RX C-DM 2WD long range: 265 kW (355 hp) / 530 Nm (CarNewsChina database)"
+  },
+  "288717622": {
+   "hp": 355,
+   "nm": 530,
+   "source": "Exeed RX C-DM 2WD long range: 265 kW (355 hp) / 530 Nm (CarNewsChina database)"
+  },
+  "289155248": {
+   "hp": 409,
+   "nm": 685,
+   "source": "dealer listing"
+  },
+  "288717686": {
+   "hp": 409,
+   "nm": 685,
+   "source": "dealer listing"
+  },
+  "287913510": {
+   "hp": 409,
+   "nm": 685,
+   "source": "dealer listing"
+  },
+  "287912580": {
+   "hp": 409,
+   "nm": 685,
+   "source": "dealer listing"
+  },
+  "288939920": {
+   "hp": 177,
+   "nm": 270,
+   "source": "dealer listing"
+  },
+  "288939240": {
+   "hp": 457,
+   "nm": 790,
+   "source": "Land Cruiser 300 performance hybrid: 341 kW / 790 Nm (Toyota, via CarExpert)"
+  },
+  "288938770": {
+   "hp": 385,
+   "nm": 450,
+   "source": "dealer listing"
+  },
+  "287890738": {
+   "hp": 204,
+   "nm": 310,
+   "source": "dealer listing"
+  },
+  "288442864": {
+   "hp": 585,
+   "nm": 940,
+   "source": "dealer listing"
+  },
+  "288700802": {
+   "hp": 480,
+   "nm": 630,
+   "source": "BYD Ti7 DM-p AWD: 480 hp / 630 Nm (DriveArabia); China AWD motors 160+200 kW"
+  },
+  "288717658": {
+   "hp": 480,
+   "nm": 630,
+   "source": "BYD Ti7 DM-p AWD: 480 hp / 630 Nm (DriveArabia); China AWD motors 160+200 kW"
+  },
+  "288717604": {
+   "hp": 95,
+   "nm": 176,
+   "source": "ARCFOX T1 dealer listings (70 kW / 176 Nm)"
+  },
+  "288438518": {
+   "hp": 95,
+   "nm": 176,
+   "source": "dealer listing"
+  },
+  "288440412": {
+   "hp": 95,
+   "nm": 176,
+   "source": "ARCFOX T1 dealer listings (70 kW / 176 Nm)"
+  },
+  "288438754": {
+   "hp": 95,
+   "nm": 176,
+   "source": "dealer listing"
+  },
+  "288438620": {
+   "hp": 95,
+   "nm": 176,
+   "source": "dealer listing"
+  },
+  "288438470": {
+   "hp": 95,
+   "nm": 176,
+   "source": "dealer listing"
+  },
+  "286428842": {
+   "hp": 95,
+   "nm": 176,
+   "source": "ARCFOX T1 dealer listings (70 kW / 176 Nm)"
+  },
+  "288714972": {
+   "hp": 248,
+   "nm": 410,
+   "source": "dealer listing"
+  },
+  "288714918": {
+   "hp": 428,
+   "nm": 594,
+   "source": "Riddara RD6 86 kWh 4WD: 315 kW (428 PS) / 594 Nm (autohled.cz)"
+  },
+  "288700838": {
+   "hp": 428,
+   "nm": 594,
+   "source": "Riddara RD6 86 kWh 4WD: 315 kW (428 PS) / 594 Nm (autohled.cz)"
+  },
+  "288441286": {
+   "hp": 428,
+   "nm": 594,
+   "source": "Riddara RD6 86 kWh 4WD: 315 kW (428 PS) / 594 Nm (autohled.cz)"
+  },
+  "288700874": {
+   "hp": 252,
+   "nm": 380,
+   "source": "Hongqi H9 2.0T 48V: 185 kW (252 PS) (manufacturer, via Wikipedia); 380 Nm dealer listing; dealer 180 hp figure differs"
+  },
+  "288700698": {
+   "hp": 1200,
+   "nm": 1280,
+   "source": "dealer listing"
+  },
+  "288700670": {
+   "hp": 544,
+   "nm": 686,
+   "source": "dealer listing"
+  },
+  "288700570": {
+   "hp": 355,
+   "nm": 400,
+   "source": "Porsche 911 Targa 4S (997) 3.8: 355 PS / 400 Nm (manufacturer)"
+  },
+  "288630286": {
+   "hp": 601,
+   "nm": 820,
+   "source": "dealer listing"
+  },
+  "288440874": {
+   "hp": 340,
+   "nm": 450,
+   "source": "Range Rover 3.0 V6 supercharged petrol: 340 PS / 450 Nm (manufacturer)"
+  },
+  "288440948": {
+   "hp": 904,
+   "nm": 1135,
+   "source": "dealer listing"
+  },
+  "287890886": {
+   "hp": 904,
+   "nm": 1135,
+   "source": "Jetour G700: 665 kW / 1,135 Nm across the range (CarNewsChina)"
+  },
+  "287890782": {
+   "hp": 904,
+   "nm": 1135,
+   "source": "Jetour G700: 665 kW / 1,135 Nm across the range (CarNewsChina)"
+  },
+  "288440772": {
+   "hp": 408,
+   "nm": 760,
+   "source": "Mercedes-Benz EQC 400 4MATIC: 300 kW (408 PS) / 760 Nm (manufacturer)"
+  },
+  "288441140": {
+   "hp": 212,
+   "nm": 300,
+   "source": "BYD Sealion 5 DM-i 18.3 kWh: 156 kW (212 hp) / 300 Nm (autohled.cz)"
+  },
+  "288441022": {
+   "hp": 416,
+   "nm": 610,
+   "source": "dealer listing (416 hp); 610 Nm Mercedes-AMG G 500 4.0 V8 manufacturer"
+  },
+  "288440988": {
+   "hp": 375,
+   "nm": 615,
+   "source": "Lynk & Co 08 EM-P FWD: 280 kW (375 hp) / 615 Nm (CarNewsChina database)"
+  },
+  "287890622": {
+   "hp": 375,
+   "nm": 615,
+   "source": "Lynk & Co 08 EM-P FWD: 280 kW (375 hp) / 615 Nm (CarNewsChina database)"
+  },
+  "288432146": {
+   "hp": 208,
+   "nm": 221,
+   "source": "dealer listing (208 hp combined); 221 Nm engine torque (Toyota)"
+  },
+  "288295034": {
+   "hp": 114,
+   "nm": 150,
+   "source": "MG5 1.5L: 84 kW (114 PS) / 150 Nm (manufacturer)"
+  },
+  "287914576": {
+   "hp": 408,
+   "nm": 858,
+   "source": "dealer listing"
+  },
+  "287914072": {
+   "hp": 404,
+   "nm": 640,
+   "source": "dealer listing"
+  },
+  "287890904": {
+   "hp": 160,
+   "nm": null,
+   "source": "dealer listing (120 kW / 160 hp); torque not published"
+  },
+  "287890852": {
+   "hp": 409,
+   "nm": 650,
+   "source": "Toyota Land Cruiser 3.5 V6 twin-turbo: 409 hp / 650 Nm (Toyota GCC)"
+  },
+  "287890822": {
+   "hp": 286,
+   "nm": 410,
+   "source": "BMW i5 eDrive35L: 210 kW / 410 Nm (CarNewsChina database); dealer 340 hp / 430 Nm matches eDrive40"
+  }
+ }
+}
