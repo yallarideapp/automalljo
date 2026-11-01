@@ -6,7 +6,7 @@ const out="dist/client";
 const fileFor=path=>path.replace(/^\//,"")+"index.html";
 const htmlFiles=pagePaths.map(fileFor);
 const artIds=["electric","hybrid","gasoline","suv","sedan","pickup","van","coupe","shooting-brake","targa","truck"];
-const expected=[...htmlFiles,"404.html","robots.txt","sitemap.xml","site.webmanifest","assets/catalog/gallery-287890822-1.webp","assets/catalog/gallery-288440948-1.webp","assets/catalog/gallery-288630286-11.webp","assets/catalog/gallery-287516454-1.webp",...artIds.map(id=>"assets/categories/category-"+id+".webp")];
+const expected=[...htmlFiles,"404.html","robots.txt","sitemap.xml","site.webmanifest","assets/catalog/gallery-287890822-1.webp","assets/catalog/gallery-288440948-1.webp","assets/catalog/gallery-288630286-11.webp","assets/catalog/gallery-287516454-1.webp","assets/banner/banner-287516454.webp","assets/banner/banner-288440948.webp","assets/banner/banner-288938770.webp",...artIds.map(id=>"assets/categories/category-"+id+".webp")];
 for(const path of expected){const info=await stat(join(out,path));if(!info.isFile()||info.size===0)throw new Error("Missing or empty static output: "+path);}
 
 const source=process.env.VITE_SITE_URL;
@@ -41,7 +41,7 @@ for(const prefix of ["","/ar"]){
  if(home.includes('id="v2-collection"')||home.includes('id="v2-posts-heading"'))throw new Error("V2 homepage still includes a full catalogue or posts page: "+prefix);
  if(!hasClass(home,"v2-home-refined")||!hasClass(home,"v2-dealer-hero")||!hasClass(home,"v2-home-search")||!hasClass(home,"v2-category-grid")||!hasClass(home,"v2-home-featured"))throw new Error("V2 homepage is missing its photo banner, search form, category links or featured vehicles: "+prefix);
  const bannerImages=tags(home,"img").filter(tag=>hasClass(tag,"v2-dealer-hero-image"));
- if(bannerImages.length!==4||new Set(bannerImages.map(tag=>tag.match(/gallery-(\d+)-/)?.[1]).filter(Boolean)).size!==4)throw new Error("V2 banner must contain four different dealer vehicles: "+prefix);
+ if(bannerImages.length!==4||new Set(bannerImages.map(tag=>tag.match(/(?:gallery|banner)-(\d+)[-.]/)?.[1]).filter(Boolean)).size!==4)throw new Error("V2 banner must contain four different dealer vehicles: "+prefix);
  if(!hasClass(home,"v2-brand-grid")||tags(home,"a").filter(tag=>hasClass(tag,"v2-brand-tile")).length!==12||home.indexOf('id="v2-brands"')<home.indexOf('id="v2-categories"')||home.indexOf('id="v2-brands"')>home.indexOf('id="v2-featured-title"'))throw new Error("V2 brand browser must follow categories and show twelve initial brand links: "+prefix);
  if(!hasClass(cars,"v2-powertrain-tabs")||!hasClass(cars,"v2-body-filters"))throw new Error("V2 catalogue needs separate powertrain and body filters: "+prefix);
  if(hasClass(cars,"v2-hero"))throw new Error("Catalogue still includes the homepage hero: "+prefix);
