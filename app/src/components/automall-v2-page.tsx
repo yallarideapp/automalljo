@@ -7,7 +7,7 @@ import {BodyStyleIcon} from "./body-style-icon";
 import {BrandLogo} from "./brand-logo";
 import {V2BrandBrowser} from "./v2-brand-browser";
 import {V2VehicleDetails} from "./v2-vehicle-details";
-import {VisualSelect,type VisualSelectOption} from "./visual-select";
+import {FilterPicker,YearRangePicker,type PickerOption} from "./v2-filter-picker";
 import {copyV2,FACEBOOK,brandNames,equipmentFor,equipmentTiles,featureLabels,cardFacts,specValue,dealerPosts} from "@/v2-content";
 import {powertrains,bodyStyles,bodyStyleFor,defaultFilters,filtersFromSearch,filtersToSearch,filterVehicles,navigationCopy,homeCopy,modelYears,type CatalogFilters} from "@/v2-catalog";
 import {ThemeToggle,themeBootScript} from "./v2-theme";
@@ -23,11 +23,6 @@ const withFilters=(path:string,filters:CatalogFilters)=>{const search=filtersToS
 const categoryArt=(id:string)=>assetPath("assets/categories/category-"+id+".webp");
 const Arrow=()=> <span aria-hidden="true">↗</span>;
 const Icon=({name,size=24}:{name:VehicleFeatureName;size?:number})=><VehicleFeatureIcon className="vehicle-feature-icon" name={name} size={size}/>;
-function YearRange({lang,idPrefix,from,to,onChange,named=false}:{lang:Lang;idPrefix:string;from:string;to:string;onChange:(from:string,to:string)=>void;named?:boolean}){
- const n=navigationCopy[lang];
- const set=(key:"from"|"to",value:string)=>{const next={from,to,[key]:value};if(next.from!=="all"&&next.to!=="all"&&Number(next.from)>Number(next.to)){if(key==="from")next.to=next.from;else next.from=next.to;}onChange(next.from,next.to);};
- return <fieldset className="v2-year-range" aria-label={n.yearRange}><legend>{n.yearFilter}</legend><div className="v2-year-fields"><label className="v2-visually-hidden" htmlFor={idPrefix+"-from"}>{n.yearFilter} {n.yearFrom}</label><select id={idPrefix+"-from"} name={named?"from":undefined} value={from} onChange={event=>set("from",event.target.value)}><option value="all">{n.yearFrom}</option>{modelYears.map(year=><option key={year} value={year}>{year}</option>)}</select><span aria-hidden="true">–</span><label className="v2-visually-hidden" htmlFor={idPrefix+"-to"}>{n.yearFilter} {n.yearTo}</label><select id={idPrefix+"-to"} name={named?"to":undefined} value={to} onChange={event=>set("to",event.target.value)}><option value="all">{n.yearTo}</option>{modelYears.map(year=><option key={year} value={year}>{year}</option>)}</select></div></fieldset>;
-}
 export function v2Head(lang:Lang,view:V2View="home",vehicleId?:string){
  const n=navigationCopy[lang],vehicle=vehicles.find(item=>item.id===vehicleId);
  const title=view==="car"&&vehicle?modelName(vehicle)+" "+vehicle.year:view==="home"?(lang==="ar"?"سيارتك القادمة":"Find your next drive"):n[view as "cars"|"features"|"updates"|"contact"]??n.cars;
@@ -69,17 +64,18 @@ function HomePage({lang,filters,onChange}:{lang:Lang;filters:CatalogFilters;onCh
  const jumpFeatured=(end:boolean)=>{const rail=featuredRail.current;if(rail)rail.scrollTo({left:end?(lang==="ar"?-1:1)*rail.scrollWidth:0,behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth"});};
  const kept={...defaultFilters,powertrain:filters.powertrain,brand:filters.brand,body:filters.body,yearFrom:filters.yearFrom,yearTo:filters.yearTo};
  const change=(key:"powertrain"|"brand"|"body",value:string)=>onChange({...kept,[key]:value});
- const bodyOptions:VisualSelectOption[]=[{value:"all",label:n.allBody,visual:<BodyStyleIcon name="all"/>},...bodyStyles.map(body=>({value:body.id,label:body.label[lang],visual:<BodyStyleIcon name={body.id}/>,count:vehicles.filter(vehicle=>(filters.powertrain==="all"||vehicle.categories.includes(filters.powertrain))&&bodyStyleFor(vehicle)===body.id).length}))];
- const brandOptions:VisualSelectOption[]=[{value:"all",label:t.allBrands,visual:<BodyStyleIcon name="all"/>},...brandNames.map(brand=>({value:brand,label:brand,visual:<BrandLogo brand={brand}/>}))];
+ const bodyOptions:PickerOption[]=[{value:"all",label:n.allBody,visual:<BodyStyleIcon name="all"/>},...bodyStyles.map(body=>({value:body.id,label:body.label[lang],keywords:body.label.en+" "+body.label.ar,visual:<BodyStyleIcon name={body.id}/>,count:vehicles.filter(vehicle=>(filters.powertrain==="all"||vehicle.categories.includes(filters.powertrain))&&bodyStyleFor(vehicle)===body.id).length}))];
+ const brandOptions:PickerOption[]=[{value:"all",label:t.allBrands,visual:<BodyStyleIcon name="all"/>},...brandNames.map(brand=>({value:brand,label:brand,visual:<BrandLogo brand={brand}/>}))];
+ const powerOptions:PickerOption[]=[{value:"all",label:n.allPower,visual:<BodyStyleIcon name="all"/>,count:vehicles.length},...powertrains.map(power=>({value:power.id,label:power.label[lang],keywords:power.label.en+" "+power.label.ar,visual:<Icon name={power.id==="electric"?"battery":power.id==="hybrid"?"hybrid":"engine"} size={20}/>,count:vehicles.filter(vehicle=>vehicle.categories.includes(power.id)).length}))];
  return <div className="v2-home-refined v2-home-banner">
   <BannerCarousel lang={lang}/>
   <form className="v2-home-search" action={pagePath("cars",lang)} method="get" aria-label={h.findTitle}>
    <div className="v2-home-search-heading"><h2>{h.findTitle}</h2><p>{h.findDescription}</p></div>
    <div className="v2-home-search-fields">
-    <div><label htmlFor="v2-home-power">{n.powerFilter}</label><select id="v2-home-power" name="powertrain" value={filters.powertrain} onChange={event=>change("powertrain",event.target.value)}><option value="all">{n.allPower}</option>{powertrains.map(power=><option key={power.id} value={power.id}>{power.label[lang]}</option>)}</select></div>
-    <div><label htmlFor="v2-home-brand">{t.brand}</label><VisualSelect id="v2-home-brand" label={t.brand} value={filters.brand} options={brandOptions} onChange={value=>change("brand",value)} dir={lang==="ar"?"rtl":"ltr"}/><input type="hidden" name="brand" value={filters.brand}/></div>
-    <div><label htmlFor="v2-home-body">{n.bodyFilter}</label><VisualSelect id="v2-home-body" label={n.bodyFilter} value={filters.body} options={bodyOptions} onChange={value=>change("body",value)} dir={lang==="ar"?"rtl":"ltr"}/><input type="hidden" name="body" value={filters.body}/></div>
-    <YearRange lang={lang} idPrefix="v2-home-year" from={filters.yearFrom} to={filters.yearTo} named onChange={(yearFrom,yearTo)=>onChange({...kept,yearFrom,yearTo})}/>
+    <div><label htmlFor="v2-home-power">{n.powerFilter}</label><FilterPicker id="v2-home-power" name="powertrain" label={n.powerFilter} lang={lang} value={filters.powertrain} options={powerOptions} onChange={value=>change("powertrain",value)}/></div>
+    <div><label htmlFor="v2-home-brand">{t.brand}</label><FilterPicker id="v2-home-brand" name="brand" label={t.brand} lang={lang} value={filters.brand} options={brandOptions} onChange={value=>change("brand",value)}/></div>
+    <div><label htmlFor="v2-home-body">{n.bodyFilter}</label><FilterPicker id="v2-home-body" name="body" label={n.bodyFilter} lang={lang} value={filters.body} options={bodyOptions} onChange={value=>change("body",value)}/></div>
+    <div className="v2-year-field"><label htmlFor="v2-home-year">{n.yearFilter}</label><YearRangePicker id="v2-home-year" label={n.yearFilter} lang={lang} years={modelYears} from={filters.yearFrom} to={filters.yearTo} named onChange={(yearFrom,yearTo)=>onChange({...kept,yearFrom,yearTo})}/></div>
     <button className="v2-button v2-button-orange" type="submit">{h.findAction}<NavIcon name="search"/></button>
    </div>
   </form>
@@ -99,8 +95,9 @@ function CatalogPage({lang,filters,onChange}:{lang:Lang;filters:CatalogFilters;o
  const change=(key:keyof CatalogFilters,value:string)=>onChange({...filters,[key]:value});
  const reset=()=>onChange({...defaultFilters});
  const more=()=>{const next=matching[visible.length];setVisibleCount(count=>count+PAGE_SIZE);if(next)requestAnimationFrame(()=>document.getElementById("v2-car-"+next.id)?.focus());};
- const bodyOptions:VisualSelectOption[]=[{value:"all",label:n.allBody,visual:<BodyStyleIcon name="all"/>},...bodyStyles.map(body=>({value:body.id,label:body.label[lang],visual:<BodyStyleIcon name={body.id}/>,count:vehicles.filter(vehicle=>(filters.powertrain==="all"||vehicle.categories.includes(filters.powertrain))&&bodyStyleFor(vehicle)===body.id).length}))];
- const brandOptions:VisualSelectOption[]=[{value:"all",label:t.allBrands,visual:<BodyStyleIcon name="all"/>},...brandNames.map(brand=>({value:brand,label:brand,visual:<BrandLogo brand={brand}/>}))];
+ const bodyOptions:PickerOption[]=[{value:"all",label:n.allBody,visual:<BodyStyleIcon name="all"/>},...bodyStyles.map(body=>({value:body.id,label:body.label[lang],keywords:body.label.en+" "+body.label.ar,visual:<BodyStyleIcon name={body.id}/>,count:vehicles.filter(vehicle=>(filters.powertrain==="all"||vehicle.categories.includes(filters.powertrain))&&bodyStyleFor(vehicle)===body.id).length}))];
+ const brandOptions:PickerOption[]=[{value:"all",label:t.allBrands,visual:<BodyStyleIcon name="all"/>},...brandNames.map(brand=>({value:brand,label:brand,visual:<BrandLogo brand={brand}/>}))];
+ const sortOptions:PickerOption[]=[{value:"featured",label:t.featured},{value:"newest",label:t.newest},{value:"price",label:t.lowPrice},{value:"price-desc",label:n.highPrice},{value:"name",label:n.byName}];
  const activeFilters:{key:keyof CatalogFilters;label:string}[]=[];
  if(filters.powertrain!=="all")activeFilters.push({key:"powertrain",label:powertrains.find(power=>power.id===filters.powertrain)!.label[lang]});
  if(filters.body!=="all")activeFilters.push({key:"body",label:bodyStyles.find(body=>body.id===filters.body)!.label[lang]});
@@ -108,7 +105,7 @@ function CatalogPage({lang,filters,onChange}:{lang:Lang;filters:CatalogFilters;o
  if(filters.equipment!=="all")activeFilters.push({key:"equipment",label:featureLabels[filters.equipment as VehicleFeatureName]?.[lang]??filters.equipment});
  if(filters.yearFrom!=="all"||filters.yearTo!=="all")activeFilters.push({key:"yearFrom",label:n.yearFilter+": "+(filters.yearFrom==="all"?modelYears[0]:filters.yearFrom)+"–"+(filters.yearTo==="all"?modelYears[modelYears.length-1]:filters.yearTo)});
  if(filters.query.trim())activeFilters.push({key:"query",label:t.search+": "+filters.query.trim()});
- const removeFilter=(key:keyof CatalogFilters)=>{if(key==="yearFrom"){onChange({...filters,yearFrom:"all",yearTo:"all"});requestAnimationFrame(()=>document.getElementById("v2-year-from")?.focus());return;}change(key,defaultFilters[key]);requestAnimationFrame(()=>{const target=key==="query"?"v2-search":key==="body"?"v2-body":key==="brand"?"v2-brand":key==="equipment"?"v2-equipment":null;if(key==="equipment")document.getElementById("v2-search")?.focus();else if(target)document.getElementById(target)?.focus();else document.querySelector<HTMLButtonElement>(".v2-powertrain-tabs button")?.focus();});};
+ const removeFilter=(key:keyof CatalogFilters)=>{if(key==="yearFrom"){onChange({...filters,yearFrom:"all",yearTo:"all"});requestAnimationFrame(()=>document.getElementById("v2-year")?.focus());return;}change(key,defaultFilters[key]);requestAnimationFrame(()=>{const target=key==="query"?"v2-search":key==="body"?"v2-body":key==="brand"?"v2-brand":key==="equipment"?"v2-equipment":null;if(key==="equipment")document.getElementById("v2-search")?.focus();else if(target)document.getElementById(target)?.focus();else document.querySelector<HTMLButtonElement>(".v2-powertrain-tabs button")?.focus();});};
  return <>
   <PageHeading lang={lang} view="cars"/>
   <section className="v2-inventory v2-wrap" id="v2-collection" aria-label={n.cars}>
@@ -116,10 +113,10 @@ function CatalogPage({lang,filters,onChange}:{lang:Lang;filters:CatalogFilters;o
     <div className="v2-powertrain-tabs v2-powertrain-compact" role="group" aria-label={n.powerFilter}><button type="button" aria-pressed={filters.powertrain==="all"} onClick={()=>change("powertrain","all")}><span>{lang==="ar"?"الكل":"All"}</span><small>{vehicles.length}</small></button>{powertrains.map(power=><button type="button" key={power.id} aria-pressed={filters.powertrain===power.id} onClick={()=>change("powertrain",power.id)}><span>{power.label[lang]}</span><small>{vehicles.filter(vehicle=>vehicle.categories.includes(power.id)).length}</small></button>)}</div>
     <div className="v2-catalog-toolbar">
      <div className="v2-search"><label htmlFor="v2-search">{t.search}</label><div><input id="v2-search" type="search" maxLength={100} placeholder={t.searchPlaceholder} value={filters.query} onChange={event=>change("query",event.target.value)}/><span aria-hidden="true">⌕</span></div></div>
-     <div className="v2-brand-select"><label htmlFor="v2-brand">{t.brand}</label><VisualSelect id="v2-brand" label={t.brand} value={filters.brand} options={brandOptions} onChange={value=>change("brand",value)} dir={lang==="ar"?"rtl":"ltr"}/></div>
-     <div className="v2-body-select v2-body-filters"><label htmlFor="v2-body">{n.bodyFilter}</label><VisualSelect id="v2-body" label={n.bodyFilter} value={filters.body} options={bodyOptions} onChange={value=>change("body",value)} dir={lang==="ar"?"rtl":"ltr"}/></div>
-     <div className="v2-year-select"><YearRange lang={lang} idPrefix="v2-year" from={filters.yearFrom} to={filters.yearTo} onChange={(yearFrom,yearTo)=>onChange({...filters,yearFrom,yearTo})}/></div>
-     <div className="v2-sort-select"><label htmlFor="v2-sort">{t.sort}</label><select id="v2-sort" value={filters.sort} onChange={event=>change("sort",event.target.value)}><option value="featured">{t.featured}</option><option value="newest">{t.newest}</option><option value="price">{t.lowPrice}</option><option value="price-desc">{n.highPrice}</option><option value="name">{n.byName}</option></select></div>
+     <div className="v2-brand-select"><label htmlFor="v2-brand">{t.brand}</label><FilterPicker id="v2-brand" label={t.brand} lang={lang} value={filters.brand} options={brandOptions} onChange={value=>change("brand",value)}/></div>
+     <div className="v2-body-select v2-body-filters"><label htmlFor="v2-body">{n.bodyFilter}</label><FilterPicker id="v2-body" label={n.bodyFilter} lang={lang} value={filters.body} options={bodyOptions} onChange={value=>change("body",value)}/></div>
+     <div className="v2-year-select"><label htmlFor="v2-year">{n.yearFilter}</label><YearRangePicker id="v2-year" label={n.yearFilter} lang={lang} years={modelYears} from={filters.yearFrom} to={filters.yearTo} onChange={(yearFrom,yearTo)=>onChange({...filters,yearFrom,yearTo})}/></div>
+     <div className="v2-sort-select"><label htmlFor="v2-sort">{t.sort}</label><FilterPicker id="v2-sort" label={t.sort} lang={lang} value={filters.sort} options={sortOptions} onChange={value=>change("sort",value)}/></div>
     </div>
     {(activeFilters.length>0||filters.sort!=="featured")&&<div className="v2-active-filters" aria-label={n.activeFilters}>{activeFilters.map(filter=><button type="button" key={filter.key} onClick={()=>removeFilter(filter.key)} aria-label={n.removeFilter+": "+filter.label}>{filter.key==="body"&&<span className="v2-filter-chip-visual"><BodyStyleIcon name={filters.body}/></span>}{filter.key==="brand"&&<span className="v2-filter-chip-visual"><BrandLogo brand={filters.brand}/></span>}{filter.label}<span aria-hidden="true">×</span></button>)}<button type="button" className="v2-clear-all" onClick={reset}>{t.reset}</button></div>}
    </div>
