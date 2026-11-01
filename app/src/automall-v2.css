@@ -1332,11 +1332,3 @@ html[data-v2-theme=light] .automall-v2 .v2-banner-controls>button:hover{border-c
  html[data-v2-theme=light] .automall-v2 .v2-home-banner .v2-dealer-hero:after,html[data-v2-theme=light] .automall-v2[dir=rtl] .v2-home-banner .v2-dealer-hero:after{background:linear-gradient(180deg,#f3f5f700 0%,#f3f5f700 38%,#f3f5f7c7 50%,#f3f5f7f5 58%,#f3f5f7 66%,#f3f5f7 100%)}
  html[data-v2-theme=light] .automall-v2 .v2-home-banner .v2-dealer-hero-content>p:not(.v2-eyebrow){color:#3d4650}
 }
-
-/* ---------- banner text: thin outline so it stays readable over the photos ---------- */
-.v2-dealer-hero-content h1{text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000,0 2px 18px #000000b3}
-.v2-dealer-hero-content>p,.v2-dealer-hero-content>.v2-eyebrow{text-shadow:-1px -1px 0 #000000d9,1px -1px 0 #000000d9,-1px 1px 0 #000000d9,1px 1px 0 #000000d9,0 1px 10px #000000b3}
-html[data-v2-theme=light] .automall-v2 .v2-dealer-hero-content h1{text-shadow:-1px -1px 0 #fff,1px -1px 0 #fff,-1px 1px 0 #fff,1px 1px 0 #fff,0 2px 18px #ffffffcc}
-html[data-v2-theme=light] .automall-v2 .v2-dealer-hero-content>p:not(.v2-eyebrow){text-shadow:-1px -1px 0 #ffffffd9,1px -1px 0 #ffffffd9,-1px 1px 0 #ffffffd9,1px 1px 0 #ffffffd9,0 1px 10px #ffffffcc}
-html[data-v2-theme=light] .automall-v2 .v2-dealer-hero-content>.v2-eyebrow{text-shadow:none}
-@media(max-width:700px){html[data-v2-theme=light] .automall-v2 .v2-home-banner .v2-dealer-hero-content>.v2-eyebrow{text-shadow:0 0 3px #fff,0 0 8px #fff,0 0 14px #ffffffcc}}
