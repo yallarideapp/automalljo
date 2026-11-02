@@ -17,7 +17,7 @@ const pretty=(value:unknown)=>JSON.stringify(value,null,2)+"\n";
 const days:OpeningDay["day"][]=["sat","sun","mon","tue","wed","thu","fri"];
 
 const copy={
- en:{title:"AutoMall admin",viewSite:"View website",signOut:"Sign out",lang:"العربية",
+ en:{title:"AutoMall admin",close:"Close",viewSite:"View website",signOut:"Sign out",lang:"العربية",
   signTitle:"Sign in to manage the website",signBody:"The admin panel saves straight to the website's GitHub repository. Each staff member uses their own GitHub access key.",
   step1:"On GitHub, open Settings → Developer settings → Fine-grained tokens, and choose Generate new token.",step1Link:"Open the token page",
   step2:"Repository access: choose Only select repositories, then "+REPO.owner+"/"+REPO.repo+".",
@@ -51,7 +51,7 @@ const copy={
   unsaved:"You have unpublished changes.",leaveWarning:"You have unpublished changes and photos. Publish before closing this page.",
   ch:{carAdded:"Added",carChanged:"Changed",carDeleted:"Deleted",listingEdited:"Edited listing",listingReset:"Reset listing",shown:"Shown again",hiddenCar:"Hidden",settings:"Showroom info",banner:"Banner cars",featured:"Featured cars",photosUp:"photos to upload",photosDel:"photos to delete"},
  },
- ar:{title:"لوحة تحكم أوتومول",viewSite:"عرض الموقع",signOut:"تسجيل الخروج",lang:"English",
+ ar:{title:"لوحة تحكم أوتومول",close:"إغلاق",viewSite:"عرض الموقع",signOut:"تسجيل الخروج",lang:"English",
   signTitle:"سجّل الدخول لإدارة الموقع",signBody:"تحفظ لوحة التحكم التغييرات مباشرة في مستودع الموقع على GitHub. يستخدم كل موظف مفتاح الوصول الخاص به.",
   step1:"في GitHub افتح Settings ← Developer settings ← Fine-grained tokens واختر Generate new token.",step1Link:"افتح صفحة المفاتيح",
   step2:"Repository access: اختر Only select repositories ثم "+REPO.owner+"/"+REPO.repo+".",
@@ -94,17 +94,21 @@ type Editing={kind:"new"}|{kind:"added";id:string}|{kind:"listing";id:string}|nu
 const option=(lang:Lang,list:{key:string;en:string;ar:string}[],value:string)=>list.find(item=>item.key===value)?.[lang]??value;
 const label=(car:VehicleRecord)=>car.brand+" "+car.name+" · "+car.year;
 
-export function AdminApp(){
- const [lang,setLang]=useState<Lang>("en");
+/** Embedded mode: the same panel opened over the website from the corner button. */
+export type AdminEmbed={lang:Lang;onClose:()=>void;vehicleId?:string};
+export function AdminApp({embed}:{embed?:AdminEmbed}={}){
+ const [lang,setLang]=useState<Lang>(embed?.lang??"en");
  const [token,setToken]=useState<string|null>(null);
  const [ready,setReady]=useState(false);
- useEffect(()=>{setLang(tryStorage(()=>localStorage.getItem(LANG_STORE)==="ar"?"ar":"en",lang));setToken(tryStorage(()=>localStorage.getItem(KEY_STORE)??sessionStorage.getItem(KEY_STORE),null));setReady(true);},[]);
- useEffect(()=>{tryStorage(()=>localStorage.setItem(LANG_STORE,lang),undefined);},[lang]);
+ const embedded=!!embed;
+ useEffect(()=>{if(!embedded)setLang(tryStorage(()=>localStorage.getItem(LANG_STORE)==="ar"?"ar":"en",lang));setToken(tryStorage(()=>localStorage.getItem(KEY_STORE)??sessionStorage.getItem(KEY_STORE),null));setReady(true);},[embedded]);
+ useEffect(()=>{if(!embedded)tryStorage(()=>localStorage.setItem(LANG_STORE,lang),undefined);},[lang,embedded]);
  const t=copy[lang];
  const signOut=useCallback(()=>{tryStorage(()=>{localStorage.removeItem(KEY_STORE);sessionStorage.removeItem(KEY_STORE);},undefined);setToken(null);},[]);
+ const brand=<><img src={assetPath("assets/logo.jpg")} alt="" width="34" height="34"/><span>{t.title}</span></>;
  return <div className="am-admin" lang={lang} dir={lang==="ar"?"rtl":"ltr"}>
-  <header className="am-admin-header"><a className="am-admin-brand" href={sitePath("v2")}><img src={assetPath("assets/logo.jpg")} alt="" width="34" height="34"/><span>{t.title}</span></a><div className="am-admin-header-actions"><button type="button" className="am-link-button" onClick={()=>setLang(lang==="en"?"ar":"en")}>{t.lang}</button><a className="am-link-button" href={sitePath("v2")} target="_blank" rel="noopener noreferrer">{t.viewSite} ↗</a>{token&&<button type="button" className="am-link-button" onClick={signOut}>{t.signOut}</button>}</div></header>
-  <main className="am-admin-main" id="main-content">{!ready?null:token?<Workspace key={token} token={token} lang={lang} onSignOut={signOut}/>:<SignIn lang={lang} onSignedIn={setToken}/>}</main>
+  <header className="am-admin-header">{embed?<div className="am-admin-brand" id="am-admin-title">{brand}</div>:<a className="am-admin-brand" href={sitePath("v2")}>{brand}</a>}<div className="am-admin-header-actions"><button type="button" className="am-link-button" onClick={()=>setLang(lang==="en"?"ar":"en")}>{t.lang}</button>{!embed&&<a className="am-link-button" href={sitePath("v2")} target="_blank" rel="noopener noreferrer">{t.viewSite} ↗</a>}{token&&<button type="button" className="am-link-button" onClick={signOut}>{t.signOut}</button>}{embed&&<button type="button" className="am-button am-small am-admin-close" onClick={embed.onClose} aria-label={t.close}><span className="am-close-label">{t.close}</span><span aria-hidden="true">×</span></button>}</div></header>
+  <main className="am-admin-main" id={embed?"am-admin-main":"main-content"}>{!ready?null:token?<Workspace key={token} token={token} lang={lang} onSignOut={signOut} focusVehicleId={embed?.vehicleId}/>:<SignIn lang={lang} onSignedIn={setToken}/>}</main>
  </div>;
 }
 
@@ -129,7 +133,7 @@ function SignIn({lang,onSignedIn}:{lang:Lang;onSignedIn:(token:string)=>void}){
  </section>;
 }
 
-function Workspace({token,lang,onSignOut}:{token:string;lang:Lang;onSignOut:()=>void}){
+function Workspace({token,lang,onSignOut,focusVehicleId}:{token:string;lang:Lang;onSignOut:()=>void;focusVehicleId?:string}){
  const t=copy[lang];
  const [base,setBase]=useState<Base|null>(null),[loadError,setLoadError]=useState("");
  const [admin,setAdmin]=useState<AdminData|null>(null),[settings,setSettings]=useState<SiteSettings|null>(null);
@@ -148,6 +152,9 @@ function Workspace({token,lang,onSignOut}:{token:string;lang:Lang;onSignOut:()=>
   }catch(caught){if(caught instanceof GitHubError&&caught.status===401){signOutRef.current();return;}setLoadError(caught instanceof Error?caught.message:String(caught));}
  },[token]);
  useEffect(()=>{void load(true);},[load]);
+ // Opened from a car page: go straight to that car's editor once the data is in.
+ const focused=useRef(false);
+ useEffect(()=>{if(focused.current||!admin||!focusVehicleId)return;focused.current=true;if(admin.cars.some(car=>car.id===focusVehicleId))setEditing({kind:"added",id:focusVehicleId});else if(catalog.some(car=>car.id===focusVehicleId))setEditing({kind:"listing",id:focusVehicleId});},[admin,focusVehicleId]);
  // Keep text-only drafts across reloads; photos waiting to upload live in memory only.
  useEffect(()=>{if(!base||!admin||!settings)return;if(Object.keys(uploads).length)return;tryStorage(()=>localStorage.setItem(DRAFT_STORE,JSON.stringify({adminSha:base.adminSha,settingsSha:base.settingsSha,admin,settings})),undefined);},[base,admin,settings,uploads]);
  const pending=!!base&&!!admin&&!!settings&&(pretty(admin)!==pretty(base.admin)||pretty(settings)!==pretty(base.settings)||Object.keys(uploads).length>0||deletions.length>0);

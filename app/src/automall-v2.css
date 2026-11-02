@@ -1465,3 +1465,15 @@ html[data-v2-theme=light] .automall-v2 .v2-banner-controls>button:hover{border-c
 .v2-hours-list>div{display:flex;justify-content:space-between;gap:16px;min-width:220px}
 .v2-hours-list dt{color:var(--v2-silver)}.v2-hours-list dd{margin:0;color:var(--v2-white)}
 .v2-showroom-hours>div{flex:1}
+/* Staff admin: corner button and the panel opened over the page */
+.am-launcher{position:fixed;z-index:46;inset-block-end:18px;inset-inline-start:18px;display:grid;place-items:center;width:42px;height:42px;padding:0;border:1px solid var(--v2-line);border-radius:50%;background:var(--v2-night);color:var(--v2-muted,#9aa3ad);opacity:.7;cursor:pointer;box-shadow:0 10px 24px -14px #000a;transition:opacity .2s,color .2s,border-color .2s,transform .2s}
+.am-launcher:hover,.am-launcher:focus-visible{opacity:1;color:var(--v2-orange,#ed8738);border-color:currentColor;transform:rotate(30deg)}
+.am-launcher:focus-visible{outline:2px solid var(--v2-orange,#ed8738);outline-offset:3px}
+html[data-v2-theme=light] .am-launcher{background:#fff;border-color:#dbe0e5;color:#56606b;box-shadow:0 8px 20px -14px #1d2a3a88}
+.am-overlay{position:fixed;inset:0;z-index:1000;overflow:auto;overscroll-behavior:contain;background:#0b0d0f;outline:none}
+html[data-v2-theme=light] .am-overlay{background:#f3f5f7}
+.am-overlay[hidden]{display:none}
+.am-overlay-loading{margin:0;padding:120px 16px;text-align:center;color:#9aa3ad;font-size:14px}
+@media(max-width:700px){.am-launcher{inset-block-end:calc(78px + env(safe-area-inset-bottom));width:38px;height:38px}}
+@media(prefers-reduced-motion:reduce){.am-launcher{transition:none}.am-launcher:hover{transform:none}}
+.automall-v2:has(.v2-compare-bar) .am-launcher{inset-block-end:96px}

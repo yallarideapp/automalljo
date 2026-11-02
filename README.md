@@ -92,6 +92,8 @@ Design observations are in `refs/research/v2-design-reference.md`, and feature p
 
 Staff manage the site at `/admin/` (https://yallarideapp.github.io/automalljo/admin/). There is no server: the panel runs in the browser and saves straight to this repository with each staff member's own GitHub fine-grained access key (Repository access: this repository only; Contents: Read and write; optionally Actions: Read-only to watch the rebuild). Every publish is one commit to `main`, which redeploys the site in about 2–3 minutes.
 
+The same panel also opens over the website from the gear button in the bottom corner of every `/v2/` page (`app/src/components/admin/admin-launcher.tsx`). Its code only downloads when the button is pressed. Opened from a car page, it goes straight to that car's editor; `/v2/#admin` opens it directly. Closing it keeps unpublished work until the page is left.
+
 - **Cars**: add cars (with photos, resized in the browser and stored in `app/public/assets/uploads/`), edit them, mark cars available, reserved or sold, hide dealer listings. Dealer listings keep their audited photos and specifications; staff can change price, status, condition, mileage, power, torque, exterior colour and description.
 - **Homepage**: choose the banner cars (1–6) and featured cars (up to 12).
 - **Showroom info**: phone, WhatsApp, address, map search text, social links and opening hours.
