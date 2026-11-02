@@ -6,7 +6,7 @@ const out="dist/client";
 const fileFor=path=>path.replace(/^\//,"")+"index.html";
 const htmlFiles=pagePaths.map(fileFor);
 const artIds=["electric","hybrid","gasoline","suv","sedan","pickup","van","coupe","shooting-brake","targa","truck"];
-const expected=[...htmlFiles,"404.html","robots.txt","sitemap.xml","site.webmanifest","assets/catalog/gallery-287890822-1.webp","assets/catalog/gallery-288440948-1.webp","assets/catalog/gallery-288630286-11.webp","assets/catalog/gallery-287516454-1.webp","assets/banner/banner-287516454.webp","assets/banner/banner-288440948.webp","assets/banner/banner-288938770.webp",...artIds.map(id=>"assets/categories/category-"+id+".webp")];
+const expected=[...htmlFiles,"404.html","robots.txt","sitemap.xml","site.webmanifest","assets/catalog/gallery-287890822-1.webp","assets/catalog/gallery-288440948-1.webp","assets/catalog/gallery-288630286-11.webp","assets/catalog/gallery-287516454-1.webp","assets/banner/banner-287516454.webp","assets/banner/banner-288630286.webp","assets/banner/banner-288440948.webp","assets/banner/banner-288938770.webp",...artIds.map(id=>"assets/categories/category-"+id+".webp")];
 for(const path of expected){const info=await stat(join(out,path));if(!info.isFile()||info.size===0)throw new Error("Missing or empty static output: "+path);}
 
 const source=process.env.VITE_SITE_URL;
