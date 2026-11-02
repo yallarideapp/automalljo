@@ -18,6 +18,7 @@ import { Route as R404RouteImport } from './routes/404'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as V2IndexRouteImport } from './routes/v2.index'
 import { Route as ArIndexRouteImport } from './routes/ar.index'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as ArTermsRouteImport } from './routes/ar.terms'
 import { Route as ArPrivacyRouteImport } from './routes/ar.privacy'
 import { Route as V2UpdatesIndexRouteImport } from './routes/v2.updates.index'
@@ -79,6 +80,11 @@ const V2IndexRoute = V2IndexRouteImport.update({
 const ArIndexRoute = ArIndexRouteImport.update({
   id: '/ar/',
   path: '/ar/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/admin/',
+  path: '/admin/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ArTermsRoute = ArTermsRouteImport.update({
@@ -177,6 +183,7 @@ export interface FileRoutesByFullPath {
   '/terms': typeof TermsRoute
   '/ar/privacy': typeof ArPrivacyRoute
   '/ar/terms': typeof ArTermsRoute
+  '/admin/': typeof AdminIndexRoute
   '/ar/': typeof ArIndexRoute
   '/v2/': typeof V2IndexRoute
   '/v2/car/$vehicleId': typeof V2CarVehicleIdRoute
@@ -205,6 +212,7 @@ export interface FileRoutesByTo {
   '/terms': typeof TermsRoute
   '/ar/privacy': typeof ArPrivacyRoute
   '/ar/terms': typeof ArTermsRoute
+  '/admin': typeof AdminIndexRoute
   '/ar': typeof ArIndexRoute
   '/v2': typeof V2IndexRoute
   '/v2/car/$vehicleId': typeof V2CarVehicleIdRoute
@@ -234,6 +242,7 @@ export interface FileRoutesById {
   '/terms': typeof TermsRoute
   '/ar/privacy': typeof ArPrivacyRoute
   '/ar/terms': typeof ArTermsRoute
+  '/admin/': typeof AdminIndexRoute
   '/ar/': typeof ArIndexRoute
   '/v2/': typeof V2IndexRoute
   '/v2/car/$vehicleId': typeof V2CarVehicleIdRoute
@@ -264,6 +273,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/ar/privacy'
     | '/ar/terms'
+    | '/admin/'
     | '/ar/'
     | '/v2/'
     | '/v2/car/$vehicleId'
@@ -292,6 +302,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/ar/privacy'
     | '/ar/terms'
+    | '/admin'
     | '/ar'
     | '/v2'
     | '/v2/car/$vehicleId'
@@ -320,6 +331,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/ar/privacy'
     | '/ar/terms'
+    | '/admin/'
     | '/ar/'
     | '/v2/'
     | '/v2/car/$vehicleId'
@@ -349,6 +361,7 @@ export interface RootRouteChildren {
   TermsRoute: typeof TermsRoute
   ArPrivacyRoute: typeof ArPrivacyRoute
   ArTermsRoute: typeof ArTermsRoute
+  AdminIndexRoute: typeof AdminIndexRoute
   ArIndexRoute: typeof ArIndexRoute
   V2IndexRoute: typeof V2IndexRoute
   V2CarVehicleIdRoute: typeof V2CarVehicleIdRoute
@@ -431,6 +444,13 @@ declare module '@tanstack/react-router' {
       path: '/ar'
       fullPath: '/ar/'
       preLoaderRoute: typeof ArIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/admin'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/ar/terms': {
@@ -565,6 +585,7 @@ const rootRouteChildren: RootRouteChildren = {
   TermsRoute: TermsRoute,
   ArPrivacyRoute: ArPrivacyRoute,
   ArTermsRoute: ArTermsRoute,
+  AdminIndexRoute: AdminIndexRoute,
   ArIndexRoute: ArIndexRoute,
   V2IndexRoute: V2IndexRoute,
   V2CarVehicleIdRoute: V2CarVehicleIdRoute,

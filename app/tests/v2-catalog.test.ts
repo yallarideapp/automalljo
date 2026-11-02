@@ -1,15 +1,16 @@
 import {describe,expect,test} from "bun:test";
-import {vehicles,type Vehicle} from "../src/site-data";
+import {catalogVehicles as vehicles,type Vehicle} from "../src/site-data";
 import {bodyStyles,bodyStyleFor,defaultFilters,filterVehicles,filtersFromSearch,filtersToSearch,powertrains} from "../src/v2-catalog";
 import {pagePaths,vehicleIds} from "../scripts/page-manifest.mjs";
+import {inventory} from "../scripts/inventory.mjs";
 
 describe("AutoMall V2 catalogue navigation",()=>{
  test("keeps every public listing in exactly one powertrain and body category",()=>{
   expect(vehicles).toHaveLength(70);
-  const powerCounts=Object.fromEntries(powertrains.map(power=>[power.id,filterVehicles({...defaultFilters,powertrain:power.id}).length]));
+  const powerCounts=Object.fromEntries(powertrains.map(power=>[power.id,filterVehicles({...defaultFilters,powertrain:power.id},vehicles).length]));
   expect(powerCounts).toEqual({electric:27,hybrid:34,gasoline:9});
   expect(Object.values(powerCounts).reduce((total,count)=>total+count,0)).toBe(vehicles.length);
-  const bodyCounts=Object.fromEntries(bodyStyles.map(body=>[body.id,filterVehicles({...defaultFilters,body:body.id}).length]));
+  const bodyCounts=Object.fromEntries(bodyStyles.map(body=>[body.id,filterVehicles({...defaultFilters,body:body.id},vehicles).length]));
   expect(bodyCounts).toEqual({suv:49,sedan:11,pickup:3,van:3,coupe:1,"shooting-brake":1,targa:1,truck:1});
   expect(vehicles.every(vehicle=>bodyStyleFor(vehicle)!=="other")).toBe(true);
   expect(Object.values(bodyCounts).reduce((total,count)=>total+count,0)).toBe(vehicles.length);
@@ -22,7 +23,7 @@ describe("AutoMall V2 catalogue navigation",()=>{
    ["electric","pickup",3],["hybrid","pickup",0],["gasoline","targa",1],
   ] as const;
   for(const [powertrain,body,count] of combinations){
-   const results=filterVehicles({...defaultFilters,powertrain,body});
+   const results=filterVehicles({...defaultFilters,powertrain,body},vehicles);
    expect(results).toHaveLength(count);
    expect(results.every(vehicle=>vehicle.categories.includes(powertrain)&&bodyStyleFor(vehicle)===body)).toBe(true);
   }
@@ -35,14 +36,14 @@ describe("AutoMall V2 catalogue navigation",()=>{
  });
 
  test("combines brand and model search with category filters",()=>{
-  expect(filterVehicles({...defaultFilters,powertrain:"electric",body:"sedan",brand:"BMW"})).toHaveLength(2);
-  const camry=filterVehicles({...defaultFilters,powertrain:"hybrid",body:"sedan",query:" cAmRy "});
+  expect(filterVehicles({...defaultFilters,powertrain:"electric",body:"sedan",brand:"BMW"},vehicles)).toHaveLength(2);
+  const camry=filterVehicles({...defaultFilters,powertrain:"hybrid",body:"sedan",query:" cAmRy "},vehicles);
   expect(camry.map(vehicle=>vehicle.id)).toEqual(["288432146"]);
-  expect(filterVehicles({...defaultFilters,query:"unmatched-example-model"})).toHaveLength(0);
+  expect(filterVehicles({...defaultFilters,query:"unmatched-example-model"},vehicles)).toHaveLength(0);
  });
 
  test("equipment selection retains the exact listing and its EV range",()=>{
-  const results=filterVehicles({...defaultFilters,powertrain:"electric",body:"suv",brand:"Zeekr",equipment:"hud"});
+  const results=filterVehicles({...defaultFilters,powertrain:"electric",body:"suv",brand:"Zeekr",equipment:"hud"},vehicles);
   expect(results.map(vehicle=>vehicle.id)).toEqual(["288700472"]);
   expect(results[0].range?.en).toBe("615 km (cycle unspecified)");
  });
@@ -74,8 +75,8 @@ describe("AutoMall V2 catalogue navigation",()=>{
  });
 
  test("preserves all static detail routes and their Arabic counterparts",()=>{
-  expect(vehicleIds).toHaveLength(70);
-  expect(pagePaths).toHaveLength(160);
+  expect(vehicleIds).toHaveLength(inventory.length);
+  expect(pagePaths).toHaveLength(20+2*inventory.length);
   expect(new Set(pagePaths).size).toBe(pagePaths.length);
   for(const id of vehicleIds){
    expect(pagePaths).toContain("/v2/car/"+id+"/");
@@ -84,10 +85,10 @@ describe("AutoMall V2 catalogue navigation",()=>{
   for(const prefix of ["","/ar"])for(const page of ["","cars/","features/","updates/","contact/"])expect(pagePaths).toContain(prefix+"/v2/"+page);
  });
  test("filters by a from-to model year range",()=>{
-  const ranged=filterVehicles({...defaultFilters,yearFrom:"2020",yearTo:"2025"});
+  const ranged=filterVehicles({...defaultFilters,yearFrom:"2020",yearTo:"2025"},vehicles);
   expect(ranged.length).toBeGreaterThan(0);
   expect(ranged.every(vehicle=>Number(vehicle.year)>=2020&&Number(vehicle.year)<=2025)).toBe(true);
-  expect(filterVehicles({...defaultFilters,yearFrom:"2027"}).every(vehicle=>Number(vehicle.year)===2027)).toBe(true);
+  expect(filterVehicles({...defaultFilters,yearFrom:"2027"},vehicles).every(vehicle=>Number(vehicle.year)===2027)).toBe(true);
   expect(filtersFromSearch(new URLSearchParams("from=1990&to=2026")).yearFrom).toBe("all");
  });
 });

@@ -1458,3 +1458,10 @@ html[data-v2-theme=light] .automall-v2 .v2-banner-controls>button:hover{border-c
  html[data-v2-theme=light] .automall-v2 .v2-home-banner .v2-dealer-hero:after,html[data-v2-theme=light] .automall-v2[dir=rtl] .v2-home-banner .v2-dealer-hero:after{background:linear-gradient(180deg,#f3f5f700 0%,#f3f5f700 44%,#f3f5f7d9 49%,#f3f5f7 53%,#f3f5f7 100%)}
 }
 @media(max-width:360px){.v2-home-banner .v2-dealer-hero{min-height:580px}}
+
+.v2-car-condition[data-status]{background:var(--v2-orange);color:var(--v2-on-accent,#0b0d0f);border-color:var(--v2-orange)}
+.v2-status-note{grid-column:1/-1;margin-top:10px;padding:10px 14px;border:1px solid var(--v2-orange);border-radius:10px;font-size:13px;color:var(--v2-white);background:var(--v2-panel)}
+.v2-hours-list{display:grid;gap:4px;margin:6px 0 0}
+.v2-hours-list>div{display:flex;justify-content:space-between;gap:16px;min-width:220px}
+.v2-hours-list dt{color:var(--v2-silver)}.v2-hours-list dd{margin:0;color:var(--v2-white)}
+.v2-showroom-hours>div{flex:1}

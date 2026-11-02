@@ -1,7 +1,7 @@
 """Create small copies of the dealer photos used on car pages and cards.
 
 thumbs/: every gallery photo, at most 450x300, for thumbnail strips and gallery grids.
-cards/:  each listing's first photo, at most 800x800, for car cards.
+cards/:  each listing's first photo (dealer snapshot and cars added in the admin panel), at most 800x800, for car cards.
 Existing files are kept, so the script is quick to re-run after new listings are added.
 """
 import json
@@ -11,8 +11,9 @@ from PIL import Image
 
 ROOT = Path(__file__).resolve().parent.parent
 catalog = json.loads((ROOT / "src/catalog-data.json").read_text(encoding="utf-8"))
+admin = json.loads((ROOT / "src/admin-data.json").read_text(encoding="utf-8"))
 jobs = []
-for vehicle in catalog:
+for vehicle in [*catalog, *admin.get("cars", [])]:
     photos = dict.fromkeys([vehicle["image"], *vehicle.get("gallery", [])])
     for photo in photos:
         jobs.append((photo, "thumbs", (450, 300), 68))

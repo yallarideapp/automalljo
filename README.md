@@ -87,3 +87,13 @@ Vehicle pages use the supplied reference’s title/statistics header, large phot
 Twenty-one original SVG automotive icons describe the source-linked equipment. Eight public AutoMall Facebook posts supply showroom updates; 25 equipment claims are corroborated by those captions and the remaining 474 come from the exact linked dealer listings. All 499 claims map to the 70 captured listing IDs; no equipment is assumed across different trims.
 
 Design observations are in `refs/research/v2-design-reference.md`, and feature provenance is in `refs/research/facebook-feature-audit.json`. Runtime content uses `app/src/v2-feature-data.json`; category and filter rules live in `app/src/v2-catalog.ts`. Prices and technical figures retain the existing catalogue sources where Facebook values are ambiguous. No customer forms, persistent customer storage, accounts, checkout or tracking were added. The shared legal pages include Facebook among external services and remain linked from both versions. Check `Documents/TESTING.md` for validation results.
+
+## Admin panel
+
+Staff manage the site at `/admin/` (https://yallarideapp.github.io/automalljo/admin/). There is no server: the panel runs in the browser and saves straight to this repository with each staff member's own GitHub fine-grained access key (Repository access: this repository only; Contents: Read and write; optionally Actions: Read-only to watch the rebuild). Every publish is one commit to `main`, which redeploys the site in about 2–3 minutes.
+
+- **Cars**: add cars (with photos, resized in the browser and stored in `app/public/assets/uploads/`), edit them, mark cars available, reserved or sold, hide dealer listings. Dealer listings keep their audited photos and specifications; staff can change price, status, condition, mileage, power, torque, exterior colour and description.
+- **Homepage**: choose the banner cars (1–6) and featured cars (up to 12).
+- **Showroom info**: phone, WhatsApp, address, map search text, social links and opening hours.
+
+What staff change lives in `app/src/admin-data.json` and `app/src/site-settings.json`; the audited dealer snapshot in `app/src/catalog-data.json` is never edited by the panel. The site merges them (`app/src/inventory.ts`, mirrored for build scripts in `app/scripts/inventory.mjs`). Sold cars leave lists but keep their page; hidden cars have no page. The build makes thumbnails (`scripts/make-thumbnails.py`), logo-free banner photos (`scripts/make-banners.py`) and checks the admin data (`scripts/verify-admin-data.mjs`) before deploying.

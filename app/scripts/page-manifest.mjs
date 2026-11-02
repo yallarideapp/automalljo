@@ -1,7 +1,6 @@
-import {readFileSync} from "node:fs";
+import {inventory} from "./inventory.mjs";
 
-const catalog=JSON.parse(readFileSync(new URL("../src/catalog-data.json",import.meta.url),"utf8"));
-export const vehicleIds=catalog.map(vehicle=>String(vehicle.id));
+export const vehicleIds=inventory.map(vehicle=>String(vehicle.id));
 export const v2Views=["","cars","features","updates","contact","saved","compare"];
 export const legacyPaths=["/","/ar/","/privacy/","/ar/privacy/","/terms/","/ar/terms/"];
 export const v2Paths=["","/ar"].flatMap(prefix=>[
@@ -9,3 +8,5 @@ export const v2Paths=["","/ar"].flatMap(prefix=>[
  ...vehicleIds.map(id=>prefix+"/v2/car/"+id+"/")
 ]);
 export const pagePaths=[...legacyPaths,...v2Paths];
+/** The staff admin panel: prerendered, but left out of the sitemap and page checks. */
+export const adminPaths=["/admin/"];

@@ -1,5 +1,5 @@
 import {useEffect,useId,useMemo,useState} from "react";
-import {vehicles,whatsapp,type Lang,type Vehicle} from "@/site-data";
+import {findVehicle,whatsapp,type Lang,type Vehicle} from "@/site-data";
 import {COMPARE_LIMIT,clearCompare,monthlyPayment,toggleCompare,toggleSaved,useCompareIds,useSavedIds} from "@/v2-garage";
 import {thumbSrc} from "@/v2-content";
 
@@ -26,7 +26,7 @@ export function CompareButton({vehicle,lang,withLabel=false}:{vehicle:Vehicle;la
 
 export function CompareBar({lang,compareHref}:{lang:Lang;compareHref:string}){
  const g=garageCopy[lang],ids=useCompareIds();
- const cars=ids.map(id=>vehicles.find(vehicle=>vehicle.id===id)).filter((item):item is Vehicle=>!!item);
+ const cars=ids.map(id=>findVehicle(id)).filter((item):item is Vehicle=>!!item);
  if(cars.length===0)return null;
  return <aside className="v2-compare-bar" aria-label={g.compareTray}>
   <ul>{cars.map(car=><li key={car.id}><img src={thumbSrc(car.image)} alt="" width="54" height="36"/><span>{car.brand} {car.name}</span><button type="button" aria-label={g.removeCompare+": "+car.brand+" "+car.name} onClick={()=>toggleCompare(car.id)}>×</button></li>)}{Array.from({length:COMPARE_LIMIT-cars.length},(_,index)=><li key={"empty"+index} className="v2-compare-slot" aria-hidden="true"><CompareGlyph/></li>)}</ul>
@@ -35,7 +35,7 @@ export function CompareBar({lang,compareHref}:{lang:Lang;compareHref:string}){
 }
 
 export function SavedCount({lang,href}:{lang:Lang;href:string}){
- const g=garageCopy[lang],count=useSavedIds().filter(id=>vehicles.some(vehicle=>vehicle.id===id)).length;
+ const g=garageCopy[lang],count=useSavedIds().filter(id=>!!findVehicle(id)).length;
  return <a className="v2-saved-link" href={href} aria-label={g.savedCars+(count?" ("+count+")":"")}><Heart filled={count>0}/>{count>0&&<span aria-hidden="true">{count}</span>}</a>;
 }
 

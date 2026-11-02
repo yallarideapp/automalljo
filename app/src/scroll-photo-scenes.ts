@@ -1,4 +1,4 @@
-import {vehicles,type Lang} from "./site-data";
+import {catalogVehicles as vehicles,type Lang} from "./site-data";
 import {assetPath} from "./site-paths";
 
 type Words=Record<Lang,string>;

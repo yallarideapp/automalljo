@@ -1,0 +1,30 @@
+{
+  "phone": "+962799050000",
+  "whatsapp": "962799050000",
+  "address": {
+    "en": "Mecca Street 148",
+    "ar": "شارع مكة 148"
+  },
+  "city": {
+    "en": "Amman, Jordan",
+    "ar": "عمّان، الأردن"
+  },
+  "mapsQuery": "AutoMall, Mecca Street 148, Amman, Jordan",
+  "instagram": "https://www.instagram.com/automalljo/",
+  "facebook": "https://www.facebook.com/automall.jo",
+  "hours": [],
+  "bannerCars": [
+    "288938770",
+    "288630286",
+    "287516454",
+    "288440948"
+  ],
+  "featuredCars": [
+    "287890738",
+    "288432146",
+    "289155248",
+    "288295034",
+    "288440874",
+    "288700472"
+  ]
+}

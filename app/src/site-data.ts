@@ -1,12 +1,21 @@
 export type Lang = "en" | "ar";
 import {assetPath} from "./site-paths";
 import catalog from "./catalog-data.json";
+import adminData from "./admin-data.json";
+import settingsData from "./site-settings.json";
+import {mergeInventory,type AdminData,type VehicleRecord,type VehicleStatus} from "./inventory";
 export {SITE_URL} from "./site-paths";
-export const PHONE = "+962799050000";
-export const INSTAGRAM = "https://www.instagram.com/automalljo/";
-export const MAPS = "https://www.google.com/maps/search/?api=1&query=AutoMall+Mecca+Street+148+Amman+Jordan";
-export const whatsapp = (message: string) => "https://wa.me/962799050000?text=" + encodeURIComponent(message);
 type Localized = {en:string;ar:string};
+export type OpeningDay={day:"sat"|"sun"|"mon"|"tue"|"wed"|"thu"|"fri";closed?:boolean;open?:string;close?:string};
+export type SiteSettings={phone:string;whatsapp:string;address:Localized;city:Localized;mapsQuery:string;instagram:string;facebook:string;hours:OpeningDay[];bannerCars:string[];featuredCars:string[]};
+/** Contact details, opening hours and homepage picks, edited in the admin panel. */
+export const settings=settingsData as SiteSettings;
+export const PHONE = settings.phone;
+export const INSTAGRAM = settings.instagram;
+export const FACEBOOK_URL = settings.facebook;
+export const MAPS = "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(settings.mapsQuery);
+export const phoneDisplay=(phone=settings.phone)=>{const digits=phone.replace(/\D/g,"");const local=digits.startsWith("962")?"0"+digits.slice(3):digits;return local.length===10?local.slice(0,3)+" "+local.slice(3,6)+" "+local.slice(6):phone;};
+export const whatsapp = (message: string) => "https://wa.me/"+settings.whatsapp.replace(/\D/g,"")+"?text=" + encodeURIComponent(message);
 export type Vehicle = {
  id:string;brand:string;name:string;year:number|string;image:string;
  categories:readonly string[];color:Localized;type:Localized;description:Localized;
@@ -15,10 +24,16 @@ export type Vehicle = {
  gallery?:readonly string[];post:string;sourceLabel?:Localized;
  price?:{amount:number;currency:"JOD"};
  range?:Localized;
+ status?:VehicleStatus;
 };
-export const vehicles:readonly Vehicle[] = (catalog as Vehicle[]).map(vehicle=>({
- ...vehicle,image:assetPath(vehicle.image),gallery:vehicle.gallery?.map(assetPath)
-}));
+const withAssets=(vehicle:VehicleRecord):Vehicle=>({...vehicle,image:assetPath(vehicle.image),gallery:vehicle.gallery?.map(assetPath)});
+/** The audited dealer snapshot alone (used by the catalogue tests). */
+export const catalogVehicles:readonly Vehicle[] = (catalog as VehicleRecord[]).map(withAssets);
+/** Every car with a page: dealer snapshot + admin additions and edits, minus hidden cars. Sold cars keep their page. */
+export const allVehicles:readonly Vehicle[] = mergeInventory(catalog as VehicleRecord[],adminData as AdminData).map(withAssets);
+/** Cars listed for sale (sold cars are left out of lists, filters and counts). */
+export const vehicles:readonly Vehicle[] = allVehicles.filter(vehicle=>vehicle.status!=="sold");
+export const findVehicle=(id?:string)=>allVehicles.find(vehicle=>vehicle.id===id);
 export const copy = {
 en:{
 navCars:"Collection",navTrade:"Trade-in",navVisit:"Showroom",chat:"WhatsApp",browse:"Browse cars",lang:"العربية",menu:"Open navigation",close:"Close",heroTitle:"Your next drive.\nAt AutoMall.",heroBody:"Electric, hybrid and gasoline. Discover more possibilities at AutoMall, your car dealership in Amman.",tagline:"More choices. Less prices.",collectionLabel:"THE COLLECTION",collectionTitle:"Find your next drive.",collectionBody:"Explore 70 public dealer listings, with real photographs and vehicle specifications. Find your next drive by brand, fuel or model.",all:"All cars",electric:"Electric",suv:"SUV",premium:"Premium",search:"Search the collection",searchPlaceholder:"Brand, model or year",results:"vehicles",sourceNote:"All 70 public dealer listings, checked 29 October 2026. Listings can change; confirm current stock, price and specifications with our team.",details:"View details",emptyTitle:"A different road awaits.",emptyBody:"Try another model or reset the filters. We can also help you find what you have in mind.",reset:"Reset filters",tradeTitle:"New keys.\nNew possibilities.",tradeBody:"Your next chapter can start with your current car. Talk to AutoMall about a trade-in, subject to inspection.",tradeAction:"Discuss trade-in",visitLabel:"COME MEET YOUR NEXT CAR",visitTitle:"Better in person.",visitBody:"Take a closer look, sit behind the wheel and talk through your options with our team.",address:"Mecca Street 148",city:"Amman, Jordan 11112",directions:"Get directions",call:"Call the showroom",visitNote:"Contact us to confirm opening hours and arrange your visit.",faqTitle:"Good to know.",faq:[["How do I check price and availability?","Choose a car and open its details to send a model-specific WhatsApp enquiry. Our team will confirm the current price, specifications and availability."],["Can I trade in my current car?","Yes, AutoMall's vehicle posts invite trade-ins. Contact the team to discuss your vehicle. Any offer depends on inspection and a final agreement."],["Can I arrange a showroom visit?","Call or send a WhatsApp message to arrange a visit. Confirm opening hours directly with the showroom before travelling."],["Where can I find more cars?","This catalogue includes the 70 live listings on our public dealer page as checked on 29 October 2026. Follow @automalljo on Instagram for showroom updates, or ask our team about the latest arrivals."]],instagram:"Follow the collection",footerDescription:"Cars for your next chapter. Visit AutoMall on Mecca Street, Amman.",source:"Original dealer listing",enquire:"Enquire on WhatsApp",detailNote:"Specifications and photographs come from the linked dealer listing. Confirm the exact trim, model year, condition, mileage and current price before purchase. Listings may contain seller errors. Advertised driving range varies with speed, weather, load and battery condition.",heroCaption:"Original dealer photographs. Explore the collection below.",back:"Back to AutoMall"

@@ -58,7 +58,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: Install the pinned photo encoder
-        run: python3 -m pip install --disable-pip-version-check Pillow==12.3.0
+        run: python3 -m pip install --disable-pip-version-check Pillow==12.3.0 opencv-python-headless==4.12.0.88
       - name: Fetch and persist verified catalogue photographs
         run: |
           python3 scripts/sync-catalog-images.py
@@ -71,6 +71,8 @@ jobs:
           fi
       - name: Make small photo copies for cards and thumbnails
         run: python3 scripts/make-thumbnails.py
+      - name: Make logo-free banner photos for the chosen banner cars
+        run: python3 scripts/make-banners.py
       - name: Configure Pages
         id: pages
         uses: actions/configure-pages@v5
@@ -87,6 +89,8 @@ jobs:
         run: node scripts/prepare-pages.mjs
       - name: Verify catalogue sources and photographs
         run: node scripts/verify-catalog.mjs
+      - name: Check the admin panel data
+        run: node scripts/verify-admin-data.mjs
       - name: Test separate car categories and shareable filters
         run: bun test tests/v2-catalog.test.ts
       - name: Type check

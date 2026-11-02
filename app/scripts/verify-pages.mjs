@@ -36,27 +36,29 @@ for(const path of ["/","/ar/"]){
  if(html.includes('src="'+expectedBase+'assets/hero-car-v2.png"'))throw new Error("Old illustrative hero remains active: "+path);
 }
 for(const path of v2Paths)if(!hasClass(htmlByPath.get(path),"automall-v2"))throw new Error("Missing second-version page content: "+path);
+const {inventory:inventoryForBanner,siteSettings:siteSettingsForBanner}=await import("./inventory.mjs");
 for(const prefix of ["","/ar"]){
  const home=htmlByPath.get(prefix+"/v2/"),cars=htmlByPath.get(prefix+"/v2/cars/");
  if(home.includes('id="v2-collection"')||home.includes('id="v2-posts-heading"'))throw new Error("V2 homepage still includes a full catalogue or posts page: "+prefix);
  if(!hasClass(home,"v2-home-refined")||!hasClass(home,"v2-dealer-hero")||!hasClass(home,"v2-home-search")||!hasClass(home,"v2-category-grid")||!hasClass(home,"v2-home-featured"))throw new Error("V2 homepage is missing its photo banner, search form, category links or featured vehicles: "+prefix);
  const bannerImages=tags(home,"img").filter(tag=>hasClass(tag,"v2-dealer-hero-image"));
- if(bannerImages.length!==4||new Set(bannerImages.map(tag=>tag.match(/(?:gallery|banner)-(\d+)[-.]/)?.[1]).filter(Boolean)).size!==4)throw new Error("V2 banner must contain four different dealer vehicles: "+prefix);
+ const bannerCount=siteSettingsForBanner.bannerCars.filter(id=>inventoryForBanner.some(vehicle=>vehicle.id===id&&vehicle.status!=="sold")).length;
+ if(bannerImages.length!==bannerCount||bannerCount<1||new Set(bannerImages.map(tag=>tag.match(/(?:gallery|banner)-(\d+)[-.]/)?.[1]).filter(Boolean)).size!==bannerCount)throw new Error("V2 banner must contain the chosen dealer vehicles: "+prefix);
  if(!hasClass(home,"v2-brand-grid")||tags(home,"a").filter(tag=>hasClass(tag,"v2-brand-tile")).length!==12||home.indexOf('id="v2-brands"')<home.indexOf('id="v2-categories"')||home.indexOf('id="v2-brands"')>home.indexOf('id="v2-featured-title"'))throw new Error("V2 brand browser must follow categories and show twelve initial brand links: "+prefix);
  if(!hasClass(cars,"v2-powertrain-tabs")||!hasClass(cars,"v2-body-filters"))throw new Error("V2 catalogue needs separate powertrain and body filters: "+prefix);
  if(hasClass(cars,"v2-hero"))throw new Error("Catalogue still includes the homepage hero: "+prefix);
  if(!/<svg\b[^>]*class="[^\"]*\bvehicle-feature-icon\b[^\"]*"/.test(cars))throw new Error("Missing prerendered vehicle feature icons: "+prefix);
  for(const view of ["features","updates","contact"])if(!/<h1\b/.test(htmlByPath.get(prefix+"/v2/"+view+"/")))throw new Error("V2 page has no primary heading: "+view);
 }
-const catalog=JSON.parse(await readFile(new URL("../src/catalog-data.json",import.meta.url),"utf8"));
-for(const vehicle of catalog)for(const prefix of ["","/ar"]){
+const {inventory,siteSettings}=await import("./inventory.mjs");
+for(const vehicle of inventory)for(const prefix of ["","/ar"]){
  const path=prefix+"/v2/car/"+vehicle.id+"/",html=htmlByPath.get(path),lang=prefix?"ar":"en";
  if(!html.includes('id="v2-detail-title"')||!hasClass(html,"v2-gallery-thumbs"))throw new Error("Missing standalone car gallery/details: "+path);
  if(!hasClass(html,"v2-showcase")||!hasClass(html,"v2-showcase-tabs")||!hasClass(html,"v2-showcase-gallery"))throw new Error("Missing reference-style car specifications or gallery tabs: "+path);
  if(!html.includes(escapeText(vehicle.brand)))throw new Error("Wrong vehicle in detail page: "+path);
  if(vehicle.range&&(!hasClass(html,"v2-range-panel")||!html.includes(escapeText(vehicle.range[lang]))))throw new Error("Missing electric range on car page: "+path);
  const images=[...new Set([vehicle.image,...(vehicle.gallery||[])])];
- for(const image of images){const thumb=image.replace("/assets/catalog/","/assets/thumbs/");if(!html.includes(expectedBase+thumb.replace(/^\//,"")))throw new Error("Missing dealer gallery photograph on car page: "+path+" / "+image);const info=await stat(join(out,thumb.replace(/^\//,"")));if(!info.size)throw new Error("Empty thumbnail: "+thumb);}
+ for(const image of images){const thumb=image.replace(/\/assets\/(?:catalog|uploads)\//,"/assets/thumbs/").replace(/\.(?:jpe?g|png)$/i,".webp");if(!html.includes(expectedBase+thumb.replace(/^\//,"")))throw new Error("Missing dealer gallery photograph on car page: "+path+" / "+image);const info=await stat(join(out,thumb.replace(/^\//,"")));if(!info.size)throw new Error("Empty thumbnail: "+thumb);}
 }
 
 // GitHub Pages serves this recovery document at arbitrary missing paths.
