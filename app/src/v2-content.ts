@@ -9,6 +9,9 @@ const supported=new Set<VehicleFeatureName>(["range","battery","charge","hybrid"
 export const FACEBOOK="https://www.facebook.com/automall.jo";
 export const dealerPosts=research.facebookPosts.filter(post=>post.captionAccess==="public-full-caption"&&post.url.startsWith("https://www.facebook.com/automall.jo/"));
 export const equipmentFor=(vehicle:Vehicle)=>{const seen=new Set<string>();return (research.vehicles[vehicle.id]?.features??[]).filter(feature=>supported.has(feature.id)&&!seen.has(feature.id)&&!!seen.add(feature.id));};
+/** Small copies of dealer photos: 450px for thumbnail strips and grids, 800px for car cards. */
+export const thumbSrc=(src:string)=>src.replace("/assets/catalog/","/assets/thumbs/");
+export const cardSrc=(src:string)=>src.replace("/assets/catalog/","/assets/cards/");
 export const specValue=(vehicle:Vehicle,label:string)=>vehicle.specs?.find(spec=>spec.label.en===label)?.value;
 export const isElectric=(vehicle:Vehicle)=>vehicle.categories.includes("electric");
 export const brandNames=[...new Set(vehicles.map(v=>v.brand))].sort((a,b)=>a.localeCompare(b));

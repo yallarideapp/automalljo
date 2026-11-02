@@ -6,7 +6,7 @@ const out="dist/client";
 const fileFor=path=>path.replace(/^\//,"")+"index.html";
 const htmlFiles=pagePaths.map(fileFor);
 const artIds=["electric","hybrid","gasoline","suv","sedan","pickup","van","coupe","shooting-brake","targa","truck"];
-const expected=[...htmlFiles,"404.html","robots.txt","sitemap.xml","site.webmanifest","assets/catalog/gallery-287890822-1.webp","assets/catalog/gallery-288440948-1.webp","assets/catalog/gallery-288630286-11.webp","assets/catalog/gallery-287516454-1.webp","assets/banner/banner-287516454.webp","assets/banner/banner-288630286.webp","assets/banner/banner-288440948.webp","assets/banner/banner-288938770.webp",...artIds.map(id=>"assets/categories/category-"+id+".webp")];
+const expected=[...htmlFiles,"404.html","robots.txt","sitemap.xml","site.webmanifest","assets/catalog/gallery-287890822-1.webp","assets/catalog/gallery-288440948-1.webp","assets/catalog/gallery-288630286-11.webp","assets/catalog/gallery-287516454-1.webp","assets/banner/banner-287516454.webp","assets/categories/photo-electric.webp","assets/categories/photo-hybrid.webp","assets/categories/photo-gasoline.webp","assets/thumbs/gallery-288630286-1.webp","assets/cards/gallery-288630286-1.webp","assets/banner/banner-288630286.webp","assets/banner/banner-288440948.webp","assets/banner/banner-288938770.webp",...artIds.map(id=>"assets/categories/category-"+id+".webp")];
 for(const path of expected){const info=await stat(join(out,path));if(!info.isFile()||info.size===0)throw new Error("Missing or empty static output: "+path);}
 
 const source=process.env.VITE_SITE_URL;
@@ -56,7 +56,7 @@ for(const vehicle of catalog)for(const prefix of ["","/ar"]){
  if(!html.includes(escapeText(vehicle.brand)))throw new Error("Wrong vehicle in detail page: "+path);
  if(vehicle.range&&(!hasClass(html,"v2-range-panel")||!html.includes(escapeText(vehicle.range[lang]))))throw new Error("Missing electric range on car page: "+path);
  const images=[...new Set([vehicle.image,...(vehicle.gallery||[])])];
- for(const image of images)if(!html.includes(expectedBase+image.replace(/^\//,"")))throw new Error("Missing dealer gallery photograph on car page: "+path+" / "+image);
+ for(const image of images){const thumb=image.replace("/assets/catalog/","/assets/thumbs/");if(!html.includes(expectedBase+thumb.replace(/^\//,"")))throw new Error("Missing dealer gallery photograph on car page: "+path+" / "+image);const info=await stat(join(out,thumb.replace(/^\//,"")));if(!info.size)throw new Error("Empty thumbnail: "+thumb);}
 }
 
 // GitHub Pages serves this recovery document at arbitrary missing paths.

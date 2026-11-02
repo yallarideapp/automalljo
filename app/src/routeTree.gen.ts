@@ -21,14 +21,18 @@ import { Route as ArIndexRouteImport } from './routes/ar.index'
 import { Route as ArTermsRouteImport } from './routes/ar.terms'
 import { Route as ArPrivacyRouteImport } from './routes/ar.privacy'
 import { Route as V2UpdatesIndexRouteImport } from './routes/v2.updates.index'
+import { Route as V2SavedIndexRouteImport } from './routes/v2.saved.index'
 import { Route as V2FeaturesIndexRouteImport } from './routes/v2.features.index'
 import { Route as V2ContactIndexRouteImport } from './routes/v2.contact.index'
+import { Route as V2CompareIndexRouteImport } from './routes/v2.compare.index'
 import { Route as V2CarsIndexRouteImport } from './routes/v2.cars.index'
 import { Route as ArV2IndexRouteImport } from './routes/ar.v2.index'
 import { Route as V2CarVehicleIdRouteImport } from './routes/v2.car.$vehicleId'
 import { Route as ArV2UpdatesIndexRouteImport } from './routes/ar.v2.updates.index'
+import { Route as ArV2SavedIndexRouteImport } from './routes/ar.v2.saved.index'
 import { Route as ArV2FeaturesIndexRouteImport } from './routes/ar.v2.features.index'
 import { Route as ArV2ContactIndexRouteImport } from './routes/ar.v2.contact.index'
+import { Route as ArV2CompareIndexRouteImport } from './routes/ar.v2.compare.index'
 import { Route as ArV2CarsIndexRouteImport } from './routes/ar.v2.cars.index'
 import { Route as ArV2CarVehicleIdRouteImport } from './routes/ar.v2.car.$vehicleId'
 
@@ -92,6 +96,11 @@ const V2UpdatesIndexRoute = V2UpdatesIndexRouteImport.update({
   path: '/v2/updates/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const V2SavedIndexRoute = V2SavedIndexRouteImport.update({
+  id: '/v2/saved/',
+  path: '/v2/saved/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const V2FeaturesIndexRoute = V2FeaturesIndexRouteImport.update({
   id: '/v2/features/',
   path: '/v2/features/',
@@ -100,6 +109,11 @@ const V2FeaturesIndexRoute = V2FeaturesIndexRouteImport.update({
 const V2ContactIndexRoute = V2ContactIndexRouteImport.update({
   id: '/v2/contact/',
   path: '/v2/contact/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const V2CompareIndexRoute = V2CompareIndexRouteImport.update({
+  id: '/v2/compare/',
+  path: '/v2/compare/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const V2CarsIndexRoute = V2CarsIndexRouteImport.update({
@@ -122,6 +136,11 @@ const ArV2UpdatesIndexRoute = ArV2UpdatesIndexRouteImport.update({
   path: '/ar/v2/updates/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ArV2SavedIndexRoute = ArV2SavedIndexRouteImport.update({
+  id: '/ar/v2/saved/',
+  path: '/ar/v2/saved/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ArV2FeaturesIndexRoute = ArV2FeaturesIndexRouteImport.update({
   id: '/ar/v2/features/',
   path: '/ar/v2/features/',
@@ -130,6 +149,11 @@ const ArV2FeaturesIndexRoute = ArV2FeaturesIndexRouteImport.update({
 const ArV2ContactIndexRoute = ArV2ContactIndexRouteImport.update({
   id: '/ar/v2/contact/',
   path: '/ar/v2/contact/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArV2CompareIndexRoute = ArV2CompareIndexRouteImport.update({
+  id: '/ar/v2/compare/',
+  path: '/ar/v2/compare/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ArV2CarsIndexRoute = ArV2CarsIndexRouteImport.update({
@@ -158,13 +182,17 @@ export interface FileRoutesByFullPath {
   '/v2/car/$vehicleId': typeof V2CarVehicleIdRoute
   '/ar/v2/': typeof ArV2IndexRoute
   '/v2/cars/': typeof V2CarsIndexRoute
+  '/v2/compare/': typeof V2CompareIndexRoute
   '/v2/contact/': typeof V2ContactIndexRoute
   '/v2/features/': typeof V2FeaturesIndexRoute
+  '/v2/saved/': typeof V2SavedIndexRoute
   '/v2/updates/': typeof V2UpdatesIndexRoute
   '/ar/v2/car/$vehicleId': typeof ArV2CarVehicleIdRoute
   '/ar/v2/cars/': typeof ArV2CarsIndexRoute
+  '/ar/v2/compare/': typeof ArV2CompareIndexRoute
   '/ar/v2/contact/': typeof ArV2ContactIndexRoute
   '/ar/v2/features/': typeof ArV2FeaturesIndexRoute
+  '/ar/v2/saved/': typeof ArV2SavedIndexRoute
   '/ar/v2/updates/': typeof ArV2UpdatesIndexRoute
 }
 export interface FileRoutesByTo {
@@ -182,13 +210,17 @@ export interface FileRoutesByTo {
   '/v2/car/$vehicleId': typeof V2CarVehicleIdRoute
   '/ar/v2': typeof ArV2IndexRoute
   '/v2/cars': typeof V2CarsIndexRoute
+  '/v2/compare': typeof V2CompareIndexRoute
   '/v2/contact': typeof V2ContactIndexRoute
   '/v2/features': typeof V2FeaturesIndexRoute
+  '/v2/saved': typeof V2SavedIndexRoute
   '/v2/updates': typeof V2UpdatesIndexRoute
   '/ar/v2/car/$vehicleId': typeof ArV2CarVehicleIdRoute
   '/ar/v2/cars': typeof ArV2CarsIndexRoute
+  '/ar/v2/compare': typeof ArV2CompareIndexRoute
   '/ar/v2/contact': typeof ArV2ContactIndexRoute
   '/ar/v2/features': typeof ArV2FeaturesIndexRoute
+  '/ar/v2/saved': typeof ArV2SavedIndexRoute
   '/ar/v2/updates': typeof ArV2UpdatesIndexRoute
 }
 export interface FileRoutesById {
@@ -207,13 +239,17 @@ export interface FileRoutesById {
   '/v2/car/$vehicleId': typeof V2CarVehicleIdRoute
   '/ar/v2/': typeof ArV2IndexRoute
   '/v2/cars/': typeof V2CarsIndexRoute
+  '/v2/compare/': typeof V2CompareIndexRoute
   '/v2/contact/': typeof V2ContactIndexRoute
   '/v2/features/': typeof V2FeaturesIndexRoute
+  '/v2/saved/': typeof V2SavedIndexRoute
   '/v2/updates/': typeof V2UpdatesIndexRoute
   '/ar/v2/car/$vehicleId': typeof ArV2CarVehicleIdRoute
   '/ar/v2/cars/': typeof ArV2CarsIndexRoute
+  '/ar/v2/compare/': typeof ArV2CompareIndexRoute
   '/ar/v2/contact/': typeof ArV2ContactIndexRoute
   '/ar/v2/features/': typeof ArV2FeaturesIndexRoute
+  '/ar/v2/saved/': typeof ArV2SavedIndexRoute
   '/ar/v2/updates/': typeof ArV2UpdatesIndexRoute
 }
 export interface FileRouteTypes {
@@ -233,13 +269,17 @@ export interface FileRouteTypes {
     | '/v2/car/$vehicleId'
     | '/ar/v2/'
     | '/v2/cars/'
+    | '/v2/compare/'
     | '/v2/contact/'
     | '/v2/features/'
+    | '/v2/saved/'
     | '/v2/updates/'
     | '/ar/v2/car/$vehicleId'
     | '/ar/v2/cars/'
+    | '/ar/v2/compare/'
     | '/ar/v2/contact/'
     | '/ar/v2/features/'
+    | '/ar/v2/saved/'
     | '/ar/v2/updates/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -257,13 +297,17 @@ export interface FileRouteTypes {
     | '/v2/car/$vehicleId'
     | '/ar/v2'
     | '/v2/cars'
+    | '/v2/compare'
     | '/v2/contact'
     | '/v2/features'
+    | '/v2/saved'
     | '/v2/updates'
     | '/ar/v2/car/$vehicleId'
     | '/ar/v2/cars'
+    | '/ar/v2/compare'
     | '/ar/v2/contact'
     | '/ar/v2/features'
+    | '/ar/v2/saved'
     | '/ar/v2/updates'
   id:
     | '__root__'
@@ -281,13 +325,17 @@ export interface FileRouteTypes {
     | '/v2/car/$vehicleId'
     | '/ar/v2/'
     | '/v2/cars/'
+    | '/v2/compare/'
     | '/v2/contact/'
     | '/v2/features/'
+    | '/v2/saved/'
     | '/v2/updates/'
     | '/ar/v2/car/$vehicleId'
     | '/ar/v2/cars/'
+    | '/ar/v2/compare/'
     | '/ar/v2/contact/'
     | '/ar/v2/features/'
+    | '/ar/v2/saved/'
     | '/ar/v2/updates/'
   fileRoutesById: FileRoutesById
 }
@@ -306,13 +354,17 @@ export interface RootRouteChildren {
   V2CarVehicleIdRoute: typeof V2CarVehicleIdRoute
   ArV2IndexRoute: typeof ArV2IndexRoute
   V2CarsIndexRoute: typeof V2CarsIndexRoute
+  V2CompareIndexRoute: typeof V2CompareIndexRoute
   V2ContactIndexRoute: typeof V2ContactIndexRoute
   V2FeaturesIndexRoute: typeof V2FeaturesIndexRoute
+  V2SavedIndexRoute: typeof V2SavedIndexRoute
   V2UpdatesIndexRoute: typeof V2UpdatesIndexRoute
   ArV2CarVehicleIdRoute: typeof ArV2CarVehicleIdRoute
   ArV2CarsIndexRoute: typeof ArV2CarsIndexRoute
+  ArV2CompareIndexRoute: typeof ArV2CompareIndexRoute
   ArV2ContactIndexRoute: typeof ArV2ContactIndexRoute
   ArV2FeaturesIndexRoute: typeof ArV2FeaturesIndexRoute
+  ArV2SavedIndexRoute: typeof ArV2SavedIndexRoute
   ArV2UpdatesIndexRoute: typeof ArV2UpdatesIndexRoute
 }
 
@@ -402,6 +454,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof V2UpdatesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/v2/saved/': {
+      id: '/v2/saved/'
+      path: '/v2/saved'
+      fullPath: '/v2/saved/'
+      preLoaderRoute: typeof V2SavedIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/v2/features/': {
       id: '/v2/features/'
       path: '/v2/features'
@@ -414,6 +473,13 @@ declare module '@tanstack/react-router' {
       path: '/v2/contact'
       fullPath: '/v2/contact/'
       preLoaderRoute: typeof V2ContactIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/v2/compare/': {
+      id: '/v2/compare/'
+      path: '/v2/compare'
+      fullPath: '/v2/compare/'
+      preLoaderRoute: typeof V2CompareIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/v2/cars/': {
@@ -444,6 +510,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ArV2UpdatesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ar/v2/saved/': {
+      id: '/ar/v2/saved/'
+      path: '/ar/v2/saved'
+      fullPath: '/ar/v2/saved/'
+      preLoaderRoute: typeof ArV2SavedIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/ar/v2/features/': {
       id: '/ar/v2/features/'
       path: '/ar/v2/features'
@@ -456,6 +529,13 @@ declare module '@tanstack/react-router' {
       path: '/ar/v2/contact'
       fullPath: '/ar/v2/contact/'
       preLoaderRoute: typeof ArV2ContactIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ar/v2/compare/': {
+      id: '/ar/v2/compare/'
+      path: '/ar/v2/compare'
+      fullPath: '/ar/v2/compare/'
+      preLoaderRoute: typeof ArV2CompareIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/ar/v2/cars/': {
@@ -490,13 +570,17 @@ const rootRouteChildren: RootRouteChildren = {
   V2CarVehicleIdRoute: V2CarVehicleIdRoute,
   ArV2IndexRoute: ArV2IndexRoute,
   V2CarsIndexRoute: V2CarsIndexRoute,
+  V2CompareIndexRoute: V2CompareIndexRoute,
   V2ContactIndexRoute: V2ContactIndexRoute,
   V2FeaturesIndexRoute: V2FeaturesIndexRoute,
+  V2SavedIndexRoute: V2SavedIndexRoute,
   V2UpdatesIndexRoute: V2UpdatesIndexRoute,
   ArV2CarVehicleIdRoute: ArV2CarVehicleIdRoute,
   ArV2CarsIndexRoute: ArV2CarsIndexRoute,
+  ArV2CompareIndexRoute: ArV2CompareIndexRoute,
   ArV2ContactIndexRoute: ArV2ContactIndexRoute,
   ArV2FeaturesIndexRoute: ArV2FeaturesIndexRoute,
+  ArV2SavedIndexRoute: ArV2SavedIndexRoute,
   ArV2UpdatesIndexRoute: ArV2UpdatesIndexRoute,
 }
 export const routeTree = rootRouteImport

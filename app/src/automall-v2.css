@@ -1332,3 +1332,129 @@ html[data-v2-theme=light] .automall-v2 .v2-banner-controls>button:hover{border-c
  html[data-v2-theme=light] .automall-v2 .v2-home-banner .v2-dealer-hero:after,html[data-v2-theme=light] .automall-v2[dir=rtl] .v2-home-banner .v2-dealer-hero:after{background:linear-gradient(180deg,#f3f5f700 0%,#f3f5f700 50%,#f3f5f7b3 57%,#f3f5f7f5 63%,#f3f5f7 68%,#f3f5f7 100%)}
  html[data-v2-theme=light] .automall-v2 .v2-home-banner .v2-dealer-hero-content>p:not(.v2-eyebrow){color:#3d4650}
 }
+
+/* ---------- category cards: real showroom photos ---------- */
+.automall-v2 .v2-category-card>img.v2-category-photo,html[data-v2-theme=light] .automall-v2 .v2-category-card>img.v2-category-photo{width:100%;margin:0;padding:0;aspect-ratio:1.8;object-fit:cover;object-position:center 62%;mix-blend-mode:normal;background:var(--v2-panel);border-radius:0}
+
+/* phones, dark mode: deepen the fade earlier so the heading stays readable over bright photo floors */
+@media(max-width:700px){
+ html:not([data-v2-theme=light]) .automall-v2 .v2-home-banner .v2-dealer-hero:after,html:not([data-v2-theme=light]) .automall-v2[dir=rtl] .v2-home-banner .v2-dealer-hero:after{background:linear-gradient(180deg,#0b0d0f00 0%,#0b0d0f00 40%,#0b0d0fa6 49%,#0b0d0fe6 57%,#0b0d0f 65%,#0b0d0f 100%)}
+}
+
+/* ---------- showroom page ---------- */
+.v2-showroom{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:48px;align-items:stretch;padding-block:56px 40px}
+.v2-showroom-info h2{font-size:clamp(32px,3.4vw,48px);line-height:1.1;letter-spacing:-.04em;margin-top:6px}
+.v2-showroom-address{display:flex;flex-direction:column;gap:4px;margin-top:20px;font-style:normal}
+.v2-showroom-address strong{font-size:20px;font-weight:500}
+.v2-showroom-address span{font-size:14px;color:var(--v2-silver)}
+.v2-showroom-tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:28px}
+.v2-showroom-tile{display:flex;align-items:center;gap:14px;min-width:0;min-height:76px;padding:14px 16px;border:1px solid var(--v2-line);border-radius:12px;background:var(--v2-panel);color:var(--v2-white);transition:border-color .2s,transform .2s}
+.v2-showroom-tile>svg{flex-shrink:0;color:var(--v2-orange)}
+.v2-showroom-tile>span:not([aria-hidden]){display:flex;flex-direction:column;gap:3px;min-width:0;flex:1}
+.v2-showroom-tile small{font-size:11px;color:var(--v2-silver)}
+.v2-showroom-tile strong{font-size:14px;font-weight:500;overflow-wrap:anywhere}
+.v2-showroom-tile>span[aria-hidden]{color:var(--v2-silver)}
+.v2-showroom-tile:hover{border-color:var(--v2-orange)}
+.v2-showroom-hours{display:flex;gap:12px;align-items:flex-start;margin-top:18px;padding:14px 16px;border:1px dashed var(--v2-line);border-radius:12px;font-size:13px;line-height:1.7;color:var(--v2-silver)}
+.v2-showroom-hours>svg{flex-shrink:0;color:var(--v2-orange);margin-top:2px}
+.v2-showroom-hours strong{display:block;color:var(--v2-white);font-weight:500}
+.v2-showroom-map{position:relative;min-height:460px;overflow:hidden;border:1px solid var(--v2-line);border-radius:16px;background:var(--v2-panel)}
+.v2-showroom-map iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.v2-showroom-map-link{position:absolute;inset-inline-end:14px;inset-block-end:14px;display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:10px 14px;border-radius:99px;background:var(--v2-night);color:var(--v2-white);font-size:12px;border:1px solid var(--v2-line)}
+.v2-showroom-trade-wrap{padding-block:8px 64px}
+.v2-showroom-trade{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:24px;align-items:center;padding:28px 30px;border:1px solid var(--v2-line);border-radius:16px;background:var(--v2-panel)}
+.v2-showroom-trade-icon{display:grid;place-items:center;width:56px;height:56px;border-radius:50%;background:var(--v2-night);color:var(--v2-orange);border:1px solid var(--v2-line)}
+.v2-showroom-trade .v2-eyebrow{margin-bottom:6px}
+.v2-showroom-trade h2{font-size:26px;letter-spacing:-.03em}
+.v2-showroom-trade p:not(.v2-eyebrow){margin-top:6px;font-size:13px;line-height:1.7;color:var(--v2-silver);max-width:520px}
+.v2-showroom-trade-actions{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+@media(max-width:960px){.v2-showroom{grid-template-columns:1fr;gap:28px}.v2-showroom-map{min-height:340px}.v2-showroom-trade{grid-template-columns:auto minmax(0,1fr)}.v2-showroom-trade-actions{grid-column:1/-1}}
+@media(max-width:700px){.v2-showroom{padding-block:28px 24px}.v2-showroom-tiles{grid-template-columns:1fr}.v2-showroom-map{min-height:300px}.v2-showroom-trade{padding:22px 18px;gap:16px}.v2-showroom-trade-wrap{padding-bottom:40px}.v2-showroom-trade-icon{width:46px;height:46px}.v2-showroom-trade h2{font-size:22px}}
+
+/* ---------- buyer tools: saved cars, compare, payment calculator ---------- */
+.v2-car{position:relative}
+.v2-car-actions{position:absolute;z-index:2;inset-block-start:12px;inset-inline-end:12px;display:flex;gap:8px}
+.v2-garage-button{display:inline-grid;place-items:center;width:40px;height:40px;padding:0;border:1px solid #ffffff2e;border-radius:50%;background:#0b0d0fb3;color:#f1f3f4;cursor:pointer;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:background .2s,color .2s,border-color .2s}
+.v2-garage-button:hover{border-color:var(--v2-orange);color:var(--v2-orange)}
+.v2-garage-button[aria-pressed=true]{background:var(--v2-orange);border-color:var(--v2-orange);color:var(--v2-on-accent,#0b0d0f)}
+.v2-garage-button[data-full]{opacity:.55}
+.v2-garage-button:focus-visible{outline:2px solid var(--v2-orange);outline-offset:2px}
+.v2-garage-button-label{display:inline-flex;gap:9px;width:auto;height:44px;padding-inline:14px 16px;border-color:var(--v2-line);border-radius:99px;background:transparent;color:var(--v2-white);font-size:12px;font-family:inherit;backdrop-filter:none;-webkit-backdrop-filter:none}
+.v2-compare-wrap{position:relative;display:inline-flex}
+.v2-compare-warning{position:absolute;z-index:5;inset-block-start:calc(100% + 8px);inset-inline-end:0;width:220px;padding:10px 12px;border:1px solid var(--v2-line);border-radius:10px;background:var(--v2-panel);color:var(--v2-white);font-size:11px;line-height:1.6;box-shadow:0 14px 30px -18px #000c}
+.v2-showcase-garage{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.v2-saved-link{position:relative;display:grid;place-items:center;flex-shrink:0;width:44px;height:44px;border:1px solid var(--v2-line);border-radius:50%;color:var(--v2-white)}
+.v2-saved-link:hover{color:var(--v2-orange);border-color:var(--v2-orange)}
+.v2-saved-link>span{position:absolute;inset-block-start:-4px;inset-inline-end:-4px;display:grid;place-items:center;min-width:19px;height:19px;padding-inline:5px;border-radius:99px;background:var(--v2-orange);color:var(--v2-on-accent,#0b0d0f);font-size:10px;font-weight:600}
+@media(max-width:360px){.v2-saved-link{display:none}}
+.v2-compare-bar{position:fixed;z-index:45;left:50%;right:auto;inset-block-end:18px;transform:translateX(-50%);display:flex;align-items:center;gap:18px;width:min(860px,calc(100% - 32px));padding:10px 12px;border:1px solid var(--v2-line);border-radius:16px;background:var(--v2-panel);box-shadow:0 24px 50px -26px #000}
+.v2-compare-bar ul{display:flex;gap:8px;flex:1;min-width:0;margin:0;padding:0;list-style:none}
+.v2-compare-bar li{display:flex;align-items:center;gap:8px;flex:1;min-width:0;padding:5px 6px;border:1px solid var(--v2-line);border-radius:10px;background:var(--v2-night);font-size:11px}
+.v2-compare-bar li>img{width:54px;height:36px;object-fit:cover;border-radius:6px;flex-shrink:0}
+.v2-compare-bar li>span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+.v2-compare-bar li>button{display:grid;place-items:center;width:28px;height:28px;flex-shrink:0;padding:0;border:0;border-radius:50%;background:transparent;color:var(--v2-silver);font-size:18px;cursor:pointer}
+.v2-compare-bar li>button:hover{color:var(--v2-orange)}
+.v2-compare-slot{justify-content:center;border-style:dashed!important;color:var(--v2-line);min-height:48px}
+.v2-compare-bar-actions{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.v2-compare-clear{min-height:44px;padding-inline:8px;border:0;background:transparent;color:var(--v2-silver);font-family:inherit;font-size:12px;cursor:pointer}
+.v2-compare-bar .v2-button[aria-disabled=true]{opacity:.6}
+@media(max-width:700px){
+ .v2-compare-bar{inset-block-end:calc(74px + env(safe-area-inset-bottom));flex-direction:column;align-items:stretch;gap:8px;padding:8px}
+ .v2-compare-bar li{padding:4px;gap:4px;font-size:10px;justify-content:space-between}.v2-compare-bar li>span{display:none}.v2-compare-bar li>img{width:58px;height:36px}.v2-compare-slot{min-height:38px}
+ .v2-compare-bar-actions{justify-content:space-between}.v2-compare-bar-actions .v2-button{flex:1;justify-content:space-between;min-height:42px}
+}
+.v2-garage-empty{gap:12px;margin-block:10px 60px}
+.v2-garage-empty .vehicle-feature-icon{color:var(--v2-orange)}
+.v2-garage-empty p{color:var(--v2-silver);font-size:13px;max-width:360px}
+/* compare page */
+.v2-compare{padding-block:24px 120px}
+.v2-compare-hint{margin-bottom:16px;padding:12px 16px;border:1px dashed var(--v2-line);border-radius:12px;font-size:13px;color:var(--v2-silver)}
+.v2-compare-hint a{color:var(--v2-orange);display:inline-flex;gap:6px;margin-inline-start:8px}
+.v2-compare-scroll{overflow-x:auto;border:1px solid var(--v2-line);border-radius:16px;background:var(--v2-panel)}
+.v2-compare-table{width:100%;min-width:calc(170px + var(--v2-compare-cols,2) * 230px);border-collapse:collapse;table-layout:fixed;font-size:13px}
+.v2-compare-table thead td,.v2-compare-table tbody th{width:170px}
+.v2-compare-table th,.v2-compare-table td{padding:13px 16px;border-bottom:1px solid var(--v2-line);text-align:start;vertical-align:top;line-height:1.6;overflow-wrap:anywhere}
+.v2-compare-table tbody th{position:sticky;inset-inline-start:0;z-index:1;background:var(--v2-panel);color:var(--v2-silver);font-weight:400;font-size:12px}
+.v2-compare-table thead th{padding-top:16px;font-weight:400}
+.v2-compare-table tbody tr:last-child>*{border-bottom:0}
+.v2-compare-photo{display:block;aspect-ratio:1.5;overflow:hidden;border-radius:10px;background:var(--v2-paper)}
+.v2-compare-photo img{width:100%;height:100%;object-fit:cover}
+.v2-compare-name{display:flex;align-items:center;gap:10px;margin-top:12px;font-size:16px;font-weight:500;color:var(--v2-white)}
+.v2-compare-remove{margin-top:8px;padding:0;min-height:32px;border:0;background:transparent;color:var(--v2-silver);font-family:inherit;font-size:11px;text-decoration:underline;cursor:pointer}
+.v2-compare-remove:hover{color:var(--v2-orange)}
+.v2-compare-enquire{min-height:42px;font-size:12px}
+@media(max-width:700px){.v2-compare-table{min-width:calc(120px + var(--v2-compare-cols,2) * 170px);font-size:12px}.v2-compare-table thead td,.v2-compare-table tbody th{width:120px}.v2-compare-table th,.v2-compare-table td{padding:11px 12px}.v2-compare-name{font-size:14px}}
+/* payment calculator (car page) */
+.v2-calculator{margin-top:34px;padding:28px;border:1px solid var(--v2-line);border-radius:16px;background:var(--v2-panel)}
+.v2-calculator-intro h2{font-size:24px;letter-spacing:-.03em}
+.v2-calculator-intro p{margin-top:6px;font-size:13px;color:var(--v2-silver)}
+.v2-calculator-body{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:28px;margin-top:22px}
+.v2-calculator-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.v2-calc-field{display:flex;flex-direction:column;gap:9px;min-width:0;font-size:12px;color:var(--v2-silver)}
+.v2-calc-field strong{color:var(--v2-white);font-weight:500;margin-inline-start:6px}
+.v2-calc-field input[type=text],.v2-calc-field input[type=number]{width:100%;min-height:48px;padding:0 14px;border:1px solid var(--v2-line);border-radius:10px;background:var(--v2-night);color:var(--v2-white);font-family:inherit;font-size:15px}
+.v2-calc-field input:focus-visible{outline:2px solid var(--v2-orange);outline-offset:1px}
+.v2-calc-field input[type=range]{width:100%;min-height:44px;accent-color:var(--v2-orange)}
+.v2-calc-field small{font-size:11px}
+.v2-calc-years{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}
+.v2-calc-years>button{width:100%;min-width:0;height:40px;padding:0;border:1px solid var(--v2-line);border-radius:10px;background:var(--v2-night);color:var(--v2-white);font-family:inherit;font-size:13px;cursor:pointer}
+.v2-calc-years>button[aria-checked=true]{background:var(--v2-orange);border-color:var(--v2-orange);color:var(--v2-on-accent,#0b0d0f);font-weight:600}
+.v2-calculator-result{display:flex;flex-direction:column;gap:16px;padding:20px;border-radius:12px;background:var(--v2-night);border:1px solid var(--v2-line)}
+.v2-calc-monthly small{display:block;font-size:12px;color:var(--v2-silver)}
+.v2-calc-monthly strong{display:block;margin-top:6px;font-size:32px;font-weight:500;letter-spacing:-.03em;color:var(--v2-orange)}
+.v2-calculator-result dl{display:grid;gap:8px;margin:0}
+.v2-calculator-result dl>div{display:flex;justify-content:space-between;gap:12px;font-size:13px}
+.v2-calculator-result dt{color:var(--v2-silver)}
+.v2-calculator-result dd{margin:0;font-weight:500}
+.v2-calculator-note{margin-top:16px;font-size:11px;line-height:1.7;color:var(--v2-silver)}
+@media(max-width:860px){.v2-calculator-body{grid-template-columns:1fr}}
+@media(max-width:700px){.v2-calculator{padding:20px 16px;margin-top:26px}.v2-calculator-fields{grid-template-columns:1fr}.v2-calc-monthly strong{font-size:28px}.v2-calc-years>button{height:42px}}
+/* phones: keep the whole banner photo above the heading so text never sits on the picture */
+@media(max-width:700px){
+ .v2-home-banner .v2-dealer-hero{min-height:600px}
+ .v2-home-banner .v2-banner-slide .v2-dealer-hero-image,.automall-v2[dir=rtl] .v2-home-banner .v2-banner-slide .v2-dealer-hero-image{height:47%}
+ .v2-home-banner .v2-banner-slide .v2-banner-backdrop{height:calc(47% + 48px)}
+ html:not([data-v2-theme=light]) .automall-v2 .v2-home-banner .v2-dealer-hero:after,html:not([data-v2-theme=light]) .automall-v2[dir=rtl] .v2-home-banner .v2-dealer-hero:after{background:linear-gradient(180deg,#0b0d0f00 0%,#0b0d0f00 44%,#0b0d0fd9 49%,#0b0d0f 53%,#0b0d0f 100%)}
+ html[data-v2-theme=light] .automall-v2 .v2-home-banner .v2-dealer-hero:after,html[data-v2-theme=light] .automall-v2[dir=rtl] .v2-home-banner .v2-dealer-hero:after{background:linear-gradient(180deg,#f3f5f700 0%,#f3f5f700 44%,#f3f5f7d9 49%,#f3f5f7 53%,#f3f5f7 100%)}
+}
+@media(max-width:360px){.v2-home-banner .v2-dealer-hero{min-height:580px}}

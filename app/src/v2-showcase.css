@@ -169,3 +169,6 @@
 .v2-showcase .v2-showcase-gallery img{object-fit:contain;background:var(--v2-photo-bg)}
 .v2-showcase .v2-showcase-theme{width:40px;height:40px;min-width:40px}
 @media(max-width:700px){.v2-showcase .v2-showcase-visit{display:none}.v2-showcase .v2-showcase-bar-actions{max-width:none}}
+.v2-showcase .v2-showcase-garage{display:flex;flex-direction:row;flex-wrap:wrap;align-items:center;gap:10px;margin-top:14px}
+.v2-showcase .v2-showcase-garage .v2-garage-button-label{height:44px;min-height:44px;padding:0 16px 0 14px;white-space:nowrap;font-size:12px;line-height:1}
+.v2-showcase .v2-showcase-title>.v2-showcase-garage{grid-column:1/-1}
