@@ -19,7 +19,9 @@ async function call<T>(token:string,path:string,init:RequestInit={}):Promise<T>{
 /** Confirms the key works and can write to the repository. */
 export async function checkAccess(token:string){
  const repo=await call<{permissions?:{push?:boolean};full_name:string}>(token,"");
- if(!repo.permissions?.push)throw new GitHubError("This key can read the website but cannot save changes. Give it Contents: Read and write.",403);
+ // GitHub only reports permissions for a signed-in request, so a missing block means the key was not accepted.
+ if(!repo.permissions)throw new GitHubError("Bad credentials",401);
+ if(!repo.permissions.push)throw new GitHubError("This key can read the website but cannot save changes. Give it Contents: Read and write.",403);
  return repo.full_name;
 }
 
