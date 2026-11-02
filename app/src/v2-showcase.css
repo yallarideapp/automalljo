@@ -172,3 +172,11 @@
 .v2-showcase .v2-showcase-garage{display:flex;flex-direction:row;flex-wrap:wrap;align-items:center;gap:10px;margin-top:14px}
 .v2-showcase .v2-showcase-garage .v2-garage-button-label{height:44px;min-height:44px;padding:0 16px 0 14px;white-space:nowrap;font-size:12px;line-height:1}
 .v2-showcase .v2-showcase-title>.v2-showcase-garage{grid-column:1/-1}
+/* phones: show the car photo first, then the title, price and key facts */
+@media(max-width:700px){
+ .v2-showcase.v2-detail-page{display:flex;flex-direction:column}
+ .v2-showcase .v2-showcase-breadcrumb{order:-3}
+ .v2-showcase .v2-showcase-bar{order:-2}
+ .v2-showcase .v2-showcase-stage{order:-1;margin-top:14px}
+ .v2-showcase .v2-showcase-top{padding-top:20px}
+}
