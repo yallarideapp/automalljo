@@ -4,29 +4,23 @@ import {mergeInventory,type AdminData,type VehicleRecord,type VehicleStatus} fro
 import type {OpeningDay,SiteSettings} from "@/site-data";
 import {assetPath,sitePath} from "@/site-paths";
 import {thumbSrc} from "@/v2-content";
-import {GitHubError,checkAccess,commitFiles,deployState,fileSha,readJson,REPO,type DeployState} from "@/admin/github";
+import {builtAdmin,builtSettings,builtVehicleIds} from "@/site-data";
+import {clearLocalData,clearOrders,clearPhotos,deleteOrder,deletePhotos,onOrdersChange,photoUrls,readLocalData,readOrders,savePhotos,updateOrder,writeLocalData,type Order,type OrderKind,type OrderStatus} from "@/local-store";
 import {bodyOptions,buildVehicle,colourOptions,conditionOptions,driveOptions,emptyForm,formProblems,marketOptions,powerOptions,preparePhoto,quickEdit,quickFormFor,statusOptions,transmissionOptions,type CarForm,type QuickForm} from "@/admin/vehicle-form";
 
 type Lang="en"|"ar";
 const catalog=catalogData as VehicleRecord[];
-const ADMIN_FILE="src/admin-data.json",SETTINGS_FILE="src/site-settings.json";
-const KEY_STORE="automall-admin-key",LANG_STORE="automall-admin-lang",DRAFT_STORE="automall-admin-draft";
+const LANG_STORE="automall-admin-lang",DRAFT_STORE="automall-admin-draft";
 const tryStorage=<T,>(fn:()=>T,fallback:T)=>{try{return fn();}catch{return fallback;}};
 const clone=<T,>(value:T):T=>JSON.parse(JSON.stringify(value)) as T;
 const pretty=(value:unknown)=>JSON.stringify(value,null,2)+"\n";
 const days:OpeningDay["day"][]=["sat","sun","mon","tue","wed","thu","fri"];
 
 const copy={
- en:{title:"AutoMall admin",close:"Close",viewSite:"View website",signOut:"Sign out",lang:"العربية",
-  signTitle:"Sign in to manage the website",signBody:"The admin panel saves straight to the website's GitHub repository. Each staff member uses their own GitHub access key.",
-  step1:"On GitHub, open Settings → Developer settings → Fine-grained tokens, and choose Generate new token.",step1Link:"Open the token page",
-  step2:"Repository access: choose Only select repositories, then "+REPO.owner+"/"+REPO.repo+".",
-  step3:"Permissions → Repository → Contents: Read and write. Optionally Actions: Read-only, to watch the site update.",
-  step4:"Generate the token, copy it and paste it below. Treat it like a password.",
-  keyLabel:"GitHub access key",remember:"Keep me signed in on this device",signIn:"Sign in",checking:"Checking…",
-  badKey:"This key isn't valid or has expired. Create a new one and try again.",noRepo:"This key can't see the website. Under Repository access, choose "+REPO.owner+"/"+REPO.repo+".",
-  loading:"Loading the latest website data…",loadFailed:"Couldn't load the website data.",retry:"Try again",
-  tabs:{cars:"Cars",homepage:"Homepage",showroom:"Showroom info",publish:"Publish"},
+ en:{title:"AutoMall admin",close:"Close",viewSite:"View website",lang:"العربية",
+  localNote:"Saved in this browser only",
+  loading:"Loading…",loadFailed:"Couldn't load the saved data.",retry:"Try again",
+  tabs:{cars:"Cars",homepage:"Homepage",showroom:"Showroom info",orders:"Orders",publish:"Save"},
   search:"Search by brand, model or year",all:"All",hiddenFilter:"Hidden",addCar:"Add a car",edit:"Edit",hide:"Hide from site",show:"Show on site",remove:"Delete",
   added:"Added",edited:"Edited",hidden:"Hidden",noPrice:"No price",carsCount:(n:number)=>n+" cars",
   status:"Status",price:"Price (JOD)",pricePh:"Leave empty for “Enquire for price”",
@@ -37,30 +31,30 @@ const copy={
   battery:"Battery (kWh)",range:"Advertised range (km)",cycle:"Range test",cyclePh:"e.g. WLTP or CLTC",power:"Horsepower (hp)",torque:"Torque (Nm)",
   body:"Body style",seats:"Seats",transmission:"Transmission",drive:"Drive",exterior:"Exterior colour",interior:"Interior colour",market:"Specification",premium:"Show under Premium",
   descriptionEn:"Description (English)",descriptionAr:"Description (Arabic)",descriptionPh:"Optional. A short line is written for you if empty.",none:"—",
-  addPhotos:"Add photos",photoHint:"The first photo is the cover. Photos are resized to 1600 px before upload.",cover:"Cover",moveEarlier:"Move earlier",moveLater:"Move later",removePhoto:"Remove photo",preparing:"Preparing photos…",
+  addPhotos:"Add photos",photoHint:"The first photo is the cover. Photos are resized to 1600 px and kept in this browser.",cover:"Cover",moveEarlier:"Move earlier",moveLater:"Move later",removePhoto:"Remove photo",preparing:"Preparing photos…",
   bannerTitle:"Banner cars",bannerBody:"The large photos at the top of the homepage. Choose 1 to 6 cars, in order.",featuredTitle:"Featured cars",featuredBody:"The cars under “A few to get you started”. Choose up to 12.",
   pick:"Add a car",pickPh:"Search cars to add",up:"Move up",down:"Move down",takeOut:"Remove",unlisted:"Hidden or sold, so it won't show",
   contact:"Contact",phone:"Phone number",phoneHint:"With country code, e.g. +962799050000",whatsappNumber:"WhatsApp number",whatsappHint:"Digits only, with country code, e.g. 962799050000",
   address:"Street address",city:"City",addressEn:"English",addressAr:"Arabic",mapsQuery:"Map search text",mapsHint:"What Google Maps searches for to place the pin.",instagram:"Instagram link",facebook:"Facebook link",
   hoursTitle:"Opening hours",hoursBody:"Leave empty to show “Call to confirm opening hours”.",addHours:"Add opening hours",clearHours:"Remove opening hours",closed:"Closed",opens:"Opens",closes:"Closes",copyFirst:"Copy Saturday to every day",
   dayNames:{sat:"Saturday",sun:"Sunday",mon:"Monday",tue:"Tuesday",wed:"Wednesday",thu:"Thursday",fri:"Friday"} as Record<OpeningDay["day"],string>,
-  publishTitle:"Publish your changes",publishBody:"Publishing saves everything to GitHub. The website then rebuilds itself, which takes about 2–3 minutes.",
-  nothing:"No unpublished changes.",changes:(n:number)=>n===1?"1 change":n+" changes",publish:"Publish to website",publishing:"Publishing…",discard:"Discard all changes",confirmDiscard:"Discard every unpublished change?",
-  problemsTitle:"Fix these before publishing",published:"Published. The website is rebuilding.",deployQueued:"Waiting to start…",deployRunning:"Building the website…",deployDone:"Done. The changes are live.",deployFailed:"The rebuild failed. Your changes are saved; open the build log to see why.",deployUnknown:"Check back in 2–3 minutes. (Add Actions: Read-only to your key to see progress here.)",buildLog:"Open the build log",
-  conflict:"Someone else published changes since you opened the admin panel. Reload to get the latest version, then make your changes again.",reload:"Reload latest",
-  unsaved:"You have unpublished changes.",leaveWarning:"You have unpublished changes and photos. Publish before closing this page.",
-  ch:{carAdded:"Added",carChanged:"Changed",carDeleted:"Deleted",listingEdited:"Edited listing",listingReset:"Reset listing",shown:"Shown again",hiddenCar:"Hidden",settings:"Showroom info",banner:"Banner cars",featured:"Featured cars",photosUp:"photos to upload",photosDel:"photos to delete"},
+  publishTitle:"Save your changes",publishBody:"Changes are saved in this browser, on this device only. Visitors on other phones and computers keep seeing the published website. Clearing this browser's data removes them.",
+  nothing:"No unsaved changes.",changes:(n:number)=>n===1?"1 change":n+" changes",publish:"Save to this browser",publishing:"Saving…",discard:"Discard unsaved changes",confirmDiscard:"Discard every unsaved change?",
+  problemsTitle:"Fix these before saving",published:"Saved. The website in this browser now shows your changes.",saveFailed:"Couldn't save. The browser may be out of space; try fewer or smaller photos.",
+  savedAt:"Last saved",usingPublished:"This browser shows the published website. Nothing is saved here yet.",
+  resetTitle:"Back to the published website",resetBody:"Removes every change saved in this browser, including added cars and their photos. Orders are kept.",reset:"Reset to the published website",confirmReset:"Remove every change saved in this browser and go back to the published website?",resetDone:"Done. This browser shows the published website again.",
+  unsaved:"You have unsaved changes.",leaveWarning:"You have unsaved changes and photos. Save before closing this page.",
+  ordersTitle:"Orders",ordersBody:"Orders customers sent with “Order this car” on the car pages, in this browser.",noOrders:"No orders yet. Customers order with the “Order this car” button on each car page.",
+  orderStatus:{new:"New",contacted:"Contacted",done:"Done",cancelled:"Cancelled"} as Record<OrderStatus,string>,orderKinds:{reserve:"Reserve","test-drive":"Test drive",buy:"Buy"} as Record<OrderKind,string>,
+  orderTimes:{any:"Any time",morning:"Morning",afternoon:"Afternoon",evening:"Evening"} as Record<string,string>,
+  call:"Call",whatsappCustomer:"WhatsApp",viewCar:"View car",deleteOrder:"Delete",confirmDeleteOrder:"Delete this order?",exportCsv:"Download CSV",clearOrders:"Delete all orders",confirmClearOrders:"Delete every order in this browser?",
+  bestTime:"Best time",orderNote:"Staff note",orderNotePh:"e.g. called, coming Saturday",newOrders:(n:number)=>n===1?"1 new order":n+" new orders",customer:"Customer",orderMessage:"Message",
+  ch:{carAdded:"Added",carChanged:"Changed",carDeleted:"Deleted",listingEdited:"Edited listing",listingReset:"Reset listing",shown:"Shown again",hiddenCar:"Hidden",settings:"Showroom info",banner:"Banner cars",featured:"Featured cars",photosUp:"photos to save",photosDel:"photos to remove"},
  },
- ar:{title:"لوحة تحكم أوتومول",close:"إغلاق",viewSite:"عرض الموقع",signOut:"تسجيل الخروج",lang:"English",
-  signTitle:"سجّل الدخول لإدارة الموقع",signBody:"تحفظ لوحة التحكم التغييرات مباشرة في مستودع الموقع على GitHub. يستخدم كل موظف مفتاح الوصول الخاص به.",
-  step1:"في GitHub افتح Settings ← Developer settings ← Fine-grained tokens واختر Generate new token.",step1Link:"افتح صفحة المفاتيح",
-  step2:"Repository access: اختر Only select repositories ثم "+REPO.owner+"/"+REPO.repo+".",
-  step3:"Permissions ← Repository ← Contents: Read and write. ويمكنك إضافة Actions: Read-only لمتابعة تحديث الموقع.",
-  step4:"أنشئ المفتاح وانسخه والصقه في الأسفل. تعامل معه ككلمة مرور.",
-  keyLabel:"مفتاح وصول GitHub",remember:"إبقائي مسجلاً على هذا الجهاز",signIn:"تسجيل الدخول",checking:"جارٍ التحقق…",
-  badKey:"هذا المفتاح غير صالح أو منتهي. أنشئ مفتاحاً جديداً وحاول مرة أخرى.",noRepo:"لا يستطيع هذا المفتاح الوصول إلى الموقع. اختر "+REPO.owner+"/"+REPO.repo+" في Repository access.",
-  loading:"جارٍ تحميل أحدث بيانات الموقع…",loadFailed:"تعذّر تحميل بيانات الموقع.",retry:"حاول مرة أخرى",
-  tabs:{cars:"السيارات",homepage:"الصفحة الرئيسية",showroom:"معلومات المعرض",publish:"النشر"},
+ ar:{title:"لوحة تحكم أوتومول",close:"إغلاق",viewSite:"عرض الموقع",lang:"English",
+  localNote:"محفوظة في هذا المتصفح فقط",
+  loading:"جارٍ التحميل…",loadFailed:"تعذّر تحميل البيانات المحفوظة.",retry:"حاول مرة أخرى",
+  tabs:{cars:"السيارات",homepage:"الصفحة الرئيسية",showroom:"معلومات المعرض",orders:"الطلبات",publish:"الحفظ"},
   search:"ابحث بالعلامة أو الموديل أو السنة",all:"الكل",hiddenFilter:"مخفية",addCar:"أضف سيارة",edit:"تعديل",hide:"إخفاء من الموقع",show:"إظهار في الموقع",remove:"حذف",
   added:"مضافة",edited:"معدّلة",hidden:"مخفية",noPrice:"بدون سعر",carsCount:(n:number)=>n+" سيارة",
   status:"الحالة",price:"السعر (دينار)",pricePh:"اتركه فارغاً لعرض «استفسر عن السعر»",
@@ -71,24 +65,30 @@ const copy={
   battery:"البطارية (كيلوواط/ساعة)",range:"المدى المعلن (كم)",cycle:"دورة القياس",cyclePh:"مثال: WLTP أو CLTC",power:"القوة (حصان)",torque:"العزم (نيوتن متر)",
   body:"نوع الهيكل",seats:"المقاعد",transmission:"ناقل الحركة",drive:"نظام الدفع",exterior:"اللون الخارجي",interior:"لون المقصورة",market:"المواصفات",premium:"إظهارها ضمن الفاخرة",
   descriptionEn:"الوصف (بالإنجليزية)",descriptionAr:"الوصف (بالعربية)",descriptionPh:"اختياري. يُكتب سطر قصير تلقائياً إذا تُرك فارغاً.",none:"—",
-  addPhotos:"أضف صوراً",photoHint:"الصورة الأولى هي صورة الغلاف. تُصغّر الصور إلى 1600 بكسل قبل الرفع.",cover:"الغلاف",moveEarlier:"تقديم",moveLater:"تأخير",removePhoto:"إزالة الصورة",preparing:"جارٍ تجهيز الصور…",
+  addPhotos:"أضف صوراً",photoHint:"الصورة الأولى هي صورة الغلاف. تُصغّر الصور إلى 1600 بكسل وتُحفظ في هذا المتصفح.",cover:"الغلاف",moveEarlier:"تقديم",moveLater:"تأخير",removePhoto:"إزالة الصورة",preparing:"جارٍ تجهيز الصور…",
   bannerTitle:"سيارات البانر",bannerBody:"الصور الكبيرة أعلى الصفحة الرئيسية. اختر من 1 إلى 6 سيارات بالترتيب.",featuredTitle:"السيارات المختارة",featuredBody:"السيارات تحت «سيارات مختارة». اختر حتى 12 سيارة.",
   pick:"أضف سيارة",pickPh:"ابحث عن سيارة لإضافتها",up:"للأعلى",down:"للأسفل",takeOut:"إزالة",unlisted:"مخفية أو مباعة فلن تظهر",
   contact:"التواصل",phone:"رقم الهاتف",phoneHint:"مع رمز الدولة، مثال: ‎+962799050000",whatsappNumber:"رقم واتساب",whatsappHint:"أرقام فقط مع رمز الدولة، مثال: 962799050000",
   address:"العنوان",city:"المدينة",addressEn:"بالإنجليزية",addressAr:"بالعربية",mapsQuery:"نص البحث في الخريطة",mapsHint:"ما يبحث عنه Google Maps لتحديد الموقع.",instagram:"رابط إنستغرام",facebook:"رابط فيسبوك",
   hoursTitle:"أوقات الدوام",hoursBody:"اتركها فارغة لعرض «اتصل لتأكيد أوقات الدوام».",addHours:"أضف أوقات الدوام",clearHours:"إزالة أوقات الدوام",closed:"مغلق",opens:"يفتح",closes:"يغلق",copyFirst:"نسخ أوقات السبت لكل الأيام",
   dayNames:{sat:"السبت",sun:"الأحد",mon:"الاثنين",tue:"الثلاثاء",wed:"الأربعاء",thu:"الخميس",fri:"الجمعة"} as Record<OpeningDay["day"],string>,
-  publishTitle:"انشر تغييراتك",publishBody:"يحفظ النشر كل شيء في GitHub، ثم يُعاد بناء الموقع تلقائياً خلال 2–3 دقائق تقريباً.",
-  nothing:"لا توجد تغييرات غير منشورة.",changes:(n:number)=>n===1?"تغيير واحد":n+" تغييرات",publish:"انشر على الموقع",publishing:"جارٍ النشر…",discard:"تجاهل كل التغييرات",confirmDiscard:"تجاهل كل التغييرات غير المنشورة؟",
-  problemsTitle:"أصلح هذه قبل النشر",published:"تم النشر. يُعاد بناء الموقع الآن.",deployQueued:"بانتظار البدء…",deployRunning:"جارٍ بناء الموقع…",deployDone:"تم. التغييرات ظاهرة على الموقع.",deployFailed:"فشل إعادة البناء. تغييراتك محفوظة؛ افتح سجل البناء لمعرفة السبب.",deployUnknown:"تحقق بعد 2–3 دقائق. (أضف Actions: Read-only لمفتاحك لمتابعة التقدم هنا.)",buildLog:"افتح سجل البناء",
-  conflict:"نشر شخص آخر تغييرات منذ فتحت لوحة التحكم. أعد التحميل للحصول على أحدث نسخة ثم أعد تغييراتك.",reload:"إعادة التحميل",
-  unsaved:"لديك تغييرات غير منشورة.",leaveWarning:"لديك تغييرات وصور غير منشورة. انشرها قبل إغلاق الصفحة.",
-  ch:{carAdded:"أضيفت",carChanged:"عُدّلت",carDeleted:"حُذفت",listingEdited:"تعديل إعلان",listingReset:"إرجاع إعلان",shown:"أُظهرت",hiddenCar:"أُخفيت",settings:"معلومات المعرض",banner:"سيارات البانر",featured:"السيارات المختارة",photosUp:"صور للرفع",photosDel:"صور للحذف"},
+  publishTitle:"احفظ تغييراتك",publishBody:"تُحفظ التغييرات في هذا المتصفح وعلى هذا الجهاز فقط. يبقى الزوار على الأجهزة الأخرى يرون الموقع المنشور. مسح بيانات المتصفح يحذفها.",
+  nothing:"لا توجد تغييرات غير محفوظة.",changes:(n:number)=>n===1?"تغيير واحد":n+" تغييرات",publish:"احفظ في هذا المتصفح",publishing:"جارٍ الحفظ…",discard:"تجاهل التغييرات غير المحفوظة",confirmDiscard:"تجاهل كل التغييرات غير المحفوظة؟",
+  problemsTitle:"أصلح هذه قبل الحفظ",published:"تم الحفظ. يعرض الموقع في هذا المتصفح تغييراتك الآن.",saveFailed:"تعذّر الحفظ. قد تكون مساحة المتصفح ممتلئة؛ جرّب صوراً أقل أو أصغر.",
+  savedAt:"آخر حفظ",usingPublished:"يعرض هذا المتصفح الموقع المنشور. لا يوجد شيء محفوظ هنا بعد.",
+  resetTitle:"العودة إلى الموقع المنشور",resetBody:"يحذف كل التغييرات المحفوظة في هذا المتصفح، بما فيها السيارات المضافة وصورها. تبقى الطلبات.",reset:"العودة إلى الموقع المنشور",confirmReset:"حذف كل التغييرات المحفوظة في هذا المتصفح والعودة إلى الموقع المنشور؟",resetDone:"تم. يعرض هذا المتصفح الموقع المنشور مجدداً.",
+  unsaved:"لديك تغييرات غير محفوظة.",leaveWarning:"لديك تغييرات وصور غير محفوظة. احفظها قبل إغلاق الصفحة.",
+  ordersTitle:"الطلبات",ordersBody:"الطلبات التي أرسلها الزبائن عبر «اطلب هذه السيارة» في صفحات السيارات، في هذا المتصفح.",noOrders:"لا توجد طلبات بعد. يطلب الزبائن عبر زر «اطلب هذه السيارة» في صفحة كل سيارة.",
+  orderStatus:{new:"جديد",contacted:"تم التواصل",done:"منجز",cancelled:"ملغى"} as Record<OrderStatus,string>,orderKinds:{reserve:"حجز","test-drive":"تجربة قيادة",buy:"شراء"} as Record<OrderKind,string>,
+  orderTimes:{any:"أي وقت",morning:"صباحاً",afternoon:"بعد الظهر",evening:"مساءً"} as Record<string,string>,
+  call:"اتصال",whatsappCustomer:"واتساب",viewCar:"عرض السيارة",deleteOrder:"حذف",confirmDeleteOrder:"حذف هذا الطلب؟",exportCsv:"تنزيل CSV",clearOrders:"حذف كل الطلبات",confirmClearOrders:"حذف كل الطلبات في هذا المتصفح؟",
+  bestTime:"أفضل وقت",orderNote:"ملاحظة الموظف",orderNotePh:"مثال: تم الاتصال، سيحضر السبت",newOrders:(n:number)=>n===1?"طلب جديد واحد":n+" طلبات جديدة",customer:"الزبون",orderMessage:"الرسالة",
+  ch:{carAdded:"أضيفت",carChanged:"عُدّلت",carDeleted:"حُذفت",listingEdited:"تعديل إعلان",listingReset:"إرجاع إعلان",shown:"أُظهرت",hiddenCar:"أُخفيت",settings:"معلومات المعرض",banner:"سيارات البانر",featured:"السيارات المختارة",photosUp:"صور للحفظ",photosDel:"صور للإزالة"},
  }
 };
 type Copy=typeof copy.en;
 
-type Base={admin:AdminData;settings:SiteSettings;adminSha:string;settingsSha:string};
+type Base={admin:AdminData;settings:SiteSettings;savedAt:string|null};
 type Upload={bytes:Uint8Array;url:string};
 type Editing={kind:"new"}|{kind:"added";id:string}|{kind:"listing";id:string}|null;
 const option=(lang:Lang,list:{key:string;en:string;ar:string}[],value:string)=>list.find(item=>item.key===value)?.[lang]??value;
@@ -98,78 +98,65 @@ const label=(car:VehicleRecord)=>car.brand+" "+car.name+" · "+car.year;
 export type AdminEmbed={lang:Lang;onClose:()=>void;vehicleId?:string};
 export function AdminApp({embed}:{embed?:AdminEmbed}={}){
  const [lang,setLang]=useState<Lang>(embed?.lang??"en");
- const [token,setToken]=useState<string|null>(null);
  const [ready,setReady]=useState(false);
  const embedded=!!embed;
- useEffect(()=>{if(!embedded)setLang(tryStorage(()=>localStorage.getItem(LANG_STORE)==="ar"?"ar":"en",lang));setToken(tryStorage(()=>localStorage.getItem(KEY_STORE)??sessionStorage.getItem(KEY_STORE),null));setReady(true);},[embedded]);
+ useEffect(()=>{if(!embedded)setLang(tryStorage(()=>localStorage.getItem(LANG_STORE)==="ar"?"ar":"en","en" as Lang));setReady(true);},[embedded]);
  useEffect(()=>{if(!embedded)tryStorage(()=>localStorage.setItem(LANG_STORE,lang),undefined);},[lang,embedded]);
  const t=copy[lang];
- const signOut=useCallback(()=>{tryStorage(()=>{localStorage.removeItem(KEY_STORE);sessionStorage.removeItem(KEY_STORE);},undefined);setToken(null);},[]);
  const brand=<><img src={assetPath("assets/logo.jpg")} alt="" width="34" height="34"/><span>{t.title}</span></>;
  return <div className="am-admin" lang={lang} dir={lang==="ar"?"rtl":"ltr"}>
-  <header className="am-admin-header">{embed?<div className="am-admin-brand" id="am-admin-title">{brand}</div>:<a className="am-admin-brand" href={sitePath("v2")}>{brand}</a>}<div className="am-admin-header-actions"><button type="button" className="am-link-button" onClick={()=>setLang(lang==="en"?"ar":"en")}>{t.lang}</button>{!embed&&<a className="am-link-button" href={sitePath("v2")} target="_blank" rel="noopener noreferrer">{t.viewSite} ↗</a>}{token&&<button type="button" className="am-link-button" onClick={signOut}>{t.signOut}</button>}{embed&&<button type="button" className="am-button am-small am-admin-close" onClick={embed.onClose} aria-label={t.close}><span className="am-close-label">{t.close}</span><span aria-hidden="true">×</span></button>}</div></header>
-  <main className="am-admin-main" id={embed?"am-admin-main":"main-content"}>{!ready?null:token?<Workspace key={token} token={token} lang={lang} onSignOut={signOut} focusVehicleId={embed?.vehicleId}/>:<SignIn lang={lang} onSignedIn={setToken}/>}</main>
+  <header className="am-admin-header">{embed?<div className="am-admin-brand" id="am-admin-title">{brand}</div>:<a className="am-admin-brand" href={sitePath("v2")}>{brand}</a>}<div className="am-admin-header-actions"><span className="am-local-chip">{t.localNote}</span><button type="button" className="am-link-button" onClick={()=>setLang(lang==="en"?"ar":"en")}>{t.lang}</button>{!embed&&<a className="am-link-button" href={sitePath("v2")}>{t.viewSite} ↗</a>}{embed&&<button type="button" className="am-button am-small am-admin-close" onClick={embed.onClose} aria-label={t.close}><span className="am-close-label">{t.close}</span><span aria-hidden="true">×</span></button>}</div></header>
+  <main className="am-admin-main" id={embed?"am-admin-main":"main-content"}>{ready&&<Workspace lang={lang} focusVehicleId={embed?.vehicleId}/>}</main>
  </div>;
 }
 
-function SignIn({lang,onSignedIn}:{lang:Lang;onSignedIn:(token:string)=>void}){
- const t=copy[lang],[key,setKey]=useState(""),[remember,setRemember]=useState(true),[busy,setBusy]=useState(false),[error,setError]=useState("");
- const submit=async()=>{
-  const value=key.trim();if(!value)return;
-  setBusy(true);setError("");
-  try{await checkAccess(value);tryStorage(()=>(remember?localStorage:sessionStorage).setItem(KEY_STORE,value),undefined);onSignedIn(value);}
-  catch(caught){setError(caught instanceof GitHubError?(caught.status===401?t.badKey:caught.status===404?t.noRepo:caught.message):String(caught));}
-  finally{setBusy(false);}
- };
- return <section className="am-card am-signin" aria-labelledby="am-signin-title">
-  <h1 id="am-signin-title">{t.signTitle}</h1><p className="am-muted">{t.signBody}</p>
-  <ol className="am-steps"><li>{t.step1} <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener noreferrer">{t.step1Link} ↗</a></li><li>{t.step2}</li><li>{t.step3}</li><li>{t.step4}</li></ol>
-  <form onSubmit={event=>{event.preventDefault();void submit();}}>
-   <label className="am-field"><span>{t.keyLabel}</span><input type="password" autoComplete="off" dir="ltr" spellCheck={false} value={key} onChange={event=>setKey(event.target.value)} placeholder="github_pat_…" required/></label>
-   <label className="am-check"><input type="checkbox" checked={remember} onChange={event=>setRemember(event.target.checked)}/><span>{t.remember}</span></label>
-   {error&&<p className="am-error" role="alert">{error}</p>}
-   <button className="am-button am-primary" type="submit" disabled={busy||!key.trim()}>{busy?t.checking:t.signIn}</button>
-  </form>
- </section>;
+/** What this browser has saved, or the published website when nothing is saved yet. */
+function savedBase():Base{
+ const local=readLocalData();
+ return local?{admin:clone(local.admin),settings:clone(local.settings),savedAt:local.savedAt}:{admin:clone(builtAdmin),settings:clone(builtSettings),savedAt:null};
 }
+const photoPaths=(admin:AdminData)=>admin.cars.flatMap(car=>[car.image,...(car.gallery??[])]);
 
-function Workspace({token,lang,onSignOut,focusVehicleId}:{token:string;lang:Lang;onSignOut:()=>void;focusVehicleId?:string}){
+function Workspace({lang,focusVehicleId}:{lang:Lang;focusVehicleId?:string}){
  const t=copy[lang];
  const [base,setBase]=useState<Base|null>(null),[loadError,setLoadError]=useState("");
  const [admin,setAdmin]=useState<AdminData|null>(null),[settings,setSettings]=useState<SiteSettings|null>(null);
  const [uploads,setUploads]=useState<Record<string,Upload>>({}),[deletions,setDeletions]=useState<string[]>([]);
- const [tab,setTab]=useState<"cars"|"homepage"|"showroom"|"publish">("cars"),[editing,setEditing]=useState<Editing>(null);
- const signOutRef=useRef(onSignOut);signOutRef.current=onSignOut;
+ const [stored,setStored]=useState<Record<string,string>>({});
+ const [tab,setTab]=useState<"cars"|"homepage"|"showroom"|"orders"|"publish">("cars"),[editing,setEditing]=useState<Editing>(null);
+ const newOrders=useOrders().filter(order=>order.status==="new").length;
  const load=useCallback(async(keepDraft:boolean)=>{
-  setLoadError("");setBase(null);
+  setLoadError("");
   try{
-   const [a,s]=await Promise.all([readJson<AdminData>(token,ADMIN_FILE),readJson<SiteSettings>(token,SETTINGS_FILE)]);
-   const next={admin:a.data,settings:s.data,adminSha:a.sha,settingsSha:s.sha};
+   const next=savedBase();
+   setStored(await photoUrls(photoPaths(next.admin)));
    setBase(next);
-   const saved=keepDraft?tryStorage(()=>JSON.parse(localStorage.getItem(DRAFT_STORE)??"null") as {adminSha:string;settingsSha:string;admin:AdminData;settings:SiteSettings}|null,null):null;
-   if(saved&&saved.adminSha===a.sha&&saved.settingsSha===s.sha){setAdmin(saved.admin);setSettings(saved.settings);}else{setAdmin(clone(a.data));setSettings(clone(s.data));tryStorage(()=>localStorage.removeItem(DRAFT_STORE),undefined);}
+   const draft=keepDraft?tryStorage(()=>JSON.parse(localStorage.getItem(DRAFT_STORE)??"null") as {savedAt:string|null;admin:AdminData;settings:SiteSettings}|null,null):null;
+   if(draft&&draft.savedAt===next.savedAt){setAdmin(draft.admin);setSettings(draft.settings);}else{setAdmin(clone(next.admin));setSettings(clone(next.settings));tryStorage(()=>localStorage.removeItem(DRAFT_STORE),undefined);}
    setUploads({});setDeletions([]);
-  }catch(caught){if(caught instanceof GitHubError&&caught.status===401){signOutRef.current();return;}setLoadError(caught instanceof Error?caught.message:String(caught));}
- },[token]);
+  }catch(caught){setLoadError(caught instanceof Error?caught.message:String(caught));}
+ },[]);
  useEffect(()=>{void load(true);},[load]);
  // Opened from a car page: go straight to that car's editor once the data is in.
  const focused=useRef(false);
  useEffect(()=>{if(focused.current||!admin||!focusVehicleId)return;focused.current=true;if(admin.cars.some(car=>car.id===focusVehicleId))setEditing({kind:"added",id:focusVehicleId});else if(catalog.some(car=>car.id===focusVehicleId))setEditing({kind:"listing",id:focusVehicleId});},[admin,focusVehicleId]);
- // Keep text-only drafts across reloads; photos waiting to upload live in memory only.
- useEffect(()=>{if(!base||!admin||!settings)return;if(Object.keys(uploads).length)return;tryStorage(()=>localStorage.setItem(DRAFT_STORE,JSON.stringify({adminSha:base.adminSha,settingsSha:base.settingsSha,admin,settings})),undefined);},[base,admin,settings,uploads]);
+ // Keep text-only drafts across reloads; photos waiting to be saved live in memory only.
+ useEffect(()=>{if(!base||!admin||!settings)return;if(Object.keys(uploads).length)return;tryStorage(()=>localStorage.setItem(DRAFT_STORE,JSON.stringify({savedAt:base.savedAt,admin,settings})),undefined);},[base,admin,settings,uploads]);
  const pending=!!base&&!!admin&&!!settings&&(pretty(admin)!==pretty(base.admin)||pretty(settings)!==pretty(base.settings)||Object.keys(uploads).length>0||deletions.length>0);
  useEffect(()=>{if(!pending)return;const warn=(event:BeforeUnloadEvent)=>{if(Object.keys(uploads).length){event.preventDefault();event.returnValue="";}};window.addEventListener("beforeunload",warn);return()=>window.removeEventListener("beforeunload",warn);},[pending,uploads]);
  if(loadError)return <section className="am-card"><p className="am-error" role="alert">{t.loadFailed} {loadError}</p><button className="am-button" type="button" onClick={()=>void load(true)}>{t.retry}</button></section>;
  if(!base||!admin||!settings)return <p className="am-muted am-loading" role="status">{t.loading}</p>;
- const photoSrc=(path:string,small=true)=>uploads[path]?.url??assetPath((small&&path.startsWith("/assets/catalog/")?thumbSrc(path):path).replace(/^\//,""));
+ const photoSrc=(path:string,small=true)=>uploads[path]?.url??stored[path]??assetPath((small&&path.startsWith("/assets/catalog/")?thumbSrc(path):path).replace(/^\//,""));
  const ctx={lang,t,admin,setAdmin,settings,setSettings,uploads,setUploads,deletions,setDeletions,photoSrc,base};
+ const tabs=["cars","homepage","showroom","orders","publish"] as const;
  return <>
   {pending&&tab!=="publish"&&<div className="am-banner" role="status"><span>{t.unsaved}</span><button type="button" className="am-button am-primary am-small" onClick={()=>{setEditing(null);setTab("publish");}}>{t.tabs.publish}</button></div>}
-  <nav className="am-tabs" role="tablist" aria-label={t.title}>{(["cars","homepage","showroom","publish"] as const).map(id=><button key={id} type="button" role="tab" aria-selected={tab===id} onClick={()=>{setEditing(null);setTab(id);}}>{t.tabs[id]}{id==="publish"&&pending&&<span className="am-dot" aria-hidden="true"/>}</button>)}</nav>
+  <nav className="am-tabs" role="tablist" aria-label={t.title}>{tabs.map(id=><button key={id} type="button" role="tab" aria-selected={tab===id} onClick={()=>{setEditing(null);setTab(id);}}>{t.tabs[id]}{id==="publish"&&pending&&<span className="am-dot" aria-hidden="true"/>}{id==="orders"&&newOrders>0&&<span className="am-count-badge" aria-label={t.newOrders(newOrders)}>{newOrders}</span>}</button>)}</nav>
   {tab==="cars"&&(editing?<CarEditor ctx={ctx} editing={editing} onDone={()=>setEditing(null)}/>:<CarList ctx={ctx} onEdit={setEditing}/>)}
   {tab==="homepage"&&<HomepageTab ctx={ctx}/>}
   {tab==="showroom"&&<ShowroomTab ctx={ctx}/>}
-  {tab==="publish"&&<PublishTab ctx={ctx} token={token} pending={pending} onReload={()=>void load(false)} onPublished={next=>{setBase(next);setUploads({});setDeletions([]);tryStorage(()=>localStorage.removeItem(DRAFT_STORE),undefined);}}/>}
+  {tab==="orders"&&<OrdersTab lang={lang} t={t}/>}
+  {tab==="publish"&&<PublishTab ctx={ctx} pending={pending} onReload={()=>void load(false)} onSaved={(next,urls)=>{setBase(next);setStored(urls);setUploads({});setDeletions([]);tryStorage(()=>localStorage.removeItem(DRAFT_STORE),undefined);}}/>}
  </>;
 }
 type Ctx={lang:Lang;t:Copy;admin:AdminData;setAdmin:(value:AdminData)=>void;settings:SiteSettings;setSettings:(value:SiteSettings)=>void;uploads:Record<string,Upload>;setUploads:(value:Record<string,Upload>)=>void;deletions:string[];setDeletions:(value:string[])=>void;photoSrc:(path:string,small?:boolean)=>string;base:Base};
@@ -407,35 +394,82 @@ function publishProblems(ctx:Ctx){
  for(const day of settings.hours)if(!day.closed&&(!/^\d{2}:\d{2}$/.test(day.open??"")||!/^\d{2}:\d{2}$/.test(day.close??""))){problems.push(tr("Give every open day an opening and closing time.","حدد وقت الفتح والإغلاق لكل يوم دوام."));break;}
  return [...new Set(problems)];
 }
-function PublishTab({ctx,token,pending,onReload,onPublished}:{ctx:Ctx;token:string;pending:boolean;onReload:()=>void;onPublished:(base:Base)=>void}){
- const {t,admin,settings,base,uploads,deletions}=ctx;
- const [busy,setBusy]=useState(false),[error,setError]=useState(""),[conflict,setConflict]=useState(false),[commit,setCommit]=useState<{sha:string;url:string}|null>(null),[deploy,setDeploy]=useState<DeployState|null>(null);
+function PublishTab({ctx,pending,onReload,onSaved}:{ctx:Ctx;pending:boolean;onReload:()=>void;onSaved:(base:Base,urls:Record<string,string>)=>void}){
+ const {t,lang,admin,settings,base,uploads,deletions}=ctx;
+ const [busy,setBusy]=useState(false),[error,setError]=useState(""),[notice,setNotice]=useState("");
  const lines=changeList(ctx),problems=publishProblems(ctx);
- useEffect(()=>{if(!commit)return;let stop=false;const poll=async()=>{const state=await deployState(token,commit.sha);if(stop)return;setDeploy(state);if(state.status!=="completed"&&state.status!=="unknown")timer=window.setTimeout(poll,10000);};let timer=window.setTimeout(poll,4000);return()=>{stop=true;window.clearTimeout(timer);};},[commit,token]);
- const publish=async()=>{
-  setBusy(true);setError("");setConflict(false);
+ const save=async()=>{
+  setBusy(true);setError("");setNotice("");
   try{
-   const [adminSha,settingsSha]=await Promise.all([fileSha(token,ADMIN_FILE),fileSha(token,SETTINGS_FILE)]);
-   if(adminSha!==base.adminSha||settingsSha!==base.settingsSha){setConflict(true);return;}
-   const files=[{path:ADMIN_FILE,text:pretty(admin)},{path:SETTINGS_FILE,text:pretty(settings)},...Object.entries(uploads).filter(([path])=>admin.cars.some(car=>car.image===path||car.gallery?.includes(path))).map(([path,upload])=>({path:"public"+path,bytes:upload.bytes}))];
-   const message="Admin panel: "+(lines.slice(0,3).join("; ")||"update")+(lines.length>3?" (+"+(lines.length-3)+" more)":"")+"\n\n"+lines.map(line=>"- "+line).join("\n")+"\n\nPublished from the AutoMall admin panel.";
-   const result=await commitFiles(token,message,files,deletions.map(path=>"public"+path));
-   const [a,s]=await Promise.all([fileSha(token,ADMIN_FILE),fileSha(token,SETTINGS_FILE)]);
-   onPublished({admin:clone(admin),settings:clone(settings),adminSha:a??"",settingsSha:s??""});
-   setCommit({sha:result.sha,url:result.html_url});setDeploy({status:"queued"});
-  }catch(caught){setError(caught instanceof Error?caught.message:String(caught));}
+   const used=new Set(photoPaths(admin));
+   await savePhotos(Object.entries(uploads).filter(([path])=>used.has(path)).map(([path,upload])=>({path,bytes:upload.bytes})));
+   await deletePhotos(deletions.filter(path=>!used.has(path)));
+   // Saving the published data again simply means "nothing saved in this browser".
+   const unchanged=pretty(admin)===pretty(builtAdmin)&&pretty(settings)===pretty(builtSettings);
+   let next:Base;
+   if(unchanged){clearLocalData();await clearPhotos();next={admin:clone(builtAdmin),settings:clone(builtSettings),savedAt:null};}
+   else{const saved=writeLocalData(clone(admin),clone(settings));next={admin:clone(admin),settings:clone(settings),savedAt:saved.savedAt};}
+   onSaved(next,await photoUrls(photoPaths(next.admin)));
+   setNotice(t.published);
+  }catch(caught){setError(t.saveFailed+(caught instanceof Error&&caught.message?" ("+caught.message+")":""));}
   finally{setBusy(false);}
  };
- const discard=()=>{if(window.confirm(t.confirmDiscard))onReload();};
- return <section className="am-card" aria-labelledby="am-publish-title">
-  <h2 id="am-publish-title">{t.publishTitle}</h2><p className="am-muted">{t.publishBody}</p>
-  {commit&&<div className="am-success" role="status"><strong>{t.published}</strong><p>{deploy?.status==="completed"?(deploy.conclusion==="success"?t.deployDone:t.deployFailed):deploy?.status==="in_progress"?t.deployRunning:deploy?.status==="unknown"?t.deployUnknown:t.deployQueued}</p>{deploy?.url&&<a href={deploy.url} target="_blank" rel="noopener noreferrer">{t.buildLog} ↗</a>}</div>}
-  {!pending?<p className="am-muted">{t.nothing}</p>:<>
-   <h3>{t.changes(lines.length)}</h3><ul className="am-changes">{lines.map(line=><li key={line}>{line}</li>)}</ul>
-   {problems.length>0&&<div className="am-error" role="alert"><strong>{t.problemsTitle}</strong><ul>{problems.map(problem=><li key={problem}>{problem}</li>)}</ul></div>}
-   {conflict&&<div className="am-error" role="alert"><p>{t.conflict}</p><button className="am-button" type="button" onClick={onReload}>{t.reload}</button></div>}
-   {error&&<p className="am-error" role="alert">{error}</p>}
-   <div className="am-editor-actions"><button className="am-button am-primary" type="button" disabled={busy||problems.length>0} onClick={()=>void publish()}>{busy?t.publishing:t.publish}</button><button className="am-button am-ghost" type="button" disabled={busy} onClick={discard}>{t.discard}</button></div>
+ const reset=async()=>{
+  if(!window.confirm(t.confirmReset))return;
+  setBusy(true);setError("");
+  try{clearLocalData();await clearPhotos();}catch{/* nothing stored */}
+  tryStorage(()=>localStorage.removeItem(DRAFT_STORE),undefined);
+  onReload();setNotice(t.resetDone);setBusy(false);
+ };
+ const discard=()=>{if(window.confirm(t.confirmDiscard)){tryStorage(()=>localStorage.removeItem(DRAFT_STORE),undefined);onReload();}};
+ const when=(iso:string)=>new Intl.DateTimeFormat(lang==="ar"?"ar-JO":"en-GB",{dateStyle:"medium",timeStyle:"short"}).format(new Date(iso));
+ return <div className="am-stack">
+  <section className="am-card" aria-labelledby="am-publish-title">
+   <h2 id="am-publish-title">{t.publishTitle}</h2><p className="am-muted">{t.publishBody}</p>
+   <p className="am-muted am-saved-at">{base.savedAt?t.savedAt+": "+when(base.savedAt):t.usingPublished}</p>
+   {notice&&<div className="am-success" role="status"><strong>{notice}</strong></div>}
+   {!pending?<p className="am-muted">{t.nothing}</p>:<>
+    <h3>{t.changes(lines.length)}</h3><ul className="am-changes">{lines.map(line=><li key={line}>{line}</li>)}</ul>
+    {problems.length>0&&<div className="am-error" role="alert"><strong>{t.problemsTitle}</strong><ul>{problems.map(problem=><li key={problem}>{problem}</li>)}</ul></div>}
+    {error&&<p className="am-error" role="alert">{error}</p>}
+    <div className="am-editor-actions"><button className="am-button am-primary" type="button" disabled={busy||problems.length>0} onClick={()=>void save()}>{busy?t.publishing:t.publish}</button><button className="am-button am-ghost" type="button" disabled={busy} onClick={discard}>{t.discard}</button></div>
+   </>}
+  </section>
+  {base.savedAt&&<section className="am-card" aria-labelledby="am-reset-title"><h2 id="am-reset-title">{t.resetTitle}</h2><p className="am-muted">{t.resetBody}</p><div className="am-editor-actions"><button className="am-button am-danger-solid" type="button" disabled={busy} onClick={()=>void reset()}>{t.reset}</button></div></section>}
+ </div>;
+}
+
+function useOrders(){
+ const [orders,setOrders]=useState<Order[]>([]);
+ useEffect(()=>{const refresh=()=>setOrders(readOrders());refresh();return onOrdersChange(refresh);},[]);
+ return orders;
+}
+/** wa.me needs the number with its country code; Jordanian numbers are often typed as 07…. */
+const customerWhatsapp=(phone:string)=>{let digits=phone.replace(/\D/g,"");if(digits.startsWith("00"))digits=digits.slice(2);else if(digits.startsWith("0"))digits="962"+digits.slice(1);else if(digits.length===9&&digits.startsWith("7"))digits="962"+digits;return "https://wa.me/"+digits;};
+const orderStatuses:OrderStatus[]=["new","contacted","done","cancelled"];
+
+function OrdersTab({lang,t}:{lang:Lang;t:Copy}){
+ const orders=useOrders(),[filter,setFilter]=useState<"all"|OrderStatus>("all");
+ const shown=orders.filter(order=>filter==="all"||order.status===filter);
+ const when=(iso:string)=>new Intl.DateTimeFormat(lang==="ar"?"ar-JO":"en-GB",{dateStyle:"medium",timeStyle:"short"}).format(new Date(iso));
+ const carHref=(id:string)=>builtVehicleIds.has(id)?sitePath("v2/car/"+id,lang):sitePath("v2/car/local",lang)+"?id="+encodeURIComponent(id);
+ const download=()=>{
+  const cell=(value:string|number|undefined)=>'"'+String(value??"").replace(/"/g,'""')+'"';
+  const rows=[["Date","Status","Type","Car","Price (JOD)","Name","Phone","Best time","Message","Staff note"],...orders.map(order=>[order.createdAt,order.status,order.kind,order.car,order.price??"",order.name,order.phone,order.preferred,order.message,order.note??""])];
+  const blob=new Blob(["﻿"+rows.map(row=>row.map(cell).join(",")).join("\r\n")],{type:"text/csv;charset=utf-8"});
+  const link=document.createElement("a");link.href=URL.createObjectURL(blob);link.download="automall-orders-"+new Date().toISOString().slice(0,10)+".csv";link.click();window.setTimeout(()=>URL.revokeObjectURL(link.href),2000);
+ };
+ const count=(status:OrderStatus)=>orders.filter(order=>order.status===status).length;
+ return <section className="am-card" aria-labelledby="am-orders-title">
+  <h2 id="am-orders-title">{t.ordersTitle} <small className="am-muted">{orders.length}</small></h2><p className="am-muted">{t.ordersBody}</p>
+  {orders.length===0?<p className="am-empty">{t.noOrders}</p>:<>
+   <div className="am-toolbar am-orders-toolbar"><select className="am-input am-select" value={filter} onChange={event=>setFilter(event.target.value as typeof filter)} aria-label={t.status}><option value="all">{t.all} ({orders.length})</option>{orderStatuses.map(status=><option key={status} value={status}>{t.orderStatus[status]} ({count(status)})</option>)}</select><button className="am-button am-small" type="button" onClick={download}>{t.exportCsv}</button><button className="am-button am-small am-ghost" type="button" onClick={()=>{if(window.confirm(t.confirmClearOrders))clearOrders();}}>{t.clearOrders}</button></div>
+   <ul className="am-orders">{shown.map(order=><li key={order.id} className="am-order" data-status={order.status}>
+    <div className="am-order-head"><span className="am-chip am-kind">{t.orderKinds[order.kind]}</span><a href={carHref(order.vehicleId)}><strong dir="auto">{order.car}</strong></a>{order.price?<span className="am-muted">{order.price.toLocaleString("en-US")} JOD</span>:null}<time className="am-muted" dateTime={order.createdAt}>{when(order.createdAt)}</time></div>
+    <dl className="am-order-facts"><div><dt>{t.customer}</dt><dd dir="auto">{order.name}</dd></div><div><dt>{t.phone}</dt><dd dir="ltr">{order.phone}</dd></div><div><dt>{t.bestTime}</dt><dd>{t.orderTimes[order.preferred]??order.preferred}</dd></div>{order.message&&<div className="am-wide"><dt>{t.orderMessage}</dt><dd dir="auto">{order.message}</dd></div>}</dl>
+    <label className="am-field am-order-note"><span>{t.orderNote}</span><input className="am-input" defaultValue={order.note??""} placeholder={t.orderNotePh} onBlur={event=>{if(event.target.value!==(order.note??""))updateOrder(order.id,{note:event.target.value});}}/></label>
+    <div className="am-order-actions"><select className="am-input am-select am-status" value={order.status} data-status={order.status} onChange={event=>updateOrder(order.id,{status:event.target.value as OrderStatus})} aria-label={t.status+": "+order.name}>{orderStatuses.map(status=><option key={status} value={status}>{t.orderStatus[status]}</option>)}</select><a className="am-button am-small" href={"tel:"+order.phone.replace(/[^\d+]/g,"")}>{t.call}</a><a className="am-button am-small" href={customerWhatsapp(order.phone)} target="_blank" rel="noopener noreferrer">{t.whatsappCustomer} ↗</a><button className="am-button am-small am-ghost" type="button" onClick={()=>{if(window.confirm(t.confirmDeleteOrder))deleteOrder(order.id);}}>{t.deleteOrder}</button></div>
+   </li>)}</ul>
   </>}
  </section>;
 }

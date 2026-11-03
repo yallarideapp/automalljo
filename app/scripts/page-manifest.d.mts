@@ -4,3 +4,4 @@ export const legacyPaths: string[];
 export const v2Paths: string[];
 export const pagePaths: string[];
 export const adminPaths: string[];
+export const localCarPaths: string[];

@@ -10,3 +10,5 @@ export const v2Paths=["","/ar"].flatMap(prefix=>[
 export const pagePaths=[...legacyPaths,...v2Paths];
 /** The staff admin panel: prerendered, but left out of the sitemap and page checks. */
 export const adminPaths=["/admin/"];
+/** One shared page for cars added in a browser's admin panel (read from that browser, by ?id=). */
+export const localCarPaths=["/v2/car/local/","/ar/v2/car/local/"];

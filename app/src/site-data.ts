@@ -1,4 +1,5 @@
 export type Lang = "en" | "ar";
+function structuredCloneJson<T>(value:T):T{return JSON.parse(JSON.stringify(value)) as T;}
 import {assetPath} from "./site-paths";
 import catalog from "./catalog-data.json";
 import adminData from "./admin-data.json";
@@ -9,11 +10,15 @@ type Localized = {en:string;ar:string};
 export type OpeningDay={day:"sat"|"sun"|"mon"|"tue"|"wed"|"thu"|"fri";closed?:boolean;open?:string;close?:string};
 export type SiteSettings={phone:string;whatsapp:string;address:Localized;city:Localized;mapsQuery:string;instagram:string;facebook:string;hours:OpeningDay[];bannerCars:string[];featuredCars:string[]};
 /** Contact details, opening hours and homepage picks, edited in the admin panel. */
-export const settings=settingsData as SiteSettings;
-export const PHONE = settings.phone;
-export const INSTAGRAM = settings.instagram;
-export const FACEBOOK_URL = settings.facebook;
-export const MAPS = "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(settings.mapsQuery);
+export const settings:SiteSettings=structuredCloneJson(settingsData as SiteSettings);
+/** The published settings and admin data, as built into the site (before this browser's own edits). */
+export const builtSettings:SiteSettings=structuredCloneJson(settingsData as SiteSettings);
+export const builtAdmin:AdminData=structuredCloneJson(adminData as AdminData);
+export let PHONE = settings.phone;
+export let INSTAGRAM = settings.instagram;
+export let FACEBOOK_URL = settings.facebook;
+const mapsFor=(query:string)=>"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(query);
+export let MAPS = mapsFor(settings.mapsQuery);
 export const phoneDisplay=(phone=settings.phone)=>{const digits=phone.replace(/\D/g,"");const local=digits.startsWith("962")?"0"+digits.slice(3):digits;return local.length===10?local.slice(0,3)+" "+local.slice(3,6)+" "+local.slice(6):phone;};
 export const whatsapp = (message: string) => "https://wa.me/"+settings.whatsapp.replace(/\D/g,"")+"?text=" + encodeURIComponent(message);
 export type Vehicle = {
@@ -26,14 +31,36 @@ export type Vehicle = {
  range?:Localized;
  status?:VehicleStatus;
 };
-const withAssets=(vehicle:VehicleRecord):Vehicle=>({...vehicle,image:assetPath(vehicle.image),gallery:vehicle.gallery?.map(assetPath)});
+const asset=(path:string)=>/^(?:blob:|data:|https?:)/.test(path)?path:assetPath(path);
+const withAssets=(vehicle:VehicleRecord):Vehicle=>({...vehicle,image:asset(vehicle.image),gallery:vehicle.gallery?.map(asset)});
 /** The audited dealer snapshot alone (used by the catalogue tests). */
 export const catalogVehicles:readonly Vehicle[] = (catalog as VehicleRecord[]).map(withAssets);
 /** Every car with a page: dealer snapshot + admin additions and edits, minus hidden cars. Sold cars keep their page. */
-export const allVehicles:readonly Vehicle[] = mergeInventory(catalog as VehicleRecord[],adminData as AdminData).map(withAssets);
+export const allVehicles:Vehicle[] = mergeInventory(catalog as VehicleRecord[],builtAdmin).map(withAssets);
 /** Cars listed for sale (sold cars are left out of lists, filters and counts). */
-export const vehicles:readonly Vehicle[] = allVehicles.filter(vehicle=>vehicle.status!=="sold");
+export const vehicles:Vehicle[] = allVehicles.filter(vehicle=>vehicle.status!=="sold");
 export const findVehicle=(id?:string)=>allVehicles.find(vehicle=>vehicle.id===id);
+/** Cars that have a prerendered page of their own. Cars added in this browser use /v2/car/local/?id=… instead. */
+export const builtVehicleIds:ReadonlySet<string>=new Set(allVehicles.map(vehicle=>vehicle.id));
+
+const listeners=new Set<()=>void>();
+/** Modules that derive lists from the cars (brands, model years…) refresh themselves here. */
+export function onSiteDataChange(fn:()=>void){listeners.add(fn);return ()=>{listeners.delete(fn);};}
+/**
+ * Swap in this browser's own edits from the admin panel (or the published data again).
+ * The arrays and the settings object are updated in place, so every module sees the change.
+ * `photos` maps admin photo paths to the object URLs of photos stored in this browser.
+ */
+export function applySiteData(admin:AdminData,next:SiteSettings,photos:Record<string,string>={}){
+ for(const key of Object.keys(settings) as (keyof SiteSettings)[])delete settings[key];
+ Object.assign(settings,structuredCloneJson(next));
+ PHONE=settings.phone;INSTAGRAM=settings.instagram;FACEBOOK_URL=settings.facebook;MAPS=mapsFor(settings.mapsQuery);
+ const swap=(path:string)=>photos[path]??path;
+ const merged=mergeInventory(catalog as VehicleRecord[],admin).map(vehicle=>withAssets({...vehicle,image:swap(vehicle.image),gallery:vehicle.gallery?.map(swap)}));
+ allVehicles.splice(0,allVehicles.length,...merged);
+ vehicles.splice(0,vehicles.length,...merged.filter(vehicle=>vehicle.status!=="sold"));
+ for(const fn of listeners)fn();
+}
 export const copy = {
 en:{
 navCars:"Collection",navTrade:"Trade-in",navVisit:"Showroom",chat:"WhatsApp",browse:"Browse cars",lang:"العربية",menu:"Open navigation",close:"Close",heroTitle:"Your next drive.\nAt AutoMall.",heroBody:"Electric, hybrid and gasoline. Discover more possibilities at AutoMall, your car dealership in Amman.",tagline:"More choices. Less prices.",collectionLabel:"THE COLLECTION",collectionTitle:"Find your next drive.",collectionBody:"Explore 70 public dealer listings, with real photographs and vehicle specifications. Find your next drive by brand, fuel or model.",all:"All cars",electric:"Electric",suv:"SUV",premium:"Premium",search:"Search the collection",searchPlaceholder:"Brand, model or year",results:"vehicles",sourceNote:"All 70 public dealer listings, checked 29 October 2026. Listings can change; confirm current stock, price and specifications with our team.",details:"View details",emptyTitle:"A different road awaits.",emptyBody:"Try another model or reset the filters. We can also help you find what you have in mind.",reset:"Reset filters",tradeTitle:"New keys.\nNew possibilities.",tradeBody:"Your next chapter can start with your current car. Talk to AutoMall about a trade-in, subject to inspection.",tradeAction:"Discuss trade-in",visitLabel:"COME MEET YOUR NEXT CAR",visitTitle:"Better in person.",visitBody:"Take a closer look, sit behind the wheel and talk through your options with our team.",address:"Mecca Street 148",city:"Amman, Jordan 11112",directions:"Get directions",call:"Call the showroom",visitNote:"Contact us to confirm opening hours and arrange your visit.",faqTitle:"Good to know.",faq:[["How do I check price and availability?","Choose a car and open its details to send a model-specific WhatsApp enquiry. Our team will confirm the current price, specifications and availability."],["Can I trade in my current car?","Yes, AutoMall's vehicle posts invite trade-ins. Contact the team to discuss your vehicle. Any offer depends on inspection and a final agreement."],["Can I arrange a showroom visit?","Call or send a WhatsApp message to arrange a visit. Confirm opening hours directly with the showroom before travelling."],["Where can I find more cars?","This catalogue includes the 70 live listings on our public dealer page as checked on 29 October 2026. Follow @automalljo on Instagram for showroom updates, or ask our team about the latest arrivals."]],instagram:"Follow the collection",footerDescription:"Cars for your next chapter. Visit AutoMall on Mecca Street, Amman.",source:"Original dealer listing",enquire:"Enquire on WhatsApp",detailNote:"Specifications and photographs come from the linked dealer listing. Confirm the exact trim, model year, condition, mileage and current price before purchase. Listings may contain seller errors. Advertised driving range varies with speed, weather, load and battery condition.",heroCaption:"Original dealer photographs. Explore the collection below.",back:"Back to AutoMall"

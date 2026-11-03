@@ -1,4 +1,4 @@
-import {vehicles,type Vehicle} from "./site-data";
+import {vehicles,onSiteDataChange,type Vehicle} from "./site-data";
 import {equipmentFor,equipmentOptions,type Localized} from "./v2-content";
 
 export const powertrains:{id:string;label:Localized;description:Localized}[]=[
@@ -17,7 +17,9 @@ export const bodyStyles:{id:string;source:string;label:Localized}[]=[
  {id:"truck",source:"Refrigerated truck",label:{en:"Refrigerated truck",ar:"شاحنة مبردة"}},
 ];
 export const bodyStyleFor=(vehicle:Vehicle)=>bodyStyles.find(body=>body.source===vehicle.type.en.split(" · ")[0])?.id??"other";
-export const modelYears=[...new Set(vehicles.map(vehicle=>Number(vehicle.year)).filter(Number.isFinite))].sort((a,b)=>a-b).map(String);
+export const modelYears:string[]=[];
+const refreshYears=()=>{modelYears.splice(0,modelYears.length,...[...new Set(vehicles.map(vehicle=>Number(vehicle.year)).filter(Number.isFinite))].sort((a,b)=>a-b).map(String));};
+refreshYears();onSiteDataChange(refreshYears);
 export type CatalogFilters={powertrain:string;body:string;brand:string;equipment:string;query:string;sort:string;yearFrom:string;yearTo:string};
 export const defaultFilters:CatalogFilters={powertrain:"all",body:"all",brand:"all",equipment:"all",query:"",sort:"featured",yearFrom:"all",yearTo:"all"};
 const normalized=(value:string)=>value.normalize("NFKD").replace(/[\u0300-\u036f\u064b-\u065f]/g,"").toLowerCase();
