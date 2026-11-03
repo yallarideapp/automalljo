@@ -18,6 +18,8 @@ export type VehicleRecord={
  /** Cars added in the admin panel keep the form they were made from, so they can be edited again. */
  form?:Record<string,unknown>;
  addedAt?:string;
+ /** Equipment chosen in the admin panel (panorama, HUD…). When absent, the researched equipment is shown. */
+ features?:string[];
 };
 export type VehicleEdit={
  price?:number|null;
@@ -27,12 +29,15 @@ export type VehicleEdit={
  color?:Localized;
  description?:Localized;
  range?:Localized|null;
+ /** A dealer listing edited in full in the admin panel: this record replaces the listing (id and source link stay). */
+ replace?:VehicleRecord;
 };
 export type AdminData={version:1;cars:VehicleRecord[];edits:Record<string,VehicleEdit>;hidden:string[]};
 
 export function applyEdit(vehicle:VehicleRecord,edit?:VehicleEdit):VehicleRecord{
  if(!edit)return vehicle;
- const next:VehicleRecord={...vehicle};
+ const base=edit.replace?{...edit.replace,id:vehicle.id,post:vehicle.post,sourceLabel:vehicle.sourceLabel}:vehicle;
+ const next:VehicleRecord={...base};
  if(edit.price===null)delete next.price;
  else if(typeof edit.price==="number"&&edit.price>0)next.price={amount:Math.round(edit.price),currency:"JOD"};
  if(edit.status)next.status=edit.status;
@@ -40,7 +45,7 @@ export function applyEdit(vehicle:VehicleRecord,edit?:VehicleEdit):VehicleRecord
  if(edit.description)next.description=edit.description;
  if(edit.range===null)delete next.range;else if(edit.range)next.range=edit.range;
  if(edit.specs){
-  const specs=[...(vehicle.specs??[])];
+  const specs=[...(base.specs??[])];
   for(const [label,value] of Object.entries(edit.specs)){
    const index=specs.findIndex(spec=>spec.label.en===label);
    if(value===null){if(index>=0)specs.splice(index,1);continue;}

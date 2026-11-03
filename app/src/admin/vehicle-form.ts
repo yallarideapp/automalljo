@@ -36,8 +36,10 @@ export type CarForm={
  powertrain:string;engine:string;battery:string;range:string;rangeCycle:string;power:string;torque:string;
  body:string;seats:string;transmission:string;drive:string;exterior:string;interior:string;market:string;
  price:string;status:VehicleStatus;premium:boolean;descriptionEn:string;descriptionAr:string;
+ /** Equipment ids (panorama, hud…). */
+ features:string[];
 };
-export const emptyForm=():CarForm=>({brand:"",model:"",year:String(new Date().getFullYear()),trim:"",condition:"New",mileage:"0",powertrain:"electric",engine:"",battery:"",range:"",rangeCycle:"",power:"",torque:"",body:"SUV",seats:"5",transmission:"Automatic",drive:"",exterior:"Black",interior:"",market:"",price:"",status:"available",premium:false,descriptionEn:"",descriptionAr:""});
+export const emptyForm=():CarForm=>({brand:"",model:"",year:String(new Date().getFullYear()),trim:"",condition:"New",mileage:"0",powertrain:"electric",engine:"",battery:"",range:"",rangeCycle:"",power:"",torque:"",body:"SUV",seats:"5",transmission:"Automatic",drive:"",exterior:"Black",interior:"",market:"",price:"",status:"available",premium:false,descriptionEn:"",descriptionAr:"",features:[]});
 
 const number=(value:string)=>{const parsed=Number(String(value).replace(/[^\d.]/g,""));return Number.isFinite(parsed)&&parsed>0?parsed:0;};
 const grouped=(value:number)=>value.toLocaleString("en-US");
@@ -55,9 +57,18 @@ export function formProblems(form:CarForm,photoCount:number,lang:"en"|"ar"){
  return problems;
 }
 
-export function buildVehicle(form:CarForm,id:string,photos:string[],addedAt:string):VehicleRecord{
- const power=find(powerOptions,form.powertrain)??powerOptions[0],body=find(bodyOptions,form.body)??bodyOptions[0],condition=find(conditionOptions,form.condition)??conditionOptions[0];
- const exterior=find(colourOptions,form.exterior),interior=find(colourOptions,form.interior),transmission=find(transmissionOptions,form.transmission),drive=find(driveOptions,form.drive),market=find(marketOptions,form.market);
+/** Select values a dealer listing uses that aren't in the option lists are kept as "=<English>" with the original wording. */
+export const ORIGINAL="=";
+export type Originals=Record<string,Localized>;
+function choose<T extends Option>(options:T[],key:string,label:string,originals:Originals):(Option&Partial<T>)|undefined{
+ if(key.startsWith(ORIGINAL)){const value=originals[label];return value?({key,en:value.en,ar:value.ar} as Option&Partial<T>):undefined;}
+ return find(options,key);
+}
+export function buildVehicle(form:CarForm,id:string,photos:string[],addedAt:string,originals:Originals={},category?:"electric"|"hybrid"|"gasoline"):VehicleRecord{
+ const chosenPower=choose(powerOptions,form.powertrain,"Fuel / powertrain",originals);
+ const power={...(chosenPower??powerOptions[0]),category:chosenPower?.category??category??"electric"} as PowerOption;
+ const body=find(bodyOptions,form.body)??bodyOptions[0],condition=find(conditionOptions,form.condition)??conditionOptions[0];
+ const exterior=choose(colourOptions,form.exterior,"Exterior colour",originals),interior=choose(colourOptions,form.interior,"Interior colour",originals),transmission=choose(transmissionOptions,form.transmission,"Transmission",originals),drive=choose(driveOptions,form.drive,"Drive",originals),market=choose(marketOptions,form.market,"Market specification",originals);
  const mileage=Math.round(number(form.mileage)),hp=Math.round(number(form.power)),nm=Math.round(number(form.torque)),battery=number(form.battery),range=Math.round(number(form.range)),seats=Math.round(number(form.seats)),price=Math.round(number(form.price));
  const name=form.model.trim(),brand=form.brand.trim(),year=Number(form.year),trim=form.trim.trim(),engine=form.engine.trim();
  const cycle=form.rangeCycle.trim();
@@ -93,7 +104,7 @@ export function buildVehicle(form:CarForm,id:string,photos:string[],addedAt:stri
   specs,post:"",
   ...(price?{price:{amount:price,currency:"JOD" as const}}:{}),
   ...(rangeText?{range:rangeText}:{}),
-  status:form.status,form:form as unknown as Record<string,unknown>,addedAt,
+  status:form.status,form:form as unknown as Record<string,unknown>,addedAt,features:[...form.features],
  };
 }
 
@@ -132,4 +143,55 @@ export async function preparePhoto(file:File):Promise<{bytes:Uint8Array;ext:"web
  if(!blob||blob.type!=="image/webp"){blob=await toBlob("image/jpeg",0.88);ext="jpg";}
  if(!blob)throw new Error("Could not read this photo.");
  return {bytes:new Uint8Array(await blob.arrayBuffer()),ext,url:URL.createObjectURL(blob)};
+}
+
+
+/* Full editing of dealer listings ---------------------------------------- */
+const keyFor=(options:Option[],value:string)=>options.find(option=>option.en===value)?.key;
+const powerKeyFor=(value:string)=>keyFor(powerOptions,value);
+/** Turns a car (usually a dealer listing) back into the editing form, keeping unusual values as originals. */
+export function formFromVehicle(vehicle:VehicleRecord,features:string[]):{form:CarForm;originals:Originals}{
+ const originals:Originals={},value=(label:string)=>vehicle.specs?.find(item=>item.label.en===label)?.value;
+ const select=(options:Option[],label:string)=>{const found=value(label);if(!found?.en)return "";const key=label==="Fuel / powertrain"?powerKeyFor(found.en):keyFor(options,found.en);if(key)return key;originals[label]=found;return ORIGINAL+found.en;};
+ const text=(label:string)=>value(label)?.en??"";
+ const fallbackPower=vehicle.categories.includes("electric")?"electric":vehicle.categories.includes("hybrid")?"hev":"petrol";
+ const rangeText=text("Advertised driving range")||vehicle.range?.en||"";
+ const cycle=rangeText.match(/\(([^)]+)\)/)?.[1]??"";
+ const bodyEn=text("Body style")||vehicle.type.en.split(" · ")[0];
+ const form:CarForm={
+  brand:vehicle.brand,model:vehicle.name,year:String(vehicle.year),trim:text("Trim / edition"),
+  condition:keyFor(conditionOptions,text("Condition"))??"New",mileage:digits(text("Mileage")),
+  powertrain:select(powerOptions,"Fuel / powertrain")||fallbackPower,engine:text("Engine / hybrid system"),
+  battery:digits(text("Battery (seller stated)")),range:digits(rangeText),rangeCycle:cycle,
+  power:digits(text("Power")),torque:digits(text("Torque")),
+  body:keyFor(bodyOptions,bodyEn)??"SUV",seats:digits(text("Seats")),
+  transmission:select(transmissionOptions,"Transmission"),drive:select(driveOptions,"Drive"),
+  exterior:select(colourOptions,"Exterior colour"),interior:select(colourOptions,"Interior colour"),market:select(marketOptions,"Market specification"),
+  price:vehicle.price?String(vehicle.price.amount):"",status:vehicle.status??"available",premium:vehicle.categories.includes("premium"),
+  descriptionEn:vehicle.description.en,descriptionAr:vehicle.description.ar,features:[...features],
+ };
+ return {form,originals};
+}
+/** Which form fields each standard specification row is made from. */
+const specFields:Record<string,(keyof CarForm)[]>={"Model year":["year"],"Trim / edition":["trim"],Condition:["condition"],Mileage:["mileage"],"Fuel / powertrain":["powertrain"],"Engine / hybrid system":["engine"],Power:["power"],Torque:["torque"],"Body style":["body"],Seats:["seats"],Transmission:["transmission"],"Exterior colour":["exterior"],"Interior colour":["interior"],"Battery (seller stated)":["battery"],Drive:["drive"],"Advertised driving range":["range","rangeCycle"],"Market specification":["market"]};
+const same=(a:CarForm,b:CarForm,keys:(keyof CarForm)[])=>keys.every(key=>JSON.stringify(a[key])===JSON.stringify(b[key]));
+/**
+ * Builds the edited dealer listing. Anything the staff member didn't change keeps the listing's
+ * exact wording in both languages; rows the form doesn't cover (such as the listing ID) are kept.
+ */
+export function buildListing(original:VehicleRecord,form:CarForm,start:CarForm,originals:Originals,photos:string[]):VehicleRecord{
+ const category=original.categories.includes("electric")?"electric":original.categories.includes("hybrid")?"hybrid":"gasoline";
+ const built=buildVehicle(form,original.id,photos,original.addedAt??"",originals,category);
+ const before=(label:string)=>original.specs?.find(item=>item.label.en===label);
+ const specs=(built.specs??[]).map(item=>{const fields=specFields[item.label.en],old=before(item.label.en);return fields&&old&&same(form,start,fields)?old:item;});
+ for(const item of original.specs??[])if(!specFields[item.label.en])specs.push(item);
+ const record:VehicleRecord={...built,specs,post:original.post,sourceLabel:original.sourceLabel};
+ delete record.form;delete record.addedAt;
+ if(same(form,start,["exterior"]))record.color=original.color;
+ if(same(form,start,["body","powertrain"]))record.type=original.type;
+ if(same(form,start,["powertrain","condition","mileage","trim"]))record.facts=original.facts;
+ if(same(form,start,["range","rangeCycle"])){if(original.range)record.range=original.range;else delete record.range;}
+ if(same(form,start,["powertrain","body","premium"]))record.categories=[...original.categories];
+ if(same(form,start,["features"]))delete record.features;
+ return record;
 }

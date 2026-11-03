@@ -8,7 +8,17 @@ const research=rawFeatures as unknown as {checkedAt:string;facebookPosts:DealerP
 const supported=new Set<VehicleFeatureName>(["range","battery","charge","hybrid","awd","panorama","camera360","heatedSeats","ventilatedSeats","leather","cruise","hud","keyless","powerTailgate","carplay","parkingSensors","safety","seats","gearbox","engine","mileage"]);
 export let FACEBOOK=settings.facebook;
 export const dealerPosts=research.facebookPosts.filter(post=>post.captionAccess==="public-full-caption"&&post.url.startsWith("https://www.facebook.com/automall.jo/"));
-export const equipmentFor=(vehicle:Vehicle)=>{const seen=new Set<string>();return (research.vehicles[vehicle.id]?.features??[]).filter(feature=>supported.has(feature.id)&&!seen.has(feature.id)&&!!seen.add(feature.id));};
+const researched=(vehicle:Vehicle)=>{const seen=new Set<string>();return (research.vehicles[vehicle.id]?.features??[]).filter(feature=>supported.has(feature.id)&&!seen.has(feature.id)&&!!seen.add(feature.id));};
+/** A car's equipment: what the research found, or the list chosen in the admin panel when there is one. */
+export const equipmentFor=(vehicle:Vehicle):EquipmentFeature[]=>{
+ const found=researched(vehicle);if(!vehicle.features)return found;
+ const chosen=new Set(vehicle.features),isEquipment=(id:string)=>id in featureLabels;
+ const kept=found.filter(feature=>!isEquipment(feature.id)||chosen.has(feature.id));
+ const added=[...chosen].filter(id=>isEquipment(id)&&!kept.some(feature=>feature.id===id)).map(id=>({id:id as VehicleFeatureName,label:featureLabels[id as VehicleFeatureName]!,sourceURL:"",sourceType:"dealer-listing" as const}));
+ return [...kept,...added];
+};
+/** The researched equipment ids alone (the admin panel's starting point). */
+export const researchedEquipment=(vehicle:Vehicle)=>researched(vehicle).map(feature=>feature.id).filter(id=>id in featureLabels);
 /** Small copies of dealer photos: 450px for thumbnail strips and grids, 800px for car cards. */
 export const thumbSrc=(src:string)=>src.replace(/\/assets\/(?:catalog|uploads)\//,"/assets/thumbs/").replace(/\.(?:jpe?g|png)$/i,".webp");
 export const cardSrc=(src:string)=>src.replace(/\/assets\/(?:catalog|uploads)\//,"/assets/cards/").replace(/\.(?:jpe?g|png)$/i,".webp");

@@ -30,6 +30,7 @@ export type Vehicle = {
  price?:{amount:number;currency:"JOD"};
  range?:Localized;
  status?:VehicleStatus;
+ features?:readonly string[];
 };
 const asset=(path:string)=>/^(?:blob:|data:|https?:)/.test(path)?path:assetPath(path);
 const withAssets=(vehicle:VehicleRecord):Vehicle=>({...vehicle,image:asset(vehicle.image),gallery:vehicle.gallery?.map(asset)});

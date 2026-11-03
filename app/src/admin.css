@@ -160,3 +160,8 @@ textarea.am-input{min-height:64px;resize:vertical}
  .am-order-actions>*{flex:1 1 auto}
  .am-order-actions .am-status{width:100%;flex-basis:100%}
 }
+.am-feature-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px 16px;margin-top:8px}
+.am-feature{min-height:40px}
+@media(max-width:700px){.am-feature-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:420px){.am-feature-grid{grid-template-columns:1fr}}
+.am-admin :is(input,select,textarea){color-scheme:inherit}

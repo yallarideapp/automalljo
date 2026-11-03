@@ -6,13 +6,14 @@ export const adminData=read("../src/admin-data.json");
 export const siteSettings=read("../src/site-settings.json");
 function applyEdit(vehicle,edit){
  if(!edit)return vehicle;
- const next={...vehicle};
+ const base=edit.replace?{...edit.replace,id:vehicle.id,post:vehicle.post,sourceLabel:vehicle.sourceLabel}:vehicle;
+ const next={...base};
  if(edit.price===null)delete next.price;else if(typeof edit.price==="number"&&edit.price>0)next.price={amount:Math.round(edit.price),currency:"JOD"};
  if(edit.status)next.status=edit.status;
  if(edit.color)next.color=edit.color;
  if(edit.description)next.description=edit.description;
  if(edit.range===null)delete next.range;else if(edit.range)next.range=edit.range;
- if(edit.specs){const specs=[...(vehicle.specs??[])];for(const [label,value] of Object.entries(edit.specs)){const index=specs.findIndex(spec=>spec.label.en===label);if(value===null){if(index>=0)specs.splice(index,1);continue;}if(index>=0)specs[index]={label:specs[index].label,value};else specs.push({label:{en:label,ar:label},value});}next.specs=specs;}
+ if(edit.specs){const specs=[...(base.specs??[])];for(const [label,value] of Object.entries(edit.specs)){const index=specs.findIndex(spec=>spec.label.en===label);if(value===null){if(index>=0)specs.splice(index,1);continue;}if(index>=0)specs[index]={label:specs[index].label,value};else specs.push({label:{en:label,ar:label},value});}next.specs=specs;}
  return next;
 }
 export function mergeInventory(base=catalog,admin=adminData){

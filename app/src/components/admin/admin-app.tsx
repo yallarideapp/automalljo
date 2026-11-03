@@ -3,10 +3,10 @@ import catalogData from "@/catalog-data.json";
 import {mergeInventory,type AdminData,type VehicleRecord,type VehicleStatus} from "@/inventory";
 import type {OpeningDay,SiteSettings} from "@/site-data";
 import {assetPath,sitePath} from "@/site-paths";
-import {thumbSrc} from "@/v2-content";
+import {featureLabels,researchedEquipment,thumbSrc} from "@/v2-content";
 import {builtAdmin,builtSettings,builtVehicleIds} from "@/site-data";
 import {clearLocalData,clearOrders,clearPhotos,deleteOrder,deletePhotos,onOrdersChange,photoUrls,readLocalData,readOrders,savePhotos,updateOrder,writeLocalData,type Order,type OrderKind,type OrderStatus} from "@/local-store";
-import {bodyOptions,buildVehicle,colourOptions,conditionOptions,driveOptions,emptyForm,formProblems,marketOptions,powerOptions,preparePhoto,quickEdit,quickFormFor,statusOptions,transmissionOptions,type CarForm,type QuickForm} from "@/admin/vehicle-form";
+import {ORIGINAL,buildListing,formFromVehicle,bodyOptions,buildVehicle,colourOptions,conditionOptions,driveOptions,emptyForm,formProblems,marketOptions,powerOptions,preparePhoto,quickEdit,quickFormFor,statusOptions,transmissionOptions,type CarForm,type QuickForm} from "@/admin/vehicle-form";
 
 type Lang="en"|"ar";
 const catalog=catalogData as VehicleRecord[];
@@ -24,7 +24,7 @@ const copy={
   search:"Search by brand, model or year",all:"All",hiddenFilter:"Hidden",addCar:"Add a car",edit:"Edit",hide:"Hide from site",show:"Show on site",remove:"Delete",
   added:"Added",edited:"Edited",hidden:"Hidden",noPrice:"No price",carsCount:(n:number)=>n+" cars",
   status:"Status",price:"Price (JOD)",pricePh:"Leave empty for “Enquire for price”",
-  newCar:"Add a car",editCar:"Edit car",editListing:"Edit dealer listing",listingNote:"This car comes from the dealer's OpenSooq listing, so its photos and most specifications stay as listed. You can change the price, status and the details below.",
+  newCar:"Add a car",editCar:"Edit car",editListing:"Edit dealer listing",listingNote:"This car comes from the dealer's OpenSooq listing. You can change everything here: photos, details, specifications and equipment. “Reset to dealer listing” brings the original back.",equipment:"Equipment",equipmentHint:"Shown on the car page and used by the equipment filter.",resetListing:"Reset to dealer listing",confirmResetListing:"Undo every change to this listing?",
   save:"Save changes",cancel:"Cancel",deleteCar:"Delete this car",confirmDelete:"Delete this car from the website? Its photos are removed too.",
   basics:"The car",performance:"Power and range",bodyAndColour:"Body and colour",selling:"Selling",photos:"Photos",
   brand:"Brand",model:"Model",year:"Model year",trim:"Trim / edition",condition:"Condition",mileage:"Mileage (km)",powertrain:"Powertrain",engine:"Engine",enginePh:"e.g. 2.0L turbo petrol",
@@ -58,7 +58,7 @@ const copy={
   search:"ابحث بالعلامة أو الموديل أو السنة",all:"الكل",hiddenFilter:"مخفية",addCar:"أضف سيارة",edit:"تعديل",hide:"إخفاء من الموقع",show:"إظهار في الموقع",remove:"حذف",
   added:"مضافة",edited:"معدّلة",hidden:"مخفية",noPrice:"بدون سعر",carsCount:(n:number)=>n+" سيارة",
   status:"الحالة",price:"السعر (دينار)",pricePh:"اتركه فارغاً لعرض «استفسر عن السعر»",
-  newCar:"أضف سيارة",editCar:"تعديل السيارة",editListing:"تعديل إعلان المعرض",listingNote:"هذه السيارة من إعلان المعرض على السوق المفتوح، لذلك تبقى صورها ومعظم مواصفاتها كما هي. يمكنك تغيير السعر والحالة والتفاصيل أدناه.",
+  newCar:"أضف سيارة",editCar:"تعديل السيارة",editListing:"تعديل إعلان المعرض",listingNote:"هذه السيارة من إعلان المعرض على السوق المفتوح. يمكنك تغيير كل شيء هنا: الصور والتفاصيل والمواصفات والتجهيزات. زر «إرجاع إعلان المعرض» يعيد الإعلان الأصلي.",equipment:"التجهيزات",equipmentHint:"تظهر في صفحة السيارة وتُستخدم في فلتر التجهيزات.",resetListing:"إرجاع إعلان المعرض",confirmResetListing:"التراجع عن كل التغييرات على هذا الإعلان؟",
   save:"حفظ التغييرات",cancel:"إلغاء",deleteCar:"حذف هذه السيارة",confirmDelete:"حذف هذه السيارة من الموقع؟ ستُحذف صورها أيضاً.",
   basics:"السيارة",performance:"القوة والمدى",bodyAndColour:"الهيكل واللون",selling:"البيع",photos:"الصور",
   brand:"العلامة التجارية",model:"الموديل",year:"سنة الموديل",trim:"الفئة / الإصدار",condition:"الحالة",mileage:"المسافة المقطوعة (كم)",powertrain:"نظام الحركة",engine:"المحرك",enginePh:"مثال: 2.0L تيربو بنزين",
@@ -176,6 +176,8 @@ function CarList({ctx,onEdit}:{ctx:Ctx;onEdit:(value:Editing)=>void}){
  const setStatus=(row:typeof rows[number],status:VehicleStatus)=>{
   if(status==="sold")dropFromHomepage(ctx,row.car.id);
   if(row.added){setAdmin({...admin,cars:admin.cars.map(car=>car.id===row.car.id?{...car,status,form:{...(car.form??{}),status}}:car)});return;}
+  const edit=admin.edits[row.car.id];
+  if(edit?.replace){setAdmin({...admin,edits:{...admin.edits,[row.car.id]:{...edit,status:undefined,replace:{...edit.replace,status}}}});return;}
   const original=catalog.find(car=>car.id===row.car.id)!;
   const form={...quickFormFor(applyCurrent(original,admin)),status};
   setListingEdit(ctx,original,form);
@@ -205,42 +207,27 @@ function Field({label:text,hint,children,wide}:{label:string;hint?:string;childr
 function Select({value,onChange,options,lang,empty}:{value:string;onChange:(value:string)=>void;options:{key:string;en:string;ar:string}[];lang:Lang;empty?:string}){return <select className="am-input am-select" value={value} onChange={event=>onChange(event.target.value)}>{empty!==undefined&&<option value="">{empty}</option>}{options.map(item=><option key={item.key} value={item.key}>{item[lang]}</option>)}</select>;}
 
 function CarEditor({ctx,editing,onDone}:{ctx:Ctx;editing:Exclude<Editing,null>;onDone:()=>void}){
- if(editing.kind==="listing")return <ListingEditor ctx={ctx} id={editing.id} onDone={onDone}/>;
+ if(editing.kind==="listing")return <AddedCarEditor ctx={ctx} id={editing.id} listing onDone={onDone}/>;
  return <AddedCarEditor ctx={ctx} id={editing.kind==="added"?editing.id:null} onDone={onDone}/>;
 }
 
-function ListingEditor({ctx,id,onDone}:{ctx:Ctx;id:string;onDone:()=>void}){
- const {t,lang}=ctx,original=catalog.find(car=>car.id===id)!;
- const [form,setForm]=useState<QuickForm>(()=>quickFormFor(applyCurrent(original,ctx.admin)));
- const set=<K extends keyof QuickForm>(key:K,value:QuickForm[K])=>setForm(previous=>({...previous,[key]:value}));
- return <section className="am-card am-editor" aria-labelledby="am-editor-title">
-  <div className="am-editor-head"><img src={ctx.photoSrc(original.image)} alt="" width="120" height="80"/><div><h2 id="am-editor-title">{t.editListing}</h2><p>{label(original)}</p></div></div>
-  <p className="am-note">{t.listingNote}</p>
-  <div className="am-grid">
-   <Field label={t.price}><input className="am-input" inputMode="numeric" dir="ltr" value={form.price} onChange={event=>set("price",event.target.value.replace(/[^\d]/g,""))} placeholder={t.pricePh}/></Field>
-   <Field label={t.status}><Select lang={lang} value={form.status} onChange={value=>set("status",value as VehicleStatus)} options={statusOptions}/></Field>
-   <Field label={t.condition}><Select lang={lang} value={form.condition} onChange={value=>set("condition",value)} options={conditionOptions}/></Field>
-   <Field label={t.mileage}><input className="am-input" inputMode="numeric" dir="ltr" value={form.mileage} onChange={event=>set("mileage",event.target.value.replace(/[^\d]/g,""))}/></Field>
-   <Field label={t.power}><input className="am-input" inputMode="numeric" dir="ltr" value={form.power} onChange={event=>set("power",event.target.value.replace(/[^\d]/g,""))}/></Field>
-   <Field label={t.torque}><input className="am-input" inputMode="numeric" dir="ltr" value={form.torque} onChange={event=>set("torque",event.target.value.replace(/[^\d]/g,""))}/></Field>
-   <Field label={t.exterior}><Select lang={lang} value={form.exterior} onChange={value=>set("exterior",value)} options={colourOptions} empty={t.none}/></Field>
-   <Field label={t.descriptionEn} wide><textarea className="am-input" dir="ltr" rows={2} value={form.descriptionEn} onChange={event=>set("descriptionEn",event.target.value)}/></Field>
-   <Field label={t.descriptionAr} wide><textarea className="am-input" dir="rtl" rows={2} value={form.descriptionAr} onChange={event=>set("descriptionAr",event.target.value)}/></Field>
-  </div>
-  <div className="am-editor-actions"><button className="am-button am-primary" type="button" onClick={()=>{if(form.status==="sold")dropFromHomepage(ctx,original.id);setListingEdit(ctx,original,form);onDone();}}>{t.save}</button><button className="am-button am-ghost" type="button" onClick={onDone}>{t.cancel}</button></div>
- </section>;
-}
-
-function AddedCarEditor({ctx,id,onDone}:{ctx:Ctx;id:string|null;onDone:()=>void}){
+function AddedCarEditor({ctx,id,onDone,listing=false}:{ctx:Ctx;id:string|null;onDone:()=>void;listing?:boolean}){
  const {t,lang,admin,setAdmin,uploads,setUploads,deletions,setDeletions,settings,setSettings}=ctx;
- const existing=id?admin.cars.find(car=>car.id===id):undefined;
+ // A dealer listing opens in the same full form, starting from the listing as it is now.
+ const original=listing&&id?catalog.find(car=>car.id===id):undefined;
+ const current=original?applyCurrent(original,admin):undefined;
+ const existing=id&&!listing?admin.cars.find(car=>car.id===id):undefined;
  const carId=useRef(id??newCarId(admin)).current;
- const [form,setForm]=useState<CarForm>(()=>({...emptyForm(),...(existing?.form as Partial<CarForm>|undefined)}));
- const [photos,setPhotos]=useState<string[]>(()=>existing?[...new Set([existing.image,...(existing.gallery??[])])]:[]);
+ const [start]=useState(()=>original?formFromVehicle(original,researchedEquipment(original)):null);
+ const [initial]=useState(()=>current?formFromVehicle(current,current.features??researchedEquipment(current)):null);
+ const originals=useMemo(()=>({...start?.originals,...initial?.originals}),[start,initial]);
+ const [form,setForm]=useState<CarForm>(()=>initial?initial.form:{...emptyForm(),...(existing?.form as Partial<CarForm>|undefined)});
+ const startPhotos=useRef<string[]>(original?[...new Set([original.image,...(original.gallery??[])])]:[]).current;
+ const [photos,setPhotos]=useState<string[]>(()=>{const car=current??existing;return car?[...new Set([car.image,...(car.gallery??[])])]:[];});
  const [localUploads,setLocalUploads]=useState<Record<string,Upload>>({}),[removed,setRemoved]=useState<string[]>([]);
  const [busy,setBusy]=useState(false),[problems,setProblems]=useState<string[]>([]);
  const set=<K extends keyof CarForm>(key:K,value:CarForm[K])=>setForm(previous=>({...previous,[key]:value}));
- const src=(path:string)=>localUploads[path]?.url??ctx.photoSrc(path,false);
+ const src=(path:string)=>localUploads[path]?.url??ctx.photoSrc(path);
  const addFiles=async(files:FileList|null)=>{
   if(!files?.length)return;setBusy(true);
   const next={...localUploads},list=[...photos];
@@ -252,9 +239,16 @@ function AddedCarEditor({ctx,id,onDone}:{ctx:Ctx;id:string|null;onDone:()=>void}
  const dropPhoto=(path:string)=>{setPhotos(photos.filter(item=>item!==path));if(localUploads[path]||uploads[path]){const next={...localUploads};delete next[path];setLocalUploads(next);}else setRemoved([...removed,path]);};
  const save=()=>{
   const issues=formProblems(form,photos.length,lang);setProblems(issues);if(issues.length)return;
-  const record=buildVehicle(form,carId,photos,existing?.addedAt??new Date().toISOString());
-  const cars=existing?admin.cars.map(car=>car.id===carId?record:car):[record,...admin.cars];
-  setAdmin({...admin,cars});
+  if(original&&start){
+   const edits={...admin.edits};
+   if(pretty(form)===pretty(start.form)&&pretty(photos)===pretty(startPhotos))delete edits[carId];
+   else edits[carId]={replace:buildListing(original,form,start.form,originals,photos)};
+   setAdmin({...admin,edits});
+  }else{
+   const record=buildVehicle(form,carId,photos,existing?.addedAt??new Date().toISOString());
+   const cars=existing?admin.cars.map(car=>car.id===carId?record:car):[record,...admin.cars];
+   setAdmin({...admin,cars});
+  }
   if(form.status==="sold")dropFromHomepage(ctx,carId);
   const merged={...uploads};for(const [path,upload] of Object.entries(localUploads))merged[path]=upload;for(const path of Object.keys(merged))if(path.includes("upload-"+carId+"-")&&!photos.includes(path))delete merged[path];setUploads(merged);
   setDeletions([...new Set([...deletions,...removed.filter(path=>!uploads[path])])]);
@@ -270,10 +264,15 @@ function AddedCarEditor({ctx,id,onDone}:{ctx:Ctx;id:string|null;onDone:()=>void}
   setSettings({...settings,bannerCars:settings.bannerCars.filter(item=>item!==carId),featuredCars:settings.featuredCars.filter(item=>item!==carId)});
   onDone();
  };
+ const resetListing=()=>{if(!window.confirm(t.confirmResetListing))return;const edits={...admin.edits};delete edits[carId];setAdmin({...admin,edits});onDone();};
  const electric=form.powertrain==="electric";
+ // Values from the dealer listing that aren't in the option lists stay selectable as they were listed.
+ const listed=(options:{key:string;en:string;ar:string}[],field:keyof CarForm,specLabel:string)=>{const value=String(form[field]);return value.startsWith(ORIGINAL)?[{key:value,en:originals[specLabel]?.en??value.slice(1),ar:originals[specLabel]?.ar??value.slice(1)},...options]:options;};
+ const toggleFeature=(feature:string)=>set("features",form.features.includes(feature)?form.features.filter(item=>item!==feature):[...form.features,feature]);
  const numberInput=(key:keyof CarForm)=><input className="am-input" inputMode="numeric" dir="ltr" value={form[key] as string} onChange={event=>set(key,event.target.value.replace(/[^\d.]/g,"") as never)}/>;
  return <section className="am-card am-editor" aria-labelledby="am-editor-title">
-  <h2 id="am-editor-title">{existing?t.editCar:t.newCar}</h2>
+  {original?<div className="am-editor-head"><img src={ctx.photoSrc(photos[0]??original.image)} alt="" width="120" height="80"/><div><h2 id="am-editor-title">{t.editListing}</h2><p>{label(original)}</p></div></div>:<h2 id="am-editor-title">{existing?t.editCar:t.newCar}</h2>}
+  {original&&<p className="am-note">{t.listingNote}</p>}
   <fieldset><legend>{t.photos}</legend><p className="am-muted">{t.photoHint}</p>
    <ul className="am-photos">{photos.map((path,index)=><li key={path}><img src={src(path)} alt="" width="160" height="107"/>{index===0&&<span className="am-chip am-cover">{t.cover}</span>}<div><button type="button" className="am-icon-button" aria-label={t.moveEarlier} disabled={index===0} onClick={()=>move(index,-1)}>{lang==="ar"?"→":"←"}</button><button type="button" className="am-icon-button" aria-label={t.moveLater} disabled={index===photos.length-1} onClick={()=>move(index,1)}>{lang==="ar"?"←":"→"}</button><button type="button" className="am-icon-button" aria-label={t.removePhoto} onClick={()=>dropPhoto(path)}>×</button></div></li>)}
     <li className="am-photo-add"><label><input type="file" accept="image/*" multiple onChange={event=>{void addFiles(event.target.files);event.target.value="";}} disabled={busy}/><span>{busy?t.preparing:"+ "+t.addPhotos}</span></label></li></ul>
@@ -285,24 +284,24 @@ function AddedCarEditor({ctx,id,onDone}:{ctx:Ctx;id:string|null;onDone:()=>void}
    <Field label={t.trim}><input className="am-input" value={form.trim} onChange={event=>set("trim",event.target.value)}/></Field>
    <Field label={t.condition}><Select lang={lang} value={form.condition} onChange={value=>set("condition",value)} options={conditionOptions}/></Field>
    <Field label={t.mileage}>{numberInput("mileage")}</Field>
-   <Field label={t.market}><Select lang={lang} value={form.market} onChange={value=>set("market",value)} options={marketOptions} empty={t.none}/></Field>
+   <Field label={t.market}><Select lang={lang} value={form.market} onChange={value=>set("market",value)} options={listed(marketOptions,"market","Market specification")} empty={t.none}/></Field>
   </div></fieldset>
   <fieldset><legend>{t.performance}</legend><div className="am-grid">
-   <Field label={t.powertrain}><Select lang={lang} value={form.powertrain} onChange={value=>set("powertrain",value)} options={powerOptions}/></Field>
+   <Field label={t.powertrain}><Select lang={lang} value={form.powertrain} onChange={value=>set("powertrain",value)} options={listed(powerOptions,"powertrain","Fuel / powertrain")}/></Field>
    {!electric&&<Field label={t.engine}><input className="am-input" dir="ltr" value={form.engine} onChange={event=>set("engine",event.target.value)} placeholder={t.enginePh}/></Field>}
    <Field label={t.power}>{numberInput("power")}</Field>
    <Field label={t.torque}>{numberInput("torque")}</Field>
    {form.powertrain!=="petrol"&&form.powertrain!=="diesel"&&<Field label={t.battery}>{numberInput("battery")}</Field>}
    {electric&&<Field label={t.range}>{numberInput("range")}</Field>}
    {electric&&<Field label={t.cycle}><input className="am-input" dir="ltr" value={form.rangeCycle} onChange={event=>set("rangeCycle",event.target.value)} placeholder={t.cyclePh}/></Field>}
-   <Field label={t.drive}><Select lang={lang} value={form.drive} onChange={value=>set("drive",value)} options={driveOptions} empty={t.none}/></Field>
-   <Field label={t.transmission}><Select lang={lang} value={form.transmission} onChange={value=>set("transmission",value)} options={transmissionOptions} empty={t.none}/></Field>
+   <Field label={t.drive}><Select lang={lang} value={form.drive} onChange={value=>set("drive",value)} options={listed(driveOptions,"drive","Drive")} empty={t.none}/></Field>
+   <Field label={t.transmission}><Select lang={lang} value={form.transmission} onChange={value=>set("transmission",value)} options={listed(transmissionOptions,"transmission","Transmission")} empty={t.none}/></Field>
   </div></fieldset>
   <fieldset><legend>{t.bodyAndColour}</legend><div className="am-grid">
    <Field label={t.body}><Select lang={lang} value={form.body} onChange={value=>set("body",value)} options={bodyOptions}/></Field>
    <Field label={t.seats}>{numberInput("seats")}</Field>
-   <Field label={t.exterior}><Select lang={lang} value={form.exterior} onChange={value=>set("exterior",value)} options={colourOptions} empty={t.none}/></Field>
-   <Field label={t.interior}><Select lang={lang} value={form.interior} onChange={value=>set("interior",value)} options={colourOptions} empty={t.none}/></Field>
+   <Field label={t.exterior}><Select lang={lang} value={form.exterior} onChange={value=>set("exterior",value)} options={listed(colourOptions,"exterior","Exterior colour")} empty={t.none}/></Field>
+   <Field label={t.interior}><Select lang={lang} value={form.interior} onChange={value=>set("interior",value)} options={listed(colourOptions,"interior","Interior colour")} empty={t.none}/></Field>
   </div></fieldset>
   <fieldset><legend>{t.selling}</legend><div className="am-grid">
    <Field label={t.price}><input className="am-input" inputMode="numeric" dir="ltr" value={form.price} onChange={event=>set("price",event.target.value.replace(/[^\d]/g,""))} placeholder={t.pricePh}/></Field>
@@ -311,8 +310,9 @@ function AddedCarEditor({ctx,id,onDone}:{ctx:Ctx;id:string|null;onDone:()=>void}
    <Field label={t.descriptionEn} wide><textarea className="am-input" dir="ltr" rows={2} value={form.descriptionEn} onChange={event=>set("descriptionEn",event.target.value)} placeholder={t.descriptionPh}/></Field>
    <Field label={t.descriptionAr} wide><textarea className="am-input" dir="rtl" rows={2} value={form.descriptionAr} onChange={event=>set("descriptionAr",event.target.value)} placeholder={t.descriptionPh}/></Field>
   </div></fieldset>
+  <fieldset><legend>{t.equipment}</legend><p className="am-muted">{t.equipmentHint}</p><div className="am-feature-grid">{(Object.entries(featureLabels) as [string,{en:string;ar:string}][]).map(([feature,name])=><label key={feature} className="am-check am-feature"><input type="checkbox" checked={form.features.includes(feature)} onChange={()=>toggleFeature(feature)}/><span>{name[lang]}</span></label>)}</div></fieldset>
   {problems.length>0&&<ul className="am-error" role="alert">{problems.map(problem=><li key={problem}>{problem}</li>)}</ul>}
-  <div className="am-editor-actions"><button className="am-button am-primary" type="button" disabled={busy} onClick={save}>{t.save}</button><button className="am-button am-ghost" type="button" onClick={onDone}>{t.cancel}</button>{existing&&<button className="am-button am-danger" type="button" onClick={remove}>{t.deleteCar}</button>}</div>
+  <div className="am-editor-actions"><button className="am-button am-primary" type="button" disabled={busy} onClick={save}>{t.save}</button><button className="am-button am-ghost" type="button" onClick={onDone}>{t.cancel}</button>{existing&&<button className="am-button am-danger" type="button" onClick={remove}>{t.deleteCar}</button>}{original&&admin.edits[carId]&&<button className="am-button am-danger" type="button" onClick={resetListing}>{t.resetListing}</button>}</div>
  </section>;
 }
 function newCarId(admin:AdminData){
