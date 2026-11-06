@@ -1510,3 +1510,12 @@ html[data-v2-theme=light] .am-overlay{background:#f3f5f7}
 .v2-local-wait{padding:120px 0;text-align:center;color:var(--v2-muted)}
 @media(max-width:560px){.v2-order-grid{grid-template-columns:1fr}.v2-order-kinds{grid-template-columns:1fr}.v2-order-dialog form,.v2-order-done{padding:18px}}
 html[data-v2-theme=light] .v2-order-dialog::backdrop{background:#1d2a3a66}
+/* Banner autoplay: pause button beside the counter, and the active dot fills while the car is shown */
+.v2-banner-status{display:flex;align-items:center;justify-content:center;gap:6px;direction:ltr}
+.v2-banner-pause{display:grid;place-items:center;width:20px;height:20px;padding:0;border:0;border-radius:50%;background:transparent;color:var(--v2-silver);cursor:pointer}
+.v2-banner-pause:hover,.v2-banner-pause:focus-visible{color:var(--v2-orange)}
+.v2-banner-pause:focus-visible{outline:2px solid var(--v2-orange);outline-offset:1px}
+.v2-dealer-hero[data-rotating] .v2-banner-dots>button[aria-current=true]:after{width:22px;background:linear-gradient(90deg,var(--v2-orange) 50%,color-mix(in srgb,var(--v2-silver) 45%,transparent) 50%) 100% 0/200% 100% no-repeat;animation:v2-banner-progress var(--v2-banner-slide-ms,8s) linear forwards}
+@keyframes v2-banner-progress{to{background-position:0 0}}
+html[data-v2-theme=light] .automall-v2 .v2-banner-pause{color:#56606b}
+@media(prefers-reduced-motion:reduce){.v2-dealer-hero[data-rotating] .v2-banner-dots>button[aria-current=true]:after{animation:none;background:var(--v2-orange)}}

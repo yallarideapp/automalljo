@@ -53,13 +53,15 @@ const bannerPhoto=(vehicle:Vehicle)=>builtSettings.bannerCars.includes(vehicle.i
 const bannerCarList=()=>{const picked=settings.bannerCars.map(id=>findVehicle(id)).filter((vehicle):vehicle is Vehicle=>!!vehicle&&vehicle.status!=="sold").slice(0,6);return (picked.length?picked:vehicles.slice(0,3)).map(vehicle=>({id:vehicle.id,label:vehicle.brand+" "+vehicle.name,vehicle,photo:bannerPhoto(vehicle)}));};
 const featuredCars=()=>{const picked=settings.featuredCars.map(id=>findVehicle(id)).filter((vehicle):vehicle is Vehicle=>!!vehicle&&vehicle.status!=="sold");return picked.length?picked:vehicles.slice(0,6);};
 /** Banner cars with a looping video (public/assets/banner/video): desktop and phone MP4s plus a poster frame. Other banner cars keep their photo. */
+/** How long each banner car stays before the banner moves on by itself. */
+const BANNER_SLIDE_MS=8000;
 const bannerVideoIds=new Set(["288938770","288630286","287516454","288440948"]);
 const bannerVideoPath=(id:string)=>({desktop:assetPath("assets/banner/video/banner-"+id+".mp4"),phone:assetPath("assets/banner/video/banner-"+id+"-phone.mp4"),poster:assetPath("assets/banner/video/banner-"+id+"-poster.webp")});
 /**
  * Plays in the same box as the banner photo, so the layout doesn't change. Only the slide on screen
  * plays; it stays on its still frame for reduced motion, data saver, or when scrolled out of view.
  */
-function BannerVideo({video,label,active}:{video:ReturnType<typeof bannerVideoPath>;label:string;active:boolean}){
+function BannerVideo({video,label,active,paused}:{video:ReturnType<typeof bannerVideoPath>;label:string;active:boolean;paused:boolean}){
  const element=useRef<HTMLVideoElement>(null),[visible,setVisible]=useState(true),[allowed,setAllowed]=useState(false);
  useEffect(()=>{
   const motion=window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -72,9 +74,12 @@ function BannerVideo({video,label,active}:{video:ReturnType<typeof bannerVideoPa
  },[]);
  useEffect(()=>{
   const target=element.current;if(!target)return;
-  if(active&&visible&&allowed){target.muted=true;target.preload="auto";void target.play().catch(()=>undefined);}
+  if(active&&visible&&allowed&&!paused){target.muted=true;target.preload="auto";void target.play().catch(()=>undefined);}
   else target.pause();
- },[active,visible,allowed]);
+ },[active,visible,allowed,paused]);
+ // Each time its car comes up, the clip starts again from the beginning.
+ const wasActive=useRef(active);
+ useEffect(()=>{const target=element.current;if(active&&!wasActive.current&&target&&target.readyState>0)target.currentTime=0;wasActive.current=active;},[active]);
  return <video ref={element} className="v2-dealer-hero-image" poster={video.poster} muted loop playsInline disablePictureInPicture preload="none" width="1280" height="720" role="img" aria-label={label}>
   <source media="(max-width: 700px)" src={video.phone} type="video/mp4"/><source src={video.desktop} type="video/mp4"/>
  </video>;
@@ -83,15 +88,45 @@ function BannerCarousel({lang}:{lang:Lang}){
  const bannerCars=bannerCarList();
  const t=copyV2[lang],h=homeCopy[lang],track=useRef<HTMLDivElement>(null),active=useRef(0),measuredWidth=useRef(0),[index,setIndex]=useState(0),car=bannerCars[index].vehicle;
  const readSlide=()=>{const element=track.current;if(!element||!element.clientWidth||measuredWidth.current&&element.clientWidth!==measuredWidth.current)return;const next=Math.max(0,Math.min(bannerCars.length-1,Math.round(Math.abs(element.scrollLeft)/element.clientWidth)));active.current=next;setIndex(previous=>previous===next?previous:next);};
- const showSlide=(next:number)=>{const element=track.current;if(!element)return;const target=(next+bannerCars.length)%bannerCars.length;element.scrollTo({left:(lang==="ar"?-1:1)*target*element.clientWidth,behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth"});};
+ // Slides change with a gentle glide (about a second). Jumps of more than one car fade instead of rewinding across the cars in between.
+ const glide=useRef(0);
+ const showSlide=(next:number)=>{
+  const element=track.current;if(!element)return;
+  const target=(next+bannerCars.length)%bannerCars.length,left=(lang==="ar"?-1:1)*target*element.clientWidth;
+  window.cancelAnimationFrame(glide.current);element.style.opacity="";
+  if(window.matchMedia("(prefers-reduced-motion: reduce)").matches){element.scrollTo({left,behavior:"instant"});return;}
+  const start=element.scrollLeft,distance=left-start;if(Math.abs(distance)<1)return;
+  element.style.scrollSnapType="none";element.style.scrollBehavior="auto";
+  const settle=()=>{element.style.scrollSnapType="";element.style.scrollBehavior="";};
+  if(Math.abs(distance)>element.clientWidth*1.5){
+   element.style.transition="opacity .45s ease";element.style.opacity="0";
+   window.setTimeout(()=>{element.scrollLeft=left;settle();element.style.opacity="1";window.setTimeout(()=>{element.style.transition="";element.style.opacity="";},500);},450);
+   return;
+  }
+  const began=performance.now(),duration=1100;
+  const step=(now:number)=>{const progress=Math.min(1,(now-began)/duration),eased=progress<.5?4*progress**3:1-(-2*progress+2)**3/2;element.scrollLeft=start+distance*eased;if(progress<1)glide.current=window.requestAnimationFrame(step);else settle();};
+  glide.current=window.requestAnimationFrame(step);
+ };
+ // The banner moves on by itself every few seconds, and keeps going after a car is picked by hand.
+ // It waits while the banner is off screen or the tab is hidden, and doesn't start for reduced motion.
+ const section=useRef<HTMLElement>(null),[playing,setPlaying]=useState(true),[canAutoplay,setCanAutoplay]=useState(false),[onScreen,setOnScreen]=useState(true);
+ useEffect(()=>{
+  const motion=window.matchMedia("(prefers-reduced-motion: reduce)"),update=()=>setCanAutoplay(!motion.matches&&!document.hidden);
+  update();motion.addEventListener("change",update);document.addEventListener("visibilitychange",update);
+  const target=section.current;let observer:IntersectionObserver|undefined;
+  if(target&&"IntersectionObserver" in window){observer=new IntersectionObserver(([entry])=>setOnScreen(entry.isIntersecting),{threshold:.25});observer.observe(target);}
+  return()=>{motion.removeEventListener("change",update);document.removeEventListener("visibilitychange",update);observer?.disconnect();window.cancelAnimationFrame(glide.current);};
+ },[]);
+ const rotating=playing&&canAutoplay&&onScreen&&bannerCars.length>1;
+ useEffect(()=>{if(!rotating)return;const timer=window.setTimeout(()=>showSlide(index+1),BANNER_SLIDE_MS);return()=>window.clearTimeout(timer);},[index,rotating]);
  useEffect(()=>{const element=track.current;if(!element)return;measuredWidth.current=element.clientWidth;const observer=new ResizeObserver(()=>{if(element.clientWidth===measuredWidth.current)return;measuredWidth.current=element.clientWidth;element.scrollTo({left:(lang==="ar"?-1:1)*active.current*measuredWidth.current,behavior:"instant"});});observer.observe(element);return()=>observer.disconnect();},[lang]);
- return <section className="v2-dealer-hero" aria-labelledby="v2-dealer-title" aria-roledescription={lang==="ar"?"عارض سيارات":"carousel"}>
+ return <section ref={section} className="v2-dealer-hero" data-rotating={rotating||undefined} style={{"--v2-banner-slide-ms":BANNER_SLIDE_MS+"ms"} as React.CSSProperties} aria-labelledby="v2-dealer-title" aria-roledescription={lang==="ar"?"عارض سيارات":"carousel"}>
   <div className="v2-banner-track" id="v2-banner-cars" ref={track} role="group" aria-label={lang==="ar"?"سيارات البانر، اسحب جانبياً":"Banner cars, swipe sideways"} tabIndex={0} onScroll={readSlide} onKeyDown={event=>{if(event.target!==event.currentTarget)return;if(event.key==="ArrowLeft"||event.key==="ArrowRight"){event.preventDefault();showSlide(index+(event.key==="ArrowRight"?1:-1)*(lang==="ar"?-1:1));}else if(event.key==="Home"||event.key==="End"){event.preventDefault();showSlide(event.key==="End"?bannerCars.length-1:0);}}}>
-   {bannerCars.map((item,slide)=><div className="v2-banner-slide" key={item.vehicle.id} role="group" aria-roledescription={lang==="ar"?"شريحة":"slide"} aria-label={(slide+1)+" / "+bannerCars.length} aria-hidden={slide!==index}>{(()=>{const alt=modelName(item.vehicle)+" "+item.vehicle.year+" — AutoMall",video=bannerVideoIds.has(item.vehicle.id)?bannerVideoPath(item.vehicle.id):null;return <><img className="v2-banner-backdrop" src={video?video.poster:item.photo} alt="" aria-hidden="true" width="1600" height="1600" loading={slide===0?"eager":"lazy"} decoding="async"/>{video?<BannerVideo video={video} label={alt} active={slide===index}/>:<img className="v2-dealer-hero-image" src={item.photo} alt={alt} width="1600" height="1600" loading={slide===0?"eager":"lazy"} fetchPriority={slide===0?"high":"low"} decoding="async"/>}</>;})()}</div>)}
+   {bannerCars.map((item,slide)=><div className="v2-banner-slide" key={item.vehicle.id} role="group" aria-roledescription={lang==="ar"?"شريحة":"slide"} aria-label={(slide+1)+" / "+bannerCars.length} aria-hidden={slide!==index}>{(()=>{const alt=modelName(item.vehicle)+" "+item.vehicle.year+" — AutoMall",video=bannerVideoIds.has(item.vehicle.id)?bannerVideoPath(item.vehicle.id):null;return <><img className="v2-banner-backdrop" src={video?video.poster:item.photo} alt="" aria-hidden="true" width="1600" height="1600" loading={slide===0?"eager":"lazy"} decoding="async"/>{video?<BannerVideo video={video} label={alt} active={slide===index} paused={!playing}/>:<img className="v2-dealer-hero-image" src={item.photo} alt={alt} width="1600" height="1600" loading={slide===0?"eager":"lazy"} fetchPriority={slide===0?"high":"low"} decoding="async"/>}</>;})()}</div>)}
   </div>
   <div className="v2-dealer-hero-content"><h1 id="v2-dealer-title" tabIndex={-1}>{h.title}</h1><p>{h.description}</p><div className="v2-dealer-hero-actions"><a className="v2-button v2-button-orange" href={pagePath("cars",lang)}>{t.browse}<Arrow/></a><a className="v2-button v2-button-outline" href={whatsapp(genericMessage(lang))} target="_blank" rel="noopener noreferrer">{t.whatsapp}<Arrow/></a></div></div>
   <a className="v2-dealer-hero-model" href={pagePath("car",lang,car.id)}>{bannerCars[index].label} <span>{specValue(car,"Fuel / powertrain")?.[lang]}</span><Arrow/></a>
-  <div className="v2-banner-controls"><button type="button" aria-label={lang==="ar"?"السيارة السابقة في البانر":"Previous banner car"} aria-controls="v2-banner-cars" onClick={()=>showSlide(index-1)}><span aria-hidden="true">{lang==="ar"?"→":"←"}</span></button><div className="v2-banner-pagination"><div className="v2-banner-dots">{bannerCars.map((item,slide)=><button type="button" key={item.vehicle.id} aria-label={(lang==="ar"?"عرض ":"Show ")+item.label} aria-current={slide===index?"true":undefined} aria-controls="v2-banner-cars" onClick={()=>showSlide(slide)}/>)}</div><span className="v2-banner-count" dir="ltr" aria-live="polite" aria-atomic="true">0{index+1} / 0{bannerCars.length}</span></div><button type="button" aria-label={lang==="ar"?"السيارة التالية في البانر":"Next banner car"} aria-controls="v2-banner-cars" onClick={()=>showSlide(index+1)}><span aria-hidden="true">{lang==="ar"?"←":"→"}</span></button></div>
+  <div className="v2-banner-controls"><button type="button" aria-label={lang==="ar"?"السيارة السابقة في البانر":"Previous banner car"} aria-controls="v2-banner-cars" onClick={()=>showSlide(index-1)}><span aria-hidden="true">{lang==="ar"?"→":"←"}</span></button><div className="v2-banner-pagination"><div className="v2-banner-dots">{bannerCars.map((item,slide)=><button type="button" key={item.vehicle.id} aria-label={(lang==="ar"?"عرض ":"Show ")+item.label} aria-current={slide===index?"true":undefined} aria-controls="v2-banner-cars" onClick={()=>showSlide(slide)}/>)}</div><span className="v2-banner-status"><span className="v2-banner-count" dir="ltr" aria-live={rotating?"off":"polite"} aria-atomic="true">0{index+1} / 0{bannerCars.length}</span><button type="button" className="v2-banner-pause" aria-pressed={!playing} aria-label={playing?(lang==="ar"?"إيقاف الحركة":"Pause the banner"):(lang==="ar"?"تشغيل الحركة":"Play the banner")} onClick={()=>setPlaying(value=>!value)}>{playing?<svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true"><rect x="2" y="1.5" width="2.6" height="9" rx=".8" fill="currentColor"/><rect x="7.4" y="1.5" width="2.6" height="9" rx=".8" fill="currentColor"/></svg>:<svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true"><path d="M3 1.6v8.8L10.4 6z" fill="currentColor"/></svg>}</button></span></div><button type="button" aria-label={lang==="ar"?"السيارة التالية في البانر":"Next banner car"} aria-controls="v2-banner-cars" onClick={()=>showSlide(index+1)}><span aria-hidden="true">{lang==="ar"?"←":"→"}</span></button></div>
  </section>;
 }
 function HomePage({lang,filters,onChange}:{lang:Lang;filters:CatalogFilters;onChange:(value:CatalogFilters)=>void}){
