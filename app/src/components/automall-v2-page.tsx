@@ -52,6 +52,33 @@ const bannerPhoto=(vehicle:Vehicle)=>builtSettings.bannerCars.includes(vehicle.i
 /** Read at render time: this browser's admin edits can change the banner after the page loads. Logo-free copies exist for the published banner cars. */
 const bannerCarList=()=>{const picked=settings.bannerCars.map(id=>findVehicle(id)).filter((vehicle):vehicle is Vehicle=>!!vehicle&&vehicle.status!=="sold").slice(0,6);return (picked.length?picked:vehicles.slice(0,3)).map(vehicle=>({id:vehicle.id,label:vehicle.brand+" "+vehicle.name,vehicle,photo:bannerPhoto(vehicle)}));};
 const featuredCars=()=>{const picked=settings.featuredCars.map(id=>findVehicle(id)).filter((vehicle):vehicle is Vehicle=>!!vehicle&&vehicle.status!=="sold");return picked.length?picked:vehicles.slice(0,6);};
+/** Banner cars with a looping video (public/assets/banner/video): desktop and phone MP4s plus a poster frame. Other banner cars keep their photo. */
+const bannerVideoIds=new Set(["288938770","288630286","287516454","288440948"]);
+const bannerVideoPath=(id:string)=>({desktop:assetPath("assets/banner/video/banner-"+id+".mp4"),phone:assetPath("assets/banner/video/banner-"+id+"-phone.mp4"),poster:assetPath("assets/banner/video/banner-"+id+"-poster.webp")});
+/**
+ * Plays in the same box as the banner photo, so the layout doesn't change. Only the slide on screen
+ * plays; it stays on its still frame for reduced motion, data saver, or when scrolled out of view.
+ */
+function BannerVideo({video,label,active}:{video:ReturnType<typeof bannerVideoPath>;label:string;active:boolean}){
+ const element=useRef<HTMLVideoElement>(null),[visible,setVisible]=useState(true),[allowed,setAllowed]=useState(false);
+ useEffect(()=>{
+  const motion=window.matchMedia("(prefers-reduced-motion: reduce)");
+  const saveData=(navigator as Navigator&{connection?:{saveData?:boolean}}).connection?.saveData===true;
+  const update=()=>setAllowed(!motion.matches&&!saveData);update();
+  motion.addEventListener("change",update);
+  const target=element.current;let observer:IntersectionObserver|undefined;
+  if(target&&"IntersectionObserver" in window){observer=new IntersectionObserver(([entry])=>setVisible(entry.isIntersecting),{threshold:.15});observer.observe(target);}
+  return()=>{motion.removeEventListener("change",update);observer?.disconnect();};
+ },[]);
+ useEffect(()=>{
+  const target=element.current;if(!target)return;
+  if(active&&visible&&allowed){target.muted=true;target.preload="auto";void target.play().catch(()=>undefined);}
+  else target.pause();
+ },[active,visible,allowed]);
+ return <video ref={element} className="v2-dealer-hero-image" poster={video.poster} muted loop playsInline disablePictureInPicture preload="none" width="1280" height="720" role="img" aria-label={label}>
+  <source media="(max-width: 700px)" src={video.phone} type="video/mp4"/><source src={video.desktop} type="video/mp4"/>
+ </video>;
+}
 function BannerCarousel({lang}:{lang:Lang}){
  const bannerCars=bannerCarList();
  const t=copyV2[lang],h=homeCopy[lang],track=useRef<HTMLDivElement>(null),active=useRef(0),measuredWidth=useRef(0),[index,setIndex]=useState(0),car=bannerCars[index].vehicle;
@@ -60,7 +87,7 @@ function BannerCarousel({lang}:{lang:Lang}){
  useEffect(()=>{const element=track.current;if(!element)return;measuredWidth.current=element.clientWidth;const observer=new ResizeObserver(()=>{if(element.clientWidth===measuredWidth.current)return;measuredWidth.current=element.clientWidth;element.scrollTo({left:(lang==="ar"?-1:1)*active.current*measuredWidth.current,behavior:"instant"});});observer.observe(element);return()=>observer.disconnect();},[lang]);
  return <section className="v2-dealer-hero" aria-labelledby="v2-dealer-title" aria-roledescription={lang==="ar"?"عارض سيارات":"carousel"}>
   <div className="v2-banner-track" id="v2-banner-cars" ref={track} role="group" aria-label={lang==="ar"?"سيارات البانر، اسحب جانبياً":"Banner cars, swipe sideways"} tabIndex={0} onScroll={readSlide} onKeyDown={event=>{if(event.target!==event.currentTarget)return;if(event.key==="ArrowLeft"||event.key==="ArrowRight"){event.preventDefault();showSlide(index+(event.key==="ArrowRight"?1:-1)*(lang==="ar"?-1:1));}else if(event.key==="Home"||event.key==="End"){event.preventDefault();showSlide(event.key==="End"?bannerCars.length-1:0);}}}>
-   {bannerCars.map((item,slide)=><div className="v2-banner-slide" key={item.vehicle.id} role="group" aria-roledescription={lang==="ar"?"شريحة":"slide"} aria-label={(slide+1)+" / "+bannerCars.length} aria-hidden={slide!==index}><img className="v2-banner-backdrop" src={item.photo} alt="" aria-hidden="true" width="1600" height="1600" loading={slide===0?"eager":"lazy"} decoding="async"/><img className="v2-dealer-hero-image" src={item.photo} alt={modelName(item.vehicle)+" "+item.vehicle.year+" — AutoMall"} width="1600" height="1600" loading={slide===0?"eager":"lazy"} fetchPriority={slide===0?"high":"low"} decoding="async"/></div>)}
+   {bannerCars.map((item,slide)=><div className="v2-banner-slide" key={item.vehicle.id} role="group" aria-roledescription={lang==="ar"?"شريحة":"slide"} aria-label={(slide+1)+" / "+bannerCars.length} aria-hidden={slide!==index}>{(()=>{const alt=modelName(item.vehicle)+" "+item.vehicle.year+" — AutoMall",video=bannerVideoIds.has(item.vehicle.id)?bannerVideoPath(item.vehicle.id):null;return <><img className="v2-banner-backdrop" src={video?video.poster:item.photo} alt="" aria-hidden="true" width="1600" height="1600" loading={slide===0?"eager":"lazy"} decoding="async"/>{video?<BannerVideo video={video} label={alt} active={slide===index}/>:<img className="v2-dealer-hero-image" src={item.photo} alt={alt} width="1600" height="1600" loading={slide===0?"eager":"lazy"} fetchPriority={slide===0?"high":"low"} decoding="async"/>}</>;})()}</div>)}
   </div>
   <div className="v2-dealer-hero-content"><h1 id="v2-dealer-title" tabIndex={-1}>{h.title}</h1><p>{h.description}</p><div className="v2-dealer-hero-actions"><a className="v2-button v2-button-orange" href={pagePath("cars",lang)}>{t.browse}<Arrow/></a><a className="v2-button v2-button-outline" href={whatsapp(genericMessage(lang))} target="_blank" rel="noopener noreferrer">{t.whatsapp}<Arrow/></a></div></div>
   <a className="v2-dealer-hero-model" href={pagePath("car",lang,car.id)}>{bannerCars[index].label} <span>{specValue(car,"Fuel / powertrain")?.[lang]}</span><Arrow/></a>

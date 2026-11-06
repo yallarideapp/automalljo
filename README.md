@@ -88,6 +88,10 @@ Twenty-one original SVG automotive icons describe the source-linked equipment. E
 
 Design observations are in `refs/research/v2-design-reference.md`, and feature provenance is in `refs/research/facebook-feature-audit.json`. Runtime content uses `app/src/v2-feature-data.json`; category and filter rules live in `app/src/v2-catalog.ts`. Prices and technical figures retain the existing catalogue sources where Facebook values are ambiguous. No customer forms, persistent customer storage, accounts, checkout or tracking were added. The shared legal pages include Facebook among external services and remain linked from both versions. Check `Documents/TESTING.md` for validation results.
 
+## Banner videos
+
+The four homepage banner cars (Porsche 911, BMW i5 M60, Mercedes G580, Jetour G700) play a short looping clip made with Google Flow, in the same box as the photo, so the layout is unchanged. The files are in `app/public/assets/banner/video/`: a 1280 px MP4, a 640 px phone MP4 and a still poster per car. Each clip is the car's own part of the Flow video played forward then backward, so the loop has no jump. Only the slide on screen plays; the poster stays for reduced motion, data saver or when the banner is scrolled away. To add a video for another car, encode the same three files for its id and add the id to `bannerVideoIds` in `app/src/components/automall-v2-page.tsx`.
+
 ## Admin panel
 
 The admin panel opens from the gear button in the bottom corner of every `/v2/` page (also `/v2/#admin` and `/admin/`). There is no login and no server: **everything it saves stays in the browser where it was made** (localStorage for edits and orders, IndexedDB for added photos). Visitors on other devices keep seeing the published site built from the repository.
