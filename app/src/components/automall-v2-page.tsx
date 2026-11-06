@@ -91,11 +91,11 @@ function BannerVideo({video,label,active,paused}:{video:ReturnType<typeof banner
  */
 const bannerFilm={
  desktop:assetPath("assets/banner/video/banner-film.mp4"),phone:assetPath("assets/banner/video/banner-film-phone.mp4"),poster:assetPath("assets/banner/video/banner-film-poster.webp"),
- cars:[{id:"288938770",from:0,jump:0},{id:"287516454",from:4,jump:4.8},{id:"288630286",from:6.6,jump:7.4},{id:"288440948",from:10.7,jump:12.2}],
+ cars:[{id:"288938770",from:0,jump:0},{id:"287516454",from:6.6,jump:7.95},{id:"288630286",from:10.9,jump:11.85},{id:"288440948",from:18.3,jump:20}],
  /** From here to the end the camera is back on the first car. */
- wrap:14,
- /** Played a little slower than recorded, so the moves stay calm. */
- rate:.9,
+ wrap:23.15,
+ /** The slow motion is built into the file (in-between frames generated), so it plays at normal speed. The BMW holds longest. */
+ rate:1,
 };
 /** The film is used while the banner shows exactly its four cars; otherwise the banner keeps one slide per car. */
 const filmCars=()=>{const list=bannerCarList();const ids=new Set(list.map(item=>item.vehicle.id));return list.length===bannerFilm.cars.length&&bannerFilm.cars.every(car=>ids.has(car.id))?bannerFilm.cars.map(car=>list.find(item=>item.vehicle.id===car.id)!):null;};
