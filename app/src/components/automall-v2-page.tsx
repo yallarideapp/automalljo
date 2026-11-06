@@ -85,15 +85,15 @@ function BannerVideo({video,label,active,paused}:{video:ReturnType<typeof banner
  </video>;
 }
 /**
- * The banner film: both Google Flow videos joined into one continuous camera move across the showroom
- * (Porsche → G580 → BMW → Jetour → back to the Porsche), so it loops without a cut.
+ * The banner film: both Google Flow videos joined into one loop (Porsche → G580 → BMW → Jetour → back to the Porsche).
+ * Inside each video the camera moves from car to car; between the videos the picture dissolves softly, and it loops without a cut.
  * `from` is when each car takes over the frame; `jump` is a well-framed moment to seek to from the dots and arrows.
  */
 const bannerFilm={
  desktop:assetPath("assets/banner/video/banner-film.mp4"),phone:assetPath("assets/banner/video/banner-film-phone.mp4"),poster:assetPath("assets/banner/video/banner-film-poster.webp"),
- cars:[{id:"288938770",from:0,jump:0},{id:"287516454",from:6.6,jump:7.95},{id:"288630286",from:10.9,jump:11.85},{id:"288440948",from:18.3,jump:20}],
- /** From here to the end the camera is back on the first car. */
- wrap:23.15,
+ cars:[{id:"288938770",from:0,jump:0},{id:"287516454",from:7,jump:8.07},{id:"288630286",from:11.24,jump:12.35},{id:"288440948",from:19.2,jump:20.8}],
+ /** From here to the end the picture has dissolved back to the first car. */
+ wrap:24.04,
  /** The slow motion is built into the file (in-between frames generated), so it plays at normal speed. The BMW holds longest. */
  rate:1,
 };
