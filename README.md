@@ -90,7 +90,9 @@ Design observations are in `refs/research/v2-design-reference.md`, and feature p
 
 ## Banner videos
 
-The four homepage banner cars (Porsche 911, BMW i5 M60, Mercedes G580, Jetour G700) play a short looping clip made with Google Flow, in the same box as the photo, so the layout is unchanged. The files are in `app/public/assets/banner/video/`: a 1280 px MP4, a 640 px phone MP4 and a still poster per car. Each clip is the car's own part of the Flow video played forward then backward, so the loop has no jump. Only the slide on screen plays; the poster stays for reduced motion, data saver or when the banner is scrolled away. To add a video for another car, encode the same three files for its id and add the id to `bannerVideoIds` in `app/src/components/automall-v2-page.tsx`.
+The homepage banner plays one continuous film (`app/public/assets/banner/video/banner-film.mp4`, a 640 px `-phone` version and a `-poster` still): the two Google Flow videos joined so the camera moves Porsche 911 → Mercedes G580 → BMW i5 M60 → Jetour G700 and back to the Porsche without a cut. The two joins (G580 → BMW and Jetour → Porsche) are eased sideways camera moves with motion blur made with ffmpeg; they can be swapped for Flow-generated transitions (Frames to Video, first frame = end of one video, last frame = start of the next). The film plays at 0.9× speed in the same box as the banner photo, so the layout is unchanged. The car name, link, counter and dots follow the car on screen (time marks in `bannerFilm` in `app/src/components/automall-v2-page.tsx`); dots and arrows jump to a car, and a pause button sits beside the counter. It waits while off screen or in a hidden tab, and stays on the poster for reduced motion or data saver.
+
+If the banner cars are changed in the admin panel, the banner falls back to one slide per car; those four cars also have their own short loops (`banner-<id>.mp4`), listed in `bannerVideoIds`.
 
 ## Admin panel
 

@@ -43,7 +43,10 @@ for(const prefix of ["","/ar"]){
  if(!hasClass(home,"v2-home-refined")||!hasClass(home,"v2-dealer-hero")||!hasClass(home,"v2-home-search")||!hasClass(home,"v2-category-grid")||!hasClass(home,"v2-home-featured"))throw new Error("V2 homepage is missing its photo banner, search form, category links or featured vehicles: "+prefix);
  const bannerImages=[...tags(home,"img"),...tags(home,"video")].filter(tag=>hasClass(tag,"v2-dealer-hero-image"));
  const bannerCount=siteSettingsForBanner.bannerCars.filter(id=>inventoryForBanner.some(vehicle=>vehicle.id===id&&vehicle.status!=="sold")).length;
- if(bannerImages.length!==bannerCount||bannerCount<1||new Set(bannerImages.map(tag=>tag.match(/(?:gallery|banner)-(\d+)[-.]/)?.[1]).filter(Boolean)).size!==bannerCount)throw new Error("V2 banner must contain the chosen dealer vehicles: "+prefix);
+ // The banner is either one film of all the banner cars (with a dot per car) or one photo/video slide per car.
+ const film=bannerImages.find(tag=>hasClass(tag,"v2-banner-film-video"));
+ if(film){const carButtons=tags(home,"button").filter(tag=>tag.includes('aria-controls="v2-banner-cars"')).length;if(bannerImages.length!==1||!home.includes("banner-film.mp4")||!home.includes("banner-film-phone.mp4")||carButtons!==bannerCount+2)throw new Error("V2 banner film must offer every chosen dealer vehicle: "+prefix);}
+ else if(bannerImages.length!==bannerCount||bannerCount<1||new Set(bannerImages.map(tag=>tag.match(/(?:gallery|banner)-(\d+)[-.]/)?.[1]).filter(Boolean)).size!==bannerCount)throw new Error("V2 banner must contain the chosen dealer vehicles: "+prefix);
  if(!hasClass(home,"v2-brand-grid")||tags(home,"a").filter(tag=>hasClass(tag,"v2-brand-tile")).length!==12||home.indexOf('id="v2-brands"')<home.indexOf('id="v2-categories"')||home.indexOf('id="v2-brands"')>home.indexOf('id="v2-featured-title"'))throw new Error("V2 brand browser must follow categories and show twelve initial brand links: "+prefix);
  if(!hasClass(cars,"v2-powertrain-tabs")||!hasClass(cars,"v2-body-filters"))throw new Error("V2 catalogue needs separate powertrain and body filters: "+prefix);
  if(hasClass(cars,"v2-hero"))throw new Error("Catalogue still includes the homepage hero: "+prefix);

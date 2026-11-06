@@ -1,4 +1,4 @@
-import {useDeferredValue,useEffect,useMemo,useRef,useState} from "react";
+import {useCallback,useDeferredValue,useEffect,useMemo,useRef,useState} from "react";
 import {AdminLauncher} from "@/components/admin/admin-launcher";
 import {useLocalSiteData} from "@/local-site";
 import {vehicles,findVehicle,settings,builtSettings,builtVehicleIds,phoneDisplay,whatsapp,modelMessage,genericMessage,PHONE,INSTAGRAM,MAPS,type Lang,type Vehicle,type OpeningDay} from "@/site-data";
@@ -84,6 +84,77 @@ function BannerVideo({video,label,active,paused}:{video:ReturnType<typeof banner
   <source media="(max-width: 700px)" src={video.phone} type="video/mp4"/><source src={video.desktop} type="video/mp4"/>
  </video>;
 }
+/**
+ * The banner film: both Google Flow videos joined into one continuous camera move across the showroom
+ * (Porsche → G580 → BMW → Jetour → back to the Porsche), so it loops without a cut.
+ * `from` is when each car takes over the frame; `jump` is a well-framed moment to seek to from the dots and arrows.
+ */
+const bannerFilm={
+ desktop:assetPath("assets/banner/video/banner-film.mp4"),phone:assetPath("assets/banner/video/banner-film-phone.mp4"),poster:assetPath("assets/banner/video/banner-film-poster.webp"),
+ cars:[{id:"288938770",from:0,jump:0},{id:"287516454",from:4,jump:4.8},{id:"288630286",from:6.6,jump:7.4},{id:"288440948",from:10.7,jump:12.2}],
+ /** From here to the end the camera is back on the first car. */
+ wrap:14,
+ /** Played a little slower than recorded, so the moves stay calm. */
+ rate:.9,
+};
+/** The film is used while the banner shows exactly its four cars; otherwise the banner keeps one slide per car. */
+const filmCars=()=>{const list=bannerCarList();const ids=new Set(list.map(item=>item.vehicle.id));return list.length===bannerFilm.cars.length&&bannerFilm.cars.every(car=>ids.has(car.id))?bannerFilm.cars.map(car=>list.find(item=>item.vehicle.id===car.id)!):null;};
+const filmCarAt=(time:number)=>{if(time>=bannerFilm.wrap)return 0;let found=0;bannerFilm.cars.forEach((car,index)=>{if(time>=car.from)found=index;});return found;};
+/** How far through the current car's turn the film is, 0–1 (the first car's turn wraps around the loop). */
+const filmProgress=(time:number,duration:number)=>{
+ const index=filmCarAt(time);
+ if(index===0){const span=duration-bannerFilm.wrap+bannerFilm.cars[1].from;return Math.min(1,(time>=bannerFilm.wrap?time-bannerFilm.wrap:duration-bannerFilm.wrap+time)/span);}
+ const end=bannerFilm.cars[index+1]?.from??bannerFilm.wrap;return Math.min(1,(time-bannerFilm.cars[index].from)/(end-bannerFilm.cars[index].from));
+};
+function BannerFilmHero({lang,cars}:{lang:Lang;cars:ReturnType<typeof bannerCarList>}){
+ const t=copyV2[lang],h=homeCopy[lang];
+ const section=useRef<HTMLElement>(null),video=useRef<HTMLVideoElement>(null);
+ const [index,setIndex]=useState(0),[playing,setPlaying]=useState(true),[canPlay,setCanPlay]=useState(false),[onScreen,setOnScreen]=useState(true);
+ const car=cars[index].vehicle;
+ // Reads the film's position: which car is on screen, and how far its turn has run (for the dot).
+ const seeking=useRef(false);
+ const read=useCallback(()=>{const element=video.current;if(!element||seeking.current)return;const time=element.currentTime,next=filmCarAt(time);setIndex(previous=>previous===next?previous:next);if(element.duration)section.current?.style.setProperty("--v2-film-progress",filmProgress(time,element.duration).toFixed(3));},[]);
+ useEffect(()=>{
+  const motion=window.matchMedia("(prefers-reduced-motion: reduce)"),saveData=(navigator as Navigator&{connection?:{saveData?:boolean}}).connection?.saveData===true;
+  const update=()=>setCanPlay(!motion.matches&&!saveData&&!document.hidden);
+  update();motion.addEventListener("change",update);document.addEventListener("visibilitychange",update);
+  const target=section.current;let observer:IntersectionObserver|undefined;
+  if(target&&"IntersectionObserver" in window){observer=new IntersectionObserver(([entry])=>setOnScreen(entry.isIntersecting),{threshold:.2});observer.observe(target);}
+  return()=>{motion.removeEventListener("change",update);document.removeEventListener("visibilitychange",update);observer?.disconnect();};
+ },[]);
+ const running=playing&&canPlay&&onScreen;
+ useEffect(()=>{
+  const element=video.current;if(!element)return;
+  element.muted=true;element.defaultPlaybackRate=bannerFilm.rate;element.playbackRate=bannerFilm.rate;
+  if(!running){element.pause();read();return;}
+  void element.play().catch(()=>undefined);
+  let frame=0;const tick=()=>{read();frame=window.requestAnimationFrame(tick);};frame=window.requestAnimationFrame(tick);
+  return()=>window.cancelAnimationFrame(frame);
+ },[running,read]);
+ // Dots and arrows jump to a car with a short fade; the film carries on from there.
+ const fading=useRef(0);
+ const showCar=(next:number)=>{
+  const element=video.current;if(!element)return;
+  const target=(next+cars.length)%cars.length,time=bannerFilm.cars[target].jump;
+  setIndex(target);window.clearTimeout(fading.current);seeking.current=true;
+  if(window.matchMedia("(prefers-reduced-motion: reduce)").matches){element.currentTime=time;return;}
+  element.style.opacity="0";
+  fading.current=window.setTimeout(()=>{element.currentTime=time;element.style.opacity="";},260);
+ };
+ const label=modelName(car)+" "+car.year+" — AutoMall";
+ return <section ref={section} className="v2-dealer-hero v2-banner-film-mode" data-rotating={running||undefined} aria-labelledby="v2-dealer-title" aria-roledescription={lang==="ar"?"عارض سيارات":"carousel"}>
+  <div className="v2-banner-track v2-banner-film" id="v2-banner-cars" role="group" aria-label={lang==="ar"?"فيديو سيارات البانر":"Banner cars video"} tabIndex={0} onKeyDown={event=>{if(event.key==="ArrowLeft"||event.key==="ArrowRight"){event.preventDefault();showCar(index+(event.key==="ArrowRight"?1:-1)*(lang==="ar"?-1:1));}}}>
+   <div className="v2-banner-slide"><img className="v2-banner-backdrop" src={bannerFilm.poster} alt="" aria-hidden="true" width="1280" height="720" decoding="async"/>
+    <video ref={video} className="v2-dealer-hero-image v2-banner-film-video" poster={bannerFilm.poster} muted loop playsInline disablePictureInPicture preload="auto" width="1280" height="720" role="img" aria-label={label} onSeeked={()=>{seeking.current=false;read();}} onLoadedMetadata={read}>
+     <source media="(max-width: 700px)" src={bannerFilm.phone} type="video/mp4"/><source src={bannerFilm.desktop} type="video/mp4"/>
+    </video>
+   </div>
+  </div>
+  <div className="v2-dealer-hero-content"><h1 id="v2-dealer-title" tabIndex={-1}>{h.title}</h1><p>{h.description}</p><div className="v2-dealer-hero-actions"><a className="v2-button v2-button-orange" href={pagePath("cars",lang)}>{t.browse}<Arrow/></a><a className="v2-button v2-button-outline" href={whatsapp(genericMessage(lang))} target="_blank" rel="noopener noreferrer">{t.whatsapp}<Arrow/></a></div></div>
+  <a className="v2-dealer-hero-model" href={pagePath("car",lang,car.id)}>{cars[index].label} <span>{specValue(car,"Fuel / powertrain")?.[lang]}</span><Arrow/></a>
+  <div className="v2-banner-controls"><button type="button" aria-label={lang==="ar"?"السيارة السابقة في البانر":"Previous banner car"} aria-controls="v2-banner-cars" onClick={()=>showCar(index-1)}><span aria-hidden="true">{lang==="ar"?"→":"←"}</span></button><div className="v2-banner-pagination"><div className="v2-banner-dots">{cars.map((item,slide)=><button type="button" key={item.vehicle.id} aria-label={(lang==="ar"?"عرض ":"Show ")+item.label} aria-current={slide===index?"true":undefined} aria-controls="v2-banner-cars" onClick={()=>showCar(slide)}/>)}</div><span className="v2-banner-status"><span className="v2-banner-count" dir="ltr" aria-live={running?"off":"polite"} aria-atomic="true">0{index+1} / 0{cars.length}</span><button type="button" className="v2-banner-pause" aria-pressed={!playing} aria-label={playing?(lang==="ar"?"إيقاف الحركة":"Pause the banner"):(lang==="ar"?"تشغيل الحركة":"Play the banner")} onClick={()=>setPlaying(value=>!value)}>{playing?<svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true"><rect x="2" y="1.5" width="2.6" height="9" rx=".8" fill="currentColor"/><rect x="7.4" y="1.5" width="2.6" height="9" rx=".8" fill="currentColor"/></svg>:<svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true"><path d="M3 1.6v8.8L10.4 6z" fill="currentColor"/></svg>}</button></span></div><button type="button" aria-label={lang==="ar"?"السيارة التالية في البانر":"Next banner car"} aria-controls="v2-banner-cars" onClick={()=>showCar(index+1)}><span aria-hidden="true">{lang==="ar"?"←":"→"}</span></button></div>
+ </section>;
+}
 function BannerCarousel({lang}:{lang:Lang}){
  const bannerCars=bannerCarList();
  const t=copyV2[lang],h=homeCopy[lang],track=useRef<HTMLDivElement>(null),active=useRef(0),measuredWidth=useRef(0),[index,setIndex]=useState(0),car=bannerCars[index].vehicle;
@@ -142,7 +213,7 @@ function HomePage({lang,filters,onChange}:{lang:Lang;filters:CatalogFilters;onCh
  const brandOptions:PickerOption[]=[{value:"all",label:t.allBrands,visual:<Icon name="emblem" size={20}/>},...brandNames.map(brand=>({value:brand,label:brand,visual:<BrandLogo brand={brand}/>}))];
  const powerOptions:PickerOption[]=[{value:"all",label:n.allPower,visual:<Icon name="energy" size={20}/>,count:vehicles.length},...powertrains.map(power=>({value:power.id,label:power.label[lang],keywords:power.label.en+" "+power.label.ar,visual:<Icon name={power.id==="electric"?"battery":power.id==="hybrid"?"hybrid":"engine"} size={20}/>,count:vehicles.filter(vehicle=>vehicle.categories.includes(power.id)).length}))];
  return <div className="v2-home-refined v2-home-banner">
-  <BannerCarousel lang={lang}/>
+  {(()=>{const cars=filmCars();return cars?<BannerFilmHero lang={lang} cars={cars}/>:<BannerCarousel lang={lang}/>;})()}
   <form className="v2-home-search" action={pagePath("cars",lang)} method="get" aria-label={h.findTitle}>
    <div className="v2-home-search-heading"><h2>{h.findTitle}</h2><p>{h.findDescription}</p></div>
    <div className="v2-home-search-fields">

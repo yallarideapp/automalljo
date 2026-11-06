@@ -1519,3 +1519,7 @@ html[data-v2-theme=light] .v2-order-dialog::backdrop{background:#1d2a3a66}
 @keyframes v2-banner-progress{to{background-position:0 0}}
 html[data-v2-theme=light] .automall-v2 .v2-banner-pause{color:#56606b}
 @media(prefers-reduced-motion:reduce){.v2-dealer-hero[data-rotating] .v2-banner-dots>button[aria-current=true]:after{animation:none;background:var(--v2-orange)}}
+/* Banner film: one continuous video; the active dot fills as the film moves through that car */
+.v2-banner-film{overflow:hidden}
+.v2-banner-film-video{transition:opacity .26s ease}
+.v2-banner-film-mode[data-rotating] .v2-banner-dots>button[aria-current=true]:after{width:22px;animation:none;background:linear-gradient(90deg,var(--v2-orange) calc(var(--v2-film-progress,0)*100%),color-mix(in srgb,var(--v2-silver) 45%,transparent) calc(var(--v2-film-progress,0)*100%))}
