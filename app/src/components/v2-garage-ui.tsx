@@ -1,4 +1,4 @@
-import {useEffect,useId,useMemo,useState} from "react";
+import {useEffect,useId,useMemo,useRef,useState} from "react";
 import {findVehicle,whatsapp,type Lang,type Vehicle} from "@/site-data";
 import {COMPARE_LIMIT,clearCompare,monthlyPayment,toggleCompare,toggleSaved,useCompareIds,useSavedIds} from "@/v2-garage";
 import {thumbSrc} from "@/v2-content";
@@ -34,9 +34,32 @@ export function CompareBar({lang,compareHref}:{lang:Lang;compareHref:string}){
  </aside>;
 }
 
-export function SavedCount({lang,href}:{lang:Lang;href:string}){
- const g=garageCopy[lang],count=useSavedIds().filter(id=>!!findVehicle(id)).length;
- return <a className="v2-saved-link" href={href} aria-label={g.savedCars+(count?" ("+count+")":"")}><Heart filled={count>0}/>{count>0&&<span aria-hidden="true">{count}</span>}</a>;
+/**
+ * The menu button in the header's corner. It holds Favourites and Compare (with counts) and,
+ * on mid-size screens where the top links are hidden, the page links too.
+ */
+export function HeaderMenu({lang,open,onToggle,onClose,savedHref,compareHref,pages}:{lang:Lang;open:boolean;onToggle:()=>void;onClose:()=>void;savedHref:string;compareHref:string;pages:{href:string;label:string;current:boolean}[]}){
+ const g=garageCopy[lang],saved=useSavedIds().filter(id=>!!findVehicle(id)).length,compared=useCompareIds().filter(id=>!!findVehicle(id)).length;
+ const box=useRef<HTMLDivElement>(null),panelId=useId();
+ useEffect(()=>{
+  if(!open)return;
+  const outside=(event:PointerEvent)=>{if(box.current&&!box.current.contains(event.target as Node))onClose();};
+  const escape=(event:KeyboardEvent)=>{if(event.key==="Escape"){onClose();box.current?.querySelector<HTMLButtonElement>(".v2-menu")?.focus();}};
+  document.addEventListener("pointerdown",outside);document.addEventListener("keydown",escape);
+  return()=>{document.removeEventListener("pointerdown",outside);document.removeEventListener("keydown",escape);};
+ },[open,onClose]);
+ const words=lang==="ar"?{menu:"القائمة",close:"إغلاق القائمة",favourites:"المفضلة",pages:"صفحات الموقع"}:{menu:"Menu",close:"Close menu",favourites:"Favourites",pages:"Site pages"};
+ return <div className="v2-menu-wrap" ref={box}>
+  <button className="v2-menu" type="button" aria-expanded={open} aria-controls={panelId} aria-label={open?words.close:words.menu+(saved?" · "+words.favourites+" ("+saved+")":"")} onClick={onToggle}>
+   {open?<span aria-hidden="true">×</span>:<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>}
+   {!open&&saved>0&&<span className="v2-menu-dot" aria-hidden="true"/>}
+  </button>
+  <div className="v2-menu-panel" id={panelId} hidden={!open}>
+   <nav className="v2-menu-pages" aria-label={words.pages}>{pages.map(page=><a key={page.href} href={page.href} aria-current={page.current?"page":undefined} onClick={onClose}>{page.label}</a>)}</nav>
+   <a className="v2-menu-item" href={savedHref} onClick={onClose}><Heart filled={saved>0}/><span>{words.favourites}</span>{saved>0&&<b>{saved}</b>}</a>
+   <a className="v2-menu-item" href={compareHref} onClick={onClose}><CompareGlyph/><span>{g.compare}</span>{compared>0&&<b>{compared}</b>}</a>
+  </div>
+ </div>;
 }
 
 export function PaymentCalculator({vehicle,lang}:{vehicle:Vehicle;lang:Lang}){
