@@ -1535,9 +1535,8 @@ html[data-v2-theme=light] .automall-v2 .v2-banner-pause{color:#56606b}
 .v2-menu-item:hover,.v2-menu-pages>a:hover,.v2-menu-item:focus-visible,.v2-menu-pages>a:focus-visible{background:color-mix(in srgb,var(--v2-orange) 12%,transparent);color:var(--v2-orange);outline:none}
 .v2-menu-item>svg{flex-shrink:0;color:var(--v2-orange)}
 .v2-menu-item>b{display:grid;place-items:center;min-width:22px;height:22px;margin-inline-start:auto;padding-inline:6px;border-radius:99px;background:var(--v2-orange);color:var(--v2-on-accent,#0b0d0f);font-size:11px;font-weight:600}
-.v2-menu-pages{display:none;flex-direction:column;gap:2px;margin-bottom:6px;padding-bottom:6px;border-bottom:1px solid var(--v2-line)}
+.v2-menu-pages{display:flex;flex-direction:column;gap:2px;margin-bottom:6px;padding-bottom:6px;border-bottom:1px solid var(--v2-line)}
 .v2-menu-pages>a[aria-current=page]{color:var(--v2-orange)}
-@media(min-width:701px) and (max-width:960px){.v2-menu-pages{display:flex}}
 html[data-v2-theme=light] .automall-v2 .v2-menu-panel{background:#ffffff;box-shadow:0 22px 44px -26px #1d2a3a80}
 html[data-v2-theme=light] .automall-v2 .v2-menu-item>b{color:#ffffff}
 @media(max-width:420px){.v2-header .v2-header-actions{gap:8px}.v2-header .v2-menu,.v2-header .v2-search-shortcut,.v2-header .v2-theme-toggle{width:40px;min-width:40px;height:40px;min-height:40px}.v2-menu-panel{min-width:220px}}

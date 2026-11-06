@@ -35,8 +35,7 @@ export function CompareBar({lang,compareHref}:{lang:Lang;compareHref:string}){
 }
 
 /**
- * The menu button in the header's corner. It holds Favourites and Compare (with counts) and,
- * on mid-size screens where the top links are hidden, the page links too.
+ * The menu button in the header's corner: every page of the site, then Favourites and Compare (with counts).
  */
 export function HeaderMenu({lang,open,onToggle,onClose,savedHref,compareHref,pages}:{lang:Lang;open:boolean;onToggle:()=>void;onClose:()=>void;savedHref:string;compareHref:string;pages:{href:string;label:string;current:boolean}[]}){
  const g=garageCopy[lang],saved=useSavedIds().filter(id=>!!findVehicle(id)).length,compared=useCompareIds().filter(id=>!!findVehicle(id)).length;
