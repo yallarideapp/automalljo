@@ -2,7 +2,8 @@ import {useCallback,useDeferredValue,useEffect,useMemo,useRef,useState} from "re
 import {AdminLauncher} from "@/components/admin/admin-launcher";
 import {useLocalSiteData} from "@/local-site";
 import {vehicles,findVehicle,settings,builtSettings,builtVehicleIds,phoneDisplay,whatsapp,modelMessage,genericMessage,PHONE,INSTAGRAM,MAPS,type Lang,type Vehicle,type OpeningDay} from "@/site-data";
-import {assetPath,sitePath,localizedLinks} from "@/site-paths";
+import {assetPath,canonicalUrl,sitePath,localizedLinks} from "@/site-paths";
+import {carSchema,carTitle,dealerSchema,jsonLd,pageDescription,previewImage} from "@/seo";
 import {legal,trademarkNotice} from "@/legal-data";
 import {VehicleFeatureIcon,type VehicleFeatureName} from "./vehicle-feature-icon";
 import {BodyStyleIcon} from "./body-style-icon";
@@ -33,7 +34,21 @@ const Icon=({name,size=24}:{name:VehicleFeatureName;size?:number})=><VehicleFeat
 export function v2Head(lang:Lang,view:V2View="home",vehicleId?:string){
  const n=navigationCopy[lang],vehicle=findVehicle(vehicleId);
  const title=view==="car"&&vehicle?modelName(vehicle)+" "+vehicle.year:view==="home"?(lang==="ar"?"سيارتك القادمة":"Find your next drive"):view==="saved"?garageCopy[lang].savedCars:view==="compare"?garageCopy[lang].compareNow:n[view as "cars"|"features"|"updates"|"contact"]??n.cars;
- return {meta:[{title:(lang==="ar"?"أوتومول | ":"AutoMall | ")+title},{name:"description",content:lang==="ar"?"تصفح سيارات أوتومول حسب نظام الحركة ونوع الهيكل، مع صور كاملة ومدى السيارات الكهربائية والتجهيزات المعلنة.":"Find AutoMall cars by powertrain and body style, with complete galleries, electric ranges and dealer-listed equipment."},{name:"theme-color",content:"#0b0d0f"}],links:[...localizedLinks("v2"+(view==="home"?"":view==="car"?"/car/"+vehicleId:"/"+view),lang),{rel:"stylesheet",href:v2Css},...(view==="car"?[{rel:"stylesheet",href:showcaseCss}]:[])]};
+ const page="v2"+(view==="home"?"":view==="car"?"/car/"+vehicleId:"/"+view);
+ // Link previews (WhatsApp, Facebook, X) and search results: each page has its own text; each car shows its own photo, name and price.
+ const fullTitle=(lang==="ar"?"أوتومول | ":"AutoMall | ")+title;
+ const shareTitle=view==="car"&&vehicle?carTitle(vehicle,lang)+(lang==="ar"?" | أوتومول عمّان":" | AutoMall Amman"):fullTitle;
+ const description=pageDescription(lang,view,vehicleId),image=previewImage(view,vehicleId),url=canonicalUrl(page,lang);
+ const structured=view==="car"&&vehicle?carSchema(vehicle,lang):view==="home"||view==="contact"?dealerSchema(lang):null;
+ return {
+  meta:[{title:fullTitle},{name:"description",content:description},{name:"theme-color",content:"#0b0d0f"},
+   {property:"og:site_name",content:lang==="ar"?"أوتومول":"AutoMall"},{property:"og:locale",content:lang==="ar"?"ar_JO":"en_JO"},
+   {property:"og:title",content:shareTitle},{property:"og:description",content:description},{property:"og:url",content:url},{property:"og:type",content:"website"},
+   {property:"og:image",content:image.url},{property:"og:image:width",content:image.width},{property:"og:image:height",content:image.height},{property:"og:image:alt",content:image.alt},
+   {name:"twitter:card",content:"summary_large_image"},{name:"twitter:title",content:shareTitle},{name:"twitter:description",content:description},{name:"twitter:image",content:image.url}],
+  links:[...localizedLinks(page,lang),{rel:"stylesheet",href:v2Css},...(view==="car"?[{rel:"stylesheet",href:showcaseCss}]:[])],
+  ...(structured?{scripts:[{type:"application/ld+json",children:jsonLd(structured)}]}:{}),
+ };
 }
 function NavIcon({name}:{name:string}){
  return <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{name==="home"?<><path d="m3 10 9-7 9 7v10H3Z"/><path d="M9 20v-7h6v7"/></>:name==="cars"?<><path d="m4 10 2-5h12l2 5M3 10h18v8H3Z"/><path d="M6 18v2m12-2v2M6 13h2m8 0h2"/></>:name==="features"?<><path d="m12 3 3 6 6 3-6 3-3 6-3-6-6-3 6-3Z"/></>:name==="updates"?<><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h8M8 15h3m3 0h2M8 18h8"/></>:name==="contact"?<><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2"/></>:<><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></>}</svg>;
@@ -355,7 +370,7 @@ function ComparePage({lang}:{lang:Lang}){
  return <><PageHeading lang={lang} view="compare"/><section className="v2-compare v2-wrap" aria-label={g.compareNow}>
   {cars.length<2&&<p className="v2-compare-hint" role="status">{g.compareOne} <a href={pagePath("cars",lang)}>{g.addMore}<Arrow/></a></p>}
   <div className="v2-compare-scroll" tabIndex={0} role="region" aria-label={g.compareNow}><table className="v2-compare-table" style={{["--v2-compare-cols" as string]:String(cars.length)}}>
-   <thead><tr><td/>{cars.map(car=><th scope="col" key={car.id}><a className="v2-compare-photo" href={pagePath("car",lang,car.id)}><img src={cardSrc(car.image)} alt="" width="800" height="534" loading="lazy"/></a><a className="v2-compare-name" href={pagePath("car",lang,car.id)}><BrandLogo brand={car.brand}/><span>{car.brand} {car.name}</span></a><button type="button" className="v2-compare-remove" onClick={()=>toggleCompare(car.id)}>{g.removeCompare}</button></th>)}</tr></thead>
+   <thead><tr><td/>{cars.map(car=><th scope="col" key={car.id}><a className="v2-compare-photo" href={pagePath("car",lang,car.id)}><img src={cardSrc(car.image)} alt={car.year+" "+car.brand+" "+car.name} width="800" height="534" loading="lazy"/></a><a className="v2-compare-name" href={pagePath("car",lang,car.id)}><BrandLogo brand={car.brand}/><span>{car.brand} {car.name}</span></a><button type="button" className="v2-compare-remove" onClick={()=>toggleCompare(car.id)}>{g.removeCompare}</button></th>)}</tr></thead>
    <tbody>{rows.map(row=><tr key={row.label}><th scope="row">{row.label}</th>{cars.map(car=><td key={car.id}>{row.get(car)??"—"}</td>)}</tr>)}<tr><th scope="row"><span className="v2-visually-hidden">{t.enquire}</span></th>{cars.map(car=><td key={car.id}><a className="v2-button v2-button-orange v2-compare-enquire" href={whatsapp(modelMessage(car,lang))} target="_blank" rel="noopener noreferrer">{lang==="ar"?"واتساب":"WhatsApp"}<Arrow/></a></td>)}</tr></tbody>
   </table></div>
  </section></>;

@@ -76,7 +76,7 @@ describe("AutoMall V2 catalogue navigation",()=>{
 
  test("preserves all static detail routes and their Arabic counterparts",()=>{
   expect(vehicleIds).toHaveLength(inventory.length);
-  expect(pagePaths).toHaveLength(20+2*inventory.length);
+  expect(pagePaths).toHaveLength(18+2*inventory.length);
   expect(new Set(pagePaths).size).toBe(pagePaths.length);
   for(const id of vehicleIds){
    expect(pagePaths).toContain("/v2/car/"+id+"/");

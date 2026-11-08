@@ -88,6 +88,13 @@ Twenty-one original SVG automotive icons describe the source-linked equipment. E
 
 Design observations are in `refs/research/v2-design-reference.md`, and feature provenance is in `refs/research/facebook-feature-audit.json`. Runtime content uses `app/src/v2-feature-data.json`; category and filter rules live in `app/src/v2-catalog.ts`. Prices and technical figures retain the existing catalogue sources where Facebook values are ambiguous. No customer forms, persistent customer storage, accounts, checkout or tracking were added. The shared legal pages include Facebook among external services and remain linked from both versions. Check `Documents/TESTING.md` for validation results.
 
+## Link previews and search data
+
+- Every page has its own description; car pages also have their own title with the price, and a link-preview photo (`app/public/assets/og/car-<id>.jpg`, 1200×630 JPEG made by `app/scripts/make-og.py` during the deploy). WhatsApp, Facebook and X show the car's photo, name and price when a car link is shared.
+- Structured data for Google (`app/src/seo.ts`): the dealership (`AutoDealer`) on the home and showroom pages, and each car (`Car` with price `Offer`, mileage, power, transmission and condition, plus a breadcrumb) on its page.
+- The old homepage addresses (`/` and `/ar/`) redirect to `/v2/` and `/ar/v2/`; the old design is no longer shown.
+- The site is still set to `noindex` with robots.txt blocking crawlers, until it moves to its own domain.
+
 ## Banner videos
 
 The homepage banner plays one continuous film (`app/public/assets/banner/video/banner-film.mp4`, a 640 px `-phone` version and a `-poster` still): the two Google Flow videos joined so the camera moves Porsche 911 → Mercedes G580 → BMW i5 M60 → Jetour G700 and back to the Porsche without a cut. The two joins (G580 → BMW and Jetour → Porsche) are soft 1.8-second dissolves; they can be swapped for Flow-generated transitions (Frames to Video, first frame = end of one video, last frame = start of the next). The film is slowed in the file itself (each Flow video is slowed in one pass with a varying speed, 0.4–0.85×, using motion-interpolated in-between frames; the BMW holds longest), runs about 25 seconds and plays in the same box as the banner photo, so the layout is unchanged. The car name, link, counter and dots follow the car on screen (time marks in `bannerFilm` in `app/src/components/automall-v2-page.tsx`); dots and arrows jump to a car, and a pause button sits beside the counter. It waits while off screen or in a hidden tab, and stays on the poster for reduced motion or data saver.

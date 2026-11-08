@@ -71,6 +71,8 @@ jobs:
           fi
       - name: Make small photo copies for cards and thumbnails
         run: python3 scripts/make-thumbnails.py
+      - name: Make car link-preview photos
+        run: python3 scripts/make-og.py
       - name: Make logo-free banner photos for the chosen banner cars
         run: python3 scripts/make-banners.py
       - name: Configure Pages

@@ -1,6 +1,6 @@
 import {readFile,writeFile,stat} from "node:fs/promises";
 import {join} from "node:path";
-import {pagePaths,v2Paths,vehicleIds} from "./page-manifest.mjs";
+import {pagePaths,redirectPaths,v2Paths,vehicleIds} from "./page-manifest.mjs";
 
 const out="dist/client";
 const fileFor=path=>path.replace(/^\//,"")+"index.html";
@@ -30,10 +30,23 @@ for(const path of pagePaths){
  if(expectedBase!=="/"&&/(?:src|href)="\/(?:assets|privacy|terms|v2|ar|site\.webmanifest)(?:\/|")/.test(html))throw new Error("Unprefixed root URL in "+file);
 }
 
-for(const path of ["/","/ar/"]){
- const html=htmlByPath.get(path);
- if((html.match(/class="am-photo-story__image"/g)||[]).length!==4)throw new Error("Expected four prerendered dealer photographs: "+path);
- if(html.includes('src="'+expectedBase+'assets/hero-car-v2.png"'))throw new Error("Old illustrative hero remains active: "+path);
+// The old homepage addresses send visitors to the current design.
+for(const [path,target] of Object.entries(redirectPaths)){
+ const html=await readFile(join(out,fileFor(path)),"utf8");
+ if(!tags(html,"meta").some(tag=>tag.includes('http-equiv="refresh"')&&tag.includes(expectedBase+target.replace(/^\//,""))))throw new Error("Old homepage must redirect to "+target+": "+path);
+ if(!tags(html,"link").some(tag=>tag.includes('rel="canonical"')&&tag.includes('href="'+site+target+'"')))throw new Error("Old homepage canonical must point to "+target+": "+path);
+}
+// Link previews and Google data: each car page names its own photo (which must exist) and carries Car data; home and showroom carry the dealership.
+for(const prefix of ["","/ar"]){
+ for(const id of vehicleIds){
+  const html=htmlByPath.get(prefix+"/v2/car/"+id+"/");
+  if(!tags(html,"meta").some(tag=>tag.includes('property="og:image"')&&tag.includes("/assets/og/car-"+id+".jpg")))throw new Error("Car page needs its own preview photo: "+prefix+" "+id);
+  if(!/<script[^>]+application\/ld\+json[^>]*>[^<]*"@type":"Car"/.test(html))throw new Error("Car page needs Car structured data: "+prefix+" "+id);
+  await readFile(join(out,"assets/og/car-"+id+".jpg")).catch(()=>{throw new Error("Missing preview photo for car "+id);});
+ }
+ for(const view of ["","contact/"])if(!/<script[^>]+application\/ld\+json[^>]*>[^<]*"@type":"AutoDealer"/.test(htmlByPath.get(prefix+"/v2/"+view)))throw new Error("Dealership structured data missing: "+prefix+"/v2/"+view);
+ const descriptions=new Set(["","cars/","contact/"].map(view=>tags(htmlByPath.get(prefix+"/v2/"+view),"meta").find(tag=>tag.includes('name="description"'))));
+ if(descriptions.size!==3)throw new Error("Pages need their own descriptions: "+prefix);
 }
 for(const path of v2Paths)if(!hasClass(htmlByPath.get(path),"automall-v2"))throw new Error("Missing second-version page content: "+path);
 const {inventory:inventoryForBanner,siteSettings:siteSettingsForBanner}=await import("./inventory.mjs");
