@@ -6,6 +6,7 @@
 import {builtSettings,findVehicle,type Lang,type Vehicle} from "./site-data";
 import {absoluteAsset,canonicalUrl,SITE_URL} from "./site-paths";
 import {specValue} from "./v2-content";
+import appMeta from "./app-meta.json";
 
 export type SeoView="home"|"cars"|"features"|"updates"|"contact"|"saved"|"compare"|"car";
 
@@ -46,7 +47,7 @@ export function pageDescription(lang:Lang,view:SeoView,vehicleId?:string){
 /** The preview image: each published car has a 1200×630 photo (scripts/make-og.py); other pages use the brand image. */
 export function previewImage(view:SeoView,vehicleId?:string){
  const vehicle=view==="car"?findVehicle(vehicleId):undefined;
- return vehicle?{url:absoluteAsset("assets/og/car-"+vehicle.id+".jpg"),width:"1200",height:"630",alt:vehicle.year+" "+vehicle.brand+" "+vehicle.name}:{url:absoluteAsset("assets/automall-og.png"),width:"1200",height:"630",alt:"AutoMall, Amman"};
+ return vehicle?{url:absoluteAsset("assets/og/car-"+vehicle.id+".jpg"),width:"1200",height:"630",alt:vehicle.year+" "+vehicle.brand+" "+vehicle.name}:{url:absoluteAsset(appMeta.og_image_url),width:String(appMeta.og_image_width),height:String(appMeta.og_image_height),alt:appMeta.og_image_alt};
 }
 
 const dealerId=SITE_URL+"/#dealership";
@@ -58,7 +59,7 @@ export function dealerSchema(lang:Lang){
  return {
   "@context":"https://schema.org","@type":"AutoDealer","@id":dealerId,
   name:"AutoMall",alternateName:"أوتومول",url:canonicalUrl("v2",lang),
-  image:absoluteAsset("assets/automall-og.png"),logo:absoluteAsset("assets/logo.jpg"),
+  image:absoluteAsset(appMeta.og_image_url),logo:absoluteAsset("assets/logo.jpg"),
   telephone:s.phone,
   address:{"@type":"PostalAddress",streetAddress:s.address.en,addressLocality:s.city.en.split(",")[0]||"Amman",addressCountry:"JO"},
   hasMap:"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(s.mapsQuery),

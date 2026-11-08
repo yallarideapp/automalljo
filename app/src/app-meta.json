@@ -2,7 +2,11 @@
   "og_title": "AutoMall Jo",
   "og_description": "More choices. Less prices. Explore AutoMall's featured cars, discuss a trade-in and visit the showroom on Mecca Street 148, Amman.",
   "favicon_url": "assets/favicon-32.png",
-  "og_image_url": "assets/automall-og.png",
+  "og_image_url": "assets/automall-share-v2.jpg",
+  "og_image_width": 1200,
+  "og_image_height": 630,
+  "og_image_type": "image/jpeg",
+  "og_image_alt": "AutoMall Jo — Amman",
   "marketplace_cover_url": "assets/automall-cover.png",
   "og_video_url": null
 }

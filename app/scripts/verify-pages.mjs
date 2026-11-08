@@ -17,10 +17,37 @@ const expectedBase="/"+base.replace(/^\/+|\/+$/g,"")+(base.replace(/^\/+|\/+$/g,
 const escapeText=value=>value.replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#x27;"})[char]);
 const tags=(html,name)=>html.match(new RegExp("<"+name+"\\b[^>]*>","g"))||[];
 const hasClass=(html,name)=>new RegExp('class="[^\\"]*\\b'+name+'\\b[^\\"]*"').test(html);
+// Read the image itself: declared dimensions must match the bytes crawlers receive.
+const previewSizes=new Map();
+async function verifyPreview(html,path){
+ const meta=tags(html,"meta"),value=name=>meta.find(tag=>tag.includes('property="'+name+'"'))?.match(/content="([^"]+)"/)?.[1];
+ const image=value("og:image");
+ if(!image?.startsWith(site+"/assets/"))throw new Error("Preview needs an absolute, self-hosted image: "+path);
+ if(!previewSizes.has(image)){
+  const bytes=await readFile(join(out,image.slice(site.length+1)));
+  let size;
+  if(bytes.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10])))size=[bytes.readUInt32BE(16),bytes.readUInt32BE(20)];
+  else if(bytes.readUInt16BE(0)===0xffd8){
+   for(let offset=2;offset+4<bytes.length;){
+    if(bytes[offset]!==0xff)break;
+    const marker=bytes[offset+1],length=bytes.readUInt16BE(offset+2);
+    if([0xc0,0xc1,0xc2,0xc3,0xc5,0xc6,0xc7,0xc9,0xca,0xcb,0xcd,0xce,0xcf].includes(marker)){size=[bytes.readUInt16BE(offset+7),bytes.readUInt16BE(offset+5)];break;}
+    if(length<2)break;
+    offset+=length+2;
+   }
+  }
+  if(!size)throw new Error("Cannot read preview image dimensions: "+image);
+  previewSizes.set(image,size);
+ }
+ const [width,height]=previewSizes.get(image);
+ if(value("og:image:width")!==String(width)||value("og:image:height")!==String(height))throw new Error("Preview image dimensions do not match the image: "+path);
+ if(!meta.some(tag=>tag.includes('name="twitter:image"')&&tag.includes('content="'+image+'"')))throw new Error("Twitter and Open Graph previews must use the same image: "+path);
+}
 const htmlByPath=new Map();
 for(const path of pagePaths){
  const file=fileFor(path),html=await readFile(join(out,file),"utf8"),lang=path.startsWith("/ar/")?"ar":"en";
  htmlByPath.set(path,html);
+ await verifyPreview(html,path);
  if(!new RegExp('<html[^>]+lang="'+lang+'"').test(html))throw new Error("Wrong HTML language: "+file);
  if(lang==="ar"&&!/<html[^>]+dir="rtl"/.test(html))throw new Error("Arabic HTML needs RTL: "+file);
  if(!html.includes("AutoMall")&&!html.includes("أوتومول"))throw new Error("Static page has no dealership content: "+file);
@@ -33,6 +60,7 @@ for(const path of pagePaths){
 // The old homepage addresses send visitors to the current design.
 for(const [path,target] of Object.entries(redirectPaths)){
  const html=await readFile(join(out,fileFor(path)),"utf8");
+ await verifyPreview(html,path);
  if(!tags(html,"meta").some(tag=>tag.includes('http-equiv="refresh"')&&tag.includes(expectedBase+target.replace(/^\//,""))))throw new Error("Old homepage must redirect to "+target+": "+path);
  if(!tags(html,"link").some(tag=>tag.includes('rel="canonical"')&&tag.includes('href="'+site+target+'"')))throw new Error("Old homepage canonical must point to "+target+": "+path);
 }
