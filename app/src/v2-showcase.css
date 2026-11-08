@@ -180,3 +180,12 @@
  .v2-showcase .v2-showcase-stage{order:-1;margin-top:14px}
  .v2-showcase .v2-showcase-top{padding-top:20px}
 }
+
+/* Keep mixed Arabic text, Western numbers and Latin units in their own bidi runs. */
+.v2-showcase .v2-gallery-controls>span[role=status]{display:flex;align-items:center;justify-content:center;gap:5px;min-width:110px;white-space:nowrap}
+.v2-showcase .v2-gallery-controls .v2-direction-arrow{width:20px;height:20px}
+.v2-showcase .v2-showcase-highlights dd{overflow-wrap:anywhere}
+.v2-showcase .v2-efficiency-note{display:block;margin-top:8px;font-size:10px;line-height:1.7;font-weight:400;color:var(--v2-silver)}
+.v2-showcase .v2-efficiency-note a{display:inline-flex;align-items:center;gap:4px;text-decoration:underline;text-underline-offset:3px}
+.v2-showcase .v2-efficiency-note .v2-direction-arrow{width:12px;height:12px}
+.v2-showcase .v2-fuel-reference-note{margin-top:14px;font-size:11px;line-height:1.8;color:var(--v2-silver)}

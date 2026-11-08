@@ -76,10 +76,18 @@ for(const prefix of ["","/ar"]){
  const descriptions=new Set(["","cars/","contact/"].map(view=>tags(htmlByPath.get(prefix+"/v2/"+view),"meta").find(tag=>tag.includes('name="description"'))));
  if(descriptions.size!==3)throw new Error("Pages need their own descriptions: "+prefix);
 }
-for(const path of v2Paths)if(!hasClass(htmlByPath.get(path),"automall-v2"))throw new Error("Missing second-version page content: "+path);
+for(const path of v2Paths){
+ const html=htmlByPath.get(path);
+ if(!hasClass(html,"automall-v2"))throw new Error("Missing second-version page content: "+path);
+ if(hasClass(html,"v2-card-equipment"))throw new Error("Equipment must stay inside car details, not on listing cards: "+path);
+ if(/[\u0660-\u0669\u06f0-\u06f9]/.test(html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi,"")))throw new Error("Public pages must use Western digits: "+path);
+}
 const {inventory:inventoryForBanner,siteSettings:siteSettingsForBanner}=await import("./inventory.mjs");
 for(const prefix of ["","/ar"]){
  const home=htmlByPath.get(prefix+"/v2/"),cars=htmlByPath.get(prefix+"/v2/cars/");
+ const finance=htmlByPath.get(prefix+"/v2/finance/");
+ if(!hasClass(finance,"v2-calculator")||!home.includes('href="'+expectedBase+(prefix?"ar/":"")+'v2/finance/"'))throw new Error("The payment calculator needs its own page and navigation link: "+prefix);
+ if(!tags(home,"img").some(tag=>hasClass(tag,"v2-category-photo")&&tag.includes("gallery-288432146-1.webp")))throw new Error("Hybrid category must use the Camry Hybrid photograph: "+prefix);
  if(home.includes('id="v2-collection"')||home.includes('id="v2-posts-heading"'))throw new Error("V2 homepage still includes a full catalogue or posts page: "+prefix);
  if(!hasClass(home,"v2-home-refined")||!hasClass(home,"v2-dealer-hero")||!hasClass(home,"v2-home-search")||!hasClass(home,"v2-category-grid")||!hasClass(home,"v2-home-featured"))throw new Error("V2 homepage is missing its photo banner, search form, category links or featured vehicles: "+prefix);
  const bannerImages=[...tags(home,"img"),...tags(home,"video")].filter(tag=>hasClass(tag,"v2-dealer-hero-image"));
@@ -92,13 +100,17 @@ for(const prefix of ["","/ar"]){
  if(!hasClass(cars,"v2-powertrain-tabs")||!hasClass(cars,"v2-body-filters"))throw new Error("V2 catalogue needs separate powertrain and body filters: "+prefix);
  if(hasClass(cars,"v2-hero"))throw new Error("Catalogue still includes the homepage hero: "+prefix);
  if(!/<svg\b[^>]*class="[^\"]*\bvehicle-feature-icon\b[^\"]*"/.test(cars))throw new Error("Missing prerendered vehicle feature icons: "+prefix);
- for(const view of ["features","updates","contact"])if(!/<h1\b/.test(htmlByPath.get(prefix+"/v2/"+view+"/")))throw new Error("V2 page has no primary heading: "+view);
+ for(const view of ["features","finance","contact"])if(!/<h1\b/.test(htmlByPath.get(prefix+"/v2/"+view+"/")))throw new Error("V2 page has no primary heading: "+view);
 }
 const {inventory,siteSettings}=await import("./inventory.mjs");
 for(const vehicle of inventory)for(const prefix of ["","/ar"]){
  const path=prefix+"/v2/car/"+vehicle.id+"/",html=htmlByPath.get(path),lang=prefix?"ar":"en";
  if(!html.includes('id="v2-detail-title"')||!hasClass(html,"v2-gallery-thumbs"))throw new Error("Missing standalone car gallery/details: "+path);
  if(!hasClass(html,"v2-showcase")||!hasClass(html,"v2-showcase-tabs")||!hasClass(html,"v2-showcase-gallery"))throw new Error("Missing reference-style car specifications or gallery tabs: "+path);
+ if(html.indexOf('id="v2-finance"')<html.indexOf('id="v2-showcase-panel-gallery"')||tags(html,"section").filter(tag=>hasClass(tag,"v2-calculator")).length!==1)throw new Error("Car payment calculator must appear once after the gallery and specifications: "+path);
+ const highlights=html.slice(html.indexOf('class="v2-showcase-highlights"')).split("</dl>")[0];
+ const efficiencyLabel=vehicle.categories.includes("electric")?(lang==="ar"?"المدى الكهربائي":"Electric range"):(lang==="ar"?"صرف الوقود":"Fuel consumption");
+ if(!highlights.includes(efficiencyLabel)||highlights.includes(lang==="ar"?"ناقل الحركة":"Transmission"))throw new Error("Car highlights must show electric range or fuel consumption instead of transmission: "+path);
  if(!html.includes(escapeText(vehicle.brand)))throw new Error("Wrong vehicle in detail page: "+path);
  if(vehicle.range&&(!hasClass(html,"v2-range-panel")||!html.includes(escapeText(vehicle.range[lang]))))throw new Error("Missing electric range on car page: "+path);
  const images=[...new Set([vehicle.image,...(vehicle.gallery||[])])];

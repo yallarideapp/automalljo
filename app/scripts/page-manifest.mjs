@@ -1,10 +1,10 @@
 import {inventory} from "./inventory.mjs";
 
 export const vehicleIds=inventory.map(vehicle=>String(vehicle.id));
-export const v2Views=["","cars","features","updates","contact","saved","compare"];
+export const v2Views=["","cars","features","finance","contact","saved","compare"];
 export const legacyPaths=["/privacy/","/ar/privacy/","/terms/","/ar/terms/"];
 /** The old homepage addresses: prerendered pages that send visitors to the current design (left out of the sitemap). */
-export const redirectPaths={"/":"/v2/","/ar/":"/ar/v2/"};
+export const redirectPaths={"/":"/v2/","/ar/":"/ar/v2/","/v2/updates/":"/v2/finance/","/ar/v2/updates/":"/ar/v2/finance/"};
 export const v2Paths=["","/ar"].flatMap(prefix=>[
  ...v2Views.map(view=>prefix+"/v2/"+(view?view+"/":"")),
  ...vehicleIds.map(id=>prefix+"/v2/car/"+id+"/")

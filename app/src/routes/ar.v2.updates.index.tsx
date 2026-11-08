@@ -1,5 +1,5 @@
 import {createFileRoute} from "@tanstack/react-router";
-import {AutoMallV2Page,v2Head} from "@/components/automall-v2-page";
+import {RedirectToV2,redirectHead} from "@/components/redirect-to-v2";
 
-export const Route=createFileRoute("/ar/v2/updates/")({head:()=>v2Head("ar","updates"),component:ArabicV2Updates});
-function ArabicV2Updates(){return <AutoMallV2Page lang="ar" view="updates"/>;}
+export const Route=createFileRoute("/ar/v2/updates/")({head:()=>redirectHead("ar","v2/finance"),component:ArabicV2Updates});
+function ArabicV2Updates(){return <RedirectToV2 lang="ar" page="v2/finance"/>;}

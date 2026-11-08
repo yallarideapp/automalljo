@@ -1,3 +1,4 @@
+import {DirectionArrow} from "./direction-arrow";
 import {useEffect,useRef,useState} from "react";
 import {whatsapp,type Lang,type Vehicle} from "@/site-data";
 import {addOrder,type Order,type OrderKind} from "@/local-store";
@@ -48,7 +49,7 @@ export function OrderButton({vehicle,lang}:{vehicle:Vehicle;lang:Lang}){
    {done?<div className="v2-order-done" role="status">
     <h2 id="v2-order-title">{c.doneTitle}</h2><p>{c.doneBody}</p>
     <p className="v2-order-summary"><strong>{c.kinds[done.kind]}</strong> · {done.car}</p>
-    <div className="v2-order-actions"><a className="v2-button v2-button-orange" href={whatsapp(orderMessage(done,lang))} target="_blank" rel="noopener noreferrer">{c.whatsapp} <span aria-hidden="true">↗</span></a><button type="button" className="v2-order-secondary" onClick={close}>{c.close}</button></div>
+    <div className="v2-order-actions"><a className="v2-button v2-button-orange" href={whatsapp(orderMessage(done,lang))} target="_blank" rel="noopener noreferrer">{c.whatsapp} <DirectionArrow kind="outward"/></a><button type="button" className="v2-order-secondary" onClick={close}>{c.close}</button></div>
    </div>:<form onSubmit={event=>{event.preventDefault();submit();}} noValidate>
     <div className="v2-order-head"><h2 id="v2-order-title">{c.title}</h2><button type="button" className="v2-order-x" onClick={close} aria-label={c.close}>×</button></div>
     <p className="v2-order-car">{car}</p>
@@ -62,7 +63,7 @@ export function OrderButton({vehicle,lang}:{vehicle:Vehicle;lang:Lang}){
      <label className="v2-order-wide"><span>{c.message}</span><textarea value={message} onChange={event=>setMessage(event.target.value)} rows={3} maxLength={600} placeholder={c.messagePh}/></label>
     </div>
     {error&&<p className="v2-order-error" role="alert">{error}</p>}
-    <div className="v2-order-actions"><button type="submit" className="v2-button v2-button-orange">{c.send} <span aria-hidden="true">↗</span></button><button type="button" className="v2-order-secondary" onClick={close}>{c.cancel}</button></div>
+    <div className="v2-order-actions"><button type="submit" className="v2-button v2-button-orange">{c.send} <DirectionArrow kind="outward"/></button><button type="button" className="v2-order-secondary" onClick={close}>{c.cancel}</button></div>
    </form>}
   </dialog>
  </>;

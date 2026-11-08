@@ -1,0 +1,407 @@
+{
+  "checkedAt": "2026-11-08",
+  "policy": "Use only linked manufacturer, official distributor or original manufacturer documents. Figures are references for the listed trim/powertrain; do not present an unspecified variant as the exact Jordan vehicle. Keep EPA/NEDC/WLTC labels and state charge-depleted PHEV conditions. Unknown values are displayed as unavailable.",
+  "conversionRules": {
+    "US mpg to L/100km": "235.214583 / mpg, rounded to 1 decimal place",
+    "km/L to L/100km": "100 / kmPerL, rounded to 1 decimal place"
+  },
+  "verifiedReferences": 17,
+  "unrecorded": [
+    {
+      "id": "288638424",
+      "model": "EXEED Exlantix ES",
+      "year": 2026,
+      "reason": "No matching primary-source fuel figure recorded for this listing."
+    },
+    {
+      "id": "288657370",
+      "model": "EXEED VX",
+      "year": 2026,
+      "reason": "No matching primary-source fuel figure recorded for this listing."
+    },
+    {
+      "id": "287175144",
+      "model": "Chery iCAR V27",
+      "year": 2026,
+      "reason": "No matching primary-source fuel figure recorded for this listing."
+    },
+    {
+      "id": "289156416",
+      "model": "Lynk & Co 900",
+      "year": 2026,
+      "reason": "No matching primary-source fuel figure recorded for this listing."
+    },
+    {
+      "id": "289156312",
+      "model": "EXEED Exlantix ES",
+      "year": 2026,
+      "reason": "No matching primary-source fuel figure recorded for this listing."
+    },
+    {
+      "id": "289156230",
+      "model": "SERES 5",
+      "year": 2024,
+      "reason": "No matching primary-source fuel figure recorded for this listing."
+    },
+    {
+      "id": "289156088",
+      "model": "BYD Song Plus",
+      "year": 2026,
+      "reason": "No matching primary-source fuel figure recorded for this listing."
+    },
+    {
+      "id": "289156002",
+      "model": "Mercedes-Benz V-Class / Vito",
+      "year": 2025,
+      "reason": "No matching primary-source fuel figure recorded for this listing."
+    },
+    {
+      "id": "289155808",
+      "model": "EXEED RX",
+      "year": 2026,
+      "reason": "No matching primary-source fuel figure recorded for this listing."
+    },
+    {
+      "id": "288939240",
+      "model": "Toyota Land Cruiser 300",
+      "year": 2026,
+      "reason": "No matching primary-source fuel figure recorded for this listing."
+    },
+    {
+      "id": "288700802",
+      "model": "BYD Ti7",
+      "year": 2027,
+      "reason": "No matching primary-source fuel figure recorded for this listing."
+    },
+    {
+      "id": "288717710",
+      "model": "EXEED VX",
+      "year": 2026,
+      "reason": "No matching primary-source fuel figure recorded for this listing."
+    },
+    {
+      "id": "288717658",
+      "model": "BYD Ti7",
+      "year": 2027,
+      "reason": "No matching primary-source fuel figure recorded for this listing."
+    },
+    {
+      "id": "288717622",
+      "model": "EXEED RX",
+      "year": 2026,
+      "reason": "No matching primary-source fuel figure recorded for this listing."
+    },
+    {
+      "id": "288714972",
+      "model": "BAW 212 T01",
+      "year": 2026,
+      "reason": "No matching primary-source fuel figure recorded for this listing."
+    },
+    {
+      "id": "288700874",
+      "model": "Hongqi H9",
+      "year": 2023,
+      "reason": "No matching primary-source fuel figure recorded for this listing."
+    },
+    {
+      "id": "288700698",
+      "model": "BYD Yangwang U8",
+      "year": 2026,
+      "reason": "No matching primary-source fuel figure recorded for this listing."
+    },
+    {
+      "id": "288700570",
+      "model": "Porsche 911",
+      "year": 2008,
+      "reason": "No matching primary-source fuel figure recorded for this listing."
+    },
+    {
+      "id": "288440874",
+      "model": "Land Rover Range Rover",
+      "year": 2019,
+      "reason": "No matching primary-source fuel figure recorded for this listing."
+    },
+    {
+      "id": "288440598",
+      "model": "Chery iCAR V27",
+      "year": 2026,
+      "reason": "No matching primary-source fuel figure recorded for this listing."
+    },
+    {
+      "id": "288442830",
+      "model": "Chery iCAR V27",
+      "year": 2026,
+      "reason": "No matching primary-source fuel figure recorded for this listing."
+    },
+    {
+      "id": "288441140",
+      "model": "BYD Sealion 5",
+      "year": 2026,
+      "reason": "No matching primary-source fuel figure recorded for this listing."
+    },
+    {
+      "id": "288441022",
+      "model": "Mercedes-Benz G-Class",
+      "year": 2023,
+      "reason": "No matching primary-source fuel figure recorded for this listing."
+    },
+    {
+      "id": "288440988",
+      "model": "Lynk & Co 08",
+      "year": 2027,
+      "reason": "No matching primary-source fuel figure recorded for this listing."
+    },
+    {
+      "id": "287914072",
+      "model": "Land Rover Defender 110",
+      "year": 2025,
+      "reason": "No matching primary-source fuel figure recorded for this listing."
+    },
+    {
+      "id": "287890622",
+      "model": "Lynk & Co 08",
+      "year": 2027,
+      "reason": "No matching primary-source fuel figure recorded for this listing."
+    }
+  ],
+  "references": {
+    "288432146": {
+      "brand": "Toyota",
+      "name": "Camry",
+      "year": "2021",
+      "engine": "2.5L petrol hybrid",
+      "trim": "LE Hybrid",
+      "value": "4.5",
+      "cycle": "EPA",
+      "note": {
+        "en": "Combined · converted from 52 US mpg",
+        "ar": "مشترك · تحويل من 52 ميل/غالون أمريكي"
+      },
+      "sourceURL": "https://engage.toyota.com/static/files/ebrochures/2021_camry_eBrochure.pdf"
+    },
+    "289155248": {
+      "brand": "BAIC",
+      "name": "BJ30e",
+      "year": "2025",
+      "engine": "1.5L turbo self-charging hybrid",
+      "trim": "Magic HEV 1.5L Turbo AWD",
+      "value": "6.45",
+      "cycle": "WLTC",
+      "note": {
+        "en": "Combined · AWD hybrid",
+        "ar": "مشترك · هايبرد بدفع كلي"
+      },
+      "sourceURL": "https://baic.iq/models/bj30"
+    },
+    "288717686": {
+      "brand": "BAIC",
+      "name": "BJ30e",
+      "year": "2025",
+      "engine": "1.5L turbo self-charging hybrid",
+      "trim": "Magic HEV 1.5L Turbo AWD",
+      "value": "6.45",
+      "cycle": "WLTC",
+      "note": {
+        "en": "Combined · AWD hybrid",
+        "ar": "مشترك · هايبرد بدفع كلي"
+      },
+      "sourceURL": "https://baic.iq/models/bj30"
+    },
+    "287913510": {
+      "brand": "BAIC",
+      "name": "BJ30e",
+      "year": "2025",
+      "engine": "1.5L turbo self-charging hybrid",
+      "trim": "Magic HEV 1.5L Turbo AWD · Grey",
+      "value": "6.45",
+      "cycle": "WLTC",
+      "note": {
+        "en": "Combined · AWD hybrid",
+        "ar": "مشترك · هايبرد بدفع كلي"
+      },
+      "sourceURL": "https://baic.iq/models/bj30"
+    },
+    "287912580": {
+      "brand": "BAIC",
+      "name": "BJ30e",
+      "year": "2025",
+      "engine": "1.5L turbo self-charging hybrid",
+      "trim": "Magic HEV 1.5L Turbo AWD · White",
+      "value": "6.45",
+      "cycle": "WLTC",
+      "note": {
+        "en": "Combined · AWD hybrid",
+        "ar": "مشترك · هايبرد بدفع كلي"
+      },
+      "sourceURL": "https://baic.iq/models/bj30"
+    },
+    "288657536": {
+      "brand": "EXEED",
+      "name": "Exlantix ET",
+      "year": "2026",
+      "engine": "1.5L turbo range extender",
+      "trim": "1.5L Turbo REEV AWD Luxury",
+      "value": "6.4",
+      "cycle": "WLTC",
+      "note": {
+        "en": "Charge-depleted · manufacturer reference",
+        "ar": "بطارية منخفضة الشحن · مرجع الشركة"
+      },
+      "sourceURL": "https://www.exeedinternational.com/global/et-reev/"
+    },
+    "289157148": {
+      "brand": "EXEED",
+      "name": "Exlantix ET",
+      "year": "2026",
+      "engine": "1.5L turbo petrol range extender",
+      "trim": "REEV AWD",
+      "value": "6.4",
+      "cycle": "WLTC",
+      "note": {
+        "en": "Charge-depleted · manufacturer reference",
+        "ar": "بطارية منخفضة الشحن · مرجع الشركة"
+      },
+      "sourceURL": "https://www.exeedinternational.com/global/et-reev/"
+    },
+    "289156972": {
+      "brand": "EXEED",
+      "name": "Exlantix ET",
+      "year": "2026",
+      "engine": "1.5L turbo petrol range extender",
+      "trim": "1.5L Turbo REEV AWD Luxury · Silver",
+      "value": "6.4",
+      "cycle": "WLTC",
+      "note": {
+        "en": "Charge-depleted · manufacturer reference",
+        "ar": "بطارية منخفضة الشحن · مرجع الشركة"
+      },
+      "sourceURL": "https://www.exeedinternational.com/global/et-reev/"
+    },
+    "288714784": {
+      "brand": "EXEED",
+      "name": "Exlantix ET",
+      "year": "2026",
+      "engine": "1.5L turbo petrol range extender",
+      "trim": "1.5L Turbo REEV AWD · Nardo Grey",
+      "value": "6.4",
+      "cycle": "WLTC",
+      "note": {
+        "en": "Charge-depleted · manufacturer reference",
+        "ar": "بطارية منخفضة الشحن · مرجع الشركة"
+      },
+      "sourceURL": "https://www.exeedinternational.com/global/et-reev/"
+    },
+    "288440948": {
+      "brand": "Jetour",
+      "name": "G700",
+      "year": "2026",
+      "engine": "2.0L turbo plug-in hybrid",
+      "trim": "Flagship PHEV VIP",
+      "value": "8.8",
+      "cycle": "WLTC",
+      "note": {
+        "en": "Charge-depleted · manufacturer reference",
+        "ar": "بطارية منخفضة الشحن · مرجع الشركة"
+      },
+      "sourceURL": "https://jetourglobal.com/g700/specification/"
+    },
+    "287890886": {
+      "brand": "Jetour",
+      "name": "G700",
+      "year": "2026",
+      "engine": "2.0L turbo plug-in hybrid",
+      "trim": "Premium",
+      "value": "8.8",
+      "cycle": "WLTC",
+      "note": {
+        "en": "Charge-depleted · manufacturer reference",
+        "ar": "بطارية منخفضة الشحن · مرجع الشركة"
+      },
+      "sourceURL": "https://jetourglobal.com/g700/specification/"
+    },
+    "287890782": {
+      "brand": "Jetour",
+      "name": "G700",
+      "year": "2026",
+      "engine": "2.0L turbo plug-in hybrid",
+      "trim": "GAIA 2.0L Turbo PHEV AWD",
+      "value": "8.8",
+      "cycle": "WLTC",
+      "note": {
+        "en": "Charge-depleted · manufacturer reference",
+        "ar": "بطارية منخفضة الشحن · مرجع الشركة"
+      },
+      "sourceURL": "https://jetourglobal.com/g700/specification/"
+    },
+    "288939920": {
+      "brand": "GAC",
+      "name": "EMKOO",
+      "year": "2025",
+      "engine": "1.5L turbo petrol",
+      "trim": "1.5L Turbo Panoramic",
+      "value": "6.4",
+      "cycle": "Manufacturer",
+      "note": {
+        "en": "1.5TGDI / 7WDCT · cycle not specified",
+        "ar": "1.5TGDI / 7WDCT · دورة القياس غير محددة"
+      },
+      "sourceURL": "https://www.gacgroup.com/en/suv/gac-emkoo"
+    },
+    "288938770": {
+      "brand": "Porsche",
+      "name": "911 Carrera",
+      "year": "2020",
+      "engine": "3.0L flat-six twin-turbo petrol",
+      "trim": "3.0L Twin-Turbo PDK (992)",
+      "value": "9.0",
+      "cycle": "NEDC-correlated",
+      "note": {
+        "en": "Combined · Carrera Coupé PDK",
+        "ar": "مشترك · كاريرا كوبيه PDK"
+      },
+      "sourceURL": "https://newsroom.porsche.com/en_AU/2019/products/porsche-911-carrera-coupe-cabriolet-eighth-generation-18248.html"
+    },
+    "288295034": {
+      "brand": "MG",
+      "name": "MG5",
+      "year": "2023",
+      "engine": "1.5L four-cylinder petrol",
+      "trim": "Luxury / DEL",
+      "value": "5.5",
+      "cycle": "Combined",
+      "note": {
+        "en": "1.5L DEL CVT · manufacturer reference",
+        "ar": "1.5L DEL CVT · مرجع الشركة"
+      },
+      "sourceURL": "https://mgmyanmar.com.mm/wp-content/uploads/2024/03/mg5-brouchure.pdf"
+    },
+    "288700596": {
+      "brand": "Maserati",
+      "name": "Quattroporte",
+      "year": "2009",
+      "engine": "4.7L V8 petrol",
+      "trim": "",
+      "value": "15.71",
+      "cycle": "Combined",
+      "note": {
+        "en": "Quattroporte S 4.7 · 2009 manufacturer sheet",
+        "ar": "كواتروبورتي S 4.7 · ورقة الشركة لعام 2009"
+      },
+      "sourceURL": "https://allcarcentral.com/Maserati-pdf/Maserati_Quattroporte-S_2009.pdf"
+    },
+    "287890852": {
+      "brand": "Toyota",
+      "name": "Land Cruiser",
+      "year": "2026",
+      "engine": "3.5L V6 twin-turbo petrol",
+      "trim": "GXR V6 Twin Turbo 4WD",
+      "value": "9.9",
+      "cycle": "Manufacturer",
+      "note": {
+        "en": "Saudi GXR 3.5TT reference · converted from 10.1 km/L",
+        "ar": "مرجع GXR 3.5TT السعودي · تحويل من 10.1 كم/لتر"
+      },
+      "sourceURL": "https://www.toyota.com.sa/en/vehicles/lc300/full-specs"
+    }
+  }
+}

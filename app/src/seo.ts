@@ -8,7 +8,7 @@ import {absoluteAsset,canonicalUrl,SITE_URL} from "./site-paths";
 import {specValue} from "./v2-content";
 import appMeta from "./app-meta.json";
 
-export type SeoView="home"|"cars"|"features"|"updates"|"contact"|"saved"|"compare"|"car";
+export type SeoView="home"|"cars"|"features"|"finance"|"contact"|"saved"|"compare"|"car";
 
 /** Western digits in both languages (previews mix the price with the model year), e.g. "JOD 20,900" / "20,900 دينار". */
 const price=(vehicle:Vehicle,lang:Lang)=>{if(!vehicle.price)return null;const amount=vehicle.price.amount.toLocaleString("en-US");return lang==="ar"?amount+" دينار":"JOD "+amount;};
@@ -36,7 +36,7 @@ export function pageDescription(lang:Lang,view:SeoView,vehicleId?:string){
   home:["Electric, hybrid and petrol cars at AutoMall on Mecca Street 148, Amman. Full photo galleries, specifications and prices, and a direct line to the showroom on WhatsApp.","سيارات كهربائية وهايبرد وبنزين في أوتومول، شارع مكة 148، عمّان. صور كاملة ومواصفات وأسعار، وتواصل مباشر مع المعرض على واتساب."],
   cars:["Browse every car at AutoMall in Amman. Filter by powertrain, brand, body style and model year, and sort by price.","تصفح كل سيارات أوتومول في عمّان. اختر حسب نظام الحركة والماركة ونوع الهيكل وسنة الصنع، ورتّب حسب السعر."],
   features:["Find AutoMall cars by the equipment you want: panoramic roof, 360° cameras, heated and ventilated seats, head-up display and more.","ابحث في سيارات أوتومول حسب التجهيزات: فتحة سقف بانورامية، كاميرات 360، مقاعد مدفأة ومبردة، شاشة أمامية وغيرها."],
-  updates:["New arrivals and news from the AutoMall showroom in Amman.","وصل حديثاً وأخبار من معرض أوتومول في عمّان."],
+  finance:["Estimate your monthly car payment with AutoMall. Enter a price, down payment, loan term and annual rate. An indicative calculation, subject to the finance provider’s terms.","احسب قسط سيارتك الشهري التقريبي مع أوتومول. أدخل السعر والدفعة الأولى ومدة التمويل والنسبة السنوية. تقدير يخضع لشروط جهة التمويل."],
   contact:["Visit AutoMall on Mecca Street 148, Amman. Call, message us on WhatsApp, get directions, or ask about trading in your car.","زر أوتومول في شارع مكة 148، عمّان. اتصل أو راسلنا على واتساب، واحصل على الاتجاهات، أو اسأل عن استبدال سيارتك."],
   saved:["The cars you saved at AutoMall.","السيارات التي حفظتها في أوتومول."],
   compare:["Compare AutoMall cars side by side: power, range, mileage, equipment and price.","قارن سيارات أوتومول جنباً إلى جنب: القوة والمدى والممشى والتجهيزات والسعر."],

@@ -1,0 +1,240 @@
+{
+  "288432146": {
+    "brand": "Toyota",
+    "name": "Camry",
+    "year": "2021",
+    "engine": "2.5L petrol hybrid",
+    "trim": "LE Hybrid",
+    "value": "4.5",
+    "cycle": "EPA",
+    "note": {
+      "en": "Combined · converted from 52 US mpg",
+      "ar": "مشترك · تحويل من 52 ميل/غالون أمريكي"
+    },
+    "sourceURL": "https://engage.toyota.com/static/files/ebrochures/2021_camry_eBrochure.pdf"
+  },
+  "289155248": {
+    "brand": "BAIC",
+    "name": "BJ30e",
+    "year": "2025",
+    "engine": "1.5L turbo self-charging hybrid",
+    "trim": "Magic HEV 1.5L Turbo AWD",
+    "value": "6.45",
+    "cycle": "WLTC",
+    "note": {
+      "en": "Combined · AWD hybrid",
+      "ar": "مشترك · هايبرد بدفع كلي"
+    },
+    "sourceURL": "https://baic.iq/models/bj30"
+  },
+  "288717686": {
+    "brand": "BAIC",
+    "name": "BJ30e",
+    "year": "2025",
+    "engine": "1.5L turbo self-charging hybrid",
+    "trim": "Magic HEV 1.5L Turbo AWD",
+    "value": "6.45",
+    "cycle": "WLTC",
+    "note": {
+      "en": "Combined · AWD hybrid",
+      "ar": "مشترك · هايبرد بدفع كلي"
+    },
+    "sourceURL": "https://baic.iq/models/bj30"
+  },
+  "287913510": {
+    "brand": "BAIC",
+    "name": "BJ30e",
+    "year": "2025",
+    "engine": "1.5L turbo self-charging hybrid",
+    "trim": "Magic HEV 1.5L Turbo AWD · Grey",
+    "value": "6.45",
+    "cycle": "WLTC",
+    "note": {
+      "en": "Combined · AWD hybrid",
+      "ar": "مشترك · هايبرد بدفع كلي"
+    },
+    "sourceURL": "https://baic.iq/models/bj30"
+  },
+  "287912580": {
+    "brand": "BAIC",
+    "name": "BJ30e",
+    "year": "2025",
+    "engine": "1.5L turbo self-charging hybrid",
+    "trim": "Magic HEV 1.5L Turbo AWD · White",
+    "value": "6.45",
+    "cycle": "WLTC",
+    "note": {
+      "en": "Combined · AWD hybrid",
+      "ar": "مشترك · هايبرد بدفع كلي"
+    },
+    "sourceURL": "https://baic.iq/models/bj30"
+  },
+  "288657536": {
+    "brand": "EXEED",
+    "name": "Exlantix ET",
+    "year": "2026",
+    "engine": "1.5L turbo range extender",
+    "trim": "1.5L Turbo REEV AWD Luxury",
+    "value": "6.4",
+    "cycle": "WLTC",
+    "note": {
+      "en": "Charge-depleted · manufacturer reference",
+      "ar": "بطارية منخفضة الشحن · مرجع الشركة"
+    },
+    "sourceURL": "https://www.exeedinternational.com/global/et-reev/"
+  },
+  "289157148": {
+    "brand": "EXEED",
+    "name": "Exlantix ET",
+    "year": "2026",
+    "engine": "1.5L turbo petrol range extender",
+    "trim": "REEV AWD",
+    "value": "6.4",
+    "cycle": "WLTC",
+    "note": {
+      "en": "Charge-depleted · manufacturer reference",
+      "ar": "بطارية منخفضة الشحن · مرجع الشركة"
+    },
+    "sourceURL": "https://www.exeedinternational.com/global/et-reev/"
+  },
+  "289156972": {
+    "brand": "EXEED",
+    "name": "Exlantix ET",
+    "year": "2026",
+    "engine": "1.5L turbo petrol range extender",
+    "trim": "1.5L Turbo REEV AWD Luxury · Silver",
+    "value": "6.4",
+    "cycle": "WLTC",
+    "note": {
+      "en": "Charge-depleted · manufacturer reference",
+      "ar": "بطارية منخفضة الشحن · مرجع الشركة"
+    },
+    "sourceURL": "https://www.exeedinternational.com/global/et-reev/"
+  },
+  "288714784": {
+    "brand": "EXEED",
+    "name": "Exlantix ET",
+    "year": "2026",
+    "engine": "1.5L turbo petrol range extender",
+    "trim": "1.5L Turbo REEV AWD · Nardo Grey",
+    "value": "6.4",
+    "cycle": "WLTC",
+    "note": {
+      "en": "Charge-depleted · manufacturer reference",
+      "ar": "بطارية منخفضة الشحن · مرجع الشركة"
+    },
+    "sourceURL": "https://www.exeedinternational.com/global/et-reev/"
+  },
+  "288440948": {
+    "brand": "Jetour",
+    "name": "G700",
+    "year": "2026",
+    "engine": "2.0L turbo plug-in hybrid",
+    "trim": "Flagship PHEV VIP",
+    "value": "8.8",
+    "cycle": "WLTC",
+    "note": {
+      "en": "Charge-depleted · manufacturer reference",
+      "ar": "بطارية منخفضة الشحن · مرجع الشركة"
+    },
+    "sourceURL": "https://jetourglobal.com/g700/specification/"
+  },
+  "287890886": {
+    "brand": "Jetour",
+    "name": "G700",
+    "year": "2026",
+    "engine": "2.0L turbo plug-in hybrid",
+    "trim": "Premium",
+    "value": "8.8",
+    "cycle": "WLTC",
+    "note": {
+      "en": "Charge-depleted · manufacturer reference",
+      "ar": "بطارية منخفضة الشحن · مرجع الشركة"
+    },
+    "sourceURL": "https://jetourglobal.com/g700/specification/"
+  },
+  "287890782": {
+    "brand": "Jetour",
+    "name": "G700",
+    "year": "2026",
+    "engine": "2.0L turbo plug-in hybrid",
+    "trim": "GAIA 2.0L Turbo PHEV AWD",
+    "value": "8.8",
+    "cycle": "WLTC",
+    "note": {
+      "en": "Charge-depleted · manufacturer reference",
+      "ar": "بطارية منخفضة الشحن · مرجع الشركة"
+    },
+    "sourceURL": "https://jetourglobal.com/g700/specification/"
+  },
+  "288939920": {
+    "brand": "GAC",
+    "name": "EMKOO",
+    "year": "2025",
+    "engine": "1.5L turbo petrol",
+    "trim": "1.5L Turbo Panoramic",
+    "value": "6.4",
+    "cycle": "Manufacturer",
+    "note": {
+      "en": "1.5TGDI / 7WDCT · cycle not specified",
+      "ar": "1.5TGDI / 7WDCT · دورة القياس غير محددة"
+    },
+    "sourceURL": "https://www.gacgroup.com/en/suv/gac-emkoo"
+  },
+  "288938770": {
+    "brand": "Porsche",
+    "name": "911 Carrera",
+    "year": "2020",
+    "engine": "3.0L flat-six twin-turbo petrol",
+    "trim": "3.0L Twin-Turbo PDK (992)",
+    "value": "9.0",
+    "cycle": "NEDC-correlated",
+    "note": {
+      "en": "Combined · Carrera Coupé PDK",
+      "ar": "مشترك · كاريرا كوبيه PDK"
+    },
+    "sourceURL": "https://newsroom.porsche.com/en_AU/2019/products/porsche-911-carrera-coupe-cabriolet-eighth-generation-18248.html"
+  },
+  "288295034": {
+    "brand": "MG",
+    "name": "MG5",
+    "year": "2023",
+    "engine": "1.5L four-cylinder petrol",
+    "trim": "Luxury / DEL",
+    "value": "5.5",
+    "cycle": "Combined",
+    "note": {
+      "en": "1.5L DEL CVT · manufacturer reference",
+      "ar": "1.5L DEL CVT · مرجع الشركة"
+    },
+    "sourceURL": "https://mgmyanmar.com.mm/wp-content/uploads/2024/03/mg5-brouchure.pdf"
+  },
+  "288700596": {
+    "brand": "Maserati",
+    "name": "Quattroporte",
+    "year": "2009",
+    "engine": "4.7L V8 petrol",
+    "trim": "",
+    "value": "15.71",
+    "cycle": "Combined",
+    "note": {
+      "en": "Quattroporte S 4.7 · 2009 manufacturer sheet",
+      "ar": "كواتروبورتي S 4.7 · ورقة الشركة لعام 2009"
+    },
+    "sourceURL": "https://allcarcentral.com/Maserati-pdf/Maserati_Quattroporte-S_2009.pdf"
+  },
+  "287890852": {
+    "brand": "Toyota",
+    "name": "Land Cruiser",
+    "year": "2026",
+    "engine": "3.5L V6 twin-turbo petrol",
+    "trim": "GXR V6 Twin Turbo 4WD",
+    "value": "9.9",
+    "cycle": "Manufacturer",
+    "note": {
+      "en": "Saudi GXR 3.5TT reference · converted from 10.1 km/L",
+      "ar": "مرجع GXR 3.5TT السعودي · تحويل من 10.1 كم/لتر"
+    },
+    "sourceURL": "https://www.toyota.com.sa/en/vehicles/lc300/full-specs"
+  }
+}

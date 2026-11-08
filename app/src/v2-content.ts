@@ -1,4 +1,5 @@
 import rawFeatures from "./v2-feature-data.json";
+import {efficiencyFact} from "./v2-efficiency";
 import {vehicles,settings,onSiteDataChange,type Lang,type Vehicle} from "./site-data";
 import type {VehicleFeatureName} from "./components/vehicle-feature-icon";
 export type Localized={en:string;ar:string};
@@ -34,9 +35,8 @@ const refreshLists=()=>{FACEBOOK=settings.facebook;brandNames.splice(0,brandName
 refreshLists();onSiteDataChange(refreshLists);
 export const equipmentTiles=["panorama","camera360","heatedSeats","ventilatedSeats","hud","carplay"] as const;
 export function cardFacts(vehicle:Vehicle,lang:Lang){
- const fuel=specValue(vehicle,"Fuel / powertrain")??vehicle.type;
  return [
-  {icon:(isElectric(vehicle)?"range":vehicle.categories.includes("hybrid")?"hybrid":"engine") as VehicleFeatureName,label:lang==="ar"?(isElectric(vehicle)?"المدى المعلن":"نظام الحركة"):(isElectric(vehicle)?"Advertised range":"Powertrain"),value:isElectric(vehicle)&&vehicle.range?vehicle.range[lang]:fuel[lang]},
+  efficiencyFact(vehicle,lang),
   {icon:"mileage" as const,label:lang==="ar"?"العداد":"Mileage",value:specValue(vehicle,"Mileage")?.[lang]??"—"},
   {icon:"power" as const,label:lang==="ar"?"القوة والعزم":"Power · torque",value:[specValue(vehicle,"Power")?.[lang],specValue(vehicle,"Torque")?.[lang]?.replace(/ \((engine|المحرك)\)$/,"")].filter(Boolean).join(" · ")||"—"},
   engineFact(vehicle,lang)

@@ -1,21 +1,24 @@
 import {useRef,useState,type KeyboardEvent,type ReactNode} from "react";
 import {whatsapp,modelMessage,PHONE,type Lang,type Vehicle} from "@/site-data";
 import {copyV2,dealerPosts,equipmentFor,specValue,thumbSrc} from "@/v2-content";
-import {CompareButton,PaymentCalculator,SaveButton} from "./v2-garage-ui";
+import {CompareButton,SaveButton} from "./v2-garage-ui";
 import {OrderButton} from "./v2-order";
 import {bodyStyleFor,navigationCopy} from "@/v2-catalog";
 import {BrandLogo} from "./brand-logo";
 import {BodyStyleIcon} from "./body-style-icon";
 import {VehicleFeatureIcon,type VehicleFeatureName} from "./vehicle-feature-icon";
 import {ThemeToggle} from "./v2-theme";
+import {formatMoney,westernDigits} from "@/number-format";
+import {efficiencyFact} from "@/v2-efficiency";
+import {DirectionArrow} from "./direction-arrow";
 
 export type V2VehicleDetailsProps={vehicle:Vehicle;lang:Lang;catalogHref:string;homeHref:string;languageHref?:string};
-type DetailTile={label:string;value:string|undefined;icon:ReactNode;range?:boolean};
+type DetailTile={label:string;value:string|undefined;icon:ReactNode;range?:boolean;note?:string;sourceURL?:string};
 const detailCopy={
  en:{back:"Back to the collection",highlights:"Highlights",information:"Information",gallery:"Gallery",modelYear:"Model year",power:"Horsepower",torque:"Torque",mileage:"Mileage",battery:"Battery",powertrain:"Powertrain",transmission:"Transmission",seats:"Seats",body:"Body type",condition:"Condition",enquire:"Enquire on WhatsApp",breadcrumb:"Breadcrumb",photoPicker:"Choose a vehicle photo"},
  ar:{back:"العودة إلى السيارات",highlights:"أبرز المواصفات",information:"المعلومات",gallery:"الصور",modelYear:"سنة الموديل",power:"القوة الحصانية",torque:"عزم الدوران",mileage:"المسافة المقطوعة",battery:"البطارية",powertrain:"نظام الحركة",transmission:"ناقل الحركة",seats:"المقاعد",body:"نوع الهيكل",condition:"الحالة",enquire:"استفسر عبر واتساب",breadcrumb:"مسار الصفحة",photoPicker:"اختر صورة للسيارة"}
 };
-const Arrow=()=> <span aria-hidden="true">↗</span>;
+const Arrow=()=> <DirectionArrow kind="outward"/>;
 const FeatureIcon=({name}:{name:VehicleFeatureName})=><VehicleFeatureIcon name={name} size={22} className="vehicle-feature-icon"/>;
 const glyphs={
  year:<><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M4 10h16M8 3v4m8-4v4M8 14h3m3 0h2M8 17h3"/></>,
@@ -25,7 +28,7 @@ function DetailGlyph({name}:{name:keyof typeof glyphs}){
  return <svg className="vehicle-feature-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{glyphs[name]}</svg>;
 }
 function DetailTiles({items,className}:{items:DetailTile[];className:string}){
- return <dl className={className}>{items.filter((item):item is DetailTile&{value:string}=>!!item.value).map(item=><div className={item.range?"v2-showcase-stat v2-range-panel":"v2-showcase-stat"} key={item.label}><dt><span>{item.label}</span>{item.icon}</dt><dd>{item.value}</dd></div>)}</dl>;
+ return <dl className={className}>{items.filter((item):item is DetailTile&{value:string}=>!!item.value).map(item=><div className={item.range?"v2-showcase-stat v2-range-panel":"v2-showcase-stat"} key={item.label}><dt><span>{item.label}</span>{item.icon}</dt><dd><bdi>{westernDigits(item.value)}</bdi>{item.note&&<small className="v2-efficiency-note">{item.sourceURL?<a href={item.sourceURL} target="_blank" rel="noopener noreferrer">{item.note}<Arrow/></a>:item.note}</small>}</dd></div>)}</dl>;
 }
 
 export function V2VehicleDetails({vehicle,lang,catalogHref,homeHref,languageHref}:V2VehicleDetailsProps){
@@ -35,7 +38,7 @@ export function V2VehicleDetails({vehicle,lang,catalogHref,homeHref,languageHref
  const images=[...new Set([vehicle.image,...(vehicle.gallery??[])])];
  const name=vehicle.brand+" "+vehicle.name;
  const facebook=dealerPosts.find(post=>post.vehicleIds.includes(vehicle.id));
- const price=vehicle.price?new Intl.NumberFormat(lang==="ar"?"ar-JO":"en-JO",{style:"currency",currency:"JOD",maximumFractionDigits:0}).format(vehicle.price.amount):null;
+ const price=vehicle.price?formatMoney(vehicle.price.amount,lang):null;
  const enquiryHref=whatsapp(modelMessage(vehicle,lang));
  const value=(label:string)=>specValue(vehicle,label)?.[lang];
  const stats:DetailTile[]=[
@@ -43,10 +46,11 @@ export function V2VehicleDetails({vehicle,lang,catalogHref,homeHref,languageHref
   {label:d.mileage,value:value("Mileage"),icon:<FeatureIcon name="mileage"/>},
   value("Battery (seller stated)")?{label:d.battery,value:value("Battery (seller stated)"),icon:<FeatureIcon name="battery"/>}:{label:d.powertrain,value:value("Fuel / powertrain"),icon:<FeatureIcon name={vehicle.categories.includes("electric")?"battery":vehicle.categories.includes("hybrid")?"hybrid":"engine"}/>}
  ];
+ const efficiency=efficiencyFact(vehicle,lang);
  const highlights:DetailTile[]=[
   {label:d.power,value:value("Power"),icon:<FeatureIcon name="power"/>},
   {label:d.torque,value:value("Torque"),icon:<FeatureIcon name="torque"/>},
-  {label:d.transmission,value:value("Transmission"),icon:<FeatureIcon name="gearbox"/>},
+  {...efficiency,icon:<FeatureIcon name={efficiency.icon}/>},
   {label:d.seats,value:value("Seats"),icon:<FeatureIcon name="seats"/>},
   {label:d.body,value:value("Body style")??vehicle.type[lang],icon:<BodyStyleIcon name={bodyStyleFor(vehicle)}/>},
   {label:d.condition,value:value("Condition"),icon:<DetailGlyph name="condition"/>}
@@ -75,19 +79,19 @@ export function V2VehicleDetails({vehicle,lang,catalogHref,homeHref,languageHref
  const selectGalleryPhoto=(index:number)=>{setPhotoIndex(index);stage.current?.focus({preventScroll:true});stage.current?.scrollIntoView({block:"start",behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth"});};
  return <section className="v2-detail-page v2-wrap v2-showcase">
   <nav className="v2-showcase-breadcrumb" aria-label={d.breadcrumb}><a href={homeHref}>{n.home}</a><span aria-hidden="true">/</span><a href={catalogHref}>{n.cars}</a><span aria-hidden="true">/</span><span>{name}</span></nav>
-  <div className="v2-showcase-bar"><a className="v2-showcase-back" href={catalogHref}><span aria-hidden="true">{lang==="ar"?"→":"←"}</span>{d.back}</a><a className="v2-showcase-wordmark" href={homeHref} aria-label={lang==="ar"?"أوتومول الرئيسية":"AutoMall home"}>AUTOMALL</a><div className="v2-showcase-bar-actions"><ThemeToggle lang={lang} className="v2-theme-toggle v2-showcase-theme"/>{languageHref&&<a className="v2-showcase-language" href={languageHref} aria-label={lang==="ar"?"التغيير إلى الإنجليزية":"Change language to Arabic"}>{lang==="ar"?"English":"العربية"}</a>}<a className="v2-showcase-visit" href={enquiryHref} target="_blank" rel="noopener noreferrer">{d.enquire}<Arrow/></a></div></div>
+  <div className="v2-showcase-bar"><a className="v2-showcase-back" href={catalogHref}><DirectionArrow kind="back"/>{d.back}</a><a className="v2-showcase-wordmark" href={homeHref} aria-label={lang==="ar"?"أوتومول الرئيسية":"AutoMall home"}>AUTOMALL</a><div className="v2-showcase-bar-actions"><ThemeToggle lang={lang} className="v2-theme-toggle v2-showcase-theme"/>{languageHref&&<a className="v2-showcase-language" href={languageHref} aria-label={lang==="ar"?"التغيير إلى الإنجليزية":"Change language to Arabic"}>{lang==="ar"?"English":"العربية"}</a>}<a className="v2-showcase-visit" href={enquiryHref} target="_blank" rel="noopener noreferrer">{d.enquire}<Arrow/></a></div></div>
   <div className="v2-showcase-top">
-   <div className="v2-showcase-title"><div className="v2-showcase-brand"><BrandLogo brand={vehicle.brand}/><span>{vehicle.brand}</span></div><h1 id="v2-detail-title" tabIndex={-1}>{name}</h1>{vehicle.status&&vehicle.status!=="available"&&<p className="v2-status-note" data-status={vehicle.status}>{vehicle.status==="sold"?(lang==="ar"?"تم بيع هذه السيارة. تواصل معنا لسيارات مشابهة.":"This car has been sold. Ask us about similar cars."):(lang==="ar"?"هذه السيارة محجوزة حالياً.":"This car is currently reserved.")}</p>}<p className="v2-showcase-meta">{vehicle.year} · {vehicle.type[lang]} · {vehicle.color[lang]}</p><p className="v2-showcase-price"><small>{price?t.priceLabel:""}</small><strong>{price??t.askPrice}</strong></p><div className="v2-showcase-actions"><a className="v2-button v2-button-orange" href={enquiryHref} target="_blank" rel="noopener noreferrer">{d.enquire}<Arrow/></a><a className="v2-text-link" href={"tel:"+PHONE}>{t.call}<Arrow/></a></div><div className="v2-showcase-garage"><SaveButton vehicle={vehicle} lang={lang} withLabel/><CompareButton vehicle={vehicle} lang={lang} withLabel/><OrderButton vehicle={vehicle} lang={lang}/></div></div>
+   <div className="v2-showcase-title"><div className="v2-showcase-brand"><BrandLogo brand={vehicle.brand}/><span>{vehicle.brand}</span></div><h1 id="v2-detail-title" tabIndex={-1}>{name}</h1>{vehicle.status&&vehicle.status!=="available"&&<p className="v2-status-note" data-status={vehicle.status}>{vehicle.status==="sold"?(lang==="ar"?"تم بيع هذه السيارة. تواصل معنا لسيارات مشابهة.":"This car has been sold. Ask us about similar cars."):(lang==="ar"?"هذه السيارة محجوزة حالياً.":"This car is currently reserved.")}</p>}<p className="v2-showcase-meta">{vehicle.year} · {vehicle.type[lang]} · {vehicle.color[lang]}</p><p className="v2-showcase-price"><small>{price?t.priceLabel:""}</small><strong><bdi>{price??t.askPrice}</bdi></strong></p><div className="v2-showcase-actions"><a className="v2-button v2-button-orange" href={enquiryHref} target="_blank" rel="noopener noreferrer">{d.enquire}<Arrow/></a><a className="v2-text-link" href={"tel:"+PHONE}>{t.call}<Arrow/></a></div><div className="v2-showcase-garage"><SaveButton vehicle={vehicle} lang={lang} withLabel/><CompareButton vehicle={vehicle} lang={lang} withLabel/><OrderButton vehicle={vehicle} lang={lang}/></div></div>
    <DetailTiles items={stats} className="v2-showcase-stats"/>
   </div>
   <div className="v2-showcase-stage">
-   <div className="v2-showcase-main" ref={stage} tabIndex={-1} role="group" aria-label={t.gallery}><img className="v2-dialog-image" src={images[photoIndex]} alt={name+" "+vehicle.year+" — "+t.photo+" "+(photoIndex+1)} width="1600" height="1600" fetchPriority="high"/><a className="v2-showcase-full-photo" href={images[photoIndex]} target="_blank" rel="noopener noreferrer">{lang==="ar"?"عرض الصورة كاملة":"Open full photo"}<Arrow/></a><div className="v2-gallery-controls"><button type="button" aria-label={t.previousPhoto} onClick={()=>selectPhoto(photoIndex-1)}><span aria-hidden="true">{lang==="ar"?"›":"‹"}</span></button><span role="status" aria-live="polite">{t.photo} {photoIndex+1} {t.of} {images.length}</span><button type="button" aria-label={t.nextPhoto} onClick={()=>selectPhoto(photoIndex+1)}><span aria-hidden="true">{lang==="ar"?"‹":"›"}</span></button></div></div>
+   <div className="v2-showcase-main" ref={stage} tabIndex={-1} role="group" aria-label={t.gallery}><img className="v2-dialog-image" src={images[photoIndex]} alt={name+" "+vehicle.year+" — "+t.photo+" "+(photoIndex+1)} width="1600" height="1600" fetchPriority="high"/><a className="v2-showcase-full-photo" href={images[photoIndex]} target="_blank" rel="noopener noreferrer">{lang==="ar"?"عرض الصورة كاملة":"Open full photo"}<Arrow/></a><div className="v2-gallery-controls"><button type="button" aria-label={t.previousPhoto} onClick={()=>selectPhoto(photoIndex-1)}><DirectionArrow kind="back"/></button><span role="status" aria-live="polite"><span>{t.photo}</span> <bdi dir="ltr">{photoIndex+1}</bdi> <span>{t.of}</span> <bdi dir="ltr">{images.length}</bdi></span><button type="button" aria-label={t.nextPhoto} onClick={()=>selectPhoto(photoIndex+1)}><DirectionArrow/></button></div></div>
    <div className="v2-gallery-thumbs v2-showcase-thumbs" ref={thumbs} role="group" aria-label={d.photoPicker}>{images.map((image,index)=><button key={image} type="button" aria-pressed={photoIndex===index} aria-label={t.photo+" "+(index+1)+" "+t.of+" "+images.length} onClick={()=>selectPhoto(index)} onKeyDown={event=>thumbnailKey(event,index)}><img src={thumbSrc(image)} alt="" width="72" height="72" loading="lazy" decoding="async"/></button>)}</div>
   </div>
   <h2 className="v2-showcase-heading">{d.highlights}</h2><DetailTiles items={highlights} className="v2-showcase-highlights"/>
-  <PaymentCalculator vehicle={vehicle} lang={lang}/>
+  {efficiency.sourceURL&&<p className="v2-fuel-reference-note">{lang==="ar"?"صرف الوقود رقم مرجعي للفئة أو منظومة الحركة في المصدر؛ يختلف حسب السوق ودورة القياس وشحن البطارية وطريقة القيادة.":"Fuel use is a reference for the trim or powertrain in the linked source. Market, test cycle, battery charge and driving conditions affect consumption."}</p>}
   <div className="v2-showcase-tabs" role="tablist" aria-label={name} ref={tabs}><button type="button" role="tab" id="v2-showcase-tab-information" aria-selected={tab==="information"} aria-controls="v2-showcase-panel-information" tabIndex={tab==="information"?0:-1} onClick={()=>setTab("information")} onKeyDown={event=>tabKey(event,0)}>{d.information}</button><button type="button" role="tab" id="v2-showcase-tab-gallery" aria-selected={tab==="gallery"} aria-controls="v2-showcase-panel-gallery" tabIndex={tab==="gallery"?0:-1} onClick={()=>setTab("gallery")} onKeyDown={event=>tabKey(event,1)}>{d.gallery} ({images.length})</button></div>
-  <div className="v2-showcase-panel" role="tabpanel" id="v2-showcase-panel-information" aria-labelledby="v2-showcase-tab-information" tabIndex={0} hidden={tab!=="information"}><dl className="v2-showcase-specs">{vehicle.specs?.map(spec=><div key={spec.label.en}><dt>{spec.label[lang]}</dt><dd>{spec.value[lang]}</dd></div>)}</dl>{equipmentFor(vehicle).length>0&&<section className="v2-showcase-equipment"><h3>{t.equipmentTitleSmall}</h3><div>{equipmentFor(vehicle).map(feature=><div key={feature.id}><FeatureIcon name={feature.id}/><span>{feature.label[lang]}</span></div>)}</div></section>}<p className="v2-showcase-note">{t.detailNote}</p><div className="v2-showcase-sources">{facebook&&<a href={facebook.url} target="_blank" rel="noopener noreferrer">{t.facebookSource}<Arrow/></a>}<a href={"tel:"+PHONE}>{t.call}<Arrow/></a></div></div>
+  <div className="v2-showcase-panel" role="tabpanel" id="v2-showcase-panel-information" aria-labelledby="v2-showcase-tab-information" tabIndex={0} hidden={tab!=="information"}><dl className="v2-showcase-specs">{!vehicle.categories.includes("electric")&&<div><dt>{efficiency.label}</dt><dd><bdi>{efficiency.value}</bdi>{efficiency.note&&<small className="v2-efficiency-note">{efficiency.sourceURL?<a href={efficiency.sourceURL} target="_blank" rel="noopener noreferrer">{efficiency.note}<Arrow/></a>:efficiency.note}</small>}</dd></div>}{vehicle.specs?.map(spec=><div key={spec.label.en}><dt>{spec.label[lang]}</dt><dd><bdi>{westernDigits(spec.value[lang])}</bdi></dd></div>)}</dl>{equipmentFor(vehicle).length>0&&<section className="v2-showcase-equipment"><h3>{t.equipmentTitleSmall}</h3><div>{equipmentFor(vehicle).map(feature=><div key={feature.id}><FeatureIcon name={feature.id}/><span>{feature.label[lang]}</span></div>)}</div></section>}<p className="v2-showcase-note">{t.detailNote}</p><div className="v2-showcase-sources">{facebook&&<a href={facebook.url} target="_blank" rel="noopener noreferrer">{t.facebookSource}<Arrow/></a>}<a href={"tel:"+PHONE}>{t.call}<Arrow/></a></div></div>
   <div className="v2-showcase-panel" role="tabpanel" id="v2-showcase-panel-gallery" aria-labelledby="v2-showcase-tab-gallery" tabIndex={0} hidden={tab!=="gallery"}><ul className="v2-showcase-gallery">{images.map((image,index)=><li key={image}><button type="button" aria-label={t.photo+" "+(index+1)+" "+t.of+" "+images.length} onClick={()=>selectGalleryPhoto(index)}><img src={thumbSrc(image)} alt={name+" — "+t.photo+" "+(index+1)} width="800" height="600" loading="lazy" decoding="async"/></button></li>)}</ul></div>
  </section>;
 }

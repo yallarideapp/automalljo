@@ -82,7 +82,7 @@ describe("AutoMall V2 catalogue navigation",()=>{
    expect(pagePaths).toContain("/v2/car/"+id+"/");
    expect(pagePaths).toContain("/ar/v2/car/"+id+"/");
   }
-  for(const prefix of ["","/ar"])for(const page of ["","cars/","features/","updates/","contact/"])expect(pagePaths).toContain(prefix+"/v2/"+page);
+  for(const prefix of ["","/ar"])for(const page of ["","cars/","features/","finance/","contact/"])expect(pagePaths).toContain(prefix+"/v2/"+page);
  });
  test("filters by a from-to model year range",()=>{
   const ranged=filterVehicles({...defaultFilters,yearFrom:"2020",yearTo:"2025"},vehicles);

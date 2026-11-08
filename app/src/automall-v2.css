@@ -12,6 +12,8 @@
 .automall-v2 :where(h1,h2,h3){font-weight:500}
 .automall-v2 :where(section[id]){scroll-margin-top:24px}
 .automall-v2 .vehicle-feature-icon{display:block;flex-shrink:0}
+.automall-v2 .v2-direction-arrow{display:block;flex-shrink:0}
+.automall-v2[dir=rtl] .v2-direction-arrow{transform:scaleX(-1)}
 .v2-wrap{padding-inline:max(var(--v2-gutter),calc((100% - var(--v2-width))/2))}
 .v2-header{position:absolute;z-index:30;inset-block-start:25px;inset-inline:var(--v2-gutter);display:flex;align-items:center;justify-content:space-between;gap:25px;color:var(--v2-white);max-width:var(--v2-width);margin-inline:auto}
 .v2-brand{display:flex;gap:11px;align-items:center;flex-shrink:0;line-height:1.1}
@@ -1544,3 +1546,29 @@ html[data-v2-theme=light] .automall-v2 .v2-menu-item>b{color:#ffffff}
 html[data-v2-theme=light] .automall-v2 :is(.v2-nav>a[aria-current=page],.v2-footer-wordmark>span,.v2-calc-monthly strong,.v2-powertrain-tabs>button[aria-pressed=true]>span,.v2-mobile-bar a[aria-current=page],.v2-mobile-bar a[aria-current=page]>span){color:#a64c0c}
 html[data-v2-theme=light] .automall-v2 .v2-showcase .v2-showcase-garage .v2-order-button{border-color:#a64c0c;color:#a64c0c}
 html[data-v2-theme=light] .automall-v2 .v2-showcase .v2-showcase-garage .v2-order-button:hover{background:#a64c0c;color:#ffffff}
+
+/* Arabic typography, Western numeric grouping, and the dedicated payment page. */
+.automall-v2[lang=ar]{font-family:"Noto Sans Arabic",Outfit,sans-serif}
+.automall-v2[dir=rtl] :is(h1,h2,h3){letter-spacing:0}
+.v2-dealer-hero-content h1>span{display:block}
+.automall-v2[dir=rtl] .v2-home-banner .v2-dealer-hero-content h1{font-size:clamp(32px,3.1vw,44px);font-weight:600;line-height:1.65;letter-spacing:0;white-space:normal}
+.automall-v2[dir=rtl] .v2-home-banner .v2-dealer-hero-content>p:not(.v2-eyebrow){max-width:35em;line-height:1.95;text-wrap:pretty}
+.automall-v2 bdi{unicode-bidi:isolate;font-variant-numeric:tabular-nums}
+.v2-finance-page{padding-bottom:70px}
+.v2-finance-page>.v2-calculator{margin-top:0}
+.v2-car-finance{padding-block:8px 64px}
+.v2-car-finance>.v2-calculator{margin-top:24px}
+.v2-finance-page .v2-calculator-intro h2,.v2-car-finance .v2-calculator-intro h2{line-height:1.7}
+.v2-calc-field strong{display:inline-flex;align-items:baseline;gap:5px;flex-wrap:wrap}
+.v2-calc-monthly strong,.v2-calculator-result dd,.v2-showcase-price strong,.v2-car-bottom strong{font-variant-numeric:tabular-nums}
+@media(max-width:700px){
+ .automall-v2[dir=rtl] .v2-home-banner .v2-dealer-hero-content h1{font-size:clamp(25px,6.5vw,32px);line-height:1.7}
+ .automall-v2[dir=rtl] .v2-home-banner .v2-dealer-hero-content>p:not(.v2-eyebrow){font-size:13px;line-height:1.95}
+ .v2-finance-page{padding-bottom:36px}.v2-car-finance{padding-bottom:36px}
+}
+@media(min-width:701px){
+ .automall-v2[dir=rtl] .v2-home-banner .v2-dealer-hero-content{width:42%;max-width:none;padding-inline:32px}
+ .automall-v2[dir=rtl] .v2-home-banner .v2-dealer-hero-content h1{font-size:clamp(26px,3vw,42px)}
+ .automall-v2[dir=rtl] .v2-home-banner .v2-dealer-hero-content>p:not(.v2-eyebrow){max-width:100%;font-size:14px}
+}
+@media(min-width:701px) and (max-width:960px){.automall-v2[dir=rtl] .v2-home-banner .v2-dealer-hero-content{padding-inline:24px}}
