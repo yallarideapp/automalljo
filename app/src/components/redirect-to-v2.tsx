@@ -8,7 +8,10 @@ import type {Lang} from "@/site-data";
  */
 export function redirectHead(lang:Lang){
  const target=sitePath("v2",lang);
- return {meta:[{title:lang==="ar"?"أوتومول | عمّان":"AutoMall | Amman"},{httpEquiv:"refresh",content:"0; url="+target},{name:"robots",content:"noindex, follow"}],links:[{rel:"canonical",href:canonicalUrl("v2",lang)}]};
+ // Old links such as /?lang=ar go to the Arabic page; this runs before the refresh below.
+ const arabic=JSON.stringify(sitePath("v2","ar"));
+ return {meta:[{title:lang==="ar"?"أوتومول | عمّان":"AutoMall | Amman"},{httpEquiv:"refresh",content:"0; url="+target},{name:"robots",content:"noindex, follow"}],links:[{rel:"canonical",href:canonicalUrl("v2",lang)}],
+  scripts:[{children:"if(/[?&]lang=ar(&|$)/.test(location.search))location.replace("+arabic+");"}]};
 }
 export function RedirectToV2({lang}:{lang:Lang}){
  const target=sitePath("v2",lang);

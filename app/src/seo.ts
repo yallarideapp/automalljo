@@ -9,7 +9,8 @@ import {specValue} from "./v2-content";
 
 export type SeoView="home"|"cars"|"features"|"updates"|"contact"|"saved"|"compare"|"car";
 
-const price=(vehicle:Vehicle,lang:Lang)=>vehicle.price?new Intl.NumberFormat(lang==="ar"?"ar-JO":"en-JO",{style:"currency",currency:"JOD",maximumFractionDigits:0}).format(vehicle.price.amount):null;
+/** Western digits in both languages (previews mix the price with the model year), e.g. "JOD 20,900" / "20,900 دينار". */
+const price=(vehicle:Vehicle,lang:Lang)=>{if(!vehicle.price)return null;const amount=vehicle.price.amount.toLocaleString("en-US");return lang==="ar"?amount+" دينار":"JOD "+amount;};
 const spec=(vehicle:Vehicle,label:string,lang:Lang)=>specValue(vehicle,label)?.[lang];
 const digits=(text?:string)=>{const found=text?.replace(/[,\s]/g,"").match(/\d+(?:\.\d+)?/);return found?Number(found[0]):undefined;};
 
