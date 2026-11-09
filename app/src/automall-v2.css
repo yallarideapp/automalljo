@@ -1572,3 +1572,17 @@ html[data-v2-theme=light] .automall-v2 .v2-showcase .v2-showcase-garage .v2-orde
  .automall-v2[dir=rtl] .v2-home-banner .v2-dealer-hero-content>p:not(.v2-eyebrow){max-width:100%;font-size:14px}
 }
 @media(min-width:701px) and (max-width:960px){.automall-v2[dir=rtl] .v2-home-banner .v2-dealer-hero-content{padding-inline:24px}}
+/* Catalogue page numbers */
+.v2-pagination{display:flex;align-items:center;justify-content:center;gap:8px;padding-top:44px;direction:ltr}
+[dir=rtl] .v2-pagination{direction:rtl}
+.v2-pagination ol{display:flex;align-items:center;gap:8px;margin:0;padding:0;list-style:none}
+.v2-page-link{display:grid;place-items:center;min-width:44px;height:44px;padding:0 6px;border:1px solid var(--v2-line);border-radius:50%;color:var(--v2-white);font-size:14px;font-weight:500;text-decoration:none;transition:border-color .2s,color .2s,background .2s}
+a.v2-page-link:hover{border-color:var(--v2-orange);color:var(--v2-orange)}
+a.v2-page-link:focus-visible{outline:2px solid var(--v2-orange);outline-offset:3px}
+.v2-page-link[aria-current=page]{background:var(--v2-orange);border-color:var(--v2-orange);color:#0b0d0f}
+span.v2-page-step{opacity:.35}
+.v2-page-gap{display:grid;place-items:center;width:20px;color:var(--v2-muted,#9aa3ad)}
+#v2-collection-results{scroll-margin-top:110px}
+#v2-collection-results:focus{outline:none}
+@media(max-width:420px){.v2-pagination,.v2-pagination ol{gap:6px}.v2-page-link{min-width:40px;height:40px}}
+html[data-v2-theme=light] .automall-v2 .v2-page-link[aria-current=page]{background:#a64c0c;border-color:#a64c0c;color:#ffffff}

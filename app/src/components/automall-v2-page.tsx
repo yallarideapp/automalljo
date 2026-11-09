@@ -23,7 +23,8 @@ import {efficiencyFact} from "@/v2-efficiency";
 import {DirectionArrow} from "./direction-arrow";
 
 export type V2View="home"|"cars"|"features"|"finance"|"contact"|"car"|"saved"|"compare";
-const PAGE_SIZE=9;
+/** Cars per page in the catalogue. */
+const PAGE_SIZE=12;
 const modelName=(vehicle:Vehicle)=>vehicle.brand+" "+vehicle.name;
 const priceText=(vehicle:Vehicle,lang:Lang)=>vehicle.price?formatMoney(vehicle.price.amount,lang):null;
 /** Cars added in this browser's admin panel have no prerendered page, so they open the shared /v2/car/local/ page. */
@@ -250,14 +251,38 @@ function HomePage({lang,filters,onChange}:{lang:Lang;filters:CatalogFilters;onCh
    <section className="v2-refined-contact v2-wrap"><div><p className="v2-eyebrow">{lang==="ar"?"زر أوتومول":"VISIT AUTOMALL"}</p><h2>{lang==="ar"?"تعرف على سيارتك عن قرب.":"See your next car in person."}</h2><p>{t.address} · {t.city}</p></div><a className="v2-button v2-button-orange" href={pagePath("contact",lang)}>{n.contact}<Arrow/></a></section>
 </div>;
 }
+/** Page numbers under the car list: every page up to 7, then first, last and the pages around the current one (‹ 1 … 4 5 6 … 12 ›). */
+function Pagination({lang,current,pages,href,onGo}:{lang:Lang;current:number;pages:number;href:(page:number)=>string;onGo:(page:number)=>void}){
+ const shown:(number|"gap")[]=[];
+ for(let number=1;number<=pages;number++){if(pages<=7||number===1||number===pages||Math.abs(number-current)<=1)shown.push(number);else if(shown[shown.length-1]!=="gap")shown.push("gap");}
+ const words=lang==="ar"?{nav:"صفحات السيارات",prev:"الصفحة السابقة",next:"الصفحة التالية",page:"الصفحة"}:{nav:"Car pages",prev:"Previous page",next:"Next page",page:"Page"};
+ const link=(target:number,label:string,content:React.ReactNode,extra:string,current_?:boolean)=><a className={"v2-page-link "+extra} href={href(target)} aria-label={label} aria-current={current_?"page":undefined} onClick={event=>{if(event.metaKey||event.ctrlKey||event.shiftKey||event.button!==0)return;event.preventDefault();onGo(target);}}>{content}</a>;
+ return <nav className="v2-pagination" aria-label={words.nav}>
+  {current>1?link(current-1,words.prev,<span aria-hidden="true">{lang==="ar"?"→":"←"}</span>,"v2-page-step"):<span className="v2-page-link v2-page-step" aria-hidden="true">{lang==="ar"?"→":"←"}</span>}
+  <ol>{shown.map((item,index)=><li key={item==="gap"?"gap"+index:item}>{item==="gap"?<span className="v2-page-gap" aria-hidden="true">…</span>:link(item,words.page+" "+item,<span dir="ltr">{item}</span>,"",item===current)}</li>)}</ol>
+  {current<pages?link(current+1,words.next,<span aria-hidden="true">{lang==="ar"?"←":"→"}</span>,"v2-page-step"):<span className="v2-page-link v2-page-step" aria-hidden="true">{lang==="ar"?"←":"→"}</span>}
+ </nav>;
+}
 function CatalogPage({lang,filters,onChange}:{lang:Lang;filters:CatalogFilters;onChange:(value:CatalogFilters)=>void}){
- const t=copyV2[lang],n=navigationCopy[lang],[visibleCount,setVisibleCount]=useState(PAGE_SIZE),deferredQuery=useDeferredValue(filters.query);
+ const t=copyV2[lang],n=navigationCopy[lang],deferredQuery=useDeferredValue(filters.query);
  const matching=useMemo(()=>filterVehicles({...filters,query:deferredQuery}),[filters,deferredQuery]);
- const visible=matching.slice(0,visibleCount);
- useEffect(()=>{setVisibleCount(PAGE_SIZE);},[filters]);
- const change=(key:keyof CatalogFilters,value:string)=>onChange({...filters,[key]:value});
- const reset=()=>onChange({...defaultFilters});
- const more=()=>{const next=matching[visible.length];setVisibleCount(count=>count+PAGE_SIZE);if(next)requestAnimationFrame(()=>document.getElementById("v2-car-"+next.id)?.focus());};
+ // Numbered pages: ?page=2 in the address, so Back/Forward and shared links keep the page.
+ const [page,setPage]=useState(1);
+ useEffect(()=>{const read=()=>setPage(Math.max(1,Math.floor(Number(new URLSearchParams(window.location.search).get("page")))||1));read();window.addEventListener("popstate",read);return()=>window.removeEventListener("popstate",read);},[]);
+ const pages=Math.max(1,Math.ceil(matching.length/PAGE_SIZE)),current=Math.min(page,pages);
+ const visible=matching.slice((current-1)*PAGE_SIZE,current*PAGE_SIZE);
+ const first=matching.length?(current-1)*PAGE_SIZE+1:0,last=(current-1)*PAGE_SIZE+visible.length;
+ const pageHref=(target:number)=>{const search=filtersToSearch(filters);const query=[search,target>1?"page="+target:""].filter(Boolean).join("&");return pagePath("cars",lang)+(query?"?"+query:"");};
+ const goToPage=(target:number)=>{
+  setPage(target);window.history.pushState(window.history.state,"",pageHref(target)+window.location.hash);
+  const top=document.getElementById("v2-collection-results");
+  top?.scrollIntoView({behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"});
+  requestAnimationFrame(()=>top?.focus({preventScroll:true}));
+ };
+ // Any change of filters starts again from page 1.
+ const update=(next:CatalogFilters)=>{setPage(1);onChange(next);};
+ const change=(key:keyof CatalogFilters,value:string)=>update({...filters,[key]:value});
+ const reset=()=>update({...defaultFilters});
  const bodyOptions:PickerOption[]=[{value:"all",label:n.allBody,visual:<BodyStyleIcon name="all"/>},...bodyStyles.map(body=>({value:body.id,label:body.label[lang],keywords:body.label.en+" "+body.label.ar,visual:<BodyStyleIcon name={body.id}/>,count:vehicles.filter(vehicle=>(filters.powertrain==="all"||vehicle.categories.includes(filters.powertrain))&&bodyStyleFor(vehicle)===body.id).length}))];
  const brandOptions:PickerOption[]=[{value:"all",label:t.allBrands,visual:<Icon name="emblem" size={20}/>},...brandNames.map(brand=>({value:brand,label:brand,visual:<BrandLogo brand={brand}/>}))];
  const sortOptions:PickerOption[]=[{value:"featured",label:t.featured,visual:<Icon name="featured" size={20}/>},{value:"newest",label:t.newest,visual:<Icon name="newest" size={20}/>},{value:"price",label:t.lowPrice,visual:<Icon name="priceUp" size={20}/>},{value:"price-desc",label:n.highPrice,visual:<Icon name="priceDown" size={20}/>},{value:"name",label:n.byName,visual:<Icon name="alphabet" size={20}/>}];
@@ -268,7 +293,7 @@ function CatalogPage({lang,filters,onChange}:{lang:Lang;filters:CatalogFilters;o
  if(filters.equipment!=="all")activeFilters.push({key:"equipment",label:featureLabels[filters.equipment as VehicleFeatureName]?.[lang]??filters.equipment});
  if(filters.yearFrom!=="all"||filters.yearTo!=="all")activeFilters.push({key:"yearFrom",label:n.yearFilter+": "+(filters.yearFrom==="all"?modelYears[0]:filters.yearFrom)+"–"+(filters.yearTo==="all"?modelYears[modelYears.length-1]:filters.yearTo)});
  if(filters.query.trim())activeFilters.push({key:"query",label:t.search+": "+filters.query.trim()});
- const removeFilter=(key:keyof CatalogFilters)=>{if(key==="yearFrom"){onChange({...filters,yearFrom:"all",yearTo:"all"});requestAnimationFrame(()=>document.getElementById("v2-year")?.focus());return;}change(key,defaultFilters[key]);requestAnimationFrame(()=>{const target=key==="query"?"v2-search":key==="body"?"v2-body":key==="brand"?"v2-brand":key==="equipment"?"v2-equipment":null;if(key==="equipment")document.getElementById("v2-search")?.focus();else if(target)document.getElementById(target)?.focus();else document.querySelector<HTMLButtonElement>(".v2-powertrain-tabs button")?.focus();});};
+ const removeFilter=(key:keyof CatalogFilters)=>{if(key==="yearFrom"){update({...filters,yearFrom:"all",yearTo:"all"});requestAnimationFrame(()=>document.getElementById("v2-year")?.focus());return;}change(key,defaultFilters[key]);requestAnimationFrame(()=>{const target=key==="query"?"v2-search":key==="body"?"v2-body":key==="brand"?"v2-brand":key==="equipment"?"v2-equipment":null;if(key==="equipment")document.getElementById("v2-search")?.focus();else if(target)document.getElementById(target)?.focus();else document.querySelector<HTMLButtonElement>(".v2-powertrain-tabs button")?.focus();});};
  return <>
   <PageHeading lang={lang} view="cars"/>
   <section className="v2-inventory v2-wrap" id="v2-collection" aria-label={n.cars}>
@@ -278,15 +303,15 @@ function CatalogPage({lang,filters,onChange}:{lang:Lang;filters:CatalogFilters;o
      <div className="v2-search"><label htmlFor="v2-search">{t.search}</label><div><input id="v2-search" type="search" maxLength={100} placeholder={t.searchPlaceholder} value={filters.query} onChange={event=>change("query",event.target.value)}/><span aria-hidden="true">⌕</span></div></div>
      <div className="v2-brand-select"><label htmlFor="v2-brand">{t.brand}</label><FilterPicker id="v2-brand" label={t.brand} lang={lang} value={filters.brand} options={brandOptions} onChange={value=>change("brand",value)}/></div>
      <div className="v2-body-select v2-body-filters"><label htmlFor="v2-body">{n.bodyFilter}</label><FilterPicker id="v2-body" label={n.bodyFilter} lang={lang} value={filters.body} options={bodyOptions} onChange={value=>change("body",value)}/></div>
-     <div className="v2-year-select"><label htmlFor="v2-year">{n.yearFilter}</label><YearRangePicker id="v2-year" label={n.yearFilter} lang={lang} years={modelYears} from={filters.yearFrom} to={filters.yearTo} onChange={(yearFrom,yearTo)=>onChange({...filters,yearFrom,yearTo})}/></div>
+     <div className="v2-year-select"><label htmlFor="v2-year">{n.yearFilter}</label><YearRangePicker id="v2-year" label={n.yearFilter} lang={lang} years={modelYears} from={filters.yearFrom} to={filters.yearTo} onChange={(yearFrom,yearTo)=>update({...filters,yearFrom,yearTo})}/></div>
      <div className="v2-sort-select"><label htmlFor="v2-sort">{t.sort}</label><FilterPicker id="v2-sort" label={t.sort} lang={lang} value={filters.sort} options={sortOptions} onChange={value=>change("sort",value)}/></div>
     </div>
     {(activeFilters.length>0||filters.sort!=="featured")&&<div className="v2-active-filters" aria-label={n.activeFilters}>{activeFilters.map(filter=><button type="button" key={filter.key} onClick={()=>removeFilter(filter.key)} aria-label={n.removeFilter+": "+filter.label}>{filter.key==="body"&&<span className="v2-filter-chip-visual"><BodyStyleIcon name={filters.body}/></span>}{filter.key==="brand"&&<span className="v2-filter-chip-visual"><BrandLogo brand={filters.brand}/></span>}{filter.label}<span aria-hidden="true">×</span></button>)}<button type="button" className="v2-clear-all" onClick={reset}>{t.reset}</button></div>}
    </div>
-   <div className="v2-filter-summary"><div className="v2-count" role="status" aria-live="polite"><span>{t.showing} {visible.length} {t.of} {matching.length} {t.cars}</span><time dateTime="2026-10-29">{lang==="ar"?"29 أكتوبر 2026":"29 OCT 2026"}</time></div></div>
-   <div className="v2-car-grid">{visible.map(vehicle=><CarCard key={vehicle.id} vehicle={vehicle} lang={lang} filters={filters}/>)}</div>
+   <div className="v2-filter-summary"><div className="v2-count" role="status" aria-live="polite"><span>{t.showing} <span dir="ltr">{first}–{last}</span> {t.of} {matching.length} {t.cars}</span><time dateTime="2026-10-29">{lang==="ar"?"29 أكتوبر 2026":"29 OCT 2026"}</time></div></div>
+   <div className="v2-car-grid" id="v2-collection-results" tabIndex={-1} aria-label={(lang==="ar"?"الصفحة ":"Page ")+current+(lang==="ar"?" من ":" of ")+pages}>{visible.map(vehicle=><CarCard key={vehicle.id} vehicle={vehicle} lang={lang} filters={filters}/>)}</div>
    {matching.length===0&&<div className="v2-empty"><Icon name="mileage" size={42}/><h3>{t.emptyTitle}</h3><p>{t.emptyBody}</p><button className="v2-button v2-button-dark" type="button" onClick={reset}>{t.reset}<Arrow/></button></div>}
-   {visible.length<matching.length&&<div className="v2-load-more"><button className="v2-button v2-button-dark" type="button" onClick={more}>{t.more}<span aria-hidden="true">+{Math.min(PAGE_SIZE,matching.length-visible.length)}</span></button></div>}
+   {pages>1&&<Pagination lang={lang} current={current} pages={pages} href={pageHref} onGo={goToPage}/>}
    <p className="v2-source-note">{t.snapshot}</p>
   </section>
  </>;
