@@ -1587,7 +1587,7 @@ span.v2-page-step{opacity:.35}
 @media(max-width:420px){.v2-pagination,.v2-pagination ol{gap:6px}.v2-page-link{min-width:40px;height:40px}}
 html[data-v2-theme=light] .automall-v2 .v2-page-link[aria-current=page]{background:#a64c0c;border-color:#a64c0c;color:#ffffff}
 /* Opening screen: a car drawn in orange, filled, lit, then the page (≈2.6 s, once per session) */
-.am-splash{position:fixed;inset:0;z-index:2000;display:grid;place-items:center;padding:24px;background:radial-gradient(ellipse 70% 55% at 50% 45%,#1a1f25 0%,#0b0d0f 70%);color:#f1f3f4;animation:am-splash-out .55s cubic-bezier(.6,0,.3,1) 2.2s forwards;cursor:pointer}
+.am-splash{position:fixed;inset:0;z-index:2000;display:grid;place-items:center;padding:24px;background:radial-gradient(ellipse 70% 55% at 50% 45%,#1a1f25 0%,#0b0d0f 70%);color:#f1f3f4;animation:am-splash-out .55s cubic-bezier(.6,0,.3,1) 2.45s forwards;cursor:pointer}
 html.am-splash-seen .am-splash{display:none}
 html.am-splash-done .am-splash{opacity:0;visibility:hidden;transition:opacity .35s ease,visibility 0s .35s}
 @keyframes am-splash-out{to{opacity:0;visibility:hidden;transform:scale(1.03)}}
@@ -1628,3 +1628,11 @@ html[data-v2-theme=light] .am-splash-shadow{opacity:0;animation-name:am-splash-s
 html[data-v2-theme=light] .am-splash-tag{color:#56606b}
 html[data-v2-theme=light] .am-splash-word b{color:#a64c0c;border-color:#a64c0c}
 @media(prefers-reduced-motion:reduce){.am-splash{display:none}}
+.am-splash-logo{position:relative;display:block;width:clamp(108px,17vw,136px);aspect-ratio:1;margin-top:18px;border-radius:24%;opacity:0;transform:scale(.55) translateY(10px);animation:am-splash-logo .75s cubic-bezier(.2,1.3,.35,1) 1.3s forwards}
+.am-splash-logo img{display:block;width:100%;height:100%;border-radius:inherit;object-fit:cover;transform:scale(1.45)}
+.am-splash-logo>span{display:block;width:100%;height:100%;border-radius:inherit;overflow:hidden}
+.am-splash-logo::after{content:"";position:absolute;inset:-2px;border-radius:inherit;box-shadow:0 0 0 0 #ed8738aa;animation:am-splash-ring 1s ease-out 1.75s forwards;pointer-events:none}
+@keyframes am-splash-logo{to{opacity:1;transform:none}}
+@keyframes am-splash-ring{0%{box-shadow:0 0 0 0 #ed8738aa}100%{box-shadow:0 0 0 22px #ed873800}}
+.am-splash-logo{filter:drop-shadow(0 12px 28px #ed873855)}
+.am-splash-tag{margin-top:6px}

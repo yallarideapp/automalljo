@@ -1,9 +1,10 @@
 import type {Lang} from "@/site-data";
+import {assetPath} from "@/site-paths";
 
 /**
  * Opening screen (like a launch / splash page): an orange line draws a sports car, the body fills
- * with a metallic sheen, the headlight flashes and the wheels turn, the AUTOMALL wordmark rises,
- * then the screen fades away to the page (about 2.6 seconds).
+ * with a metallic sheen, the headlight flashes and the wheels turn, the shop's logo pops in,
+ * then the screen fades away to the page (about 2.9 seconds).
  *
  * - It is in the prerendered HTML and runs on CSS alone, so it plays straight away and always ends,
  *   even before the page's JavaScript has loaded.
@@ -11,7 +12,7 @@ import type {Lang} from "@/site-data";
  * - A tap, click or key press skips it. It never shows with reduced motion.
  * - The car is an original drawing, not any brand's design.
  */
-const bootScript=`(function(){var d=document.documentElement;try{if(sessionStorage.getItem("am-splash")){d.classList.add("am-splash-seen");return}sessionStorage.setItem("am-splash","1")}catch(e){}var s=document.getElementById("am-splash");if(!s)return;var done=function(){d.classList.add("am-splash-done");removeEventListener("keydown",done);};s.addEventListener("pointerdown",done);addEventListener("keydown",done);setTimeout(function(){d.classList.add("am-splash-done")},3200);})();`;
+const bootScript=`(function(){var d=document.documentElement;try{if(sessionStorage.getItem("am-splash")){d.classList.add("am-splash-seen");return}sessionStorage.setItem("am-splash","1")}catch(e){}var s=document.getElementById("am-splash");if(!s)return;var done=function(){d.classList.add("am-splash-done");removeEventListener("keydown",done);};s.addEventListener("pointerdown",done);addEventListener("keydown",done);setTimeout(function(){d.classList.add("am-splash-done")},3500);})();`;
 
 export function V2Splash({lang}:{lang:Lang}){
  return <>
@@ -49,7 +50,8 @@ export function V2Splash({lang}:{lang:Lang}){
      </g>)}
      <path className="am-splash-road" d="M20 187H580" pathLength="1"/>
     </svg>
-    <p className="am-splash-word"><span>AUTOMALL</span><b>JO</b></p>
+    {/* The shop's own logo (orange tile: AUTOMALL · مجمع السيارات) */}
+    <span className="am-splash-logo"><span><img src={assetPath("assets/logo.jpg")} alt="" width="136" height="136" decoding="sync" fetchPriority="high"/></span></span>
     <p className="am-splash-tag">{lang==="ar"?"خيارات أكثر. إمكانيات أكثر.":"More choices. More possibilities."}</p>
    </div>
   </div>
