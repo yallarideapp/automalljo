@@ -86,22 +86,33 @@
 
 @media (max-width: 700px) and (prefers-reduced-motion: no-preference) {
   .v2-home-banner .v2-dealer-hero-content {
-    display: flex;
-    flex-direction: column;
-    padding-block-start: calc(var(--v2-banner-photo-height) + 14px);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    column-gap: 10px;
+  }
+
+  .v2-home-banner .v2-dealer-hero-content > h1 {
+    grid-area: 1 / 1;
+  }
+
+  .v2-home-banner .v2-dealer-hero-content > :is(p, .v2-dealer-hero-actions) {
+    grid-column: 1 / -1;
   }
 
   .v2-engine-gauge {
-    order: -1;
-    align-self: flex-start;
-    gap: 8px;
-    margin-block: 0 10px;
-    padding-block: 4px;
+    grid-area: 1 / 2;
+    flex-direction: column;
+    gap: 2px;
+    margin: 0;
+    padding: 5px;
     background: var(--v2-panel);
   }
 
   .v2-engine-dial { inline-size: 28px; block-size: 28px; }
-  .v2-engine-readout strong { font-size: 16px; }
+  .v2-engine-readout { justify-items: center; }
+  .v2-engine-readout strong { min-inline-size: 40px; font-size: 15px; text-align: center; }
+  .v2-engine-readout > span { font-size: 8px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
