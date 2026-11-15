@@ -45,7 +45,7 @@ describe("AutoMall V2 catalogue navigation",()=>{
  test("equipment selection retains the exact listing and its EV range",()=>{
   const results=filterVehicles({...defaultFilters,powertrain:"electric",body:"suv",brand:"Zeekr",equipment:"hud"},vehicles);
   expect(results.map(vehicle=>vehicle.id)).toEqual(["288700472"]);
-  expect(results[0].range?.en).toBe("615 km (cycle unspecified)");
+  expect(results[0].range).toEqual({en:"615 km",ar:"615 كم"});
  });
 
  test("serializes filters for reload, links, back navigation and language switching",()=>{
