@@ -19,6 +19,10 @@ import {CompareBar,CompareButton,HeaderMenu,PaymentCalculator,SaveButton,garageC
 import {setCompare,useCompareIds,useSavedIds,toggleCompare} from "@/v2-garage";
 import v2Css from "../automall-v2.css?url";
 import showcaseCss from "../v2-showcase.css?url";
+import engineCss from "../v2-engine-gauge.css?url";
+import paymentMotionCss from "../v2-payment-motion.css?url";
+import { ENGINE_REV_TIMES, V2EngineGauge } from "./v2-engine-gauge";
+import { useV2PageMotion } from "./v2-page-motion";
 import {formatMoney} from "@/number-format";
 import {efficiencyFact} from "@/v2-efficiency";
 import {DirectionArrow} from "./direction-arrow";
@@ -51,7 +55,7 @@ export function v2Head(lang:Lang,view:V2View="home",vehicleId?:string){
    {property:"og:title",content:shareTitle},{property:"og:description",content:description},{property:"og:url",content:url},{property:"og:type",content:"website"},
    {property:"og:image",content:image.url},{property:"og:image:width",content:image.width},{property:"og:image:height",content:image.height},{property:"og:image:alt",content:image.alt},
    {name:"twitter:card",content:"summary_large_image"},{name:"twitter:title",content:shareTitle},{name:"twitter:description",content:description},{name:"twitter:image",content:image.url}],
-  links:[...localizedLinks(page,lang),{rel:"stylesheet",href:v2Css},...(view==="car"?[{rel:"stylesheet",href:showcaseCss}]:[])],
+  links:[...localizedLinks(page,lang),{rel:"stylesheet",href:v2Css},...(view==="car"?[{rel:"stylesheet",href:showcaseCss}]:[]), ...(view==="home"?[{rel:"stylesheet",href:engineCss}]:[]), ...(view==="car"||view==="finance"?[{rel:"stylesheet",href:paymentMotionCss}]:[])],
   ...(structured?{scripts:[{type:"application/ld+json",children:jsonLd(structured)}]}:{}),
  };
 }
@@ -126,8 +130,40 @@ const filmProgress=(time:number,duration:number)=>{
  if(index===0){const span=duration-bannerFilm.wrap+bannerFilm.cars[1].from;return Math.min(1,(time>=bannerFilm.wrap?time-bannerFilm.wrap:duration-bannerFilm.wrap+time)/span);}
  const end=bannerFilm.cars[index+1]?.from??bannerFilm.wrap;return Math.min(1,(time-bannerFilm.cars[index].from)/(end-bannerFilm.cars[index].from));
 };
-function BannerFilmHero({lang,cars}:{lang:Lang;cars:ReturnType<typeof bannerCarList>}){
- const t=copyV2[lang],h=homeCopy[lang];
+function BannerCopy({lang, revving}: {lang: Lang; revving: boolean}) {
+ const copy = homeCopy[lang];
+ const labels = copyV2[lang];
+ const impactWords = lang === "ar" ? [0, 2, 4] : [0, 3, 5];
+ let wordIndex = 0;
+
+ return <>
+  {revving && <div className="v2-engine-headlights" aria-hidden="true">
+   {ENGINE_REV_TIMES.map(peak => <span key={peak} style={{ animationDelay: peak + "ms" }}/>)}
+  </div>}
+  <div className="v2-dealer-hero-content">
+   <h1 id="v2-dealer-title" aria-label={copy.title.replace("\n", " ")} tabIndex={-1}>
+    {copy.title.split("\n").map(line => <span key={line}>
+     {line.split(/( +)/).map((word, index) => {
+      if (!word.trim()) return word;
+      const beat = impactWords.indexOf(wordIndex++);
+      return beat < 0 ? word : <span className="v2-engine-word" key={index}
+       style={{ animationDelay: (ENGINE_REV_TIMES[beat] - 125) + "ms" }}>{word}</span>;
+     })}
+    </span>)}
+   </h1>
+   <p>{copy.description}</p>
+   <div className="v2-dealer-hero-actions">
+    <a className="v2-button v2-button-orange" href={pagePath("cars",lang)}>{labels.browse}<Arrow/></a>
+    <a className="v2-button v2-button-outline" href={whatsapp(genericMessage(lang))} target="_blank" rel="noopener noreferrer">{labels.whatsapp}<Arrow/></a>
+   </div>
+   <V2EngineGauge lang={lang} intro={revving}/>
+  </div>
+ </>;
+}
+
+type BannerMotion = {opening: boolean; revving: boolean};
+function BannerFilmHero({lang,cars,opening,revving}:BannerMotion & {lang:Lang;cars:ReturnType<typeof bannerCarList>}){
+ const t=copyV2[lang];
  const section=useRef<HTMLElement>(null),video=useRef<HTMLVideoElement>(null);
  const [index,setIndex]=useState(0),[playing,setPlaying]=useState(true),[canPlay,setCanPlay]=useState(false),[onScreen,setOnScreen]=useState(true);
  const car=cars[index].vehicle;
@@ -142,7 +178,7 @@ function BannerFilmHero({lang,cars}:{lang:Lang;cars:ReturnType<typeof bannerCarL
   if(target&&"IntersectionObserver" in window){observer=new IntersectionObserver(([entry])=>setOnScreen(entry.isIntersecting),{threshold:.2});observer.observe(target);}
   return()=>{motion.removeEventListener("change",update);document.removeEventListener("visibilitychange",update);observer?.disconnect();};
  },[]);
- const running=playing&&canPlay&&onScreen;
+ const running=playing&&canPlay&&onScreen&&!opening&&!revving;
  useEffect(()=>{
   const element=video.current;if(!element)return;
   element.muted=true;element.defaultPlaybackRate=bannerFilm.rate;element.playbackRate=bannerFilm.rate;
@@ -162,7 +198,7 @@ function BannerFilmHero({lang,cars}:{lang:Lang;cars:ReturnType<typeof bannerCarL
   fading.current=window.setTimeout(()=>{element.currentTime=time;element.style.opacity="";},260);
  };
  const label=modelName(car)+" "+car.year+" — AutoMall";
- return <section ref={section} className="v2-dealer-hero v2-banner-film-mode" data-rotating={running||undefined} aria-labelledby="v2-dealer-title" aria-roledescription={lang==="ar"?"عارض سيارات":"carousel"}>
+ return <section ref={section} className="v2-dealer-hero v2-banner-film-mode" data-rotating={running||undefined} data-engine-intro={revving||undefined} aria-labelledby="v2-dealer-title" aria-roledescription={lang==="ar"?"عارض سيارات":"carousel"}>
   <div className="v2-banner-track v2-banner-film" id="v2-banner-cars" role="group" aria-label={lang==="ar"?"فيديو سيارات البانر":"Banner cars video"} tabIndex={0} onKeyDown={event=>{if(event.key==="ArrowLeft"||event.key==="ArrowRight"){event.preventDefault();showCar(index+(event.key==="ArrowRight"?1:-1)*(lang==="ar"?-1:1));}}}>
    <div className="v2-banner-slide"><img className="v2-banner-backdrop" src={bannerFilm.poster} alt="" aria-hidden="true" width="1280" height="720" decoding="async"/>
     <video ref={video} className="v2-dealer-hero-image v2-banner-film-video" poster={bannerFilm.poster} muted loop playsInline disablePictureInPicture preload="auto" width="1280" height="720" role="img" aria-label={label} onSeeked={()=>{seeking.current=false;read();}} onLoadedMetadata={read}>
@@ -170,14 +206,14 @@ function BannerFilmHero({lang,cars}:{lang:Lang;cars:ReturnType<typeof bannerCarL
     </video>
    </div>
   </div>
-  <div className="v2-dealer-hero-content"><h1 id="v2-dealer-title" tabIndex={-1}>{h.title.split("\n").map(line=><span key={line}>{line}</span>)}</h1><p>{h.description}</p><div className="v2-dealer-hero-actions"><a className="v2-button v2-button-orange" href={pagePath("cars",lang)}>{t.browse}<Arrow/></a><a className="v2-button v2-button-outline" href={whatsapp(genericMessage(lang))} target="_blank" rel="noopener noreferrer">{t.whatsapp}<Arrow/></a></div></div>
+  <BannerCopy lang={lang} revving={revving}/>
   <a className="v2-dealer-hero-model" href={pagePath("car",lang,car.id)}>{cars[index].label} <span>{specValue(car,"Fuel / powertrain")?.[lang]}</span><Arrow/></a>
   <div className="v2-banner-controls"><button type="button" aria-label={lang==="ar"?"السيارة السابقة في البانر":"Previous banner car"} aria-controls="v2-banner-cars" onClick={()=>showCar(index-1)}><DirectionArrow kind="back"/></button><div className="v2-banner-pagination"><div className="v2-banner-dots">{cars.map((item,slide)=><button type="button" key={item.vehicle.id} aria-label={(lang==="ar"?"عرض ":"Show ")+item.label} aria-current={slide===index?"true":undefined} aria-controls="v2-banner-cars" onClick={()=>showCar(slide)}/>)}</div><span className="v2-banner-status"><span className="v2-banner-count" dir="ltr" aria-live={running?"off":"polite"} aria-atomic="true">0{index+1} / 0{cars.length}</span><button type="button" className="v2-banner-pause" aria-pressed={!playing} aria-label={playing?(lang==="ar"?"إيقاف الحركة":"Pause the banner"):(lang==="ar"?"تشغيل الحركة":"Play the banner")} onClick={()=>setPlaying(value=>!value)}>{playing?<svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true"><rect x="2" y="1.5" width="2.6" height="9" rx=".8" fill="currentColor"/><rect x="7.4" y="1.5" width="2.6" height="9" rx=".8" fill="currentColor"/></svg>:<svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true"><path d="M3 1.6v8.8L10.4 6z" fill="currentColor"/></svg>}</button></span></div><button type="button" aria-label={lang==="ar"?"السيارة التالية في البانر":"Next banner car"} aria-controls="v2-banner-cars" onClick={()=>showCar(index+1)}><DirectionArrow/></button></div>
  </section>;
 }
-function BannerCarousel({lang}:{lang:Lang}){
+function BannerCarousel({lang,opening,revving}:BannerMotion & {lang:Lang}){
  const bannerCars=bannerCarList();
- const t=copyV2[lang],h=homeCopy[lang],track=useRef<HTMLDivElement>(null),active=useRef(0),measuredWidth=useRef(0),[index,setIndex]=useState(0),car=bannerCars[index].vehicle;
+ const t=copyV2[lang],track=useRef<HTMLDivElement>(null),active=useRef(0),measuredWidth=useRef(0),[index,setIndex]=useState(0),car=bannerCars[index].vehicle;
  const readSlide=()=>{const element=track.current;if(!element||!element.clientWidth||measuredWidth.current&&element.clientWidth!==measuredWidth.current)return;const next=Math.max(0,Math.min(bannerCars.length-1,Math.round(Math.abs(element.scrollLeft)/element.clientWidth)));active.current=next;setIndex(previous=>previous===next?previous:next);};
  // Slides change with a gentle glide (about a second). Jumps of more than one car fade instead of rewinding across the cars in between.
  const glide=useRef(0);
@@ -208,19 +244,19 @@ function BannerCarousel({lang}:{lang:Lang}){
   if(target&&"IntersectionObserver" in window){observer=new IntersectionObserver(([entry])=>setOnScreen(entry.isIntersecting),{threshold:.25});observer.observe(target);}
   return()=>{motion.removeEventListener("change",update);document.removeEventListener("visibilitychange",update);observer?.disconnect();window.cancelAnimationFrame(glide.current);};
  },[]);
- const rotating=playing&&canAutoplay&&onScreen&&bannerCars.length>1;
+ const rotating=playing&&canAutoplay&&onScreen&&!opening&&!revving&&bannerCars.length>1;
  useEffect(()=>{if(!rotating)return;const timer=window.setTimeout(()=>showSlide(index+1),BANNER_SLIDE_MS);return()=>window.clearTimeout(timer);},[index,rotating]);
  useEffect(()=>{const element=track.current;if(!element)return;measuredWidth.current=element.clientWidth;const observer=new ResizeObserver(()=>{if(element.clientWidth===measuredWidth.current)return;measuredWidth.current=element.clientWidth;element.scrollTo({left:(lang==="ar"?-1:1)*active.current*measuredWidth.current,behavior:"instant"});});observer.observe(element);return()=>observer.disconnect();},[lang]);
- return <section ref={section} className="v2-dealer-hero" data-rotating={rotating||undefined} style={{"--v2-banner-slide-ms":BANNER_SLIDE_MS+"ms"} as React.CSSProperties} aria-labelledby="v2-dealer-title" aria-roledescription={lang==="ar"?"عارض سيارات":"carousel"}>
+ return <section ref={section} className="v2-dealer-hero" data-rotating={rotating||undefined} data-engine-intro={revving||undefined} style={{"--v2-banner-slide-ms":BANNER_SLIDE_MS+"ms"} as React.CSSProperties} aria-labelledby="v2-dealer-title" aria-roledescription={lang==="ar"?"عارض سيارات":"carousel"}>
   <div className="v2-banner-track" id="v2-banner-cars" ref={track} role="group" aria-label={lang==="ar"?"سيارات البانر، اسحب جانبياً":"Banner cars, swipe sideways"} tabIndex={0} onScroll={readSlide} onKeyDown={event=>{if(event.target!==event.currentTarget)return;if(event.key==="ArrowLeft"||event.key==="ArrowRight"){event.preventDefault();showSlide(index+(event.key==="ArrowRight"?1:-1)*(lang==="ar"?-1:1));}else if(event.key==="Home"||event.key==="End"){event.preventDefault();showSlide(event.key==="End"?bannerCars.length-1:0);}}}>
    {bannerCars.map((item,slide)=><div className="v2-banner-slide" key={item.vehicle.id} role="group" aria-roledescription={lang==="ar"?"شريحة":"slide"} aria-label={(slide+1)+" / "+bannerCars.length} aria-hidden={slide!==index}>{(()=>{const alt=modelName(item.vehicle)+" "+item.vehicle.year+" — AutoMall",video=bannerVideoIds.has(item.vehicle.id)?bannerVideoPath(item.vehicle.id):null;return <><img className="v2-banner-backdrop" src={video?video.poster:item.photo} alt="" aria-hidden="true" width="1600" height="1600" loading={slide===0?"eager":"lazy"} decoding="async"/>{video?<BannerVideo video={video} label={alt} active={slide===index} paused={!playing}/>:<img className="v2-dealer-hero-image" src={item.photo} alt={alt} width="1600" height="1600" loading={slide===0?"eager":"lazy"} fetchPriority={slide===0?"high":"low"} decoding="async"/>}</>;})()}</div>)}
   </div>
-  <div className="v2-dealer-hero-content"><h1 id="v2-dealer-title" tabIndex={-1}>{h.title.split("\n").map(line=><span key={line}>{line}</span>)}</h1><p>{h.description}</p><div className="v2-dealer-hero-actions"><a className="v2-button v2-button-orange" href={pagePath("cars",lang)}>{t.browse}<Arrow/></a><a className="v2-button v2-button-outline" href={whatsapp(genericMessage(lang))} target="_blank" rel="noopener noreferrer">{t.whatsapp}<Arrow/></a></div></div>
+  <BannerCopy lang={lang} revving={revving}/>
   <a className="v2-dealer-hero-model" href={pagePath("car",lang,car.id)}>{bannerCars[index].label} <span>{specValue(car,"Fuel / powertrain")?.[lang]}</span><Arrow/></a>
   <div className="v2-banner-controls"><button type="button" aria-label={lang==="ar"?"السيارة السابقة في البانر":"Previous banner car"} aria-controls="v2-banner-cars" onClick={()=>showSlide(index-1)}><DirectionArrow kind="back"/></button><div className="v2-banner-pagination"><div className="v2-banner-dots">{bannerCars.map((item,slide)=><button type="button" key={item.vehicle.id} aria-label={(lang==="ar"?"عرض ":"Show ")+item.label} aria-current={slide===index?"true":undefined} aria-controls="v2-banner-cars" onClick={()=>showSlide(slide)}/>)}</div><span className="v2-banner-status"><span className="v2-banner-count" dir="ltr" aria-live={rotating?"off":"polite"} aria-atomic="true">0{index+1} / 0{bannerCars.length}</span><button type="button" className="v2-banner-pause" aria-pressed={!playing} aria-label={playing?(lang==="ar"?"إيقاف الحركة":"Pause the banner"):(lang==="ar"?"تشغيل الحركة":"Play the banner")} onClick={()=>setPlaying(value=>!value)}>{playing?<svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true"><rect x="2" y="1.5" width="2.6" height="9" rx=".8" fill="currentColor"/><rect x="7.4" y="1.5" width="2.6" height="9" rx=".8" fill="currentColor"/></svg>:<svg viewBox="0 0 12 12" width="10" height="10" aria-hidden="true"><path d="M3 1.6v8.8L10.4 6z" fill="currentColor"/></svg>}</button></span></div><button type="button" aria-label={lang==="ar"?"السيارة التالية في البانر":"Next banner car"} aria-controls="v2-banner-cars" onClick={()=>showSlide(index+1)}><DirectionArrow/></button></div>
  </section>;
 }
-function HomePage({lang,filters,onChange}:{lang:Lang;filters:CatalogFilters;onChange:(value:CatalogFilters)=>void}){
+function HomePage({lang,filters,onChange,opening,revving}:BannerMotion & {lang:Lang;filters:CatalogFilters;onChange:(value:CatalogFilters)=>void}){
  const t=copyV2[lang],n=navigationCopy[lang],h=homeCopy[lang];
  const featuredRail=useRef<HTMLDivElement>(null),[railEdges,setRailEdges]=useState({start:true,end:false});
  const readRailEdges=()=>{const rail=featuredRail.current;if(!rail)return;const position=Math.abs(rail.scrollLeft),maximum=rail.scrollWidth-rail.clientWidth;const start=position<2,end=position>=maximum-2;setRailEdges(previous=>previous.start===start&&previous.end===end?previous:{start,end});};
@@ -233,7 +269,7 @@ function HomePage({lang,filters,onChange}:{lang:Lang;filters:CatalogFilters;onCh
  const brandOptions:PickerOption[]=[{value:"all",label:t.allBrands,visual:<Icon name="emblem" size={20}/>},...brandNames.map(brand=>({value:brand,label:brand,visual:<BrandLogo brand={brand}/>}))];
  const powerOptions:PickerOption[]=[{value:"all",label:n.allPower,visual:<Icon name="energy" size={20}/>,count:vehicles.length},...powertrains.map(power=>({value:power.id,label:power.label[lang],keywords:power.label.en+" "+power.label.ar,visual:<Icon name={power.id==="electric"?"battery":power.id==="hybrid"?"hybrid":"engine"} size={20}/>,count:vehicles.filter(vehicle=>vehicle.categories.includes(power.id)).length}))];
  return <div className="v2-home-refined v2-home-banner">
-  {(()=>{const cars=filmCars();return cars?<BannerFilmHero lang={lang} cars={cars}/>:<BannerCarousel lang={lang}/>;})()}
+  {(()=>{const cars=filmCars();return cars?<BannerFilmHero lang={lang} cars={cars} opening={opening} revving={revving}/>:<BannerCarousel lang={lang} opening={opening} revving={revving}/>;})()}
   <form className="v2-home-search" action={pagePath("cars",lang)} method="get" aria-label={h.findTitle}>
    <div className="v2-home-search-heading"><h2>{h.findTitle}</h2><p>{h.findDescription}</p></div>
    <div className="v2-home-search-fields">
@@ -412,10 +448,11 @@ export function AutoMallV2Page({lang,view="home",vehicleId:routeVehicleId}:{lang
  const waitingForLocalCar=routeVehicleId==="local"&&(!local.ready||localCarId===null);
  const vehicleId=routeVehicleId==="local"?localCarId??undefined:routeVehicleId;
  const t=copyV2[lang],n=navigationCopy[lang],l=legal[lang],page=useRef<HTMLDivElement>(null),[menu,setMenu]=useState(false),[filters,setFilters]=useState<CatalogFilters>({...defaultFilters});
+ const motionPhase = useV2PageMotion(page, view === "home");
  const closeMenu=useCallback(()=>setMenu(false),[]);
  const navViews=["home","cars","finance","contact"] as const;
  const updateFilters=(value:CatalogFilters)=>{setFilters(value);const search=filtersToSearch(value);window.history.replaceState(window.history.state,"",window.location.pathname+(search?"?"+search:"")+window.location.hash);};
  useEffect(()=>{const read=()=>setFilters(filtersFromSearch(new URLSearchParams(window.location.search)));read();window.addEventListener("popstate",read);return()=>window.removeEventListener("popstate",read);},[]);
  useEffect(()=>{const element=page.current;if(!element)return;const reduced=window.matchMedia("(prefers-reduced-motion: reduce)");const targets=Array.from(element.querySelectorAll<HTMLElement>("[data-reveal]"));for(const target of targets)if(reduced.matches||target.getBoundingClientRect().top<window.innerHeight)target.dataset.visible="true";element.dataset.ready="true";const observer=new IntersectionObserver(entries=>{for(const entry of entries)if(entry.isIntersecting){(entry.target as HTMLElement).dataset.visible="true";observer.unobserve(entry.target);}},{rootMargin:"60px",threshold:.08});for(const target of targets)observer.observe(target);return()=>observer.disconnect();},[view,local.version,waitingForLocalCar]);
- return <div ref={page} className="automall-v2" data-view={view} lang={lang} dir={lang==="ar"?"rtl":"ltr"}><script dangerouslySetInnerHTML={{__html:themeBootScript}}/><V2Splash lang={lang}/><header className="v2-header"><a className="v2-brand" href={pagePath("home",lang)} aria-label={lang==="ar"?"أوتومول الرئيسية":"AutoMall home"}><img src={assetPath("assets/logo.jpg")} alt="AutoMall" width="42" height="42"/><span>AUTOMALL<small lang="ar">مجمع السيارات</small></span></a><nav className="v2-nav" aria-label={lang==="ar"?"التنقل الرئيسي":"Main navigation"}>{navViews.map(item=><a key={item} href={item==="cars"?withFilters(pagePath(item,lang),filters):pagePath(item,lang)} aria-current={view===item||view==="car"&&item==="cars"?"page":undefined} onClick={()=>setMenu(false)}>{n[item]}</a>)}</nav><div className="v2-header-actions"><a className="v2-language" href={withFilters(pagePath(view,lang==="en"?"ar":"en",vehicleId),filters)}>{lang==="en"?"العربية":"English"}</a><ThemeToggle lang={lang}/><a className="v2-search-shortcut" href={pagePath("cars",lang)+"#v2-search"} aria-label={t.search}><NavIcon name="search"/></a><a className="v2-header-chat" href={whatsapp(genericMessage(lang))} target="_blank" rel="noopener noreferrer">{lang==="ar"?"واتساب":"WhatsApp"}<Arrow/></a><HeaderMenu lang={lang} open={menu} onToggle={()=>setMenu(!menu)} onClose={closeMenu} savedHref={pagePath("saved",lang)} compareHref={pagePath("compare",lang)} pages={navViews.map(item=>({href:item==="cars"?withFilters(pagePath(item,lang),filters):pagePath(item,lang),label:n[item],current:view===item||view==="car"&&item==="cars"}))}/></div></header><main id="main-content" key={local.version}>{waitingForLocalCar?<p className="v2-local-wait v2-wrap" role="status">{lang==="ar"?"جارٍ التحميل…":"Loading…"}</p>:view==="home"?<HomePage lang={lang} filters={filters} onChange={updateFilters}/>:view==="cars"?<CatalogPage lang={lang} filters={filters} onChange={updateFilters}/>:view==="features"?<FeaturesPage lang={lang}/>:view==="finance"?<FinancePage lang={lang}/>:view==="contact"?<ContactPage lang={lang}/>:view==="saved"?<SavedPage lang={lang}/>:view==="compare"?<ComparePage lang={lang}/>:<DetailPage key={vehicleId} lang={lang} vehicleId={vehicleId} filters={filters}/>}</main><footer className="v2-footer v2-wrap"><div className="v2-footer-top"><a className="v2-footer-wordmark" href={pagePath("home",lang)}>AUTOMALL<span>JO</span></a><p>{t.footerLine}</p><div><a href={INSTAGRAM} target="_blank" rel="noopener noreferrer">Instagram<Arrow/></a><a href={FACEBOOK} target="_blank" rel="noopener noreferrer">Facebook<Arrow/></a></div></div><div className="v2-footer-bottom"><span>© 2026 AutoMall</span><nav aria-label={t.legal}><a href={pagePath("contact",lang)}>{n.contact}</a><a href={pagePath("features",lang)}>{n.features}</a><a href={pagePath("finance",lang)}>{n.finance}</a><a href={pagePath("saved",lang)}>{garageCopy[lang].savedCars}</a><a href={pagePath("compare",lang)}>{garageCopy[lang].compareNow}</a><a href={sitePath("privacy",lang)}>{l.privacyTitle}</a><a href={sitePath("terms",lang)}>{l.termsTitle}</a><a href={sitePath("",lang)+"?v=scroll"}>{t.versionOne}</a></nav></div><p className="v2-trademark">{trademarkNotice(lang)}</p></footer>{view!=="compare"&&<CompareBar lang={lang} compareHref={pagePath("compare",lang)}/>}<AdminLauncher lang={lang} vehicleId={view==="car"?vehicleId:undefined}/><nav className="v2-mobile-bar" aria-label={lang==="ar"?"التنقل السريع":"Quick navigation"}>{(["home","cars","finance","contact"] as const).map(item=><a key={item} href={item==="cars"?withFilters(pagePath(item,lang),filters):pagePath(item,lang)} aria-current={view===item||view==="car"&&item==="cars"?"page":undefined}><NavIcon name={item}/><span>{n[item]}</span></a>)}</nav></div>;
+ return <div ref={page} className="automall-v2" data-view={view} lang={lang} dir={lang==="ar"?"rtl":"ltr"}><script dangerouslySetInnerHTML={{__html:themeBootScript}}/><V2Splash lang={lang}/><header className="v2-header"><a className="v2-brand" href={pagePath("home",lang)} aria-label={lang==="ar"?"أوتومول الرئيسية":"AutoMall home"}><img src={assetPath("assets/logo.jpg")} alt="AutoMall" width="42" height="42"/><span>AUTOMALL<small lang="ar">مجمع السيارات</small></span></a><nav className="v2-nav" aria-label={lang==="ar"?"التنقل الرئيسي":"Main navigation"}>{navViews.map(item=><a key={item} href={item==="cars"?withFilters(pagePath(item,lang),filters):pagePath(item,lang)} aria-current={view===item||view==="car"&&item==="cars"?"page":undefined} onClick={()=>setMenu(false)}>{n[item]}</a>)}</nav><div className="v2-header-actions"><a className="v2-language" href={withFilters(pagePath(view,lang==="en"?"ar":"en",vehicleId),filters)}>{lang==="en"?"العربية":"English"}</a><ThemeToggle lang={lang}/><a className="v2-search-shortcut" href={pagePath("cars",lang)+"#v2-search"} aria-label={t.search}><NavIcon name="search"/></a><a className="v2-header-chat" href={whatsapp(genericMessage(lang))} target="_blank" rel="noopener noreferrer">{lang==="ar"?"واتساب":"WhatsApp"}<Arrow/></a><HeaderMenu lang={lang} open={menu} onToggle={()=>setMenu(!menu)} onClose={closeMenu} savedHref={pagePath("saved",lang)} compareHref={pagePath("compare",lang)} pages={navViews.map(item=>({href:item==="cars"?withFilters(pagePath(item,lang),filters):pagePath(item,lang),label:n[item],current:view===item||view==="car"&&item==="cars"}))}/></div></header><main id="main-content" key={local.version}>{waitingForLocalCar?<p className="v2-local-wait v2-wrap" role="status">{lang==="ar"?"جارٍ التحميل…":"Loading…"}</p>:view==="home"?<HomePage lang={lang} filters={filters} onChange={updateFilters} opening={motionPhase==="opening"} revving={motionPhase==="revving"}/>:view==="cars"?<CatalogPage lang={lang} filters={filters} onChange={updateFilters}/>:view==="features"?<FeaturesPage lang={lang}/>:view==="finance"?<FinancePage lang={lang}/>:view==="contact"?<ContactPage lang={lang}/>:view==="saved"?<SavedPage lang={lang}/>:view==="compare"?<ComparePage lang={lang}/>:<DetailPage key={vehicleId} lang={lang} vehicleId={vehicleId} filters={filters}/>}</main><footer className="v2-footer v2-wrap"><div className="v2-footer-top"><a className="v2-footer-wordmark" href={pagePath("home",lang)}>AUTOMALL<span>JO</span></a><p>{t.footerLine}</p><div><a href={INSTAGRAM} target="_blank" rel="noopener noreferrer">Instagram<Arrow/></a><a href={FACEBOOK} target="_blank" rel="noopener noreferrer">Facebook<Arrow/></a></div></div><div className="v2-footer-bottom"><span>© 2026 AutoMall</span><nav aria-label={t.legal}><a href={pagePath("contact",lang)}>{n.contact}</a><a href={pagePath("features",lang)}>{n.features}</a><a href={pagePath("finance",lang)}>{n.finance}</a><a href={pagePath("saved",lang)}>{garageCopy[lang].savedCars}</a><a href={pagePath("compare",lang)}>{garageCopy[lang].compareNow}</a><a href={sitePath("privacy",lang)}>{l.privacyTitle}</a><a href={sitePath("terms",lang)}>{l.termsTitle}</a><a href={sitePath("",lang)+"?v=scroll"}>{t.versionOne}</a></nav></div><p className="v2-trademark">{trademarkNotice(lang)}</p></footer>{view!=="compare"&&<CompareBar lang={lang} compareHref={pagePath("compare",lang)}/>}<AdminLauncher lang={lang} vehicleId={view==="car"?vehicleId:undefined}/><nav className="v2-mobile-bar" aria-label={lang==="ar"?"التنقل السريع":"Quick navigation"}>{(["home","cars","finance","contact"] as const).map(item=><a key={item} href={item==="cars"?withFilters(pagePath(item,lang),filters):pagePath(item,lang)} aria-current={view===item||view==="car"&&item==="cars"?"page":undefined}><NavIcon name={item}/><span>{n[item]}</span></a>)}</nav></div>;
 }

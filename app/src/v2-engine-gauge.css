@@ -1,0 +1,106 @@
+.v2-engine-gauge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-block-start: 17px;
+  padding-block: 5px;
+  padding-inline: 8px 11px;
+  border: 1px solid var(--v2-line);
+  border-radius: 12px;
+  background: var(--v2-night);
+  color: var(--v2-white);
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+  vertical-align: top;
+}
+
+.v2-engine-gauge[data-starting] {
+  animation: v2-gauge-start .3s ease-out both;
+}
+
+@keyframes v2-gauge-start {
+  from { opacity: .55; transform: scale(.93); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.v2-engine-dial {
+  position: relative;
+  display: block;
+  inline-size: 40px;
+  block-size: 40px;
+  flex-shrink: 0;
+}
+
+.v2-engine-scale {
+  position: absolute;
+  inset: 1px;
+  border-radius: 50%;
+  background: conic-gradient(from 225deg, var(--v2-line) 0deg 220deg, #dc6047 220deg 270deg, transparent 270deg);
+  mask-image: radial-gradient(transparent 58%, #000 60%);
+}
+
+.v2-engine-scale::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-conic-gradient(from 225deg, var(--v2-muted) 0deg 2deg, transparent 2deg 33.75deg);
+  mask-image: conic-gradient(from 225deg, #000 0deg 220deg, transparent 220deg);
+}
+
+.v2-engine-needle {
+  position: absolute;
+  inset: 12% auto 50% calc(50% - 1px);
+  width: 2px;
+  border-radius: 2px;
+  background: var(--v2-orange);
+  transform: rotate(-108deg);
+  transform-origin: 50% 100%;
+}
+
+.v2-engine-hub {
+  position: absolute;
+  inset: calc(50% - 3px);
+  border-radius: 50%;
+  background: var(--v2-orange);
+}
+
+.v2-engine-readout {
+  display: grid;
+  justify-items: start;
+  gap: 2px;
+  line-height: 1.18;
+}
+
+.v2-engine-readout strong {
+  min-inline-size: 52px;
+  text-align: start;
+  font: 600 18px/1.1 Outfit, sans-serif;
+  font-variant-numeric: tabular-nums;
+}
+
+.v2-engine-readout > span {
+  color: var(--v2-muted);
+  font-size: 9px;
+  white-space: nowrap;
+}
+
+@media (max-width: 700px) {
+  .v2-home-banner .v2-dealer-hero-content { position: static; }
+
+  .v2-engine-gauge {
+    position: absolute;
+    inset-block-start: 58px;
+    inset-inline-start: 14px;
+    z-index: 2;
+    gap: 8px;
+    margin-block-start: 0;
+    background: color-mix(in srgb, var(--v2-night) 92%, transparent);
+  }
+
+  .v2-engine-dial { inline-size: 34px; block-size: 34px; }
+  .v2-engine-readout strong { font-size: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v2-engine-gauge { display: none; animation: none; }
+}

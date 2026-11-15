@@ -1636,3 +1636,45 @@ html[data-v2-theme=light] .am-splash-word b{color:#a64c0c;border-color:#a64c0c}
 @keyframes am-splash-ring{0%{box-shadow:0 0 0 0 #ed8738aa}100%{box-shadow:0 0 0 22px #ed873800}}
 .am-splash-logo{filter:drop-shadow(0 12px 28px #ed873855)}
 .am-splash-tag{margin-top:6px}
+
+/* The three engine beats share the needle's peak timings. */
+.v2-engine-word { display: inline-block; }
+.v2-engine-headlights {
+ position: absolute;
+ inset-block: 0;
+ inset-inline: 40% 0;
+ pointer-events: none;
+}
+.v2-engine-headlights > span {
+ position: absolute;
+ inset: 0;
+ opacity: 0;
+ background:
+  radial-gradient(ellipse 24% 19% at 33% 49%, #fff6df80, transparent 82%),
+  radial-gradient(ellipse 24% 19% at 70% 49%, #fff6df80, transparent 82%);
+}
+.automall-v2[dir="rtl"] .v2-engine-headlights { transform: scaleX(-1); }
+
+@media (prefers-reduced-motion: no-preference) {
+ .v2-dealer-hero[data-engine-intro] .v2-engine-word {
+  animation: v2-engine-word-impact 360ms cubic-bezier(.2,.75,.3,1);
+ }
+ .v2-engine-headlights > span {
+  animation: v2-engine-headlight-glow 420ms ease-out;
+ }
+}
+
+@keyframes v2-engine-word-impact {
+ 0% { transform: translateY(-10px) scale(.97); opacity: .5; }
+ 35% { transform: translateY(2px) scale(1.045); opacity: 1; }
+ 100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+@keyframes v2-engine-headlight-glow {
+ 0% { opacity: 0; }
+ 24% { opacity: .8; }
+ 100% { opacity: 0; }
+}
+
+@media (max-width: 700px) {
+ .v2-engine-headlights { inset-block: 0 auto; inset-inline: 0; height: 47%; }
+}

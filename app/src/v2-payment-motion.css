@@ -1,0 +1,39 @@
+@media (prefers-reduced-motion: no-preference) {
+ .v2-calc-monthly .v2-payment-exact {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+ }
+
+ .v2-calc-monthly .v2-payment-visual {
+  display: inline-flex !important;
+  align-items: center;
+  gap: .26em;
+  user-select: none;
+  vertical-align: middle;
+ }
+
+ .v2-payment-number {
+  display: inline-flex;
+  align-items: center;
+  font-variant-numeric: tabular-nums;
+ }
+
+ .v2-payment-digit {
+  --v2-payment-row: 1.22em;
+  display: inline-block;
+  block-size: var(--v2-payment-row);
+  overflow: hidden;
+  text-align: center;
+ }
+
+ .v2-payment-reel {
+  display: block;
+  white-space: pre;
+  line-height: var(--v2-payment-row);
+  transform: var(--v2-payment-offset);
+ }
+}

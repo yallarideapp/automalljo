@@ -4,6 +4,7 @@ import {COMPARE_LIMIT,clearCompare,monthlyPayment,toggleCompare,toggleSaved,useC
 import {thumbSrc} from "@/v2-content";
 import {formatMoney,formatNumber,westernDigits} from "@/number-format";
 import {DirectionArrow} from "./direction-arrow";
+import {RollingPayment} from "./rolling-payment";
 
 export const garageCopy={
  en:{save:"Save car",saved:"Saved",unsave:"Remove from saved",savedCars:"Saved cars",compare:"Compare",comparing:"In compare",addCompare:"Add to compare",removeCompare:"Remove from compare",compareFull:"You can compare up to "+COMPARE_LIMIT+" cars. Remove one to add another.",compareNow:"Compare cars",clear:"Clear",compareTray:"Cars to compare",
@@ -81,7 +82,7 @@ export function PaymentCalculator({vehicle,lang}:{vehicle?:Vehicle;lang:Lang}){
     <label className="v2-calc-field"><span>{g.rate}</span><input type="number" inputMode="decimal" dir="ltr" min="0" max="30" step="0.25" value={rate} onChange={event=>setRate(event.target.value)}/></label>
    </div>
    <div className="v2-calculator-result" aria-live="polite">
-    <p className="v2-calc-monthly"><small>{g.monthly}</small><strong><bdi>{amount?money(monthly,lang):"—"}</bdi></strong></p>
+    <p className="v2-calc-monthly"><small>{g.monthly}</small><strong><RollingPayment amount={amount ? monthly : null} lang={lang}/></strong></p>
     <dl><div><dt>{g.financed}</dt><dd><bdi>{amount?money(financed,lang):"—"}</bdi></dd></div><div><dt>{g.interest}</dt><dd><bdi>{amount?money(interest,lang):"—"}</bdi></dd></div><div><dt>{g.total}</dt><dd><bdi>{amount?money(total,lang):"—"}</bdi></dd></div></dl>
     <a className="v2-button v2-button-orange" href={whatsapp(message)} target="_blank" rel="noopener noreferrer">{g.askFinance}<DirectionArrow kind="outward"/></a>
    </div>

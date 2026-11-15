@@ -189,3 +189,81 @@
 .v2-showcase .v2-efficiency-note a{display:inline-flex;align-items:center;gap:4px;text-decoration:underline;text-underline-offset:3px}
 .v2-showcase .v2-efficiency-note .v2-direction-arrow{width:12px;height:12px}
 .v2-showcase .v2-fuel-reference-note{margin-top:14px;font-size:11px;line-height:1.8;color:var(--v2-silver)}
+
+.v2-highlight-meter {
+ display: block;
+ min-inline-size: 0;
+}
+
+.v2-highlight-meter-value {
+ display: grid;
+ font-variant-numeric: tabular-nums;
+}
+
+.v2-highlight-meter-value > bdi {
+ grid-area: 1 / 1;
+ min-inline-size: 0;
+ text-align: match-parent;
+}
+
+.v2-highlight-meter-counter {
+ display: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+ .v2-highlight-meter[data-pending] .v2-highlight-meter-fill { transform: scaleX(0); }
+ .v2-highlight-meter[data-counting] .v2-highlight-meter-value > bdi:first-child { opacity: 0; }
+ .v2-highlight-meter[data-counting] .v2-highlight-meter-counter { display: block; }
+}
+
+.v2-highlight-meter-track {
+ display: block;
+ position: relative;
+ margin-block-start: 12px;
+}
+
+.v2-highlight-meter-well {
+ display: block;
+ overflow: hidden;
+ block-size: 4px;
+ border-radius: 999px;
+ background: var(--v2-line);
+}
+
+.v2-highlight-meter-fill {
+ display: block;
+ block-size: 100%;
+ background: linear-gradient(to right, color-mix(in srgb, var(--v2-orange) 48%, var(--v2-line)), var(--v2-orange));
+ transform-origin: left center;
+}
+
+.automall-v2[dir=rtl] .v2-highlight-meter-fill {
+ background: linear-gradient(to left, color-mix(in srgb, var(--v2-orange) 48%, var(--v2-line)), var(--v2-orange));
+ transform-origin: right center;
+}
+
+.v2-highlight-meter[data-meter=range] .v2-highlight-meter-track {
+ inline-size: min(100% - 5px, 112px);
+ border: 1px solid var(--v2-silver);
+ border-radius: 4px;
+ padding: 2px;
+}
+
+.v2-highlight-meter[data-meter=range] .v2-highlight-meter-track::after {
+ content: "";
+ position: absolute;
+ inset-block: 4px;
+ inset-inline-start: calc(100% + 1px);
+ inline-size: 3px;
+ border-radius: 1px;
+ background: var(--v2-silver);
+}
+
+.v2-highlight-meter[data-meter=range] .v2-highlight-meter-well {
+ block-size: 8px;
+ border-radius: 1px;
+}
+
+.v2-highlight-meter[data-meter=range] .v2-highlight-meter-fill {
+ background: repeating-linear-gradient(90deg, var(--v2-orange) 0 calc(25% - 2px), var(--v2-panel) calc(25% - 2px) 25%);
+}

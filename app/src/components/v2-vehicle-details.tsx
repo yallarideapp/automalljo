@@ -11,9 +11,10 @@ import {ThemeToggle} from "./v2-theme";
 import {formatMoney,westernDigits} from "@/number-format";
 import {efficiencyFact} from "@/v2-efficiency";
 import {DirectionArrow} from "./direction-arrow";
+import {HighlightMeter,type HighlightMeterKind} from "./v2-highlight-meter";
 
 export type V2VehicleDetailsProps={vehicle:Vehicle;lang:Lang;catalogHref:string;homeHref:string;languageHref?:string};
-type DetailTile={label:string;value:string|undefined;icon:ReactNode;range?:boolean;note?:string;sourceURL?:string};
+type DetailTile={label:string;value:string|undefined;icon:ReactNode;meter?:HighlightMeterKind;range?:boolean;note?:string;sourceURL?:string};
 const detailCopy={
  en:{back:"Back to the collection",highlights:"Highlights",information:"Information",gallery:"Gallery",modelYear:"Model year",power:"Horsepower",torque:"Torque",mileage:"Mileage",battery:"Battery",powertrain:"Powertrain",transmission:"Transmission",seats:"Seats",body:"Body type",condition:"Condition",enquire:"Enquire on WhatsApp",breadcrumb:"Breadcrumb",photoPicker:"Choose a vehicle photo"},
  ar:{back:"العودة إلى السيارات",highlights:"أبرز المواصفات",information:"المعلومات",gallery:"الصور",modelYear:"سنة الموديل",power:"القوة الحصانية",torque:"عزم الدوران",mileage:"المسافة المقطوعة",battery:"البطارية",powertrain:"نظام الحركة",transmission:"ناقل الحركة",seats:"المقاعد",body:"نوع الهيكل",condition:"الحالة",enquire:"استفسر عبر واتساب",breadcrumb:"مسار الصفحة",photoPicker:"اختر صورة للسيارة"}
@@ -27,8 +28,29 @@ const glyphs={
 function DetailGlyph({name}:{name:keyof typeof glyphs}){
  return <svg className="vehicle-feature-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{glyphs[name]}</svg>;
 }
-function DetailTiles({items,className}:{items:DetailTile[];className:string}){
- return <dl className={className}>{items.filter((item):item is DetailTile&{value:string}=>!!item.value).map(item=><div className={item.range?"v2-showcase-stat v2-range-panel":"v2-showcase-stat"} key={item.label}><dt><span>{item.label}</span>{item.icon}</dt><dd><bdi>{westernDigits(item.value)}</bdi>{item.note&&<small className="v2-efficiency-note">{item.sourceURL?<a href={item.sourceURL} target="_blank" rel="noopener noreferrer">{item.note}<Arrow/></a>:item.note}</small>}</dd></div>)}</dl>;
+function DetailTiles({ items, className }: { items: DetailTile[]; className: string }) {
+  return (
+    <dl className={className}>
+      {items.filter((item): item is DetailTile & { value: string } => !!item.value).map(item => {
+        const value = westernDigits(item.value);
+        return (
+          <div className={item.range ? "v2-showcase-stat v2-range-panel" : "v2-showcase-stat"} key={item.label}>
+            <dt><span>{item.label}</span>{item.icon}</dt>
+            <dd>
+              {item.meter ? <HighlightMeter kind={item.meter} value={value} /> : <bdi>{value}</bdi>}
+              {item.note && (
+                <small className="v2-efficiency-note">
+                  {item.sourceURL
+                    ? <a href={item.sourceURL} target="_blank" rel="noopener noreferrer">{item.note}<Arrow/></a>
+                    : item.note}
+                </small>
+              )}
+            </dd>
+          </div>
+        );
+      })}
+    </dl>
+  );
 }
 
 export function V2VehicleDetails({vehicle,lang,catalogHref,homeHref,languageHref}:V2VehicleDetailsProps){
@@ -48,9 +70,9 @@ export function V2VehicleDetails({vehicle,lang,catalogHref,homeHref,languageHref
  ];
  const efficiency=efficiencyFact(vehicle,lang);
  const highlights:DetailTile[]=[
-  {label:d.power,value:value("Power"),icon:<FeatureIcon name="power"/>},
-  {label:d.torque,value:value("Torque"),icon:<FeatureIcon name="torque"/>},
-  {...efficiency,icon:<FeatureIcon name={efficiency.icon}/>},
+  {label:d.power,value:value("Power"),meter:"power",icon:<FeatureIcon name="power"/>},
+  {label:d.torque,value:value("Torque"),meter:"torque",icon:<FeatureIcon name="torque"/>},
+  {...efficiency,meter:efficiency.icon==="range"?"range":undefined,icon:<FeatureIcon name={efficiency.icon}/>},
   {label:d.seats,value:value("Seats"),icon:<FeatureIcon name="seats"/>},
   {label:d.body,value:value("Body style")??vehicle.type[lang],icon:<BodyStyleIcon name={bodyStyleFor(vehicle)}/>},
   {label:d.condition,value:value("Condition"),icon:<DetailGlyph name="condition"/>}
