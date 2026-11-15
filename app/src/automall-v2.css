@@ -1453,13 +1453,13 @@ html[data-v2-theme=light] .automall-v2 .v2-banner-controls>button:hover{border-c
 @media(max-width:700px){.v2-calculator{padding:20px 16px;margin-top:26px}.v2-calculator-fields{grid-template-columns:1fr}.v2-calc-monthly strong{font-size:28px}.v2-calc-years>button{height:42px}}
 /* phones: keep the whole banner photo above the heading so text never sits on the picture */
 @media(max-width:700px){
- .v2-home-banner .v2-dealer-hero{min-height:600px}
- .v2-home-banner .v2-banner-slide .v2-dealer-hero-image,.automall-v2[dir=rtl] .v2-home-banner .v2-banner-slide .v2-dealer-hero-image{height:47%}
- .v2-home-banner .v2-banner-slide .v2-banner-backdrop{height:calc(47% + 48px)}
- html:not([data-v2-theme=light]) .automall-v2 .v2-home-banner .v2-dealer-hero:after,html:not([data-v2-theme=light]) .automall-v2[dir=rtl] .v2-home-banner .v2-dealer-hero:after{background:linear-gradient(180deg,#0b0d0f00 0%,#0b0d0f00 44%,#0b0d0fd9 49%,#0b0d0f 53%,#0b0d0f 100%)}
- html[data-v2-theme=light] .automall-v2 .v2-home-banner .v2-dealer-hero:after,html[data-v2-theme=light] .automall-v2[dir=rtl] .v2-home-banner .v2-dealer-hero:after{background:linear-gradient(180deg,#f3f5f700 0%,#f3f5f700 44%,#f3f5f7d9 49%,#f3f5f7 53%,#f3f5f7 100%)}
+ .v2-home-banner .v2-dealer-hero{--v2-banner-photo-height:281px;min-height:600px}
+ .v2-home-banner .v2-banner-slide .v2-dealer-hero-image,.automall-v2[dir=rtl] .v2-home-banner .v2-banner-slide .v2-dealer-hero-image{height:var(--v2-banner-photo-height)}
+ .v2-home-banner .v2-banner-slide .v2-banner-backdrop{height:calc(var(--v2-banner-photo-height) + 48px)}
+ html:not([data-v2-theme=light]) .automall-v2 .v2-home-banner .v2-dealer-hero:after,html:not([data-v2-theme=light]) .automall-v2[dir=rtl] .v2-home-banner .v2-dealer-hero:after{background:linear-gradient(180deg,transparent calc(var(--v2-banner-photo-height) - 18px),#0b0d0fd9 calc(var(--v2-banner-photo-height) + 12px),var(--v2-night) calc(var(--v2-banner-photo-height) + 36px))}
+ html[data-v2-theme=light] .automall-v2 .v2-home-banner .v2-dealer-hero:after,html[data-v2-theme=light] .automall-v2[dir=rtl] .v2-home-banner .v2-dealer-hero:after{background:linear-gradient(180deg,transparent calc(var(--v2-banner-photo-height) - 18px),#f3f5f7d9 calc(var(--v2-banner-photo-height) + 12px),var(--v2-night) calc(var(--v2-banner-photo-height) + 36px))}
 }
-@media(max-width:360px){.v2-home-banner .v2-dealer-hero{min-height:580px}}
+@media(max-width:360px){.v2-home-banner .v2-dealer-hero{--v2-banner-photo-height:272px;min-height:580px}}
 
 .v2-car-condition[data-status]{background:var(--v2-orange);color:var(--v2-on-accent,#0b0d0f);border-color:var(--v2-orange)}
 .v2-status-note{grid-column:1/-1;margin-top:10px;padding:10px 14px;border:1px solid var(--v2-orange);border-radius:10px;font-size:13px;color:var(--v2-white);background:var(--v2-panel)}
@@ -1676,5 +1676,5 @@ html[data-v2-theme=light] .am-splash-word b{color:#a64c0c;border-color:#a64c0c}
 }
 
 @media (max-width: 700px) {
- .v2-engine-headlights { inset-block: 0 auto; inset-inline: 0; height: 47%; }
+ .v2-engine-headlights { inset-block: 0 auto; inset-inline: 0; height: var(--v2-banner-photo-height); }
 }
